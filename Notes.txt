@@ -3,3 +3,9 @@ https://spoonacular.com/food-api/sdk
 The current one is a Java SDK, others can be found at the URL above 
 Current Key is : 46953957ae604aeba07e605696eef0cc
 Might swap to Rapid API if we are met with any unexpected issues 
+https://rapidapi.com/spoonacular/api/recipe-food-nutrition
+Rapid API info
+X-RapidAPI-Host :
+spoonacular-recipe-food-nutrition-v1.p.rapidapi.com
+X-RapidAPI-Key :
+7dba1c8b6dmsh8c3919fbe127d43p122d00jsn89f1b32d2216
