@@ -2,3 +2,4 @@ Spoonacular API
 https://spoonacular.com/food-api/sdk
 The current one is a Java SDK, others can be found at the URL above 
 Current Key is : 46953957ae604aeba07e605696eef0cc
+Might swap to Rapid API if we are met with any unexpected issues 
