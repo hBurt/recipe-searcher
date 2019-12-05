@@ -46,6 +46,7 @@ public class SearchResultsActivity extends Activity
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String query = intent.getStringExtra(SearchManager.QUERY);
             //use the query to search data
+            DoSearch(query);
         }
     }
     public void DoSearch(String query)
@@ -133,5 +134,5 @@ public class SearchResultsActivity extends Activity
             e.printStackTrace();
         }
     }
-  
+
 }
