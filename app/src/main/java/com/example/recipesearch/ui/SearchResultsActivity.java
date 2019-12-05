@@ -18,7 +18,7 @@ import java.io.IOException;
 
 public class SearchResultsActivity extends Activity
 {
-    //* Changing these should be handled in a settings screen 
+    //* Changing these should be handled in a settings screen
     boolean SearchingDishes = true;
     boolean SearchingIngredients = false;
     boolean SearchingByID = false;
@@ -55,7 +55,7 @@ public class SearchResultsActivity extends Activity
         if (SearchingDishes == true)
         {
             if(query != null || query.length() > 0)
-            APISearchDish(query);
+                APISearchDish(query);
             else
                 APISearchDish(defDish);
         }
@@ -91,7 +91,8 @@ public class SearchResultsActivity extends Activity
                 .addHeader("x-rapidapi-key", "7dba1c8b6dmsh8c3919fbe127d43p122d00jsn89f1b32d2216")
                 .build();
 
-        try {
+        try
+        {
             Response response = client.newCall(request).execute();
         } catch (IOException e) {
             e.printStackTrace();
@@ -107,7 +108,8 @@ public class SearchResultsActivity extends Activity
                 .addHeader("x-rapidapi-host", "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com")
                 .addHeader("x-rapidapi-key", "7dba1c8b6dmsh8c3919fbe127d43p122d00jsn89f1b32d2216")
                 .build();
-        try {
+        try
+        {
             Response response = client.newCall(request).execute();
         } catch (IOException e) {
             e.printStackTrace();
@@ -124,23 +126,12 @@ public class SearchResultsActivity extends Activity
                 .addHeader("x-rapidapi-key", "7dba1c8b6dmsh8c3919fbe127d43p122d00jsn89f1b32d2216")
                 .build();
 
-        try {
+        try
+        {
             Response response = client.newCall(request).execute();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-  /*  public boolean onCreateOptionsMenu(Menu menu) { // only for use after the settings menu is made 
-        // Inflate the options menu from XML
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.settings_menu, menu);
-
-        // Get the SearchView and set the searchable configuration
-        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        SearchView searchView = (SearchView) menu.findItem(R.id.settings_menu).getActionView();
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-        searchView.setIconifiedByDefault(false);
-
-        return true;
-    }*/
+  
 }
