@@ -1,6 +1,10 @@
 package com.example.recipesearch.ui.home;
 
+<<<<<<< HEAD
 import android.graphics.PorterDuff;
+=======
+import android.os.Build;
+>>>>>>> 284598d4f77bb08a9665252e7b14a37b468fce5f
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -10,13 +14,22 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+<<<<<<< HEAD
 import android.widget.EditText;
 import android.widget.ImageView;
+=======
+import android.widget.SearchView;
+>>>>>>> 284598d4f77bb08a9665252e7b14a37b468fce5f
 import android.widget.TextView;
+import android.widget.Toolbar;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
+<<<<<<< HEAD
 import androidx.core.content.ContextCompat;
+=======
+import androidx.annotation.RequiresApi;
+>>>>>>> 284598d4f77bb08a9665252e7b14a37b468fce5f
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -35,17 +48,13 @@ import java.util.Scanner;
 public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
-
-    String query = null;
-    public HomeFragment() throws IOException {
-    }
-
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         homeViewModel =
                 ViewModelProviders.of(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_search, container, false);
         final TextView textView = root.findViewById(R.id.text_search);
+        final SearchView search = root.findViewById(R.id.search_box);
         homeViewModel.getText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
@@ -78,13 +87,4 @@ public class HomeFragment extends Fragment {
         return root;
     }
 
-   /* OkHttpClient client = new OkHttpClient();
-    Request request = new Request.Builder()
-            .url("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/search?diet=vegetarian&excludeIngredients=coconut&intolerances=egg%252C%20gluten&number=10&offset=0&type=main%20course&query=burger")
-            .get()
-            .addHeader("x-rapidapi-host", "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com")
-            .addHeader("x-rapidapi-key", "7dba1c8b6dmsh8c3919fbe127d43p122d00jsn89f1b32d2216")
-            .build();
-
-    Response response = client.newCall(request).execute();*/
 }
