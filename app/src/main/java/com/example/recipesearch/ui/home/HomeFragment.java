@@ -22,7 +22,7 @@ import java.io.IOException;
 public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
-    String query;
+    String query = null;// should be null untill a search is given to the app
     public HomeFragment() throws IOException {
     }
 
