@@ -18,11 +18,13 @@ import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 
 import java.io.IOException;
+import java.util.Scanner;
 
 public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
-    String query = null;// should be null untill a search is given to the app
+    Scanner input = new Scanner(System.in);
+    String query = input.nextLine();
     public HomeFragment() throws IOException {
     }
 
