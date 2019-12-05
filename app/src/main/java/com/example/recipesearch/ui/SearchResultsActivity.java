@@ -11,6 +11,13 @@ public class SearchResultsActivity extends Activity {
 
         super.onCreate(savedInstanceState);
         handleIntent(getIntent());
+        // Get the intent, verify the action and get the query
+        Intent intent = null;//getIntent(); //null for now
+        if (Intent.ACTION_SEARCH.equals(intent.getAction()))
+        {
+            String query = intent.getStringExtra(SearchManager.QUERY);
+            preformsearch(query); //will be used to well preform the search
+        }
     }
 
     protected void onNewIntent(Intent intent) {
@@ -24,5 +31,11 @@ public class SearchResultsActivity extends Activity {
             String query = intent.getStringExtra(SearchManager.QUERY);
             //use the query to search data
         }
+    }
+    private String preformsearch(String query)
+    {
+
+        String result = "Food" ; // temp val, will return the result from a search
+        return result;
     }
 }
