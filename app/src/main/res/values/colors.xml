@@ -2,9 +2,10 @@
 <resources>
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorAccent">#A34CAF50</color>
     <color name="baseGreen">#99CC52</color>
     <color name="navigationGreen">#5F7F33</color>
     <color name="black">#000000</color>
     <color name="yellow">#FFE446</color>
+    <color name="navLight">#BECABA</color>
 </resources>
