@@ -120,7 +120,7 @@
         app:layout_constraintVertical_bias="0.181" />
 
     <TextView
-        android:id="@+id/search_Result"
+        android:id="@+id/search_Result1"
         android:layout_width="406dp"
         android:layout_height="42dp"
         android:layout_marginStart="176dp"
