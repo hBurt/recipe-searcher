@@ -10,6 +10,11 @@ import android.view.MenuInflater;
 import android.widget.SearchView;
 
 import com.example.recipesearch.R;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
+
+import java.io.IOException;
 
 public class SearchResultsActivity extends Activity {
 
@@ -49,6 +54,23 @@ public class SearchResultsActivity extends Activity {
         appData.putBoolean(SearchResultsActivity.INPUT_SERVICE, true);
         startSearch(null, false, appData, false);
         return true;
+    }
+    private  void APISearch(String query)
+    {
+        OkHttpClient client = new OkHttpClient();
+        String Result = null;
+        Request request = new Request.Builder()
+                .url("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/search?diet=vegetarian&excludeIngredients=coconut&intolerances=egg%252C%20gluten&number=10&offset=0&type=main%20course&query="+query)
+                .get()
+                .addHeader("x-rapidapi-host", "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com")
+                .addHeader("x-rapidapi-key", "7dba1c8b6dmsh8c3919fbe127d43p122d00jsn89f1b32d2216")
+                .build();
+
+        try {
+            Response response = client.newCall(request).execute();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
   /*  public boolean onCreateOptionsMenu(Menu menu) { // only for use after the settings menu is made 
         // Inflate the options menu from XML
