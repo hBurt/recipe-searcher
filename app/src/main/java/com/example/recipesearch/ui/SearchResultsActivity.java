@@ -16,7 +16,12 @@ import com.squareup.okhttp.Response;
 
 import java.io.IOException;
 
-public class SearchResultsActivity extends Activity {
+public class SearchResultsActivity extends Activity
+{
+    //* Changing these should be handled in a settings screen 
+    boolean SearchingDishes = true;
+    boolean SearchingIngredients = false;
+    boolean SearchingByID = false;
 
     public void onCreate(Bundle savedInstanceState) {
 
@@ -27,7 +32,7 @@ public class SearchResultsActivity extends Activity {
         if (Intent.ACTION_SEARCH.equals(intent.getAction()))
         {
             String query = intent.getStringExtra(SearchManager.QUERY);
-            preformsearch(query); //will be used to well preform the search
+            DoSearch(query); //will be used to well preform the search
         }
     }
 
@@ -43,11 +48,29 @@ public class SearchResultsActivity extends Activity {
             //use the query to search data
         }
     }
-    private String preformsearch(String query)
+    public void DoSearch(String query)
     {
-
-        String result = "Food" ; // temp val, will return the result from a search
-        return result;
+        String defDish = "Burger";//default Dish search
+        String defIngr = "Potato";//Default Ingredient Search
+        if (SearchingDishes == true)
+        {
+            if(query != null || query.length() > 0)
+            APISearchDish(query);
+            else
+                APISearchDish(defDish);
+        }
+        else if (SearchingIngredients == true)
+        {
+            if(query != null || query.length() > 0)
+                APISearchIngredient(query);
+            else
+                APISearchIngredient(defIngr);
+        }
+    }
+    public void searchSimilar(int ID)
+    //Should only be used from a Recipe screen, DO NOT SEARCH BY ID BEFORE OPENING A RECIPE SCREEN, THIS NEEDS THE INT ID
+    {
+        APISearchSimilar(ID);
     }
     public boolean onSearchRequested() {
         Bundle appData = new Bundle();
@@ -55,8 +78,10 @@ public class SearchResultsActivity extends Activity {
         startSearch(null, false, appData, false);
         return true;
     }
-    private  void APISearchDish(String query)// will search baised off dish
+    private    void APISearchDish(String query)// will search baised off dish
     {
+        //* The code Snippets for the API searches are from the https://rapidapi.com/spoonacular/api/recipe-food-nutrition?endpoint=55e1b24ae4b0a29b2c36073c
+        //* only deference is the changes for the input of a val, string or int, for the search
         OkHttpClient client = new OkHttpClient();
         String Result = null;
         Request request = new Request.Builder()
