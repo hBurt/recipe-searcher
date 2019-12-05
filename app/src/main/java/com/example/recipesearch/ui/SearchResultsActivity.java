@@ -1,4 +1,4 @@
-package com.example.recipesearch.ui.search;
+package com.example.recipesearch.ui;
 
 import android.app.Activity;
 import android.app.SearchManager;
