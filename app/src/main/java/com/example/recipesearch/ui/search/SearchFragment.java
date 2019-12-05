@@ -1,5 +1,8 @@
 package com.example.recipesearch.ui.search;
 
+import android.app.Activity;
+import android.app.SearchManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,6 +31,7 @@ public class SearchFragment extends Fragment {
         searchViewModel.getText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
+
                 textView.setText(s);
             }
         });
