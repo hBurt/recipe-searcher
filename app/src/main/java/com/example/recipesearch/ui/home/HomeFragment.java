@@ -22,7 +22,7 @@ import java.io.IOException;
 public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
-
+    String query;
     public HomeFragment() throws IOException {
     }
 
@@ -42,9 +42,8 @@ public class HomeFragment extends Fragment {
     }
 
     OkHttpClient client = new OkHttpClient();
-
     Request request = new Request.Builder()
-            .url("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/search?diet=vegetarian&excludeIngredients=coconut&intolerances=egg%252C%20gluten&number=10&offset=0&type=main%20course&query=burger")
+            .url("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/search?diet=vegetarian&excludeIngredients=coconut&intolerances=egg%252C%20gluten&number=10&offset=0&type=main%20course&query="+ query)
             .get()
             .addHeader("x-rapidapi-host", "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com")
             .addHeader("x-rapidapi-key", "7dba1c8b6dmsh8c3919fbe127d43p122d00jsn89f1b32d2216")
