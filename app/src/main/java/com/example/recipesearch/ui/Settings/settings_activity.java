@@ -4,11 +4,15 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.TextureView;
 import android.view.View;
+import android.widget.TextView;
 
 import com.example.recipesearch.R;
 
+import androidx.annotation.StringDef;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
+
+import org.w3c.dom.Text;
 
 public class settings_activity extends AppCompatActivity
 {

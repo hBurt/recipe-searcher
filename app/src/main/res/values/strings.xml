@@ -6,4 +6,7 @@
     <string name="title_search">Search</string>
     <string name="title_favorites">Favorites</string>
     <string name="action_settings" />
+    <string name="ingredient">Ingredient</string>
+    <string name="dish">Dish</string>
+    <string name="settings">Settings</string>
 </resources>
