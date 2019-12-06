@@ -10,14 +10,17 @@ import android.view.MenuInflater;
 import android.widget.SearchView;
 
 import com.example.recipesearch.R;
+import com.example.recipesearch.ui.Settings.settings_activity;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 
 import java.io.IOException;
 
+
 public class SearchResultsActivity extends Activity
 {
+    settings_activity set = new settings_activity();
     //* Changing these should be handled in a settings screen
     boolean SearchingDishes = true;
     boolean SearchingIngredients = false;
@@ -53,6 +56,8 @@ public class SearchResultsActivity extends Activity
     {
         String defDish = "Burger";//default Dish search
         String defIngr = "Potato";//Default Ingredient Search
+        SearchingDishes = set.GetSwitchA();
+        SearchingIngredients = set.GetSwitchB();
         if (SearchingDishes == true)
         {
             if(query != null || query.length() > 0)

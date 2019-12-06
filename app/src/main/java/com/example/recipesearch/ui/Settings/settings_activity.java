@@ -60,7 +60,7 @@ public class settings_activity extends AppCompatActivity
     {
         return SwitchState_A;
     }
-    public boolean GetSwitchB()
+      public boolean GetSwitchB()
     {
         return SwitchState_B;
     }
