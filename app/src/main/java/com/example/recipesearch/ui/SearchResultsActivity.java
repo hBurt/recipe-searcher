@@ -20,7 +20,7 @@ import java.io.IOException;
 
 public class SearchResultsActivity extends Activity
 {
-    settings_activity set = new settings_activity();
+    settings_activity set = new settings_activity();// to use the getSwitchA/B functions for changing how the search is handled
     //* Changing these should be handled in a settings screen
     boolean SearchingDishes = true;
     boolean SearchingIngredients = false;
