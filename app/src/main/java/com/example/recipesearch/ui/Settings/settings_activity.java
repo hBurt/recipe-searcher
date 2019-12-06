@@ -20,10 +20,10 @@ public class settings_activity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
-         Prefs = getSharedPreferences("Pref", 0);
+        Prefs = getSharedPreferences("Pref", 0);
         SwitchState_A = Prefs.getBoolean("Switch_A", true);
-       Switch_A = this.<SwitchCompat>findViewById(R.id.Dish_Search);
-       Switch_A.setChecked(SwitchState_A);
+        Switch_A = this.<SwitchCompat>findViewById(R.id.Dish_Search);
+        Switch_A.setChecked(SwitchState_A);
         SwitchState_B = Prefs.getBoolean("Switch_B", false);
         Switch_B = this.<SwitchCompat>findViewById(R.id.Dish_Search);
         Switch_B.setChecked(SwitchState_B);
