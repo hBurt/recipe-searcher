@@ -23,7 +23,7 @@ public class SearchResultsActivity extends Activity
     settings_activity set = new settings_activity();// to use the getSwitchA/B functions for changing how the search is handled
     boolean SearchingDishes = true;
     boolean SearchingIngredients = false;
-    //if both are true it will default to Dishes as it comes first 
+    //if both are true it will default to Dishes as it comes first
     boolean SearchingByID = false;
 
     public void onCreate(Bundle savedInstanceState) {
