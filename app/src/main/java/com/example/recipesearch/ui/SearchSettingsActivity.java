@@ -2,14 +2,9 @@ package com.example.recipesearch.ui;
 
 import android.app.Activity;
 import android.app.SearchManager;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.widget.SearchView;
 
-import com.example.recipesearch.R;
 import com.example.recipesearch.ui.Settings.settings_activity;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
@@ -18,7 +13,7 @@ import com.squareup.okhttp.Response;
 import java.io.IOException;
 
 
-public class SearchResultsActivity extends Activity
+public class SearchSettingsActivity extends Activity
 {
     settings_activity set = new settings_activity();// to use the getSwitchA/B functions for changing how the search is handled
     boolean SearchingDishes = true;
@@ -80,7 +75,7 @@ public class SearchResultsActivity extends Activity
     }
     public boolean onSearchRequested() {
         Bundle appData = new Bundle();
-        appData.putBoolean(SearchResultsActivity.INPUT_SERVICE, true);
+        appData.putBoolean(SearchSettingsActivity.INPUT_SERVICE, true);
         startSearch(null, false, appData, false);
         return true;
     }

@@ -1,7 +1,5 @@
 package com.example.recipesearch.ui.search;
 
-import android.app.SearchManager;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +14,6 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.recipesearch.R;
-import com.example.recipesearch.ui.SearchResultsActivity;
 
 public class SearchFragment extends Fragment {
 
@@ -29,7 +26,7 @@ public class SearchFragment extends Fragment {
 
         View root = inflater.inflate(R.layout.fragment_search, container, false);
         final TextView textView = root.findViewById(R.id.text_search);
-        final SearchView search = root.findViewById(R.id.Search_Query);
+        final SearchView search = root.findViewById(R.id.search_box);
         searchViewModel.getText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
