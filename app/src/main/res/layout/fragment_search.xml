@@ -18,19 +18,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/ToolBox"
-        android:layout_width="415dp"
-        android:layout_height="545dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/search_box" />
-
     <SearchView
         android:id="@+id/search_box"
-        android:layout_width="409dp"
-        android:layout_height="79dp"
+        android:layout_width="408dp"
+        android:layout_height="71dp"
         android:layout_marginTop="1dp"
         android:layout_marginBottom="1dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -40,15 +31,4 @@
         app:layout_constraintTop_toBottomOf="@+id/text_search"
         app:layout_constraintVertical_bias="0.0" />
 
-    <ListView
-        android:id="@+id/listView"
-        android:layout_width="411dp"
-        android:layout_height="457dp"
-        android:layout_below="@+id/ToolBox"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.688" />
 </androidx.constraintlayout.widget.ConstraintLayout>
