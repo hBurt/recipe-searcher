@@ -28,7 +28,7 @@ public class SearchFragment extends Fragment {
 
 
         View root = inflater.inflate(R.layout.fragment_search, container, false);
-        final TextView textView = root.findViewById(R.id.Search_Result);
+        final TextView textView = root.findViewById(R.id.text_search);
         final SearchView search = root.findViewById(R.id.Search_Query);
         searchViewModel.getText().observe(this, new Observer<String>() {
             @Override

@@ -43,7 +43,7 @@ public class SearchActivity extends AppCompatActivity
             public void onSearchViewClosed()
             {
                 arrayAdapt.clear();
-                arrayAdapt.addAll(Suggestion);
+                arrayAdapt.addAll((Object) Suggestion);
                 arrayAdapt.notifyDataSetChanged();
             }
         });
@@ -68,9 +68,7 @@ public class SearchActivity extends AppCompatActivity
                             arrayAdapt.add(s);
                         }
                         else
-                            {
-                                arrayAdapt.addAll(Suggestion);
-                            }
+                            arrayAdapt.addAll((Object) Suggestion);
                     }
 
                 }

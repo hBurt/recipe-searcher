@@ -4,7 +4,6 @@
     <item
         android:id = "@+id/searchMenu"
         android:orderInCategory="100"
-        android:showAction="always"
         android:title="@string/search"
         android:icon="@drawable/ic_search_black_24dp"
         />
