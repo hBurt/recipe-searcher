@@ -11,6 +11,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
+    private CharSequence message;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -21,6 +23,16 @@ public class MainActivity extends AppCompatActivity {
 
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupWithNavController(navView, navController);
+
     }
+
+    public void setMessage(CharSequence s){
+        message = s;
+    }
+
+    public CharSequence getMessage(){
+        return message;
+    }
+
 
 }

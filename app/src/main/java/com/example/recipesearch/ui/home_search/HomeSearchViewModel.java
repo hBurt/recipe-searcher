@@ -12,9 +12,12 @@ public class HomeSearchViewModel extends ViewModel {
         mText = new MutableLiveData<>();
         mText.setValue("Recipe\n   Search");
 
+
     }
 
     public LiveData<String> getText() {
         return mText;
     }
+
+
 }

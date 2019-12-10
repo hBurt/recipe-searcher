@@ -12,13 +12,12 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.example.recipesearch.MainActivity;
 import com.example.recipesearch.R;
+import com.example.recipesearch.ui.UiHelper;
 import com.example.recipesearch.ui.search_result.SearchResultFragment;
-
-import java.util.Objects;
 
 public class HomeSearchFragment extends Fragment {
 
@@ -28,6 +27,8 @@ public class HomeSearchFragment extends Fragment {
         homeSearchViewModel =
                 ViewModelProviders.of(this).get(HomeSearchViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home_search, container, false);
+
+        final UiHelper ui = new UiHelper(getFragmentManager());
 
         //Do img color overlay
         ImageView iv = root.findViewById(R.id.imageView);
@@ -42,7 +43,9 @@ public class HomeSearchFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                switchScreen();
+                MainActivity m = (MainActivity) getActivity();
+                m.setMessage(s);
+                ui.switchScreen(new SearchResultFragment());
             }
 
             @Override
@@ -52,18 +55,4 @@ public class HomeSearchFragment extends Fragment {
         });
         return root;
     }
-
-    void switchScreen(){
-        SearchResultFragment newFragment = new SearchResultFragment();
-        Bundle args = new Bundle();
-        newFragment.setArguments(args);
-
-        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-
-        fragmentTransaction.replace(R.id.nav_host_fragment, newFragment);
-        fragmentTransaction.addToBackStack(null);
-
-        fragmentTransaction.commit();
-    }
-
 }
