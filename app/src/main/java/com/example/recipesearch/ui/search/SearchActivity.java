@@ -31,7 +31,7 @@ public class SearchActivity extends AppCompatActivity
         FsearchView = findViewById(R.id.Search_Query);
         FsearchView .setSuggestions(Suggestion);
         ListView list = findViewById(R.id.listView);
-        final ArrayAdapter arrayAdapt = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, Suggestion);
+        final ArrayAdapter<String> arrayAdapt = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, Suggestion);
         FsearchView.setOnSearchViewListener(new MaterialSearchView.SearchViewListener() {
             @Override
             public void onSearchViewShown()
@@ -43,7 +43,7 @@ public class SearchActivity extends AppCompatActivity
             public void onSearchViewClosed()
             {
                 arrayAdapt.clear();
-                arrayAdapt.addAll((Object) Suggestion);
+                arrayAdapt.addAll(Suggestion);
                 arrayAdapt.notifyDataSetChanged();
             }
         });
@@ -68,7 +68,7 @@ public class SearchActivity extends AppCompatActivity
                             arrayAdapt.add(s);
                         }
                         else
-                            arrayAdapt.addAll((Object) Suggestion);
+                            arrayAdapt.addAll(Suggestion);
                     }
 
                 }
