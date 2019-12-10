@@ -7,13 +7,18 @@
 
     <fragment
         android:id="@+id/navigation_search"
-        android:name="com.example.recipesearch.ui.home.HomeFragment"
+        android:name="com.example.recipesearch.ui.home_search.HomeSearchFragment"
         android:label="@string/title_search"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_home_search" >
+        <action
+            android:id="@+id/action_navigation_search_to_navigation_favorites"
+            app:destination="@id/navigation_favorites" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_favorites"
         android:name="com.example.recipesearch.ui.favorites.FavoritesFragment"
         android:label="@string/title_favorites"
         tools:layout="@layout/fragment_favorites" />
+
 </navigation>

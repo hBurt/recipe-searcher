@@ -1,21 +1,20 @@
-package com.example.recipesearch.ui.search;
+package com.example.recipesearch.ui.home_search;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+public class HomeSearchViewModel extends ViewModel {
 
-public class SearchViewModel extends ViewModel
-{
     private MutableLiveData<String> mText;
 
-    public SearchViewModel()
-    {
+    public HomeSearchViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("Place Holder Result");
+        mText.setValue("Recipe\n   Search");
+
     }
-    public LiveData<String> getText()
-    {
+
+    public LiveData<String> getText() {
         return mText;
     }
 }

@@ -2,24 +2,11 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/container"
+    android:id="@+id/fragment_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingTop="0dp"
     android:background="@color/baseGreen">
-
-    <FrameLayout
-        android:id="@+id/content_frame"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" >
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="677dp"
-            android:scaleType="centerCrop"
-            app:srcCompat="@drawable/bg_1" />
-    </FrameLayout>
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -49,51 +36,5 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:navGraph="@navigation/mobile_navigation" />
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar2"
-        android:layout_width="339dp"
-        android:layout_height="58dp"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:layout_constraintBottom_toTopOf="@+id/nav_view"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/nav_host_fragment"
-        app:layout_constraintVertical_bias="0.39" />
-
-    <LinearLayout
-        android:layout_width="338dp"
-        android:layout_height="58dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/nav_view"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.506"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/nav_host_fragment"
-        app:layout_constraintVertical_bias="0.39">
-
-        <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="235dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@color/navLight"
-            android:scaleType="center"
-        app:srcCompat="@drawable/ic_search_black_24dp" />
-        <!--            android:backgroundTint="@color/navigationGreen"-->
-
-        <EditText
-            android:id="@+id/search_bar_edit_text"
-            android:layout_width="500dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@color/navLight"
-            android:hint="@string/search_default_text"
-            android:inputType="textCapWords"
-            android:textColorHint="@color/black" />
-
-    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
