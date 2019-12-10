@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import com.example.recipesearch.R;
 // based off what i found in this tutorial https://www.youtube.com/watch?v=tIgVvZQnr_0&t=2s
-// needs compile 'com.miguelcatalan:materialsearchview:1.4.0'
+// needs compile 'com.miguelcatalan:materialsearchview:1.4.0' , place in the dependencies in the build.gradle (Module: app)
 public class SearchActivity extends AppCompatActivity
 {
     private static String[] Suggestion = new String[]{
