@@ -12,4 +12,6 @@
     <string name="settings">Settings</string>
     <string name="search">Search</string>
     <string name="number_of_results">Number of Results</string>
+    <string name="search_label">0</string>
+    <string name="settings_description">1</string>
 </resources>

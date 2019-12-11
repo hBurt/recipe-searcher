@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -27,24 +28,26 @@ public class SearchResultFragment extends Fragment {
 
         View root = inflater.inflate(R.layout.fragmnt_search_results, container, false);
 
-        final EditText et = root.findViewById(R.id.editText1);
+        final SearchView et = root.findViewById(R.id.SearchBox);
         MainActivity m = (MainActivity) getActivity();
-        if (m != null) {
-            et.setText(m.getMessage());
+        if (m != null)
+        {
+            et.setQuery(m.getMessage(),false);
         }
 
         et.requestFocus();
         et.setFocusable(true);
         et.setFocusableInTouchMode(true);
 
-        if (m != null) {
+        if (m != null)
+        {
             showKeyboard(et, m.getApplicationContext());
         }
 
         return root;
     }
 
-    private static void showKeyboard(EditText editText, Context context) {
+    private static void showKeyboard(SearchView editText, Context context) {
         editText.requestFocus();
         InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
         if (imm != null) {
