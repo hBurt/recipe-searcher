@@ -47,31 +47,35 @@ public class SearchSettingsActivity extends Activity
             DoSearch(query);
         }
     }
-    public void DoSearch(String query)
+    public String[] DoSearch(String query)
     {
         String defDish = "Burger";//default Dish search
         String defIngr = "Potato";//Default Ingredient Search
+        String[] returnList = new String[5];
         SearchingDishes = set.GetSwitchA();
         SearchingIngredients = set.GetSwitchB();
         if (SearchingDishes == true)
         {
             if(query != null || query.length() > 0)
-                APISearchDish(query);
+                returnList = APISearchDish(query);
             else
-                APISearchDish(defDish);
+                returnList = APISearchDish(defDish);
         }
         else if (SearchingIngredients == true)
         {
             if(query != null || query.length() > 0)
-                APISearchIngredient(query);
+                returnList = APISearchIngredient(query);
             else
-                APISearchIngredient(defIngr);
+                returnList = APISearchIngredient(defIngr);
         }
+        return  returnList;
     }
-    public void searchSimilar(int ID)
+    public String searchSimilar(int ID)
     //Should only be used from a Recipe screen, DO NOT SEARCH BY ID BEFORE OPENING A RECIPE SCREEN, THIS NEEDS THE INT ID
     {
-        APISearchSimilar(ID);
+        String result = new String();
+        result = APISearchSimilar(ID);
+        return result;
     }
     public boolean onSearchRequested() {
         Bundle appData = new Bundle();
@@ -79,14 +83,16 @@ public class SearchSettingsActivity extends Activity
         startSearch(null, false, appData, false);
         return true;
     }
-    private    void APISearchDish(String query)// will search baised off dish
+    private String[] APISearchDish(String query)// will search baised off dish
     {
         //* The code Snippets for the API searches are from the https://rapidapi.com/spoonacular/api/recipe-food-nutrition?endpoint=55e1b24ae4b0a29b2c36073c
         //* only deference is the changes for the input of a val, string or int, for the search
         OkHttpClient client = new OkHttpClient();
+        String result = new String();
+        String[] FoodList = new String[5];
         String Result = null;
         Request request = new Request.Builder()
-                .url("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/search?diet=vegetarian&excludeIngredients=coconut&intolerances=egg%252C%20gluten&number=10&offset=0&type=main%20course&query="+query)
+                .url("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/search?number=5&offset=0&type=main%20course&query="+query)
                 .get()
                 .addHeader("x-rapidapi-host", "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com")
                 .addHeader("x-rapidapi-key", "7dba1c8b6dmsh8c3919fbe127d43p122d00jsn89f1b32d2216")
@@ -98,13 +104,21 @@ public class SearchSettingsActivity extends Activity
         } catch (IOException e) {
             e.printStackTrace();
         }
+        //test func
+        result = "test";
+        for (int i = 0; i < 5; i++)
+        {
+            FoodList[i] = result;
+        }
+        return FoodList;
     }
-    private void  APISearchIngredient(String query)//will search baissed off ingredient
+    private String[]  APISearchIngredient(String query)//will search baissed off ingredient
     {
         OkHttpClient client = new OkHttpClient();
-
+        String result = new String();
+        String[] FoodList = new String[4];
         Request request = new Request.Builder()
-                .url("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/findByIngredients?number=5&ranking=1&ignorePantry=false&ingredients="+query)
+                .url("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/findByIngredients?number=5&ingredients="+query)
                 .get()
                 .addHeader("x-rapidapi-host", "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com")
                 .addHeader("x-rapidapi-key", "7dba1c8b6dmsh8c3919fbe127d43p122d00jsn89f1b32d2216")
@@ -115,9 +129,17 @@ public class SearchSettingsActivity extends Activity
         } catch (IOException e) {
             e.printStackTrace();
         }
+        //test func
+        result = "test";
+        for (int i = 0; i < 5; i++)
+        {
+            FoodList[i] = result;
+        }
+        return FoodList;
     }
-    private void APISearchSimilar (int ID)//search baised off similar, should make a seperate file, MUST PASS THE ID OF THE CURRENT DISH!!!
+    private String APISearchSimilar (int ID)//search baised off similar, should make a seperate file, MUST PASS THE ID OF THE CURRENT DISH!!!
     {
+        String searchedFood = new String();
         OkHttpClient client = new OkHttpClient();
 
         Request request = new Request.Builder()
@@ -126,13 +148,15 @@ public class SearchSettingsActivity extends Activity
                 .addHeader("x-rapidapi-host", "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com")
                 .addHeader("x-rapidapi-key", "7dba1c8b6dmsh8c3919fbe127d43p122d00jsn89f1b32d2216")
                 .build();
-
         try
         {
             Response response = client.newCall(request).execute();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        //test return
+       searchedFood = "Test";
+        return searchedFood;
     }
 
 }
