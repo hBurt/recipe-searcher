@@ -2,6 +2,7 @@ package com.example.recipesearch.ui.search_result;
 
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -47,7 +48,7 @@ public class SearchActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-
+        handleIntent(getIntent());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragmnt_search_results);
         Toolbar tool = findViewById(R.id.ToolBox2);
@@ -138,5 +139,19 @@ public class SearchActivity extends AppCompatActivity
                 searchManager.getSearchableInfo(getComponentName()));
 
         return true;
+    }
+    @Override
+    protected void onNewIntent(Intent intent)
+    {
+        handleIntent(intent);
+    }
+
+    private void handleIntent(Intent intent)
+    {
+
+        if (Intent.ACTION_SEARCH.equals(intent.getAction()))
+        {
+            String query = intent.getStringExtra(SearchManager.QUERY);
+        }
     }
 }
