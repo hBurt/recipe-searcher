@@ -5,6 +5,7 @@
     <string name="title_notifications">Notifications</string>
     <string name="title_search">Search</string>
     <string name="title_favorites">Favorites</string>
+    <string name="search_default_text">Recipe / Ingredient</string>
     <string name="action_settings" />
     <string name="ingredient">Ingredient</string>
     <string name="dish">Dish</string>

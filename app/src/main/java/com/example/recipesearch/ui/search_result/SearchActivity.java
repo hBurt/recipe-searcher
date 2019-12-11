@@ -1,4 +1,4 @@
-package com.example.recipesearch.ui.search;
+package com.example.recipesearch.ui.search_result;
 
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -18,8 +18,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.recipesearch.MainActivity;
 import com.example.recipesearch.ui.SearchSettingsActivity;
-import com.miguelcatalan.materialsearchview.MaterialSearchView;
+
 import com.example.recipesearch.R;
+import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -123,6 +124,7 @@ public class SearchActivity extends AppCompatActivity
             }
         });
     }
+
     @Override
     public boolean onCreateOptionsMenu (Menu menu)
     {
