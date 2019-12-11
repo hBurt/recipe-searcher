@@ -50,7 +50,7 @@ public class SearchActivity extends AppCompatActivity
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragmnt_search_results);
-        Toolbar tool = findViewById(R.id.Search_Query);
+        Toolbar tool = findViewById(R.id.ToolBox2);
         FsearchView = findViewById(R.id.search_box);
         FsearchView .setSuggestions(Suggestion);
         ListView list = findViewById(R.id.listView);// list view use and creation of the adapter for it
