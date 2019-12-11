@@ -22,6 +22,19 @@ import com.example.recipesearch.ui.search_result.SearchResultFragment;
 public class HomeSearchFragment extends Fragment {
 
     private HomeSearchViewModel homeSearchViewModel;
+    private EditText et;
+    private ImageView iv;
+    private boolean canSwitch = true;
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        // This stops auto switching back to search result fragment
+        et.getText().clear();
+        canSwitch = true;
+    }
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         homeSearchViewModel =
@@ -30,11 +43,13 @@ public class HomeSearchFragment extends Fragment {
 
         final UiHelper ui = new UiHelper(getFragmentManager());
 
-        //Do img color overlay
-        ImageView iv = root.findViewById(R.id.imageView);
-        iv.setColorFilter(getResources().getColor(R.color.colorAccent), PorterDuff.Mode.SRC_ATOP);
+        //set vars
+        iv = root.findViewById(R.id.imageView);
+        et = root.findViewById(R.id.search_bar_edit_text);
 
-        EditText et = root.findViewById(R.id.search_bar_edit_text);
+        //Do img color overlay
+        imgColorOverlay();
+
         et.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -43,16 +58,26 @@ public class HomeSearchFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                MainActivity m = (MainActivity) getActivity();
-                m.setMessage(s);
-                ui.switchScreen(new SearchResultFragment());
+
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-
+                //Switch to the search result fragment
+                if(canSwitch) {
+                    MainActivity m = (MainActivity) getActivity();
+                    if (m != null) {
+                        m.setMessage(s);
+                    }
+                    canSwitch = false;
+                    ui.switchScreen(new SearchResultFragment());
+                }
             }
         });
         return root;
+    }
+
+    private void imgColorOverlay(){
+        iv.setColorFilter(getResources().getColor(R.color.colorAccent), PorterDuff.Mode.SRC_ATOP);
     }
 }
