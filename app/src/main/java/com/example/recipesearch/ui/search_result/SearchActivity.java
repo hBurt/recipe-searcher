@@ -29,6 +29,7 @@ public class SearchActivity extends AppCompatActivity
     private String[] CreatedList = new String[5];
     private SearchView FsearchView;
     private ArrayAdapter silAd;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
