@@ -1,5 +1,6 @@
 package com.example.recipesearch.ui.home_search;
 
+import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.text.Editable;
@@ -17,10 +18,9 @@ import androidx.lifecycle.ViewModelProviders;
 import com.example.recipesearch.MainActivity;
 import com.example.recipesearch.R;
 import com.example.recipesearch.ui.UiHelper;
-import com.example.recipesearch.ui.search_result.SearchResultFragment;
+import com.example.recipesearch.ui.search_result.SearchActivity;
 
 public class HomeSearchFragment extends Fragment {
-
     private HomeSearchViewModel homeSearchViewModel;
     private EditText et;
     private ImageView iv;
@@ -70,7 +70,9 @@ public class HomeSearchFragment extends Fragment {
                         m.setMessage(s);
                     }
                     canSwitch = false;
-                    ui.switchScreen(new SearchResultFragment());
+                    Intent in = new Intent(getActivity(), SearchActivity.class);
+                    startActivity(in);
+                    //ui.switchScreen(new SearchFragment());
                 }
             }
         });

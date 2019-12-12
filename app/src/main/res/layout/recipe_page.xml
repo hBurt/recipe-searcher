@@ -10,6 +10,8 @@
         android:id="@+id/Recipe_Name"
         android:layout_width="780dp"
         android:layout_height="58dp"
+        android:text="@string/place_holder"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.005"
         app:layout_constraintStart_toStartOf="parent"
@@ -50,16 +52,19 @@
         <com.google.android.material.tabs.TabItem
             android:id="@+id/Ingredients"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="@string/ingredients" />
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/Directions"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="@string/directions" />
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/Similar_Recipes"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="@string/similar_recipes" />
     </com.google.android.material.tabs.TabLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

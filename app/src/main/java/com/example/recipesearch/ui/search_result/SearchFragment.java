@@ -17,7 +17,7 @@ import androidx.lifecycle.ViewModelProviders;
 import com.example.recipesearch.MainActivity;
 import com.example.recipesearch.R;
 
-public class SearchResultFragment extends Fragment {
+public class SearchFragment extends Fragment {
 
     private SearchResultViewModel searchResultViewModel;
 
@@ -28,7 +28,7 @@ public class SearchResultFragment extends Fragment {
 
         View root = inflater.inflate(R.layout.fragmnt_search_results, container, false);
 
-        final SearchView et = root.findViewById(R.id.SearchBox);
+       /* final SearchView et = root.findViewById(R.id.SearchBox);
         MainActivity m = (MainActivity) getActivity();
         if (m != null)
         {
@@ -42,7 +42,7 @@ public class SearchResultFragment extends Fragment {
         if (m != null)
         {
             showKeyboard(et, m.getApplicationContext());
-        }
+        }*/
 
         return root;
     }

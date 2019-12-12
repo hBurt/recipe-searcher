@@ -14,10 +14,18 @@
     <string name="number_of_results">Number of Results</string>
     <string name="search_label">0</string>
     <string name="settings_description">1</string>
+    <string name="test">test</string>
+    <string name="ingredients">Ingredients</string>
+    <string name="similar_recipes">Similar Recipes</string>
+    <string name="directions">Directions</string>
+    <string name="place_holder">Place_Holder</string>
     <string-array name="food_stuff">
         <item>Burger</item>
         <item>Pizza</item>
         <item>Fish</item>
         <item>Ramin</item>
+        <item>Pasta</item>
+        <item>Test</item>
+        <item>Place_Holder</item>
     </string-array>
 </resources>

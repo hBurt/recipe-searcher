@@ -24,6 +24,7 @@
         app:menu="@menu/bottom_nav_menu" />
 
     <!--android:background="?android:attr/windowBackground"-->
+
     <fragment
         android:id="@+id/nav_host_fragment"
         android:name="androidx.navigation.fragment.NavHostFragment"
