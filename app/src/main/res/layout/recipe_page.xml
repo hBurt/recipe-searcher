@@ -6,6 +6,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="410dp"
+        android:layout_height="366dp"
+        android:layout_marginTop="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/Tabs"
+        app:layout_constraintTop_toBottomOf="@+id/Tabs"
+        app:layout_constraintVertical_bias="1.0" />
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/Recpie_Tool_Bar"
         android:layout_width="match_parent"
@@ -57,29 +69,12 @@
         android:layout_marginEnd="1dp"
         android:layout_marginRight="1dp"
         android:layout_marginBottom="380dp"
+        app:tabInlineLabel="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Image_of_Food"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintVertical_bias="1.0"/>
 
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/Ingredients"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/ingredients" />
-
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/Directions"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/directions" />
-
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/Similar_Recipes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/similar_recipes" />
-    </com.google.android.material.tabs.TabLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

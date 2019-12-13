@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.viewpager.widget.ViewPager;
 
 import com.example.recipesearch.R;
 import com.google.android.material.tabs.TabItem;
@@ -23,56 +24,43 @@ public class RecipeActivity extends AppCompatActivity
     private TextView tex; // all this shit is declared here because it just made it easy incase it was needed outside onCreate
     private ImageView pic;
     private TabLayout tab;
-    private TabItem tab1;
-    private TabItem tab2;
-    private TabItem tab3;
+    ViewPager view;
     private String RecipeName = "Test Text";
     FragmentManager fm = getSupportFragmentManager();
     FragmentTransaction transaction = fm.beginTransaction();
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recipe_page);
         //Toolbar tool = findViewById(R.id.Recpie_Tool_Bar);
-        //tool.inflateMenu(R.menu.to_home_menu);
+        view = findViewById(R.id.viewPager);
         tex = findViewById(R.id.Recipe_Name);
         pic = findViewById(R.id.Image_of_Food);
         tab = findViewById(R.id.Tabs);
-        TabItem tab1 = findViewById(R.id.Ingredients);
-        TabItem tab2 = findViewById(R.id.Directions);
-        TabItem tab3 = findViewById(R.id.Similar_Recipes);
+        tab.addTab(tab.newTab().setText("Ingredients"));
+        tab.addTab(tab.newTab().setText("Directions"));
+        tab.addTab(tab.newTab().setText("Similar Recipes"));
         tex.setText(RecipeName);
+        tab.setTabGravity(TabLayout.GRAVITY_FILL);
+        final MyTabAdapter adapter = new MyTabAdapter(this,getSupportFragmentManager(), tab.getTabCount());
+        view.setAdapter(adapter);
+        view.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tab));
         tab.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener()
         {
             @Override
             public void onTabSelected(TabLayout.Tab tab)
             {
-                switch (tab.getPosition())// swaps between the fragments each time a tab is selected
-                {
-                    case 0:// ingredient
-                        transaction.replace(R.id.Tabs, RDTF);
-                        transaction.commit();
-                        break;
-                    case 1: // directions
-                        transaction.replace(R.id.Tabs, RSRTF);
-                        transaction.commit();
-                        break;
-                    case 2: // similar
-                        transaction.replace(R.id.Tabs, RITF);
-                        transaction.commit();
-                        break;
-                }
+                view.setCurrentItem(tab.getPosition());
             }
             @Override
             public void onTabUnselected(TabLayout.Tab tab)
-            {//not sure what to do here rn, if anything
+            {
             }
 
             @Override
             public void onTabReselected(TabLayout.Tab tab)
-            {//will do nothing, don't think anything should happen if tabs are reselected
+            {
             }
         });
     }
