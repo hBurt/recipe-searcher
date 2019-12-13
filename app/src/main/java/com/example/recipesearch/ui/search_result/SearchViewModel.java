@@ -5,11 +5,11 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 
-public class SearchResultViewModel extends ViewModel
+public class SearchViewModel extends ViewModel
 {
     private MutableLiveData<String> mText;
 
-    public SearchResultViewModel()
+    public SearchViewModel()
     {
         mText = new MutableLiveData<>();
         mText.setValue("Place Holder Result");

@@ -7,24 +7,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
 import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.example.recipesearch.MainActivity;
 import com.example.recipesearch.R;
 
 public class SearchFragment extends Fragment {
 
-    private SearchResultViewModel searchResultViewModel;
+    private SearchViewModel searchResultViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         searchResultViewModel =
-                ViewModelProviders.of(this).get(SearchResultViewModel.class);
+                ViewModelProviders.of(this).get(SearchViewModel.class);
 
         View root = inflater.inflate(R.layout.fragmnt_search_results, container, false);
 

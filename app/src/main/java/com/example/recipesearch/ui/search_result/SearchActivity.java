@@ -2,34 +2,21 @@ package com.example.recipesearch.ui.search_result;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
-import com.example.recipesearch.MainActivity;
 import com.example.recipesearch.ui.SearchSettingsActivity;
 
 import com.example.recipesearch.R;
-import com.example.recipesearch.ui.UiHelper;
-import com.example.recipesearch.ui.recipe.RecipeFragment;
-import com.example.recipesearch.ui.recipe.RecipeViewModel;
+import com.example.recipesearch.ui.recipe.RecipeActivity;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+
 public class SearchActivity extends AppCompatActivity
 {
     SearchSettingsActivity search = new SearchSettingsActivity(); // for use with passing a query to search
@@ -57,7 +44,10 @@ public class SearchActivity extends AppCompatActivity
             @Override
             public boolean onQueryTextSubmit(String query)
             {
-                return false;
+                //search.DoSearch(query); // for searching
+                Intent in = new Intent(SearchActivity.this, RecipeActivity.class);
+                startActivity(in);
+                return true;
             }
 
             @Override
