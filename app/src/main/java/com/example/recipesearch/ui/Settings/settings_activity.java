@@ -16,7 +16,6 @@ import org.w3c.dom.Text;
 
 public class settings_activity extends AppCompatActivity
 {
-    //Both A and B can be true, but with how the search is set up only the Dish search will run
     SwitchCompat Switch_A, Switch_B;
     boolean SwitchState_A, SwitchState_B;
     SharedPreferences Prefs;
@@ -40,6 +39,10 @@ public class settings_activity extends AppCompatActivity
                 Switch_A.setChecked(SwitchState_A);
                 SharedPreferences.Editor edit = Prefs.edit();
                 edit.putBoolean("Switch_A",SwitchState_A);
+                if (SwitchState_A == SwitchState_B)
+                {
+                    SwitchState_B = !SwitchState_A;
+                }
                 edit.apply();
             }
         });
@@ -52,6 +55,10 @@ public class settings_activity extends AppCompatActivity
                 Switch_B.setChecked(SwitchState_B);
                 SharedPreferences.Editor edit = Prefs.edit();
                 edit.putBoolean("Switch_B",SwitchState_B);
+                if (SwitchState_B == SwitchState_A)
+                {
+                    SwitchState_A = !SwitchState_B;
+                }
                 edit.apply();
             }
         });

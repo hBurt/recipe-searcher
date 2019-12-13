@@ -20,12 +20,17 @@
     <string name="directions">Directions</string>
     <string name="place_holder">Place_Holder</string>
     <string-array name="food_stuff">
-        <item>Burger</item>
-        <item>Pizza</item>
-        <item>Fish</item>
-        <item>Ramin</item>
+        <item>Beef Burger</item>
+        <item>Lamb Burger</item>
+        <item>Cheese Pizza</item>
+        <item>Baked Cod</item>
+        <item>Things</item>
         <item>Pasta</item>
         <item>Test</item>
-        <item>Place_Holder</item>
+        <item>Place Holder</item>
+        <item>test</item>
+        <item>tEsT</item>
+        <item>TeSt</item>
+        <item>Food</item>
     </string-array>
 </resources>

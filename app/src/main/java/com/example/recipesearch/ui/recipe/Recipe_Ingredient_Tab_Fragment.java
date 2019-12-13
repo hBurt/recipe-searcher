@@ -24,14 +24,7 @@ public class Recipe_Ingredient_Tab_Fragment extends Fragment
                 ViewModelProviders.of(this).get(RecipeViewModel.class);
         View root = inflater.inflate(R.layout.recipe_page, container, false);
         final TextView textView = root.findViewById(R.id.Recipe_Name);
-        Image = (ImageView) Image.findViewById(R.id.Image_of_Food);
-        recipeViewModel.getText().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-                Image.setImageResource(R.drawable.testimg);
-            }
-        });
+
         return root;
     }
 
