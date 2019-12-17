@@ -4,6 +4,8 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.util.Vector;
+
 @Entity
 public class User {
     @PrimaryKey
@@ -20,6 +22,9 @@ public class User {
 
     //Use char[], strings are immutable and wont be cleaned up by the garbage collector
     @ColumnInfo(name = "password")
-    public char[] password;
+    public String password;
+
+    //@ColumnInfo(name = "favorites")
+    //public Vector<Integer> favorites;
 }
 

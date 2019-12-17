@@ -7,6 +7,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
@@ -18,12 +19,15 @@ import com.example.recipesearch.MainActivity;
 import com.example.recipesearch.R;
 import com.example.recipesearch.ui.UiHelper;
 import com.example.recipesearch.ui.search_result.SearchResultFragment;
+import com.example.recipesearch.ui.user.login.LoginFragment;
+import com.example.recipesearch.ui.user.signup.SignUpFragment;
 
 public class HomeSearchFragment extends Fragment {
 
     private HomeSearchViewModel homeSearchViewModel;
     private EditText et;
     private ImageView iv;
+    private Button login, signup;
     private boolean canSwitch = true;
 
     @Override
@@ -46,6 +50,10 @@ public class HomeSearchFragment extends Fragment {
         //set vars
         iv = root.findViewById(R.id.imageView);
         et = root.findViewById(R.id.search_bar_edit_text);
+
+        login = root.findViewById(R.id.home_button_login);
+        signup = root.findViewById(R.id.home_button_signup);
+
 
         //Do img color overlay
         imgColorOverlay();
@@ -74,6 +82,21 @@ public class HomeSearchFragment extends Fragment {
                 }
             }
         });
+
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ui.switchScreen(new LoginFragment());
+            }
+        });
+
+        signup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ui.switchScreen(new SignUpFragment());
+            }
+        });
+
         return root;
     }
 

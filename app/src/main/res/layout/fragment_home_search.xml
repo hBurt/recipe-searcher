@@ -23,15 +23,18 @@
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:contentDescription="TODO"
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/bg_1"
-        android:contentDescription="TODO" />
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/bg_1" />
 
     <LinearLayout
+        android:id="@+id/linearLayout3"
         android:layout_width="0dp"
         android:layout_height="57dp"
         android:orientation="horizontal"
@@ -56,12 +59,55 @@
             android:layout_width="500dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:autofillHints=""
             android:background="@color/navLight"
             android:hint="@string/search_default_text"
             android:inputType="textCapWords"
-            android:textColorHint="@color/black"
-            android:autofillHints="" />
+            android:textColorHint="@color/black" />
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/home_button_signup"
+        android:layout_width="0dp"
+        android:layout_height="67dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:text="@string/sign_up"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/home_button_login"
+        app:layout_constraintVertical_bias="0.15" />
+
+    <TextView
+        android:id="@+id/textView_or2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/or"
+        app:layout_constraintBottom_toTopOf="@+id/home_button_signup"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/home_button_login"
+        app:layout_constraintVertical_bias="0.5" />
+
+    <Button
+        android:id="@+id/home_button_login"
+        android:layout_width="0dp"
+        android:layout_height="67dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:text="@string/login"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar4"
+        app:layout_constraintVertical_bias="0.22000003" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

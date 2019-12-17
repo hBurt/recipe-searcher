@@ -22,6 +22,9 @@ public interface UserDao {
     @Query("SELECT * FROM user WHERE email LIKE :email LIMIT 1")
     User findByEmail(String email);
 
+    //@Query("SELECT * FROM user WHERE email LIKE :email")
+    //List<Integer> getFavoritesByEmail(String email);
+
     @Insert
     void insertAll(User... users);
 
