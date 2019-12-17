@@ -24,11 +24,15 @@ public class SignUpFragment extends Fragment {
 
         View root = inflater.inflate(R.layout.fragment_sign_up, container, false);
 
+        //Used to switch between fragments
         final UiHelper ui = new UiHelper(getFragmentManager());
 
+        //Declare vars
         login = root.findViewById(R.id.signup_button_login);
         signup = root.findViewById(R.id.signup_button_signup);
 
+
+        //Listeners
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
