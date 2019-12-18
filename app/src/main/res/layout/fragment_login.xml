@@ -25,7 +25,7 @@
 
         <ImageView
             android:id="@+id/imageView3_login_user"
-            android:layout_width="235dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/navLight"
@@ -40,7 +40,7 @@
             android:layout_weight="1"
             android:autofillHints=""
             android:background="@color/navLight"
-            android:hint="@string/username"
+            android:hint="@string/email"
             android:inputType="textCapWords"
             android:textColorHint="@color/black" />
 
@@ -64,7 +64,7 @@
 
         <ImageView
             android:id="@+id/imageView_login_pass"
-            android:layout_width="235dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/navLight"

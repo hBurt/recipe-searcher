@@ -8,4 +8,6 @@
     <color name="black">#000000</color>
     <color name="yellow">#FFE446</color>
     <color name="navLight">#BECABA</color>
+
+    <color name="errorRed">#FF0000</color>
 </resources>

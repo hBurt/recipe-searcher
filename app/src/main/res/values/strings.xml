@@ -17,17 +17,18 @@
 
     <!-- ******* User login / sign up ******* -->
 
-    <string name="title_registration">Registration</string>
-    <string name="username">Username</string>
+    <string name="email">E-mail</string>
     <string name="password">Password</string>
     <string name="confirm_password">Confirm password</string>
 
     <string name="login">Login</string>
     <string name="sign_up">Sign Up</string>
-    <string name="name_first">First name</string>
-    <string name="name_last">Last name</string>
+
+    <string name="error_passwords">Error: Passwords do not match</string>
+    <string name="error_email">Error: E-mail not valid</string>
 
     <string name="or">or</string>
+    <string name="clear"> </string>
 
     <!-- *************** End **************** -->
 
