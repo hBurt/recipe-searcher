@@ -9,11 +9,16 @@ import android.widget.SearchView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.example.recipesearch.ui.SearchSettingsActivity;
+import com.example.recipesearch.ui.APIComunication.Request_Handler;
+import com.example.recipesearch.ui.APIComunication.SearchSettingsActivity;
 
 import com.example.recipesearch.R;
 import com.example.recipesearch.ui.recipe.RecipeActivity;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -24,6 +29,7 @@ public class SearchActivity extends AppCompatActivity
     private ArrayAdapter silAd;
     private ListView list;
     Toolbar tool;
+    public static String SearchedFood = null;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -43,8 +49,11 @@ public class SearchActivity extends AppCompatActivity
             @Override
             public boolean onQueryTextSubmit(String query)
             {
-                SearchSettingsActivity search = new SearchSettingsActivity(); // for use with passing a query to search
-                search.DoSearch(query); // for searching
+                //SearchSettingsActivity search = new SearchSettingsActivity(); // for use with passing a query to search
+                //search.DoSearch(query); // for searching
+                SearchedFood = query;
+                Request_Handler req = new Request_Handler();
+                req.execute();
                 Intent in = new Intent(SearchActivity.this, RecipeActivity.class);
                 startActivity(in);
                 return false;
@@ -57,5 +66,9 @@ public class SearchActivity extends AppCompatActivity
                 return false;
             }
         });
+    }
+    public static String getSearchedFood()
+    {
+     return SearchedFood;
     }
 }

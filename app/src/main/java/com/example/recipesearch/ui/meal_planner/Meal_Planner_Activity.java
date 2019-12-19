@@ -24,6 +24,9 @@ public class Meal_Planner_Activity extends AppCompatActivity
     CalendarView Cal;
     FragmentManager fm = getSupportFragmentManager();
     FragmentTransaction transaction = fm.beginTransaction();
+    String Notes;
+    String Today;
+    String Tomarrow;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {

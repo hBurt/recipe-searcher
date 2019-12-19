@@ -1,31 +1,21 @@
-package com.example.recipesearch.ui;
+package com.example.recipesearch.ui.APIComunication;
 
-import android.app.Activity;
 import android.app.SearchManager;
 import android.content.Intent;
-import android.net.http.HttpResponseCache;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.JsonReader;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.example.recipesearch.ui.Settings.settings_activity;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.MalformedURLException;
-import java.net.URL;
+import org.json.JSONArray;
 
-import javax.net.ssl.HttpsURLConnection;
+import java.io.IOException;
 
 
 public class SearchSettingsActivity extends AppCompatActivity
@@ -75,7 +65,11 @@ public class SearchSettingsActivity extends AppCompatActivity
         String url = URL + SearchedTerm + Key ;
         // com.android.volley. this seemes to solve some issues with Volley
         // Will call the Request_Handler class funcs for api communication here
+
+
+        // Adding JsonObject request to request queue
     }
+
     public String searchSimilar(int ID)
     //Should only be used from a Recipe screen, DO NOT SEARCH BY ID BEFORE OPENING A RECIPE SCREEN, THIS NEEDS THE INT ID
     {
