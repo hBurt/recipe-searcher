@@ -6,25 +6,42 @@ import androidx.room.PrimaryKey;
 
 import java.util.Vector;
 
-@Entity
+@Entity(tableName = "User")
 public class User {
-    @PrimaryKey
-    public int uid;
 
-    @ColumnInfo(name = "first_name")
-    public String firstName;
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "ID")
+    private int id;
 
-    @ColumnInfo(name = "last_name")
-    public String lastName;
+    @ColumnInfo(name = "Email")
+    private String email;
 
-    @ColumnInfo(name = "email")
-    public String email;
+    @ColumnInfo(name = "Password")
+    private String password;
 
-    //Use char[], strings are immutable and wont be cleaned up by the garbage collector
-    @ColumnInfo(name = "password")
-    public String password;
 
-    //@ColumnInfo(name = "favorites")
-    //public Vector<Integer> favorites;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }
 
