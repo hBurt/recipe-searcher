@@ -9,3 +9,5 @@ X-RapidAPI-Host :
 spoonacular-recipe-food-nutrition-v1.p.rapidapi.com
 X-RapidAPI-Key :
 7dba1c8b6dmsh8c3919fbe127d43p122d00jsn89f1b32d2216
+
+IMPORTANT, ALL NEW ACTIVITYS MUST BE ADDED TO THE MANIFEST FILE

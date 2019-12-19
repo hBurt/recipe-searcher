@@ -1,20 +1,21 @@
-package com.example.recipesearch.ui.meal_planner;
-
+package com.example.recipesearch.ui.search_result;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class MealPlannerModel extends ViewModel {
 
+public class SearchViewModel extends ViewModel
+{
     private MutableLiveData<String> mText;
 
-    public MealPlannerModel() {
+    public SearchViewModel()
+    {
         mText = new MutableLiveData<>();
-        mText.setValue("This is favorites fragment");
+        mText.setValue("Place Holder Result");
     }
-
-    public LiveData<String> getText() {
+    public LiveData<String> getText()
+    {
         return mText;
     }
 }

@@ -13,21 +13,20 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.example.recipesearch.MainActivity;
 import com.example.recipesearch.R;
 
-public class SearchResultFragment extends Fragment {
+public class SearchFragment extends Fragment {
 
-    private SearchResultViewModel searchResultViewModel;
+    private SearchViewModel searchResultViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         searchResultViewModel =
-                ViewModelProviders.of(this).get(SearchResultViewModel.class);
+                ViewModelProviders.of(this).get(SearchViewModel.class);
 
         View root = inflater.inflate(R.layout.fragmnt_search_results, container, false);
 
-        final SearchView et = root.findViewById(R.id.SearchBox);
+       /* final SearchView et = root.findViewById(R.id.SearchBox);
         MainActivity m = (MainActivity) getActivity();
 
         if (m != null)
@@ -41,7 +40,7 @@ public class SearchResultFragment extends Fragment {
         if (m != null)
         {
             showKeyboard(et, m.getApplicationContext());
-        }
+        }*/
 
         return root;
     }

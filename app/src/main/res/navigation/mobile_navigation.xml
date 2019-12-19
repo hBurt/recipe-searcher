@@ -20,5 +20,4 @@
         android:name="com.example.recipesearch.ui.favorites.FavoritesFragment"
         android:label="@string/title_favorites"
         tools:layout="@layout/fragment_favorites" />
-
 </navigation>
