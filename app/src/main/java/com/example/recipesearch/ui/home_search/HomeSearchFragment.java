@@ -72,14 +72,14 @@ public class HomeSearchFragment extends Fragment {
             @Override
             public void afterTextChanged(Editable s) {
                 //Switch to the search result fragment
-//                if(canSwitch) {
-//                    MainActivity m = (MainActivity) getActivity();
-//                    if (m != null) {
-//                        m.setMessage(s);
-//                    }
-//                    canSwitch = false;
-//                    ui.switchScreen(new SearchResultFragment());
-//                }
+                if(canSwitch) {
+                    MainActivity m = (MainActivity) getActivity();
+                    if (m != null) {
+                        m.setMessage(s);
+                    }
+                    canSwitch = false;
+                    ui.switchScreen(new SearchResultFragment());
+                }
             }
         });
 

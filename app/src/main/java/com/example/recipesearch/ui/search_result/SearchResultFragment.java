@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
 import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
@@ -30,12 +29,12 @@ public class SearchResultFragment extends Fragment {
 
         final SearchView et = root.findViewById(R.id.SearchBox);
         MainActivity m = (MainActivity) getActivity();
+
         if (m != null)
         {
             et.setQuery(m.getMessage(),false);
         }
 
-        et.requestFocus();
         et.setFocusable(true);
         et.setFocusableInTouchMode(true);
 

@@ -77,9 +77,9 @@ public class SignUpFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if(email.getText().length() >= 1){
+                if(editable.length() >= 1){
 
-                    String emailString = email.getText().toString();
+                    String emailString = editable.toString();
                     if(emailString.contains("@")) { // Does email contain '@'
                         String[] emailStringSplit = emailString.split("@");
 
@@ -104,7 +104,7 @@ public class SignUpFragment extends Fragment {
                     emailIsValid = false;
                 }
 
-                if(emailIsValid || email.getText().length() == 0){
+                if(emailIsValid || editable.length() == 0){
                     error_email.setVisibility(View.INVISIBLE);
                 } else {
                     error_email.setVisibility(View.VISIBLE);
@@ -112,8 +112,26 @@ public class SignUpFragment extends Fragment {
             }
         });
 
-        
+        passwordConfirm.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if(password.getText().toString().matches(passwordConfirm.getText().toString())){
+                    error_password.setVisibility(View.INVISIBLE);
+                } else {
+                    error_password.setVisibility(View.VISIBLE);
+                }
+            }
+        });
         return root;
     }
 

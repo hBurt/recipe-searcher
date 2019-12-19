@@ -171,8 +171,10 @@
 
     <TextView
         android:id="@+id/signup_error_email"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
         android:text="@string/error_email"
         android:textColor="@color/errorRed"
         app:layout_constraintBottom_toTopOf="@+id/signup_linearLayout_login_pass"
@@ -183,8 +185,10 @@
 
     <TextView
         android:id="@+id/signup_error_pass_nomatch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="19dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
         android:text="@string/error_passwords"
         android:textColor="@color/errorRed"
         app:layout_constraintBottom_toTopOf="@+id/signup_button_signup"
