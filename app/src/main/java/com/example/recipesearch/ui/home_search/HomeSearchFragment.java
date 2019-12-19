@@ -21,11 +21,14 @@ import com.example.recipesearch.R;
 import com.example.recipesearch.ui.UiHelper;
 import com.example.recipesearch.ui.meal_planner.Meal_Planner_Activity;
 import com.example.recipesearch.ui.search_result.SearchActivity;
+import com.example.recipesearch.ui.user.login.LoginFragment;
+import com.example.recipesearch.ui.user.signup.SignUpFragment;
 
 public class HomeSearchFragment extends Fragment {
     private HomeSearchViewModel homeSearchViewModel;
     private EditText et;
     private ImageView iv;
+    private Button login, signup;
     private boolean canSwitch = true;
 
     @Override
@@ -47,6 +50,10 @@ public class HomeSearchFragment extends Fragment {
         //set vars
         iv = root.findViewById(R.id.imageView);
         et = root.findViewById(R.id.search_bar_edit_text);
+        login = root.findViewById(R.id.home_button_login);
+        signup = root.findViewById(R.id.home_button_signup);
+
+
         //Do img color overlay
         imgColorOverlay();
         et.setOnClickListener(new View.OnClickListener()
@@ -83,6 +90,21 @@ public class HomeSearchFragment extends Fragment {
                 }
             }
         });
+
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ui.switchScreen(new LoginFragment());
+            }
+        });
+
+        signup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ui.switchScreen(new SignUpFragment());
+            }
+        });
+
         return root;
     }
 

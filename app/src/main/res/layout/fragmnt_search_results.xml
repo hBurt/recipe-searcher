@@ -15,11 +15,12 @@
         android:id="@+id/tb"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:iconifiedByDefault="false"
+        android:closeIcon="@null"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:popupTheme="@style/Theme.AppCompat.Light"/>
-
     <ListView
         android:id="@+id/listView"
         android:layout_width="match_parent"

@@ -19,7 +19,22 @@
     <string name="similar_recipes">Similar Recipes</string>
     <string name="directions">Directions</string>
     <string name="place_holder">Place_Holder</string>
-    <string-array name="food_stuff">
+<!-- ******* User login / sign up ******* -->
+
+    <string name="email">E-mail</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm password</string>
+
+    <string name="login">Login</string>
+    <string name="sign_up">Sign Up</string>
+
+    <string name="error_passwords">Error: Passwords do not match</string>
+    <string name="error_email">Error: E-mail not valid</string>
+
+    <string name="or">or</string>
+    <string name="clear"> </string>
+
+    <!-- *************** End **************** -->    <string-array name="food_stuff">
         <item>Beef Burger</item>
         <item>Lamb Burger</item>
         <item>Cheese Pizza</item>

@@ -28,12 +28,12 @@ public class SearchFragment extends Fragment {
 
        /* final SearchView et = root.findViewById(R.id.SearchBox);
         MainActivity m = (MainActivity) getActivity();
+
         if (m != null)
         {
             et.setQuery(m.getMessage(),false);
         }
 
-        et.requestFocus();
         et.setFocusable(true);
         et.setFocusableInTouchMode(true);
 
