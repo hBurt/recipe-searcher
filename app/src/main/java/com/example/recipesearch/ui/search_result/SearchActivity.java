@@ -13,6 +13,7 @@ import com.example.recipesearch.ui.APIComunication.Request_Handler;
 import com.example.recipesearch.ui.APIComunication.SearchSettingsActivity;
 
 import com.example.recipesearch.R;
+import com.example.recipesearch.ui.meal_planner.Meal_Planner_Activity;
 import com.example.recipesearch.ui.recipe.RecipeActivity;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
@@ -54,6 +55,7 @@ public class SearchActivity extends AppCompatActivity
                 SearchedFood = query;
                 Request_Handler req = new Request_Handler();
                 req.execute();
+                //Intent in = new Intent(SearchActivity.this, Meal_Planner_Activity.class); // this is for testing the meal planner untill it has a dedicated button
                 Intent in = new Intent(SearchActivity.this, RecipeActivity.class);
                 startActivity(in);
                 return false;
