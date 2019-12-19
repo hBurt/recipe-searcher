@@ -17,12 +17,12 @@ import com.example.recipesearch.ui.recipe.RecipeActivity;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+
 public class SearchActivity extends AppCompatActivity
 {
-    SearchSettingsActivity search = new SearchSettingsActivity(); // for use with passing a query to search
     private SearchView FsearchView;
     private ArrayAdapter silAd;
-    private  ListView list;
+    private ListView list;
     Toolbar tool;
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -30,12 +30,11 @@ public class SearchActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragmnt_search_results);
         tool = findViewById(R.id.tb);
-        tool.inflateMenu(R.menu.menu_search);// displays the toolbar
+        tool.inflateMenu(R.menu.menu_search);
         list = findViewById(R.id.listView);// list view use and creation of the adapter for iz
         ArrayList<String> foodArray = new ArrayList<>();
         foodArray.addAll(Arrays.asList(getResources().getStringArray(R.array.food_stuff)));
-        silAd = new ArrayAdapter<String>(
-                SearchActivity.this, android.R.layout.simple_list_item_1, foodArray);
+        silAd = new ArrayAdapter<String>(SearchActivity.this, android.R.layout.simple_list_item_1, foodArray);
         list.setAdapter(silAd);
         FsearchView = findViewById(R.id.searchFood);
         FsearchView.setQueryHint("Search Food or Ingredient");
@@ -44,10 +43,11 @@ public class SearchActivity extends AppCompatActivity
             @Override
             public boolean onQueryTextSubmit(String query)
             {
-                //search.DoSearch(query); // for searching
+                SearchSettingsActivity search = new SearchSettingsActivity(); // for use with passing a query to search
+                search.DoSearch(query); // for searching
                 Intent in = new Intent(SearchActivity.this, RecipeActivity.class);
                 startActivity(in);
-                return true;
+                return false;
             }
 
             @Override
@@ -58,5 +58,4 @@ public class SearchActivity extends AppCompatActivity
             }
         });
     }
-
 }

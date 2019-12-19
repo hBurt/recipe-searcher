@@ -7,6 +7,19 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <TextView
+        android:id="@+id/meal_planner"
+        android:layout_width="216dp"
+        android:layout_height="48dp"
+        android:textSize="36sp"
+        app:layout_constraintBottom_toTopOf="@+id/calender"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.632"
+        tools:text="Meal Planner" />
+
     <androidx.viewpager.widget.ViewPager
         android:layout_width="414dp"
         android:layout_height="324dp"
@@ -62,16 +75,4 @@
             android:layout_height="wrap_content" />
     </com.google.android.material.tabs.TabLayout>
 
-    <TextView
-        android:id="@+id/meal_planner"
-        android:layout_width="216dp"
-        android:layout_height="48dp"
-        android:textSize="36sp"
-        app:layout_constraintBottom_toTopOf="@+id/calender"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.632"
-        tools:text="Meal Planner" />
 </androidx.constraintlayout.widget.ConstraintLayout>

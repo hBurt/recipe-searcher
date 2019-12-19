@@ -1,15 +1,19 @@
 package com.example.recipesearch;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toolbar;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
+import com.example.recipesearch.ui.meal_planner.Meal_Planner_Activity;
 import com.example.recipesearch.ui.search_result.SearchActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 

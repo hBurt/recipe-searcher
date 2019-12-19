@@ -24,7 +24,7 @@ public class Meal_Planner_T_Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_recipe__directions__tab_, container, false);
+        return inflater.inflate(R.layout.fragment_meal__planner__t_, container, false);
     }
 
 }

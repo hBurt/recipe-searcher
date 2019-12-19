@@ -13,6 +13,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.recipesearch.R;
+import com.example.recipesearch.ui.search_result.SearchActivity;
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 
@@ -64,5 +65,6 @@ public class RecipeActivity extends AppCompatActivity
             }
         });
     }
+
 
 }

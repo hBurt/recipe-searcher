@@ -39,4 +39,7 @@
     <string name="what_you_want_to_cook_today">What you want to cook today</string>
     <string name="notes">Notes</string>
     <string name="what_you_want_to_make_tomarrow">What You Want to make Tomarrow</string>
+    <string name="planner">Planner</string>
+    <string name="Planner" >Meal Planner</string>
+    <string name="meal_planner_menu">Meal Planner</string>
 </resources>

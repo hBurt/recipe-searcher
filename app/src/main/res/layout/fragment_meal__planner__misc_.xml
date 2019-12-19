@@ -6,7 +6,7 @@
     tools:context=".ui.meal_planner.Meal_Planner_Misc_Fragment">
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/Meal plan"
+        android:id="@+id/MealPlan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
