@@ -61,6 +61,16 @@ public class Request_Handler extends AsyncTask<Void, Void, String>
         } catch (IOException e) {
             e.printStackTrace();
         }
+       /* OkHttpClient client = new OkHttpClient(); // for getting instructions, needs an ID from the previous search
+
+        Request request = new Request.Builder()
+                .url("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/" + ID + "/analyzedInstructions?stepBreakdown=false")
+                .get()
+                .addHeader("x-rapidapi-host", "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com")
+                .addHeader("x-rapidapi-key", "7dba1c8b6dmsh8c3919fbe127d43p122d00jsn89f1b32d2216")
+                .build();
+
+        Response response = client.newCall(request).execute();*/
         try {
             URL url = new URL(API_URL + "email=" + Food + "&apiKey=" + API_KEY);
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
