@@ -29,7 +29,7 @@ import java.net.URL;
 public class Request_Handler extends AsyncTask<Void, Void, String>
 {
     //wip for communicating with the api
-    // com.android.volley. this seemes to solve some issues with Volley, if that is used
+    // com.android.volley. this seems to solve some issues with Volley, if using Volley
     String API_KEY = "7dba1c8b6dmsh8c3919fbe127d43p122d00jsn89f1b32d2216";
     String API_URL = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/search?number=5&offset=0&instructionsRequired=true&query=";
     @Override
