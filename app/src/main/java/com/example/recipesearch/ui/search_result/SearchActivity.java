@@ -38,7 +38,7 @@ public class SearchActivity extends AppCompatActivity
     private ArrayAdapter silAd;
     private ListView list;
     Toolbar tool;
-    public static String SearchedFood = null;
+    public static String SearchedFood = null; // static to share the query
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -59,11 +59,9 @@ public class SearchActivity extends AppCompatActivity
             @Override
             public boolean onQueryTextSubmit(String query)
             {
-                //SearchSettingsActivity search = new SearchSettingsActivity(); // for use with passing a query to search
-                //search.DoSearch(query); // for searching
                 SearchedFood = query;
                 Request_Handler req = new Request_Handler();
-                req.execute();
+                req.execute(); // handles the search query
                 Intent in = new Intent(SearchActivity.this, RecipeActivity.class);
                 startActivity(in);
                 return false;

@@ -1,6 +1,7 @@
 package com.example.recipesearch.ui.meal_planner;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
@@ -9,8 +10,10 @@ import android.widget.CalendarView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.Toolbar;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -26,7 +29,6 @@ public class Meal_Planner_Activity extends AppCompatActivity
 {
     private TabLayout tabM;
     ViewPager Mview;
-    CalendarView Cal;
     String Notes;
     String Today;
     String Tomorrow;
@@ -46,7 +48,6 @@ public class Meal_Planner_Activity extends AppCompatActivity
         setContentView(R.layout.recipe_page);
         Mview = findViewById(R.id.viewPager);
         tabM = findViewById(R.id.Tabs);
-        Cal = findViewById(R.id.calender);
         tabM.addTab(tabM.newTab().setText("Today"));
         tabM.addTab(tabM.newTab().setText("Tomarrow"));
         tabM.addTab(tabM.newTab().setText("Notes"));
