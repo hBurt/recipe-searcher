@@ -58,4 +58,5 @@
     <string name="Planner" >Meal Planner</string>
     <string name="meal_planner_menu">Meal Planner</string>
     <string name="save_changes">Save changes</string>
+    <string name="planer">Planer</string>
 </resources>

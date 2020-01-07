@@ -43,6 +43,10 @@ public class Request_Handler extends AsyncTask<Void, Void, String>
     // might create a random recipe func as the API does support that
     String API_KEY = "7dba1c8b6dmsh8c3919fbe127d43p122d00jsn89f1b32d2216";
     String API_URL = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/search?number=5&offset=0&instructionsRequired=true&query=";
+    static  String id2 = null;
+    static  String id3 = null;
+    static  String id4 = null;
+    static  String id5 = null;
     @Override
     protected String doInBackground(Void... voids)
     {
@@ -62,7 +66,7 @@ public class Request_Handler extends AsyncTask<Void, Void, String>
         OkHttpClient client = new OkHttpClient();
         final Moshi moshi = new Moshi.Builder().build();
         com.squareup.okhttp.Request request = new Request.Builder()
-                .url("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/search?number=5&offset=0&instructionsRequired=true&query="+ Food)
+                .url("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/search?number=1&offset=0&instructionsRequired=true&query="+ Food) // will use only the first result
                 .get()
                 .addHeader("x-rapidapi-host", "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com")
                 .addHeader("x-rapidapi-key", "7dba1c8b6dmsh8c3919fbe127d43p122d00jsn89f1b32d2216")
@@ -72,35 +76,22 @@ public class Request_Handler extends AsyncTask<Void, Void, String>
         try
         {
             response = client.newCall(request).execute(); // provides a val for the first search and preforms it
-            JSONObject jObject = new JSONObject(String.valueOf(response));
-            // begins parsing to get the id, will just get the first id
-            // goal is to save the other 4 id's and titles for the similar Recipes section to reduce the total number of calls
-            //WIP RN as the return is multiple arrays nested in another, like a russian nesting doll
-            JSONArray jArray = jObject.getJSONArray("Food_Results");
-            for (int i=0; i < jArray.length(); i++)
-            {
-                try {
-                    JSONObject oneObject = jArray.getJSONObject(i);
-                    // Pull items from the array
-                    String oneObjectsItem = oneObject.getString("STRINGNAMEinTHEarray");
-                    String oneObjectsItem2 = oneObject.getString("anotherSTRINGNAMEINtheARRAY");
-                } catch (JSONException e) {
-                    // when an error occurs
-                }
-            }
+
         }
         catch (IOException e)
         {
             e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
         }
+
+        // begins parsing to get the id, will just get the first id
+        //WIP RN as the return is multiple arrays nested in another, like a russian nesting doll
+        //Place code to parse here
 
 
         // will create a second api call
         // after received must get the item id from what was received
          request = new Request.Builder()
-                .url("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/" + id + "/analyzedInstructions?stepBreakdown=false")
+                .url("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/" + id + "/analyzedInstructions?stepBreakdown=false") // will fail if not given an id
                 .get()
                 .addHeader("x-rapidapi-host", "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com")
                 .addHeader("x-rapidapi-key", "7dba1c8b6dmsh8c3919fbe127d43p122d00jsn89f1b32d2216")

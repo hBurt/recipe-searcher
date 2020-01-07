@@ -1,6 +1,7 @@
 package com.example.recipesearch.ui.meal_planner;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -15,6 +16,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.recipesearch.R;
+
+import static android.content.Context.MODE_PRIVATE;
 
 
 public class Meal_Planner_T_Fragment extends Fragment {

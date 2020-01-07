@@ -28,7 +28,7 @@ public class HomeSearchFragment extends Fragment {
     private HomeSearchViewModel homeSearchViewModel;
     private EditText et;
     private ImageView iv;
-    private Button login, signup;
+    private Button login, signup, planer;
     private boolean canSwitch = true;
 
     @Override
@@ -52,7 +52,7 @@ public class HomeSearchFragment extends Fragment {
         et = root.findViewById(R.id.search_bar_edit_text);
         login = root.findViewById(R.id.home_button_login);
         signup = root.findViewById(R.id.home_button_signup);
-
+        planer = root.findViewById(R.id.Planer);
 
         //Do img color overlay
         imgColorOverlay();
@@ -104,7 +104,13 @@ public class HomeSearchFragment extends Fragment {
                 ui.switchScreen(new SignUpFragment());
             }
         });
-
+        planer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent in = new Intent(getActivity(), Meal_Planner_Activity.class);
+                startActivity(in);
+            }
+        });
         return root;
     }
 

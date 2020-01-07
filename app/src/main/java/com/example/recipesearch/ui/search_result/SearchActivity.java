@@ -40,7 +40,6 @@ import java.util.Arrays;
 public class SearchActivity extends AppCompatActivity
 {
     private SearchView FsearchView;
-    private Button Plannerbtn;
     private ArrayAdapter silAd;
     private ListView list;
     Toolbar tool;
@@ -67,7 +66,6 @@ public class SearchActivity extends AppCompatActivity
         else
             connected = false;
         FsearchView = findViewById(R.id.searchFood);
-        Plannerbtn = findViewById(R.id.Planner);
         FsearchView.setQueryHint("Search Food or Ingredient");
         FsearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener()
         {
@@ -87,15 +85,6 @@ public class SearchActivity extends AppCompatActivity
             {
                 silAd.getFilter().filter(newText);
                 return false;
-            }
-        });
-        Plannerbtn.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                Intent in = new Intent(SearchActivity.this, Meal_Planner_Activity.class);
-                startActivity(in);
             }
         });
     }

@@ -1,6 +1,7 @@
 package com.example.recipesearch.ui.meal_planner;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -15,6 +16,8 @@ import android.widget.EditText;
 
 import com.example.recipesearch.R;
 
+import static android.content.Context.MODE_PRIVATE;
+
 
 public class Meal_Planner_Tomarrow_Fragment extends Fragment
 {
@@ -27,7 +30,6 @@ public class Meal_Planner_Tomarrow_Fragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
         return inflater.inflate(R.layout.fragment_meal__planner__tomarrow_, container, false);
     }
 

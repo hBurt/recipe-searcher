@@ -4,6 +4,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -27,6 +28,8 @@ import com.example.recipesearch.R;
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 
+import static android.preference.PreferenceManager.getDefaultSharedPreferences;
+
 public class Meal_Planner_Activity extends AppCompatActivity
 {
     private TabLayout tabM;
@@ -37,14 +40,15 @@ public class Meal_Planner_Activity extends AppCompatActivity
     static EditText editNotes;
     static EditText  editToday;
     static EditText editTomorrow;
-    SharedPreferences.Editor editor;
+    SharedPreferences mPrefs;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recipe_page);
         Mview = findViewById(R.id.viewPager);
-        //Button Save = findViewById(R.id.Save);
+        mPrefs = getSharedPreferences("Saved_Plan", MODE_PRIVATE);
+        final SharedPreferences.Editor edit = mPrefs.edit();
         tabM = findViewById(R.id.Tabs);
         tabM.addTab(tabM.newTab().setText("Today"));
         tabM.addTab(tabM.newTab().setText("Tomorrow"));
@@ -53,6 +57,9 @@ public class Meal_Planner_Activity extends AppCompatActivity
         editNotes = (EditText) findViewById(R.id.Notes);
         editToday = (EditText) findViewById(R.id.Today);
         editTomorrow = (EditText) findViewById(R.id.tomarrow);
+        //editNotes.setText(mPrefs.getString("Notes", ""));
+        //editToday.setText(mPrefs.getString("Today",""));
+        //editTomorrow.setText(mPrefs.getString("Tomorrow",""));
         final MP_TabAdapter adapter = new MP_TabAdapter(this,getSupportFragmentManager(), tabM.getTabCount());
         Mview.setAdapter(adapter);
         Mview.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabM));
