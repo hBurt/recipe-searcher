@@ -13,9 +13,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
 import com.example.recipesearch.R;
+import com.example.recipesearch.databinding.ActivityMainBinding;
 import com.example.recipesearch.ui.UiHelper;
 import com.example.recipesearch.ui.user.login.LoginFragment;
 
