@@ -1,6 +1,9 @@
 package com.example.recipesearch;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.WindowManager;import android.view.View;
@@ -16,14 +19,17 @@ import com.example.recipesearch.ui.meal_planner.Meal_Planner_Activity;
 import com.example.recipesearch.ui.search_result.SearchActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import static androidx.core.content.ContextCompat.getSystemService;
+
 public class MainActivity extends AppCompatActivity {
 
     private CharSequence message;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);

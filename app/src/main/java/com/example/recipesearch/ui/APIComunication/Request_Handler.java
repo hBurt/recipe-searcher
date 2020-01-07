@@ -2,6 +2,8 @@ package com.example.recipesearch.ui.APIComunication;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.PersistableBundle;
@@ -16,6 +18,8 @@ import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.recipesearch.ui.search_result.SearchActivity;
+import com.squareup.moshi.JsonAdapter;
+import com.squareup.moshi.Moshi;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
@@ -26,6 +30,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import static androidx.core.content.ContextCompat.getSystemService;
+
 public class Request_Handler extends AsyncTask<Void, Void, String>
 {
     //wip for communicating with the api
@@ -35,6 +41,7 @@ public class Request_Handler extends AsyncTask<Void, Void, String>
     @Override
     protected String doInBackground(Void... voids)
     {
+
         String RetreivedFood = SearchActivity.getSearchedFood();
         String Food = new String(RetreivedFood.trim().replace(" ", "%20").replace("&", "%26")
                 .replace(",", "%2c").replace("(", "%28").replace(")", "%29")
@@ -48,7 +55,7 @@ public class Request_Handler extends AsyncTask<Void, Void, String>
                 .replace("|", "%7C").replace("}", "%7D"));
         // Do some validation here
         OkHttpClient client = new OkHttpClient();
-
+        final Moshi moshi = new Moshi.Builder().build();
         com.squareup.okhttp.Request request = new Request.Builder()
                 .url("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/search?number=5&offset=0&instructionsRequired=true&query="+ Food)
                 .get()
@@ -56,11 +63,17 @@ public class Request_Handler extends AsyncTask<Void, Void, String>
                 .addHeader("x-rapidapi-key", "7dba1c8b6dmsh8c3919fbe127d43p122d00jsn89f1b32d2216")
                 .build();
 
-        try {
+
+        try
+        {
             Response response = client.newCall(request).execute();
-        } catch (IOException e) {
+        } catch (IOException e)
+        {
             e.printStackTrace();
         }
+
+
+        // after received must get the item id from what was received
        /* OkHttpClient client = new OkHttpClient(); // for getting instructions, needs an ID from the previous search
 
         Request request = new Request.Builder()

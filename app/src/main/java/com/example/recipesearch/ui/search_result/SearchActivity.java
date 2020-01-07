@@ -1,6 +1,9 @@
 package com.example.recipesearch.ui.search_result;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.Menu;
@@ -16,6 +19,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.recipesearch.ui.APIComunication.Request_Handler;
 import com.example.recipesearch.ui.APIComunication.SearchSettingsActivity;
 
@@ -51,6 +57,15 @@ public class SearchActivity extends AppCompatActivity
         foodArray.addAll(Arrays.asList(getResources().getStringArray(R.array.food_stuff)));
         silAd = new ArrayAdapter<String>(SearchActivity.this, android.R.layout.simple_list_item_1, foodArray);
         list.setAdapter(silAd);
+        boolean connected = false;
+        ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        if(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+                connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
+            //we are connected to a network
+            connected = true;
+        }
+        else
+            connected = false;
         FsearchView = findViewById(R.id.searchFood);
         Plannerbtn = findViewById(R.id.Planner);
         FsearchView.setQueryHint("Search Food or Ingredient");

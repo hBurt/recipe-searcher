@@ -6,6 +6,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
+import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -40,16 +42,12 @@ public class Meal_Planner_Activity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        SharedPreferences myPrefs = this.getSharedPreferences("prefID", Context.MODE_PRIVATE);
-        editor =  myPrefs.edit();
-        Notes = myPrefs.getString("NoteKey","Default");
-        Today = myPrefs.getString("TodayKey", "Default");
-        Tomorrow = myPrefs.getString("TomorrowKey","Default");
         setContentView(R.layout.recipe_page);
         Mview = findViewById(R.id.viewPager);
+        //Button Save = findViewById(R.id.Save);
         tabM = findViewById(R.id.Tabs);
         tabM.addTab(tabM.newTab().setText("Today"));
-        tabM.addTab(tabM.newTab().setText("Tomarrow"));
+        tabM.addTab(tabM.newTab().setText("Tomorrow"));
         tabM.addTab(tabM.newTab().setText("Notes"));
         tabM.setTabGravity(TabLayout.GRAVITY_FILL);
         editNotes = (EditText) findViewById(R.id.Notes);
@@ -64,24 +62,6 @@ public class Meal_Planner_Activity extends AppCompatActivity
             public void onTabSelected(TabLayout.Tab tab)
             {
                 Mview.setCurrentItem(tab.getPosition());
-                if (Notes.length() > 1)
-                {
-                    editor.putString("NoteKey", Notes);
-                    editor.apply();
-                    editor.commit();
-                }
-               if (Today.length() > 1)
-               {
-                   editor.putString("TodayKey", Today);
-                   editor.apply();
-                   editor.commit();
-               }
-                if (Tomorrow.length() > 1)
-                {
-                    editor.putString("TomorrowKey", Tomorrow);
-                    editor.apply();
-                    editor.commit();
-                }
             }
             @Override
             public void onTabUnselected(TabLayout.Tab tab)
@@ -95,4 +75,5 @@ public class Meal_Planner_Activity extends AppCompatActivity
             }
         });
     }
+
 }

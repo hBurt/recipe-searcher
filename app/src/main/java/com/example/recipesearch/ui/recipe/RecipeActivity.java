@@ -34,7 +34,7 @@ public class RecipeActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recipe_page);
-        //Toolbar tool = findViewById(R.id.Recpie_Tool_Bar);
+        RecipeName = SearchActivity.getSearchedFood();
         view = findViewById(R.id.viewPager);
         tex = findViewById(R.id.Recipe_Name);
         pic = findViewById(R.id.Image_of_Food);
