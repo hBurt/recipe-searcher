@@ -24,6 +24,10 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -41,7 +45,7 @@ public class Request_Handler extends AsyncTask<Void, Void, String>
     @Override
     protected String doInBackground(Void... voids)
     {
-
+        String id = null;
         String RetreivedFood = SearchActivity.getSearchedFood();
         String Food = new String(RetreivedFood.trim().replace(" ", "%20").replace("&", "%26")
                 .replace(",", "%2c").replace("(", "%28").replace(")", "%29")
@@ -63,27 +67,49 @@ public class Request_Handler extends AsyncTask<Void, Void, String>
                 .addHeader("x-rapidapi-key", "7dba1c8b6dmsh8c3919fbe127d43p122d00jsn89f1b32d2216")
                 .build();
 
-
+        Response response = null; // needs an id num or will cause an error
         try
         {
-            Response response = client.newCall(request).execute();
-        } catch (IOException e)
+            response = client.newCall(request).execute();
+            JSONObject jObject = new JSONObject(String.valueOf(response));
+            JSONArray jArray = jObject.getJSONArray("Food_Res");
+            for (int i=0; i < jArray.length(); i++)
+            {
+                try {
+                    JSONObject oneObject = jArray.getJSONObject(i);
+                    // Pulling items from the array
+                    String oneObjectsItem = oneObject.getString("STRINGNAMEinTHEarray");
+                    String oneObjectsItem2 = oneObject.getString("anotherSTRINGNAMEINtheARRAY");
+                } catch (JSONException e) {
+                    // Oops
+                }
+            }
+        }
+        catch (IOException e)
         {
+            e.printStackTrace();
+        } catch (JSONException e) {
             e.printStackTrace();
         }
 
 
+        // will create a second api call
         // after received must get the item id from what was received
-       /* OkHttpClient client = new OkHttpClient(); // for getting instructions, needs an ID from the previous search
-
-        Request request = new Request.Builder()
-                .url("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/" + ID + "/analyzedInstructions?stepBreakdown=false")
+         request = new Request.Builder()
+                .url("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/" + id + "/analyzedInstructions?stepBreakdown=false")
                 .get()
                 .addHeader("x-rapidapi-host", "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com")
                 .addHeader("x-rapidapi-key", "7dba1c8b6dmsh8c3919fbe127d43p122d00jsn89f1b32d2216")
                 .build();
 
-        Response response = client.newCall(request).execute();*/
+        try
+        {
+            response = client.newCall(request).execute();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
         try {
             URL url = new URL(API_URL + "email=" + Food + "&apiKey=" + API_KEY);
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
