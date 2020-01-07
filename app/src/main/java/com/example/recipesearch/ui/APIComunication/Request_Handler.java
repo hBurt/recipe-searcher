@@ -38,8 +38,9 @@ import static androidx.core.content.ContextCompat.getSystemService;
 
 public class Request_Handler extends AsyncTask<Void, Void, String>
 {
-    //wip for communicating with the api
-    // com.android.volley. this seems to solve some issues with Volley, if using Volley
+    //API calls work, working on parsing and using the returns, will make 2 calls plus the similar recipe calls
+    //the similar recipe calls will be handled in a different class but i want to save the extra returns for latter us
+    // might create a random recipe func as the API does support that
     String API_KEY = "7dba1c8b6dmsh8c3919fbe127d43p122d00jsn89f1b32d2216";
     String API_URL = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/search?number=5&offset=0&instructionsRequired=true&query=";
     @Override
@@ -70,18 +71,21 @@ public class Request_Handler extends AsyncTask<Void, Void, String>
         Response response = null; // needs an id num or will cause an error
         try
         {
-            response = client.newCall(request).execute();
+            response = client.newCall(request).execute(); // provides a val for the first search and preforms it
             JSONObject jObject = new JSONObject(String.valueOf(response));
-            JSONArray jArray = jObject.getJSONArray("Food_Res");
+            // begins parsing to get the id, will just get the first id
+            // goal is to save the other 4 id's and titles for the similar Recipes section to reduce the total number of calls
+            //WIP RN as the return is multiple arrays nested in another, like a russian nesting doll
+            JSONArray jArray = jObject.getJSONArray("Food_Results");
             for (int i=0; i < jArray.length(); i++)
             {
                 try {
                     JSONObject oneObject = jArray.getJSONObject(i);
-                    // Pulling items from the array
+                    // Pull items from the array
                     String oneObjectsItem = oneObject.getString("STRINGNAMEinTHEarray");
                     String oneObjectsItem2 = oneObject.getString("anotherSTRINGNAMEINtheARRAY");
                 } catch (JSONException e) {
-                    // Oops
+                    // when an error occurs
                 }
             }
         }
@@ -110,27 +114,7 @@ public class Request_Handler extends AsyncTask<Void, Void, String>
         {
             e.printStackTrace();
         }
-        try {
-            URL url = new URL(API_URL + "email=" + Food + "&apiKey=" + API_KEY);
-            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-            try {
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
-                StringBuilder stringBuilder = new StringBuilder();
-                String line;
-                while ((line = bufferedReader.readLine()) != null) {
-                    stringBuilder.append(line).append("\n");
-                }
-                bufferedReader.close();
-                return stringBuilder.toString();
-            }
-            finally{
-                urlConnection.disconnect();
-            }
-        }
-        catch(Exception e) {
-            Log.e("ERROR", e.getMessage(), e);
-            return null;
-        }
+       return null;
     }
 
 
