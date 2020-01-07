@@ -84,7 +84,7 @@ public class Request_Handler extends AsyncTask<Void, Void, String>
         }
 
         // begins parsing to get the id, will just get the first id
-        //WIP RN as the return is multiple arrays nested in another, like a russian nesting doll
+        //WIP RN as the return is multiple arrays nested in another
         //Place code to parse here
 
 
