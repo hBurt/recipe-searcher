@@ -64,7 +64,7 @@ public class Request_Handler extends AsyncTask<Void, Void, String>
                 .replace("|", "%7C").replace("}", "%7D"));
         // Do some validation here
         OkHttpClient client = new OkHttpClient();
-        final Moshi moshi = new Moshi.Builder().build();
+        final Moshi moshi1 = new Moshi.Builder().build();
         com.squareup.okhttp.Request request = new Request.Builder()
                 .url("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/search?number=1&offset=0&instructionsRequired=true&query="+ Food) // will use only the first result
                 .get()
@@ -86,22 +86,55 @@ public class Request_Handler extends AsyncTask<Void, Void, String>
         // begins parsing to get the id, will just get the first id
         //WIP RN as the return is multiple arrays nested in another
         //Place code to parse here
+       /* JSONObject jObject = null;
+        try
+        {
+            jObject = new JSONObject(String.valueOf(response));
+        }
+        catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
+        JSONArray jArray = null;
+        try
+        {
+            jArray = jObject.getJSONArray("Retrieved_Array");
+        }
+        catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
+        for (int i=0; i < jArray.length(); i++)
+        {
+            try
+            {
+                JSONObject oneObject = jArray.getJSONObject(i);
+                // Begin getting shit from the arrays
 
+            }
+            catch (JSONException e)
+            {
+                // Crap
+            }
+        }*/
 
         // will create a second api call
         // after received must get the item id from what was received
         // this is a test id
          id = "156992";
+        // for having them be on different calls
+        OkHttpClient client2 = new OkHttpClient();
+        final Moshi moshi2 = new Moshi.Builder().build();
+        Response response2 = null; // needs an id num or will cause an error
          request = new Request.Builder()
                 .url("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/" + id + "/analyzedInstructions?stepBreakdown=false") // will fail if not given an id
                 .get()
                 .addHeader("x-rapidapi-host", "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com")
                 .addHeader("x-rapidapi-key", "7dba1c8b6dmsh8c3919fbe127d43p122d00jsn89f1b32d2216")
                 .build();
-
         try
         {
-            response = client.newCall(request).execute();
+            response2 = client2.newCall(request).execute();
         }
         catch (IOException e)
         {
