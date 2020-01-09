@@ -38,18 +38,20 @@ public class Meal_Planner_Activity extends AppCompatActivity
     String Today;
     String Tomorrow;SharedPreferences mPrefs;
     SharedPreferences.Editor edit;
+    CalendarView Cal = null;
     @SuppressLint("CommitPrefEdits")
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.recipe_page);
-        Mview = findViewById(R.id.viewPager);
+        setContentView(R.layout.meal_planner);
+        Mview = findViewById(R.id.viewPager2);
         mPrefs = getApplicationContext().getSharedPreferences("Saved_Plan", MODE_PRIVATE);
-        TabLayout tabM = findViewById(R.id.Tabs);
+        TabLayout tabM = findViewById(R.id.tabLayout);
         tabM.addTab(tabM.newTab().setText("Today"));
         tabM.addTab(tabM.newTab().setText("Tomorrow"));
         tabM.addTab(tabM.newTab().setText("Notes            "));
+       // Cal = findViewById(R.id.Planner_Cal);
         tabM.setTabGravity(TabLayout.GRAVITY_FILL);
         if (mPrefs.contains("Note"))
             Notes = mPrefs.getString("Note", " ");
