@@ -5,17 +5,30 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.example.recipesearch.MainActivity;
 import com.example.recipesearch.R;
+import com.example.recipesearch.database.User;
+import com.example.recipesearch.database.encryption.FactoryPBKDF2;
 import com.example.recipesearch.ui.UiHelper;
 import com.example.recipesearch.ui.user.signup.SignUpFragment;
+
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
+import java.util.List;
 
 public class LoginFragment extends Fragment {
 
     private Button login, signup;
+    private EditText et_user, et_pass;
+    private List<User> users;
+    private User currUser;
+
+    FactoryPBKDF2 encrypt;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -24,9 +37,16 @@ public class LoginFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_login, container, false);
 
         final UiHelper ui = new UiHelper(getFragmentManager());
+        encrypt = new FactoryPBKDF2();
 
         login = root.findViewById(R.id.login_button_login);
         signup = root.findViewById(R.id.login_button_signup);
+        et_user = root.findViewById(R.id.edit_text_user);
+        et_pass = root.findViewById(R.id.edit_text_pass);
+
+        final MainActivity main = (MainActivity) getParentFragment().getActivity();
+
+        users = main.returnUsers();
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,6 +62,36 @@ public class LoginFragment extends Fragment {
             }
         });
 
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(userExistsAndValid()){
+                    main.setCurrentUser(currUser);
+                }
+            }
+        });
+
         return root;
+    }
+
+    private boolean userExistsAndValid(){
+        boolean doesUserExistAndValid= false;
+
+        for (User u : users) {
+            if(u.getEmail().matches(et_user.getText().toString())){
+                try {
+                    if(encrypt.DoDecryption(et_pass.getText().toString(), u.getPassword())){
+                        doesUserExistAndValid = true;
+                        currUser = u;
+                    }
+                } catch (NoSuchAlgorithmException e) {
+                    e.printStackTrace();
+                } catch (InvalidKeySpecException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return doesUserExistAndValid;
     }
 }

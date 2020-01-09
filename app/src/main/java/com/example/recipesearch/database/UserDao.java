@@ -1,8 +1,6 @@
 package com.example.recipesearch.database;
 
-import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
-import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 
@@ -14,7 +12,10 @@ public interface UserDao {
     void insertDetails(User data);
 
     @Query("select * from User")
-    LiveData<List<User>> getDetails();
+    List<User> getDetails();
+
+    @Query("select * from User where email like :email")
+    User getUserByEmail(String email);
 
     @Query("delete from User")
     void deleteAllData();

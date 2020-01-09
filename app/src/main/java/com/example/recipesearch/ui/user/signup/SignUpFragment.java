@@ -1,7 +1,6 @@
 package com.example.recipesearch.ui.user.signup;
 
 
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -13,20 +12,24 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
+import com.example.recipesearch.MainActivity;
 import com.example.recipesearch.R;
-import com.example.recipesearch.databinding.ActivityMainBinding;
+import com.example.recipesearch.database.User;
+import com.example.recipesearch.database.encryption.FactoryPBKDF2;
 import com.example.recipesearch.ui.UiHelper;
 import com.example.recipesearch.ui.user.login.LoginFragment;
+
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 
 public class SignUpFragment extends Fragment {
 
     private Button login, signup;
     private EditText email, password, passwordConfirm;
     private TextView error_email, error_password;
-    boolean emailIsValid = false;
+    boolean emailIsValid = false, passwordIsValid = false;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -35,8 +38,7 @@ public class SignUpFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_sign_up, container, false);
 
         final UiHelper ui = new UiHelper(getFragmentManager());
-
-        final Resources res = getResources();
+        final FactoryPBKDF2 encrypt = new FactoryPBKDF2();
 
         //Declare vars
         login = root.findViewById(R.id.signup_button_login);
@@ -63,6 +65,29 @@ public class SignUpFragment extends Fragment {
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                if(isSignupValid(emailIsValid, passwordIsValid)){
+                    // assert getParentFragment() != null;
+                    MainActivity main = (MainActivity) getParentFragment().getActivity();
+                    User user = new User();
+                    user.setId(0);
+                    user.setEmail(email.getText().toString());
+                    user.setPassword(encrypt.DoEncrption(password.getText().toString().toCharArray()));
+                    main.addUser(user);
+
+                    try {
+                        System.out.println("Pass match? " + encrypt.DoDecryption(password.getText().toString(), user.getPassword()));
+                    } catch (NoSuchAlgorithmException e) {
+                        e.printStackTrace();
+                    } catch (InvalidKeySpecException e) {
+                        e.printStackTrace();
+                    }
+
+                    for (User u : main.returnUsers()) {
+                        System.out.println("Added user: id=" + u.getId() + ", email=" + u.getEmail() + ", pass=" + u.getPassword());
+                    }
+
+                }
 
             }
         });
@@ -129,12 +154,19 @@ public class SignUpFragment extends Fragment {
             public void afterTextChanged(Editable editable) {
                 if(password.getText().toString().matches(passwordConfirm.getText().toString())){
                     error_password.setVisibility(View.INVISIBLE);
+                    passwordIsValid = true;
                 } else {
                     error_password.setVisibility(View.VISIBLE);
+                    passwordIsValid = false;
                 }
             }
         });
         return root;
+    }
+
+    private boolean isSignupValid(boolean emailIsValid, boolean passwordIsValid){
+
+        return emailIsValid && passwordIsValid;
     }
 
 }
