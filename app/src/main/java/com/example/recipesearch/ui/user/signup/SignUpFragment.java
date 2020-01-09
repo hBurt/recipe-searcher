@@ -65,30 +65,9 @@ public class SignUpFragment extends Fragment {
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 if(isSignupValid(emailIsValid, passwordIsValid)){
-                    // assert getParentFragment() != null;
-                    MainActivity main = (MainActivity) getParentFragment().getActivity();
-                    User user = new User();
-                    user.setId(0);
-                    user.setEmail(email.getText().toString());
-                    user.setPassword(encrypt.DoEncrption(password.getText().toString().toCharArray()));
-                    main.addUser(user);
-
-                    try {
-                        System.out.println("Pass match? " + encrypt.DoDecryption(password.getText().toString(), user.getPassword()));
-                    } catch (NoSuchAlgorithmException e) {
-                        e.printStackTrace();
-                    } catch (InvalidKeySpecException e) {
-                        e.printStackTrace();
-                    }
-
-                    for (User u : main.returnUsers()) {
-                        System.out.println("Added user: id=" + u.getId() + ", email=" + u.getEmail() + ", pass=" + u.getPassword());
-                    }
-
+                    addUserToDatabase();
                 }
-
             }
         });
 
@@ -169,4 +148,15 @@ public class SignUpFragment extends Fragment {
         return emailIsValid && passwordIsValid;
     }
 
+    private void addUserToDatabase(){
+
+        MainActivity main = (MainActivity) getParentFragment().getActivity();
+        final FactoryPBKDF2 encrypt = new FactoryPBKDF2();
+
+        User user = new User();
+        user.setEmail(email.getText().toString());
+        user.setPassword(encrypt.DoEncrption(password.getText().toString().toCharArray()));
+        main.addUser(user);
+
+    }
 }

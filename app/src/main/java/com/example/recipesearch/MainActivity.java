@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     LocalLoginDatabase database;
     User currentUser;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -31,9 +32,6 @@ public class MainActivity extends AppCompatActivity {
 
         database = Room.databaseBuilder(this, LocalLoginDatabase.class, "LOCAL_LOGIN_DATABASE")
                 .allowMainThreadQueries().build();
-
-
-        database.getUserDao().deleteAllData();
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
