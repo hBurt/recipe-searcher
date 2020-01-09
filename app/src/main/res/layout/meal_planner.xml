@@ -15,6 +15,7 @@
         android:layout_marginRight="2dp"
         android:layout_marginBottom="1dp"
         android:text="@string/Planner"
+        android:textColor="#6BC964"
         android:textSize="36sp"
         app:layout_constraintBottom_toTopOf="@+id/calendarView"
         app:layout_constraintEnd_toEndOf="parent"
