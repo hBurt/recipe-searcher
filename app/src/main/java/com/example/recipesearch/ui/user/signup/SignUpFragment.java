@@ -21,15 +21,14 @@ import com.example.recipesearch.database.encryption.FactoryPBKDF2;
 import com.example.recipesearch.ui.UiHelper;
 import com.example.recipesearch.ui.user.login.LoginFragment;
 
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
-
 public class SignUpFragment extends Fragment {
 
     private Button login, signup;
     private EditText email, password, passwordConfirm;
     private TextView error_email, error_password;
     boolean emailIsValid = false, passwordIsValid = false;
+
+    private enum errorMessage { EMAIL, PASSWORD }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -38,7 +37,6 @@ public class SignUpFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_sign_up, container, false);
 
         final UiHelper ui = new UiHelper(getFragmentManager());
-        final FactoryPBKDF2 encrypt = new FactoryPBKDF2();
 
         //Declare vars
         login = root.findViewById(R.id.signup_button_login);
@@ -131,13 +129,7 @@ public class SignUpFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if(password.getText().toString().matches(passwordConfirm.getText().toString())){
-                    error_password.setVisibility(View.INVISIBLE);
-                    passwordIsValid = true;
-                } else {
-                    error_password.setVisibility(View.VISIBLE);
-                    passwordIsValid = false;
-                }
+                showErrorMessage(errorMessage.PASSWORD);
             }
         });
         return root;
@@ -157,6 +149,25 @@ public class SignUpFragment extends Fragment {
         user.setEmail(email.getText().toString());
         user.setPassword(encrypt.DoEncrption(password.getText().toString().toCharArray()));
         main.addUser(user);
+    }
 
+    private void showErrorMessage(errorMessage errorMessageType){
+
+        switch (errorMessageType){
+            case EMAIL:
+
+            case PASSWORD:
+                setPasswordErrorVisibility();
+        }
+    }
+
+    private void setPasswordErrorVisibility(){
+        if(password.getText().toString().matches(passwordConfirm.getText().toString())){
+            error_password.setVisibility(View.INVISIBLE);
+            passwordIsValid = true;
+        } else {
+            error_password.setVisibility(View.VISIBLE);
+            passwordIsValid = false;
+        }
     }
 }
