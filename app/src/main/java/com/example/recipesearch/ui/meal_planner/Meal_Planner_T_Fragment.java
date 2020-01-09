@@ -5,6 +5,8 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.text.Editable;
@@ -22,12 +24,22 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class Meal_Planner_T_Fragment extends Fragment {
 
-
+    private TextView editToday;
+    private  String today;
 
     public Meal_Planner_T_Fragment()
     {
         // Required empty public constructor
     }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+        today = ((Meal_Planner_Activity)getActivity()).getToday();
+
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -35,5 +47,19 @@ public class Meal_Planner_T_Fragment extends Fragment {
         return inflater.inflate(R.layout.fragment_meal__planner__t_, container, false);
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState)
+    {
+        super.onViewCreated(view, savedInstanceState);
+        editToday = view.findViewById(R.id.Today);
+        editToday.setText(today);
+    }
 
+    @Override
+    public void onDestroy()
+    {
+        super.onDestroy();
+        today = editToday.getText().toString();
+        ((Meal_Planner_Activity)getActivity()).setToday(today);
+    }
 }

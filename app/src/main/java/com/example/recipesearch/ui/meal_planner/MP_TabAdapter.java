@@ -9,15 +9,25 @@ import com.example.recipesearch.ui.meal_planner.Meal_Planner_Misc_Fragment;
 import com.example.recipesearch.ui.meal_planner.Meal_Planner_T_Fragment;
 import com.example.recipesearch.ui.meal_planner.Meal_Planner_Tomarrow_Fragment;
 
+import java.util.ArrayList;
+import java.util.List;
+
 class MP_TabAdapter extends FragmentPagerAdapter {
     Context context;
     int totalTabs;
+    private final List<Fragment> fragmentList = new ArrayList<>();
+    private final List<String> fragmentTitleList = new ArrayList<>();
 
     public MP_TabAdapter(Context c, FragmentManager fm, int totalTabs) {
         super(fm);
         context = c;
         this.totalTabs = totalTabs;
     }
+    public void addFragment(Fragment fragment, String title) {
+        fragmentList.add(fragment);
+        fragmentTitleList.add(title);
+    }
+
 
     @Override
     public Fragment getItem(int position) {
@@ -39,5 +49,9 @@ class MP_TabAdapter extends FragmentPagerAdapter {
     @Override
     public int getCount() {
         return totalTabs;
+    }
+    @Override
+    public CharSequence getPageTitle(int position) {
+        return fragmentTitleList.get(position);
     }
 }

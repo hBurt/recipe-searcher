@@ -1,4 +1,5 @@
 package com.example.recipesearch.ui.meal_planner;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -32,34 +33,31 @@ import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 
 public class Meal_Planner_Activity extends AppCompatActivity
 {
-    private TabLayout tabM;
     ViewPager Mview;
     String Notes;
     String Today;
     String Tomorrow;
-    static EditText editNotes;
-    static EditText  editToday;
-    static EditText editTomorrow;
     SharedPreferences mPrefs;
+    SharedPreferences.Editor edit;
+    @SuppressLint("CommitPrefEdits")
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recipe_page);
         Mview = findViewById(R.id.viewPager);
-        mPrefs = getSharedPreferences("Saved_Plan", MODE_PRIVATE);
-        final SharedPreferences.Editor edit = mPrefs.edit();
-        tabM = findViewById(R.id.Tabs);
+        mPrefs = getApplicationContext().getSharedPreferences("Saved_Plan", MODE_PRIVATE);
+        TabLayout tabM = findViewById(R.id.Tabs);
         tabM.addTab(tabM.newTab().setText("Today"));
         tabM.addTab(tabM.newTab().setText("Tomorrow"));
         tabM.addTab(tabM.newTab().setText("Notes"));
         tabM.setTabGravity(TabLayout.GRAVITY_FILL);
-        editNotes = (EditText) findViewById(R.id.Notes);
-        editToday = (EditText) findViewById(R.id.Today);
-        editTomorrow = (EditText) findViewById(R.id.tomarrow);
-        //editNotes.setText(mPrefs.getString("Notes", ""));
-        //editToday.setText(mPrefs.getString("Today",""));
-        //editTomorrow.setText(mPrefs.getString("Tomorrow",""));
+        if (mPrefs.contains("Note"))
+            Notes = mPrefs.getString("Note", " ");
+        if (mPrefs.contains("Day1"))
+            Today = mPrefs.getString("Day1"," ");
+        if (mPrefs.contains("Day2"))
+            Tomorrow = mPrefs.getString("Day2"," ");
         final MP_TabAdapter adapter = new MP_TabAdapter(this,getSupportFragmentManager(), tabM.getTabCount());
         Mview.setAdapter(adapter);
         Mview.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabM));
@@ -71,16 +69,52 @@ public class Meal_Planner_Activity extends AppCompatActivity
                 Mview.setCurrentItem(tab.getPosition());
             }
             @Override
-            public void onTabUnselected(TabLayout.Tab tab)
-            {
-
-            }
-
+            public void onTabUnselected(TabLayout.Tab tab) { }
             @Override
-            public void onTabReselected(TabLayout.Tab tab)
-            {
-            }
+            public void onTabReselected(TabLayout.Tab tab) { }
         });
+
+    }
+    public void setToday(String today)
+    {
+        Today = today;
+    }
+    public void setTomorrow(String tomorrow)
+    {
+        Tomorrow = tomorrow;
+    }
+    public void setNotes(String note)
+    {
+        Notes = note;
+    }
+    public String getToday()
+    {
+        return Today;
+    }
+    public String getTomorrow()
+    {
+        return Tomorrow;
+    }
+    public String getNotes()
+    {
+        return Notes;
     }
 
+    @Override
+    public void onBackPressed()
+    {
+        super.onBackPressed();
+    }
+
+    @Override
+    protected void onDestroy()
+    {
+        super.onDestroy();
+        edit = mPrefs.edit();
+        edit.putString("Note", Notes);
+        edit.putString("Day1", Today);
+        edit.putString("Day2", Tomorrow);
+        edit.apply();
+
+    }
 }
