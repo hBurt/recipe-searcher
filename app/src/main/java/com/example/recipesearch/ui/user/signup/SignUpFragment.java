@@ -26,7 +26,6 @@ public class SignUpFragment extends Fragment {
     private Button login, signup;
     private EditText email, password, passwordConfirm;
     private TextView error_email, error_password;
-    boolean emailIsValid = false, passwordIsValid = false;
 
     private enum errorMessage { EMAIL, PASSWORD }
 
@@ -63,7 +62,7 @@ public class SignUpFragment extends Fragment {
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(isSignupValid(emailIsValid, passwordIsValid)){
+                if(isSignupValid(isEmailValid(), isPasswordValid())){
                     addUserToDatabase();
                 }
             }
@@ -81,38 +80,7 @@ public class SignUpFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if(editable.length() >= 1){
-
-                    String emailString = editable.toString();
-                    if(emailString.contains("@")) { // Does email contain '@'
-                        String[] emailStringSplit = emailString.split("@");
-
-                        if(emailStringSplit.length > 1 && emailStringSplit[1].contains(".")) { // Does email contain '.'
-                            String[] emailStringSplitDot = emailStringSplit[1].split("[.]");
-
-                            if (emailStringSplitDot.length > 1 &&
-                                    emailString.contains("@") &&
-                                    emailStringSplit[1].contains(".") &&
-                                    emailStringSplitDot[0].length() > 1) {
-                                emailIsValid = true;
-                            } else {
-                                emailIsValid = false;
-                            }
-                        } else {
-                            emailIsValid = false;
-                        }
-                    } else {
-                        emailIsValid = false;
-                    }
-                } else {
-                    emailIsValid = false;
-                }
-
-                if(emailIsValid || editable.length() == 0){
-                    error_email.setVisibility(View.INVISIBLE);
-                } else {
-                    error_email.setVisibility(View.VISIBLE);
-                }
+                showErrorMessage(errorMessage.EMAIL);
             }
         });
 
@@ -155,19 +123,61 @@ public class SignUpFragment extends Fragment {
 
         switch (errorMessageType){
             case EMAIL:
-
+                setEmailErrorVisibility();
+                break;
             case PASSWORD:
                 setPasswordErrorVisibility();
+                break;
+        }
+    }
+
+    private boolean isEmailValid(){
+
+        String emailString = email.getText().toString();
+
+        return checkEmailAtSign(emailString)
+                && checkEmailDot(emailString)
+                && checkEmailLengthAfterDot(emailString);
+    }
+
+    private boolean checkEmailAtSign(String s){
+
+        return s.length() >= 1 && s.contains("@");
+    }
+
+    private boolean checkEmailDot(String s) {
+
+        String[] emailStringSplit = s.split("@");
+
+        return emailStringSplit.length > 1 && emailStringSplit[1].contains(".");
+    }
+
+    private boolean checkEmailLengthAfterDot(String s){
+        String[] emailStringSplit = s.split("@");
+        String[] emailStringSplitDot = emailStringSplit[1].split("[.]");
+
+        return emailStringSplitDot.length > 1 && emailStringSplitDot[0].length() > 1;
+    }
+
+    private void setEmailErrorVisibility(){
+        if(isEmailValid() || email.getText().length() == 0){
+            error_email.setVisibility(View.INVISIBLE);
+        } else {
+            error_email.setVisibility(View.VISIBLE);
         }
     }
 
     private void setPasswordErrorVisibility(){
         if(password.getText().toString().matches(passwordConfirm.getText().toString())){
             error_password.setVisibility(View.INVISIBLE);
-            passwordIsValid = true;
         } else {
             error_password.setVisibility(View.VISIBLE);
-            passwordIsValid = false;
         }
+    }
+
+    private boolean isPasswordValid(){
+
+        //If error_pass is invisible, password is valid
+        return error_password.getVisibility() == View.INVISIBLE;
     }
 }
