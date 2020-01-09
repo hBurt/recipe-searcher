@@ -90,6 +90,8 @@ public class Request_Handler extends AsyncTask<Void, Void, String>
 
         // will create a second api call
         // after received must get the item id from what was received
+        // this is a test id
+         id = "156992";
          request = new Request.Builder()
                 .url("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/" + id + "/analyzedInstructions?stepBreakdown=false") // will fail if not given an id
                 .get()

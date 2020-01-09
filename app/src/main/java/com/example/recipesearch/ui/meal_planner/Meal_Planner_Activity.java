@@ -36,8 +36,7 @@ public class Meal_Planner_Activity extends AppCompatActivity
     ViewPager Mview;
     String Notes;
     String Today;
-    String Tomorrow;
-    SharedPreferences mPrefs;
+    String Tomorrow;SharedPreferences mPrefs;
     SharedPreferences.Editor edit;
     @SuppressLint("CommitPrefEdits")
     @Override
@@ -50,7 +49,7 @@ public class Meal_Planner_Activity extends AppCompatActivity
         TabLayout tabM = findViewById(R.id.Tabs);
         tabM.addTab(tabM.newTab().setText("Today"));
         tabM.addTab(tabM.newTab().setText("Tomorrow"));
-        tabM.addTab(tabM.newTab().setText("Notes          "));
+        tabM.addTab(tabM.newTab().setText("Notes            "));
         tabM.setTabGravity(TabLayout.GRAVITY_FILL);
         if (mPrefs.contains("Note"))
             Notes = mPrefs.getString("Note", " ");
@@ -100,12 +99,12 @@ public class Meal_Planner_Activity extends AppCompatActivity
         return Notes;
     }
 
+
     @Override
     public void onBackPressed()
     {
         super.onBackPressed();
     }
-
     @Override
     protected void onDestroy()
     {
