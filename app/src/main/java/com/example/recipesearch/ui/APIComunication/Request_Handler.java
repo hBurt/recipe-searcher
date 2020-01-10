@@ -47,6 +47,7 @@ public class Request_Handler extends AsyncTask<Void, Void, String>
     static  String id3 = null;
     static  String id4 = null;
     static  String id5 = null;
+    String responseData;
     @Override
     protected String doInBackground(Void... voids)
     {
@@ -64,7 +65,6 @@ public class Request_Handler extends AsyncTask<Void, Void, String>
                 .replace("|", "%7C").replace("}", "%7D"));
         // Do some validation here
         OkHttpClient client = new OkHttpClient();
-        final Moshi moshi1 = new Moshi.Builder().build();
         com.squareup.okhttp.Request request = new Request.Builder()
                 .url("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/search?number=1&offset=0&instructionsRequired=true&query="+ Food) // will use only the first result
                 .get()
@@ -76,6 +76,7 @@ public class Request_Handler extends AsyncTask<Void, Void, String>
         try
         {
             response = client.newCall(request).execute(); // provides a val for the first search and preforms it
+            responseData = response.body().string();
 
         }
         catch (IOException e)
@@ -86,45 +87,59 @@ public class Request_Handler extends AsyncTask<Void, Void, String>
         // begins parsing to get the id, will just get the first id
         //WIP RN as the return is multiple arrays nested in another
         //Place code to parse here
-       /* JSONObject jObject = null;
-        try
-        {
-            jObject = new JSONObject(String.valueOf(response));
-        }
-        catch (JSONException e)
-        {
-            e.printStackTrace();
-        }
+        JSONObject jObject = null;
         JSONArray jArray = null;
+        String oneObjectsItem = null;
+        String oneObjectsItem2 = null;
+        String oneObjectsItem3 = null;
+        String oneObjectsItem4 = null;
         try
         {
-            jArray = jObject.getJSONArray("Retrieved_Array");
+            jObject = new JSONObject(String.valueOf(responseData));
         }
         catch (JSONException e)
         {
             e.printStackTrace();
         }
-        for (int i=0; i < jArray.length(); i++)
+        try
         {
-            try
-            {
-                JSONObject oneObject = jArray.getJSONObject(i);
+            jArray = jObject.getJSONArray("results");
+        }
+        catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
                 // Begin getting shit from the arrays
-
-            }
-            catch (JSONException e)
-            {
-                // Crap
-            }
-        }*/
-
+                        for (int i=0; i < jArray.length(); i++)
+                        {
+                            try
+                            {
+                            JSONObject oneObject = jArray.getJSONObject(i);
+                             oneObjectsItem = oneObject.getString("id");
+                             oneObjectsItem2 = oneObject.getString("title");
+                             oneObjectsItem3 = oneObject.getString("readyInMinutes");
+                             oneObjectsItem4 = oneObject.getString("image");
+                            }
+                            catch (JSONException e)
+                            {
+                                // this is a test id
+                                id = "324694";
+                                // Crap
+                            }
+                        }
         // will create a second api call
         // after received must get the item id from what was received
+        if (oneObjectsItem.length() > 0)
+        {
+            id = oneObjectsItem;
+        }
+        else
+        {
         // this is a test id
-         id = "156992";
+         id = "324694";
+        }
         // for having them be on different calls
         OkHttpClient client2 = new OkHttpClient();
-        final Moshi moshi2 = new Moshi.Builder().build();
         Response response2 = null; // needs an id num or will cause an error
          request = new Request.Builder()
                 .url("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/" + id + "/analyzedInstructions?stepBreakdown=false") // will fail if not given an id
