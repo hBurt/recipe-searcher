@@ -4,7 +4,7 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import java.util.Vector;
+import java.util.ArrayList;
 
 @Entity(tableName = "User")
 public class User {
@@ -18,6 +18,9 @@ public class User {
 
     @ColumnInfo(name = "Password")
     private String password;
+
+    @ColumnInfo(name = "Favorites")
+    private ArrayList<Favorite> favorites;
 
     public int getId() {
         return id;
@@ -41,6 +44,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public ArrayList<Favorite> getFavorites() {
+        return favorites;
+    }
+
+    public void setFavorites(ArrayList<Favorite> favorites) {
+        this.favorites = favorites;
     }
 }
 

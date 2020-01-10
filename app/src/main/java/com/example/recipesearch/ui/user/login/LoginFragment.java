@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.recipesearch.MainActivity;
 import com.example.recipesearch.R;
+import com.example.recipesearch.database.Favorite;
 import com.example.recipesearch.database.User;
 import com.example.recipesearch.database.encryption.FactoryPBKDF2;
 import com.example.recipesearch.ui.UiHelper;
@@ -22,6 +23,7 @@ import com.example.recipesearch.ui.user.signup.SignUpFragment;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.util.List;
+import java.util.Random;
 
 public class LoginFragment extends Fragment {
 
@@ -87,7 +89,14 @@ public class LoginFragment extends Fragment {
                         doesUserExistAndValid = true;
                         currUser = u;
 
-                        System.out.println(u.getEmail() + " : logged in");
+                        for(int i = 0; i < 10; ++i)
+                            u.getFavorites().add(new Favorite(new Random().nextInt(), new Random().nextInt()));
+
+                        System.out.println(u.getEmail() + " : logged in with :: " + u.getFavorites().size() + " favorites");
+                        for(int i = 0; i < u.getFavorites().size(); ++i){
+                            Favorite fav = u.getFavorites().get(i);
+                            System.out.println("Fav id: " + fav.getId() + ", Fav rating: " + fav.getRating());
+                        }
                         ui.switchScreen(new HomeSearchFragment());
                     }
                 } catch (NoSuchAlgorithmException e) {
