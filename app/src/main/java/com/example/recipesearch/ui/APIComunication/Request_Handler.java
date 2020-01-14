@@ -92,8 +92,6 @@ public class Request_Handler extends AsyncTask<Void, Void, String>
         }
 
         // begins parsing to get the id, will just get the first id
-        //WIP RN as the return is multiple arrays nested in another
-        //Place code to parse here
         JSONObject jObject = null;
         JSONArray jArray = null;
         try
@@ -144,6 +142,7 @@ public class Request_Handler extends AsyncTask<Void, Void, String>
         if (oneObjectsItem2 .length() > 0)
             dishName = oneObjectsItem2;
         // for having them be on different calls
+        // wip for getting the instructions 
         OkHttpClient client2 = new OkHttpClient();
         Response response2 = null; // needs an id num or will cause an error
         com.squareup.okhttp.Request request2 = new Request.Builder()
