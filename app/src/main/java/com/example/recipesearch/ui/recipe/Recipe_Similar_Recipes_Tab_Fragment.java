@@ -53,9 +53,8 @@ public class Recipe_Similar_Recipes_Tab_Fragment extends Fragment
                       RecipeActivity.setRecipeName(test);
                 else
                     RecipeActivity.setRecipeName("Next Test");
-                /*Intent intent = getActivity().getIntent(); // just causes problems, goal is to refresh the page, will revisit
-                getActivity().finish();
-                startActivity(intent);*/
+
+                ((RecipeActivity)getActivity()).refresh();
             }
         });
     }
