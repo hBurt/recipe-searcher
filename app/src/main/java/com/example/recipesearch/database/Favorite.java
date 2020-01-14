@@ -4,8 +4,8 @@ public class Favorite {
     private int id, rating;
 
     public Favorite(int id, int rating) {
-        this.id = id;
-        this.rating = rating;
+        setId(id);
+        setRating(rating);
     }
 
     public int getId() {

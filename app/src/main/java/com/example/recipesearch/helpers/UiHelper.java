@@ -1,4 +1,4 @@
-package com.example.recipesearch.ui;
+package com.example.recipesearch.helpers;
 
 import android.os.Bundle;
 
@@ -26,4 +26,5 @@ public class UiHelper {
 
         fragmentTransaction.commit();
     }
+
 }

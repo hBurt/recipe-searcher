@@ -18,7 +18,7 @@ import com.example.recipesearch.MainActivity;
 import com.example.recipesearch.R;
 import com.example.recipesearch.database.User;
 import com.example.recipesearch.database.encryption.FactoryPBKDF2;
-import com.example.recipesearch.ui.UiHelper;
+import com.example.recipesearch.helpers.UiHelper;
 import com.example.recipesearch.ui.user.login.LoginFragment;
 
 public class SignUpFragment extends Fragment {
@@ -110,13 +110,12 @@ public class SignUpFragment extends Fragment {
 
     private void addUserToDatabase(){
 
-        MainActivity main = (MainActivity) getParentFragment().getActivity();
         final FactoryPBKDF2 encrypt = new FactoryPBKDF2();
 
         User user = new User();
         user.setEmail(email.getText().toString());
         user.setPassword(encrypt.DoEncrption(password.getText().toString().toCharArray()));
-        main.addUser(user);
+        ((MainActivity) getActivity()).getDatabaseHelper().addUser(user);
     }
 
     private void showErrorMessage(errorMessage errorMessageType){

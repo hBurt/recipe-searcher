@@ -20,7 +20,7 @@ public class User {
     private String password;
 
     @ColumnInfo(name = "Favorites")
-    private ArrayList<Favorite> favorites;
+    private ArrayList<Favorite> favorites = new ArrayList<>();
 
     public int getId() {
         return id;

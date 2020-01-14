@@ -3,6 +3,7 @@ package com.example.recipesearch.database;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import java.util.List;
 
@@ -10,6 +11,9 @@ import java.util.List;
 public interface UserDao {
     @Insert
     void insertDetails(User data);
+
+    @Update
+    void updateDetails(User data);
 
     @Query("select * from User")
     List<User> getDetails();
