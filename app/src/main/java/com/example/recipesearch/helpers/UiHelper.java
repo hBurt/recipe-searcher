@@ -10,7 +10,7 @@ import com.example.recipesearch.R;
 
 public class UiHelper {
 
-    FragmentManager manager;
+    private FragmentManager manager;
 
     public UiHelper(FragmentManager manager){
         this.manager = manager;
@@ -27,4 +27,7 @@ public class UiHelper {
         fragmentTransaction.commit();
     }
 
+    public FragmentManager getManager() {
+        return manager;
+    }
 }

@@ -41,4 +41,8 @@ public class DatabaseHelper {
     public void setCurrentUser(User currentUser) {
         this.currentUser = currentUser;
     }
+
+    public boolean isUserLoggedOn(){
+        return getCurrentUser() != null;
+    }
 }

@@ -103,6 +103,16 @@ public class SignUpFragment extends Fragment {
         return root;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        email.setText("");
+        password.setText("");
+        passwordConfirm.setText("");
+
+    }
+
     private boolean isSignupValid(boolean emailIsValid, boolean passwordIsValid){
 
         return emailIsValid && passwordIsValid;

@@ -1,5 +1,7 @@
 package com.example.recipesearch.ui.user.login;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -75,6 +77,14 @@ public class LoginFragment extends Fragment {
         return root;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        et_user.setText("");
+        et_pass.setText("");
+    }
+
     private void userExistsAndValid(){
 
         for (User u : users) {
@@ -86,6 +96,9 @@ public class LoginFragment extends Fragment {
                         //User logged in
                         databaseHelper.setCurrentUser(u);
                         System.out.println(u.getEmail() + " : logged in with :: " + u.getFavorites().size() + " favorites");
+
+                        saveLoginState();
+
                         ui.switchScreen(new HomeSearchFragment());
 
                         //Add & show random favorites
@@ -106,6 +119,19 @@ public class LoginFragment extends Fragment {
                     e.printStackTrace();
                 }
             }
+        }
+    }
+
+    private void saveLoginState(){
+        if(databaseHelper.isUserLoggedOn()) {
+            SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPref.edit();
+
+            //Save e-mail
+            editor.putString(getResources().getString(R.string.saved_user), databaseHelper.getCurrentUser().getEmail());
+
+            //Save password
+            editor.putString(getResources().getString(R.string.saved_pass), databaseHelper.getCurrentUser().getPassword());
         }
     }
 }
