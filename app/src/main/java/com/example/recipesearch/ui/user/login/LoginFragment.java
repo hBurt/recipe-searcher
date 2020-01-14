@@ -132,6 +132,9 @@ public class LoginFragment extends Fragment {
 
             //Save password
             editor.putString(getResources().getString(R.string.saved_pass), databaseHelper.getCurrentUser().getPassword());
+
+            //Write data in background
+            editor.apply();
         }
     }
 }
