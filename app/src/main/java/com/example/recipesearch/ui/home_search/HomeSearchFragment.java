@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -28,11 +29,14 @@ public class HomeSearchFragment extends Fragment {
     private EditText et;
     private ImageView iv;
     private Button login, signup;
+    private TextView textView_or;
     private boolean canSwitch = true;
 
     @Override
     public void onResume() {
         super.onResume();
+
+        setButtonVisibilty();
 
         // This stops auto switching back to search result fragment
         et.getText().clear();
@@ -51,10 +55,12 @@ public class HomeSearchFragment extends Fragment {
         et = root.findViewById(R.id.search_bar_edit_text);
         login = root.findViewById(R.id.home_button_login);
         signup = root.findViewById(R.id.home_button_signup);
-
+        textView_or = root.findViewById(R.id.textView_or2);
 
         //Do img color overlay
         imgColorOverlay();
+        setButtonVisibilty();
+
         et.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -109,5 +115,15 @@ public class HomeSearchFragment extends Fragment {
 
     private void imgColorOverlay(){
         iv.setColorFilter(getResources().getColor(R.color.colorAccent), PorterDuff.Mode.SRC_ATOP);
+    }
+
+    private boolean loginCheck(){
+        return ((MainActivity) getActivity()).getDatabaseHelper().getCurrentUser() != null;
+    }
+
+    private void setButtonVisibilty(){
+        login.setVisibility(loginCheck() ? View.INVISIBLE : View.VISIBLE);
+        signup.setVisibility(loginCheck() ? View.INVISIBLE : View.VISIBLE);
+        textView_or.setVisibility(loginCheck() ? View.INVISIBLE : View.VISIBLE);
     }
 }
