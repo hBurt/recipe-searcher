@@ -73,8 +73,8 @@ public class SearchActivity extends AppCompatActivity
             public boolean onQueryTextSubmit(String query)
             {
                 SearchedFood = query;
-                Request_Handler req = new Request_Handler();
-                req.execute(); // handles the search query
+                //Request_Handler req = new Request_Handler();
+               // req.execute(); // handles the search query
                 Intent in = new Intent(SearchActivity.this, RecipeActivity.class);
                 startActivity(in);
                 return false;
@@ -92,4 +92,5 @@ public class SearchActivity extends AppCompatActivity
     {
      return SearchedFood;
     }
+    public static void setSearchedFood(String dish){ SearchedFood = dish;}
 }

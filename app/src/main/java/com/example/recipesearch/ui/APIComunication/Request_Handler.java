@@ -17,6 +17,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.recipesearch.ui.recipe.Recipe_Similar_Recipes_Tab_Fragment;
 import com.example.recipesearch.ui.search_result.SearchActivity;
 import com.squareup.moshi.JsonAdapter;
 import com.squareup.moshi.Moshi;
@@ -43,15 +44,21 @@ public class Request_Handler extends AsyncTask<Void, Void, String>
     // might create a random recipe func as the API does support that
     String API_KEY = "7dba1c8b6dmsh8c3919fbe127d43p122d00jsn89f1b32d2216";
     String API_URL = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/search?number=5&offset=0&instructionsRequired=true&query=";
+    static String id = null;
+    static String dishName = null;
     static  String id2 = null;
     static  String id3 = null;
     static  String id4 = null;
     static  String id5 = null;
+    static String oneObjectsItem = null;
+    static String oneObjectsItem2 = null;
+    static String oneObjectsItem3 = null;
+    static String oneObjectsItem4 = null;
     String responseData;
+    String responseData2;
     @Override
     protected String doInBackground(Void... voids)
     {
-        String id = null;
         String RetreivedFood = SearchActivity.getSearchedFood();
         String Food = new String(RetreivedFood.trim().replace(" ", "%20").replace("&", "%26")
                 .replace(",", "%2c").replace("(", "%28").replace(")", "%29")
@@ -89,10 +96,6 @@ public class Request_Handler extends AsyncTask<Void, Void, String>
         //Place code to parse here
         JSONObject jObject = null;
         JSONArray jArray = null;
-        String oneObjectsItem = null;
-        String oneObjectsItem2 = null;
-        String oneObjectsItem3 = null;
-        String oneObjectsItem4 = null;
         try
         {
             jObject = new JSONObject(String.valueOf(responseData));
@@ -138,24 +141,63 @@ public class Request_Handler extends AsyncTask<Void, Void, String>
         // this is a test id
          id = "324694";
         }
+        if (oneObjectsItem2 .length() > 0)
+            dishName = oneObjectsItem2;
         // for having them be on different calls
         OkHttpClient client2 = new OkHttpClient();
         Response response2 = null; // needs an id num or will cause an error
-         request = new Request.Builder()
-                .url("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/" + id + "/analyzedInstructions?stepBreakdown=false") // will fail if not given an id
+        com.squareup.okhttp.Request request2 = new Request.Builder()
+                .url("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/" + id + "/analyzedInstructions?stepBreakdown=true") // will fail if not given an id
                 .get()
                 .addHeader("x-rapidapi-host", "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com")
                 .addHeader("x-rapidapi-key", "7dba1c8b6dmsh8c3919fbe127d43p122d00jsn89f1b32d2216")
                 .build();
         try
         {
-            response2 = client2.newCall(request).execute();
+            response2 = client2.newCall(request2).execute();
+            responseData2 = response2.body().string();
         }
         catch (IOException e)
         {
             e.printStackTrace();
         }
+        // this section will get the second response
+        // after the second one is done i will work on how to use the data where it is needed
+        JSONObject jObject2 = null;
+        JSONArray jArray2 = null;
+        String test = "Should Change"; // for testing if i get any change to the jObject2
+        try
+        {
+            jObject2 = new JSONObject(String.valueOf(responseData2));
+            test = jObject2.toString(); // test to check for changes
+        }
+        catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
+        try
+        {
+            jArray2 = jObject2.getJSONArray("0:");
+        }
+        catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
+
        return null;
+    }
+    public static String getID()
+    {
+        if (id.length() > 0)
+        return id;
+        else {
+            id = "324694"; // default test id
+        return id;
+        }
+    }
+    public static String getDishName()
+    {
+        return dishName;
     }
 
 

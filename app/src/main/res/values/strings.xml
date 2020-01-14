@@ -60,4 +60,5 @@
     <string name="save_changes">Save changes</string>
     <string name="planer">Planer</string>
     <string name="what_you_want_to_make_tomorrow">What you want to make Tomorrow</string>
+    <string name="next_similar_recipe">Next Similar Recipe</string>
 </resources>

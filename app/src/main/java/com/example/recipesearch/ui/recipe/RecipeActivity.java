@@ -23,20 +23,18 @@ public class RecipeActivity extends AppCompatActivity
     Recipe_Directions_Tab_Fragment RDTF = new Recipe_Directions_Tab_Fragment(); // case 1
     Recipe_Ingredient_Tab_Fragment RITF = new Recipe_Ingredient_Tab_Fragment(); // case 0
     Recipe_Similar_Recipes_Tab_Fragment RSRTF = new Recipe_Similar_Recipes_Tab_Fragment(); //case 2
-    private TextView tex; // all this shit is declared here because it just made it easy incase it was needed outside onCreate
+    private TextView tex;
     private ImageView pic;
     private TabLayout tab;
     ViewPager view;
-    private String RecipeName = "Test Text";
+    static String RecipeName = "Test Text";
     String recipeTitle = null;
-    FragmentManager fm = getSupportFragmentManager();
-    FragmentTransaction transaction = fm.beginTransaction();
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recipe_page);
-        RecipeName = SearchActivity.getSearchedFood();
+        RecipeName = SearchActivity.getSearchedFood(); // the searched term will serve as the default title for the recipe page
         view = findViewById(R.id.viewPager);
         tex = findViewById(R.id.Recipe_Name);
         pic = findViewById(R.id.Image_of_Food);
@@ -66,6 +64,14 @@ public class RecipeActivity extends AppCompatActivity
             {
             }
         });
+    }
+    public static void setRecipeName(String someName)
+    {
+        RecipeName = someName;
+    }
+    public static String getRecipeName()
+    {
+        return RecipeName;
     }
 
 
