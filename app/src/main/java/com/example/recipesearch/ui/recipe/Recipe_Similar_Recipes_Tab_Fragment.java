@@ -52,8 +52,11 @@ public class Recipe_Similar_Recipes_Tab_Fragment extends Fragment
                 if (test.length() > 0) // in theory should be an error check for the name
                       RecipeActivity.setRecipeName(test);
                 else
-                    RecipeActivity.setRecipeName("Next Test");
-
+                    RecipeActivity.setRecipeName("Next Test"); // temp test
+                String direct = " ";
+                Recipe_Directions_Tab_Fragment.setText("Next Text");
+                String ingredient = " ";
+                Recipe_Ingredient_Tab_Fragment.setText("Next Text");
                 ((RecipeActivity)getActivity()).refresh();
             }
         });

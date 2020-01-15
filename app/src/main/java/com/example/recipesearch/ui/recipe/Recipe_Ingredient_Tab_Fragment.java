@@ -4,17 +4,21 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.recipesearch.R;
 
 
 public class Recipe_Ingredient_Tab_Fragment extends Fragment
 {
+    static String newText = " ";
     public Recipe_Ingredient_Tab_Fragment()
     {
         // Required empty public constructor
@@ -26,4 +30,19 @@ public class Recipe_Ingredient_Tab_Fragment extends Fragment
         return inflater.inflate(R.layout.fragment_recipe__ingredient__tab_, container, false);
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState)
+    {
+        super.onViewCreated(view, savedInstanceState);
+        TextView ingredient = view.findViewById(R.id.Ingredients);
+        // test and example text
+        if (newText.length() > 2)
+            ingredient.setText(newText);
+        else
+            ingredient.setText("worcestershire sauce\n" + "green onions\n" + "spring-onions\n" + "mushrooms\n" + "olive oil\n" + "seasoning of choice\n" + "butter\n" + "garlic\n" + "pepper\n" + "all purpose flour\n");
+    }
+    public static void setText(String string)
+    {
+        newText = string;
+    }
 }

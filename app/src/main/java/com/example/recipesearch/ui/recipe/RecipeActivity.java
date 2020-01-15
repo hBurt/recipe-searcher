@@ -27,14 +27,14 @@ public class RecipeActivity extends AppCompatActivity
     private ImageView pic;
     private TabLayout tab;
     ViewPager view;
-    static String RecipeName = "Test Text";
+    static String RecipeName = "Beef Salpicao"; // example/default
     String recipeTitle = null;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recipe_page);
-        RecipeName = SearchActivity.getSearchedFood(); // the searched term will serve as the default title for the recipe page
+        //RecipeName = SearchActivity.getSearchedFood();
         view = findViewById(R.id.viewPager);
         tex = findViewById(R.id.Recipe_Name);
         pic = findViewById(R.id.Image_of_Food);

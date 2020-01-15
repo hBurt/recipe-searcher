@@ -54,6 +54,7 @@ public class Request_Handler extends AsyncTask<Void, Void, String>
     static String oneObjectsItem2 = null;
     static String oneObjectsItem3 = null;
     static String oneObjectsItem4 = null;
+    static String instructionDetail = "false"; // for use in filtering how detailed the instructions are
     String responseData;
     String responseData2;
     @Override
@@ -142,11 +143,11 @@ public class Request_Handler extends AsyncTask<Void, Void, String>
         if (oneObjectsItem2 .length() > 0)
             dishName = oneObjectsItem2;
         // for having them be on different calls
-        // wip for getting the instructions 
+        // wip for getting the instructions
         OkHttpClient client2 = new OkHttpClient();
         Response response2 = null; // needs an id num or will cause an error
         com.squareup.okhttp.Request request2 = new Request.Builder()
-                .url("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/" + id + "/analyzedInstructions?stepBreakdown=true") // will fail if not given an id
+                .url("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/" + id + "/analyzedInstructions?stepBreakdown="+ instructionDetail) // will fail if not given an id
                 .get()
                 .addHeader("x-rapidapi-host", "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com")
                 .addHeader("x-rapidapi-key", "7dba1c8b6dmsh8c3919fbe127d43p122d00jsn89f1b32d2216")
@@ -167,6 +168,7 @@ public class Request_Handler extends AsyncTask<Void, Void, String>
         String test = "Should Change"; // for testing if i get any change to the jObject2
         try
         {
+            test = responseData2;
             jObject2 = new JSONObject(String.valueOf(responseData2));
             test = jObject2.toString(); // test to check for changes
         }
