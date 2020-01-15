@@ -19,6 +19,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.recipesearch.MainActivity;
 import com.example.recipesearch.R;
+import com.example.recipesearch.helpers.DatabaseHelper;
 import com.example.recipesearch.helpers.UiHelper;
 import com.example.recipesearch.ui.search_result.SearchActivity;
 import com.example.recipesearch.ui.user.login.LoginFragment;
@@ -56,6 +57,22 @@ public class HomeSearchFragment extends Fragment {
         login = root.findViewById(R.id.home_button_login);
         signup = root.findViewById(R.id.home_button_signup);
         textView_or = root.findViewById(R.id.textView_or2);
+
+        DatabaseHelper databaseHelper = ((MainActivity) getActivity()).getDatabaseHelper();
+
+        if(databaseHelper.isLoginStateSaved()){
+            System.out.println("Login state is saved");
+
+            String email = databaseHelper.getSharedPrefEmail();
+            String pass = databaseHelper.getSharedPrefPass();
+
+            System.out.println("Email: " + email + "\n" + "Password: " + pass);
+
+            databaseHelper.login(email, pass);
+
+        } else {
+            System.out.println("Login state is NOT saved");
+        }
 
         //Do img color overlay
         imgColorOverlay();
