@@ -16,6 +16,7 @@ import org.w3c.dom.Text;
 
 public class settings_activity extends AppCompatActivity
 {
+    // this will need some updates
     SwitchCompat Switch_A, Switch_B;
     boolean SwitchState_A, SwitchState_B;
     SharedPreferences Prefs;

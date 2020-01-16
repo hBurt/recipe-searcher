@@ -1,41 +1,23 @@
 package com.example.recipesearch.ui.APIComunication;
 
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
+
 import android.os.AsyncTask;
-import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.util.Log;
-import android.util.LruCache;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.ImageLoader;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
-import com.example.recipesearch.ui.recipe.Recipe_Similar_Recipes_Tab_Fragment;
+
 import com.example.recipesearch.ui.search_result.SearchActivity;
-import com.squareup.moshi.JsonAdapter;
-import com.squareup.moshi.Moshi;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
+
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import java.util.StringTokenizer;
 
-import static androidx.core.content.ContextCompat.getSystemService;
 
 public class Request_Handler extends AsyncTask<Void, Void, String>
 {
@@ -57,6 +39,8 @@ public class Request_Handler extends AsyncTask<Void, Void, String>
     static String instructionDetail = "false"; // for use in filtering how detailed the instructions are
     String responseData;
     String responseData2;
+    String Directions;
+    String Ingredients;
     @Override
     protected String doInBackground(Void... voids)
     {
@@ -144,6 +128,8 @@ public class Request_Handler extends AsyncTask<Void, Void, String>
             dishName = oneObjectsItem2;
         // for having them be on different calls
         // wip for getting the instructions
+        String newReturn = " ";
+        id = "521510";
         OkHttpClient client2 = new OkHttpClient();
         Response response2 = null; // needs an id num or will cause an error
         com.squareup.okhttp.Request request2 = new Request.Builder()
@@ -156,35 +142,54 @@ public class Request_Handler extends AsyncTask<Void, Void, String>
         {
             response2 = client2.newCall(request2).execute();
             responseData2 = response2.body().string();
+            newReturn = responseData2;
         }
         catch (IOException e)
         {
             e.printStackTrace();
         }
+        // this is for testing without making api calls
+        //newReturn = "[{\"name\":\"\",\"steps\":[{\"number\":1,\"step\":\"Place the beef cubes in a bowl. Add the minced garlic, pepper and 3 tbsps. of olive oil. Mix well. Cover and keep in the fridge for a couple of hours.Heat the butter and olive oil in a wide shallow pan — wide enough to contain the beef cubes in a single layer. The heat should be very high.Place the beef in a plastic freezer bag. Add the flour. Shake to coat each piece of meat with flour. It is the flour that will thicken the sauce later and make it stick well to the beef.When the olive oil and butter are hot, add the floured beef, spreading the pieces so that every piece touches the oil. Do not stir for a minute or so to allow the underside to brown. Keep the heat very high. Stir and cook for a few minutes, with occasional stirring, until the beef changes color and a light crust forms.Pour in the Worcestershire sauce and liquid seasoning. Stir briskly; the sauce should thicken quite fast. Add the mushrooms, cook just until heated, stirring occasionally.The actual cooking should take no more than five minutes. If you overcook the beef, the meat will turn tough and dry.Transfer the beef salpicao to a serving platter, sprinkle with toasted garlic bits and finely sliced onion leaves. Serve hot with rice.\",\"ingredients\":[{\"id\":6971,\"name\":\"worcestershire sauce\",\"image\":\"dark-sauce.jpg\"},{\"id\":11291,\"name\":\"green onions\",\"image\":\"spring-onions.jpg\"},{\"id\":11260,\"name\":\"mushrooms\",\"image\":\"mushrooms.png\"},{\"id\":4053,\"name\":\"olive oil\",\"image\":\"olive-oil.jpg\"},{\"id\":1042027,\"name\":\"seasoning\",\"image\":\"seasoning.png\"},{\"id\":1001,\"name\":\"butter\",\"image\":\"butter-sliced.jpg\"},{\"id\":11215,\"name\":\"garlic\",\"image\":\"garlic.png\"},{\"id\":1002030,\"name\":\"pepper\",\"image\":\"pepper.jpg\"},{\"id\":20081,\"name\":\"all purpose flour\",\"image\":\"flour.png\"}],\"equipment\":[{\"id\":404783,\"name\":\"bowl\",\"image\":\"bowl.jpg\"},{\"id\":404645,\"name\":\"frying pan\",\"image\":\"pan.png\"}],\"length\":{\"number\":5,\"unit\":\"minutes\"}}]}]";
         // this section will get the second response
         // after the second one is done i will work on how to use the data where it is needed
-        JSONObject jObject2 = null;
-        JSONArray jArray2 = null;
-        String test = "Should Change"; // for testing if i get any change to the jObject2
-        try
+        String secondReturn = " ";
+        // this should remove unwanted characters
+        secondReturn = new String(newReturn.trim().replace("&", "")
+                .replace("(", "").replace(")", "").replace(",", " ")
+                .replace("!", "").replace("=", "").replace("<", "")
+                .replace(">", "").replace("#", "").replace("$", "")
+                .replace("'", "").replace("*", "").replace("-", " ")
+                .replace("/", "").replace("unit", "").replace("number", "")
+                .replace(";", "").replace("?", "").replace("@", "")
+                .replace("[", "").replace("\\", "").replace("]", "")
+                .replace("_", "").replace("`", "").replace("{", "")
+                .replace("|", "").replace("}", "").replace("name", "")
+                .replace("image", "").replace(".jpg", "").replace("minutes", "")
+                .replace("\"", "").replace(".png", ""));
+        StringTokenizer tokens = new StringTokenizer(secondReturn, ":");
+        String[] result = new String[tokens.countTokens()];
+        int i = 0;
+        String firstDirect = " ";
+        String firstIngred = " ";
+        while ( tokens.hasMoreTokens() )
         {
-            test = responseData2;
-            jObject2 = new JSONObject(String.valueOf(responseData2));
-            test = jObject2.toString(); // test to check for changes
+            result[i++] = tokens.nextToken();
         }
-        catch (JSONException e)
+        for (int x = 0; x < result.length; x++)
         {
-            e.printStackTrace();
+            if (result[x].length() > 30 )
+            {
+                firstDirect = result[x];
+            }
+            else {
+                firstIngred += result[x];
+            }
         }
-        try
-        {
-            jArray2 = jObject2.getJSONArray("0:");
-        }
-        catch (JSONException e)
-        {
-            e.printStackTrace();
-        }
-
+        Directions = new String(firstDirect.trim().replace("ingredients", ""));
+        Ingredients = new String(firstIngred.trim().replace("null", "").replace("id", "").replace("steps", "").replace("length", "")
+                .replace("0", "").replace("1", "").replace("2", "").replace("3", "").replace("4", "")
+                .replace("5", "").replace("6", "").replace("7", "").replace("8", "").replace("9", "")
+                .replace("step", ""));
        return null;
     }
     public static String getID()

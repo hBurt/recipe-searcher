@@ -48,10 +48,10 @@ public class Recipe_Similar_Recipes_Tab_Fragment extends Fragment
                 String id2 = Next_Similar_Activity.getNewID();
                 //if (id2 != id)
                   //  id = id2;
-                String test = Next_Similar_Activity.getName();
+               /* String test = Next_Similar_Activity.getName();
                 if (test.length() > 0) // in theory should be an error check for the name
                       RecipeActivity.setRecipeName(test);
-                else
+                else*/
                     RecipeActivity.setRecipeName("Next Test"); // temp test
                 String direct = " ";
                 Recipe_Directions_Tab_Fragment.setText("Next Text");

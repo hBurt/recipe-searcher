@@ -27,11 +27,12 @@ public class Next_Similar_Activity extends AsyncTask<Void, Void, String>
     protected String doInBackground(Void... voids)
     {
         String responseData = null;
-        id = Request_Handler.getID();
-        if (id != Recipe_Similar_Recipes_Tab_Fragment.getID())
+        //id = Request_Handler.getID();
+        /*if (id != Recipe_Similar_Recipes_Tab_Fragment.getID())
         {
             id = Recipe_Similar_Recipes_Tab_Fragment.getID();
-        }
+        }*/
+        id = "324694";
         OkHttpClient client = new OkHttpClient();
         Response response = null; // needs an id num or will cause an error
         com.squareup.okhttp.Request request = new Request.Builder()
