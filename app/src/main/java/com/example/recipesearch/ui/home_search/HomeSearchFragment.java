@@ -21,6 +21,7 @@ import com.example.recipesearch.MainActivity;
 import com.example.recipesearch.R;
 import com.example.recipesearch.helpers.DatabaseHelper;
 import com.example.recipesearch.helpers.UiHelper;
+import com.example.recipesearch.ui.meal_planner.Meal_Planner_Activity;
 import com.example.recipesearch.ui.search_result.SearchActivity;
 import com.example.recipesearch.ui.user.login.LoginFragment;
 import com.example.recipesearch.ui.user.signup.SignUpFragment;
