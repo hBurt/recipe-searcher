@@ -106,5 +106,7 @@ public class RecipeActivity extends AppCompatActivity
             Ingred = iTest;
 
         Recipe_Ingredient_Tab_Fragment.setIngredients(Ingred);
+
+        refresh();
     }
 }
