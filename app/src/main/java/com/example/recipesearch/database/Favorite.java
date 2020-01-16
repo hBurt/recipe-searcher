@@ -1,19 +1,14 @@
 package com.example.recipesearch.database;
 
 public class Favorite {
-    private int id, rating;
 
-    public Favorite(int id, int rating) {
-        setId(id);
-        setRating(rating);
-    }
+    private int rating;
 
-    public int getId() {
-        return id;
-    }
+    private Recipe recipe;
 
-    public void setId(int id) {
-        this.id = id;
+    public Favorite(Recipe recipe) {
+        rating = 0;
+        setRecipe(recipe);
     }
 
     public int getRating() {
@@ -22,5 +17,13 @@ public class Favorite {
 
     public void setRating(int rating) {
         this.rating = rating;
+    }
+
+    public Recipe getRecipe() {
+        return recipe;
+    }
+
+    public void setRecipe(Recipe recipe) {
+        this.recipe = recipe;
     }
 }
