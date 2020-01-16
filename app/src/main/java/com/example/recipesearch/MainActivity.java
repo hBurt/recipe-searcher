@@ -1,5 +1,10 @@
 package com.example.recipesearch;
 
+import android.content.Context;
+import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.WindowManager;
 
@@ -13,14 +18,16 @@ import com.example.recipesearch.database.LocalLoginDatabase;
 import com.example.recipesearch.helpers.DatabaseHelper;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import static androidx.core.content.ContextCompat.getSystemService;
+
 public class MainActivity extends AppCompatActivity {
 
     private CharSequence message;
     private DatabaseHelper databaseHelper;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 

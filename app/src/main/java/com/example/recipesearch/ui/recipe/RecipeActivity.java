@@ -13,6 +13,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.recipesearch.R;
+import com.example.recipesearch.ui.APIComunication.Request_Handler;
 import com.example.recipesearch.ui.search_result.SearchActivity;
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
@@ -22,19 +23,18 @@ public class RecipeActivity extends AppCompatActivity
     Recipe_Directions_Tab_Fragment RDTF = new Recipe_Directions_Tab_Fragment(); // case 1
     Recipe_Ingredient_Tab_Fragment RITF = new Recipe_Ingredient_Tab_Fragment(); // case 0
     Recipe_Similar_Recipes_Tab_Fragment RSRTF = new Recipe_Similar_Recipes_Tab_Fragment(); //case 2
-    private TextView tex; // all this shit is declared here because it just made it easy incase it was needed outside onCreate
+    private TextView tex;
     private ImageView pic;
     private TabLayout tab;
     ViewPager view;
-    private String RecipeName = "Test Text";
-    FragmentManager fm = getSupportFragmentManager();
-    FragmentTransaction transaction = fm.beginTransaction();
+    static String RecipeName = "Beef Salpicao"; // example/default
+    String recipeTitle = null;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recipe_page);
-        //Toolbar tool = findViewById(R.id.Recpie_Tool_Bar);
+        //RecipeName = SearchActivity.getSearchedFood();
         view = findViewById(R.id.viewPager);
         tex = findViewById(R.id.Recipe_Name);
         pic = findViewById(R.id.Image_of_Food);
@@ -65,6 +65,22 @@ public class RecipeActivity extends AppCompatActivity
             }
         });
     }
+    public static void setRecipeName(String someName)
+    {
+        RecipeName = someName;
+    }
+    public static String getRecipeName()
+    {
+        return RecipeName;
+    }
+    public void refresh()
+    {
+        finish();
+        overridePendingTransition(0, 0);
+        startActivity(getIntent());
+        overridePendingTransition(0, 0);
+    }
+
 
 
 }
