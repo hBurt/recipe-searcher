@@ -66,7 +66,7 @@ public class HomeSearchFragment extends Fragment {
             String email = databaseHelper.getSharedPrefEmail();
             String pass = databaseHelper.getSharedPrefPass();
 
-            System.out.println("Email: " + email + "\n" + "Password: " + pass);
+            //System.out.println("Email: " + email + "\n" + "Password: " + pass);
 
             databaseHelper.login(email, pass);
 
