@@ -12,6 +12,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.StringTokenizer;
 
 public class Next_Similar_Activity extends AsyncTask<Void, Void, String>
 {
@@ -23,16 +24,13 @@ public class Next_Similar_Activity extends AsyncTask<Void, Void, String>
     private static String oneObjectsItem2 = null;
     private static String oneObjectsItem3 = null;
     private static String oneObjectsItem4 = null;
+    String originalReturn = null;
+    String editedReturn = null;
     @Override
     protected String doInBackground(Void... voids)
     {
         String responseData = null;
-        //id = Request_Handler.getID();
-        /*if (id != Recipe_Similar_Recipes_Tab_Fragment.getID())
-        {
-            id = Recipe_Similar_Recipes_Tab_Fragment.getID();
-        }*/
-        id = "324694";
+        id = "521510";
         OkHttpClient client = new OkHttpClient();
         Response response = null; // needs an id num or will cause an error
         com.squareup.okhttp.Request request = new Request.Builder()
@@ -45,45 +43,41 @@ public class Next_Similar_Activity extends AsyncTask<Void, Void, String>
         {
             response = client.newCall(request).execute();
             responseData = response.body().string();
+            originalReturn = responseData;
         }
         catch (IOException e)
         {
             e.printStackTrace();
         }
-        JSONObject jObject = null;
-        JSONArray jArray = null;
-        String test = "Should Change"; // for testing if i get any change to the jObject
-        try
+        editedReturn = new String(originalReturn.trim().replace("&", "")
+                .replace("(", "").replace(")", "").replace(",", " ")
+                .replace("!", "").replace("=", "").replace("<", "")
+                .replace(">", "").replace("#", "").replace("$", "")
+                .replace("'", "").replace("*", "").replace("-", " ")
+                .replace("/", "").replace("unit", "").replace("number", "")
+                .replace(";", "").replace("?", "").replace("@", "")
+                .replace("[", "").replace("\\", "").replace("]", "")
+                .replace("_", "").replace("`", "").replace("{", "")
+                .replace("|", "").replace("}", "").replace("name", "")
+                .replace("image", "").replace(".jpg", "").replace("minutes", "")
+                .replace("\"", "").replace(".png", ""));
+        StringTokenizer tokens = new StringTokenizer(editedReturn, ":");
+        String[] result = new String[tokens.countTokens()];
+        int i = 0;
+        String firstDirect = " ";
+        String firstIngred = " ";
+        while ( tokens.hasMoreTokens() )
         {
-            jObject = new JSONObject(String.valueOf(responseData));
-            test = jObject.toString();
+            result[i++] = tokens.nextToken();
         }
-        catch (JSONException e)
+        for (int x = 0; x < result.length; x++)
         {
-            e.printStackTrace();
-        }
-        try
-        {
-            jArray = jObject.getJSONArray("0:");
-        }
-        catch (JSONException e)
-        {
-            e.printStackTrace();
-        }
-        for (int i=0; i < jArray.length(); i++)
-        {
-            try
+            if (result[x].length() > 30 )
             {
-                JSONObject oneObject = jArray.getJSONObject(i);
-                oneObjectsItem = oneObject.getString("id");
-                oneObjectsItem2 = oneObject.getString("title");
-                oneObjectsItem3 = oneObject.getString("readyInMinutes");
-                oneObjectsItem4 = oneObject.getString("image");
+                firstDirect = result[x];
             }
-            catch (JSONException e)
-            {
-                // Crap
-                e.printStackTrace();
+            else {
+                firstIngred += result[x];
             }
         }
         return null;

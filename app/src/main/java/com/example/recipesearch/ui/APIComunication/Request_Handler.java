@@ -129,7 +129,7 @@ public class Request_Handler extends AsyncTask<Void, Void, String>
         // for having them be on different calls
         // wip for getting the instructions
         String newReturn = " ";
-        id = "521510";
+       // id = "521510"; // testing id
         OkHttpClient client2 = new OkHttpClient();
         Response response2 = null; // needs an id num or will cause an error
         com.squareup.okhttp.Request request2 = new Request.Builder()
