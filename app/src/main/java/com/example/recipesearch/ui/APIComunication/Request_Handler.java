@@ -69,6 +69,7 @@ public class Request_Handler extends AsyncTask<Void, Void, String>
         {
             response = client.newCall(request).execute(); // provides a val for the first search and preforms it
             responseData = response.body().string();
+            String test = responseData;
 
         }
         catch (IOException e)
@@ -155,7 +156,7 @@ public class Request_Handler extends AsyncTask<Void, Void, String>
         String secondReturn = " ";
         // this should remove unwanted characters
         secondReturn = new String(newReturn.trim().replace("&", "")
-                .replace("(", "").replace(")", "").replace(",", " ")
+                .replace(",", " ")
                 .replace("!", "").replace("=", "").replace("<", "")
                 .replace(">", "").replace("#", "").replace("$", "")
                 .replace("'", "").replace("*", "").replace("-", " ")
@@ -164,13 +165,14 @@ public class Request_Handler extends AsyncTask<Void, Void, String>
                 .replace("[", "").replace("\\", "").replace("]", "")
                 .replace("_", "").replace("`", "").replace("{", "")
                 .replace("|", "").replace("}", "").replace("name", "")
-                .replace("image", "").replace(".jpg", "").replace("minutes", "")
-                .replace("\"", "").replace(".png", ""));
+                .replace("image", "").replace(".jpg", "")
+                .replace("\"", " ").replace(".png", ""));
         StringTokenizer tokens = new StringTokenizer(secondReturn, ":");
         String[] result = new String[tokens.countTokens()];
         int i = 0;
         String firstDirect = " ";
         String firstIngred = " ";
+        String time = " ";
         while ( tokens.hasMoreTokens() )
         {
             result[i++] = tokens.nextToken();
@@ -179,7 +181,11 @@ public class Request_Handler extends AsyncTask<Void, Void, String>
         {
             if (result[x].length() > 30 )
             {
-                firstDirect = result[x];
+                firstDirect += result[x];
+            }
+            else if (result[x].length() < 3 )
+            {
+                time += result[x];
             }
             else {
                 firstIngred += result[x];

@@ -34,7 +34,7 @@ public class Next_Similar_Activity extends AsyncTask<Void, Void, String>
         OkHttpClient client = new OkHttpClient();
         Response response = null; // needs an id num or will cause an error
         com.squareup.okhttp.Request request = new Request.Builder()
-                .url("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/"+ id +"/similar")
+                .url("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/521510/similar")
                 .get()
                 .addHeader("x-rapidapi-host", "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com")
                 .addHeader("x-rapidapi-key", "7dba1c8b6dmsh8c3919fbe127d43p122d00jsn89f1b32d2216")
@@ -64,20 +64,20 @@ public class Next_Similar_Activity extends AsyncTask<Void, Void, String>
         StringTokenizer tokens = new StringTokenizer(editedReturn, ":");
         String[] result = new String[tokens.countTokens()];
         int i = 0;
-        String firstDirect = " ";
-        String firstIngred = " ";
+        String newID = " ";
+        String everythingElse = " ";
         while ( tokens.hasMoreTokens() )
         {
             result[i++] = tokens.nextToken();
         }
         for (int x = 0; x < result.length; x++)
         {
-            if (result[x].length() > 30 )
+            if (result[x].length() > 4 && result[x].length() < 10 )
             {
-                firstDirect = result[x];
+                newID = result[x];
             }
             else {
-                firstIngred += result[x];
+                everythingElse += result[x];
             }
         }
         return null;
