@@ -27,14 +27,15 @@ public class RecipeActivity extends AppCompatActivity
     private ImageView pic;
     private TabLayout tab;
     ViewPager view;
-    static String RecipeName = "Beef Salpicao"; // example/default
+    static String RecipeName = "Beef Salpicao"; // example for test purposes
+    static String Ingred= " ";
+    static String Direct = " ";
     String recipeTitle = null;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recipe_page);
-        //RecipeName = SearchActivity.getSearchedFood();
         view = findViewById(R.id.viewPager);
         tex = findViewById(R.id.Recipe_Name);
         pic = findViewById(R.id.Image_of_Food);
@@ -81,6 +82,29 @@ public class RecipeActivity extends AppCompatActivity
         overridePendingTransition(0, 0);
     }
 
+    @Override
+    protected void onStart()
+    {
+        super.onStart();
+        String test = " ";
+        String iTest = " ";
+        String dTest = " ";
+        if (Request_Handler.getDishName() != null)
+            test = Request_Handler.getDishName();
+        if (test.length() > 0)
+            RecipeName = test;
 
+        if (Request_Handler.getDirections() != null)
+            dTest = Request_Handler.getDirections();
+        if (dTest.length() > 0)
+            Direct = dTest;
+        Recipe_Directions_Tab_Fragment.setDirections(Direct);
 
+        if (Request_Handler.getIngredients() != null)
+            iTest = Request_Handler.getIngredients();
+        if (iTest.length() > 0)
+            Ingred = iTest;
+
+        Recipe_Ingredient_Tab_Fragment.setIngredients(Ingred);
+    }
 }

@@ -54,9 +54,9 @@ public class Recipe_Similar_Recipes_Tab_Fragment extends Fragment
                 else*/
                     RecipeActivity.setRecipeName("Next Test"); // temp test
                 String direct = " ";
-                Recipe_Directions_Tab_Fragment.setText("Next Text");
+                Recipe_Directions_Tab_Fragment.setDirections("Next Text");
                 String ingredient = " ";
-                Recipe_Ingredient_Tab_Fragment.setText("Next Text");
+                Recipe_Ingredient_Tab_Fragment.setIngredients("Next Text");
                 ((RecipeActivity)getActivity()).refresh();
             }
         });

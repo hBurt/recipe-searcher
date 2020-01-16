@@ -41,7 +41,7 @@ public class Recipe_Ingredient_Tab_Fragment extends Fragment
         else
             ingredient.setText("worcestershire sauce\n" + "green onions\n" + "spring-onions\n" + "mushrooms\n" + "olive oil\n" + "seasoning of choice\n" + "butter\n" + "garlic\n" + "pepper\n" + "all purpose flour\n");
     }
-    public static void setText(String string)
+    public static void setIngredients(String string)
     {
         newText = string;
     }

@@ -1,10 +1,11 @@
 package com.example.recipesearch.ui.APIComunication;
 
 
+import android.content.Intent;
 import android.os.AsyncTask;
 
 
-
+import com.example.recipesearch.ui.recipe.RecipeActivity;
 import com.example.recipesearch.ui.search_result.SearchActivity;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
@@ -39,8 +40,8 @@ public class Request_Handler extends AsyncTask<Void, Void, String>
     static String instructionDetail = "false"; // for use in filtering how detailed the instructions are
     String responseData;
     String responseData2;
-    String Directions;
-    String Ingredients;
+    static String Directions;
+    static String Ingredients;
     @Override
     protected String doInBackground(Void... voids)
     {
@@ -210,6 +211,14 @@ public class Request_Handler extends AsyncTask<Void, Void, String>
     public static String getDishName()
     {
         return dishName;
+    }
+    public static String getDirections()
+    {
+        return Directions;
+    }
+    public static String getIngredients()
+    {
+        return Ingredients;
     }
 
 
