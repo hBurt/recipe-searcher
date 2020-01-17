@@ -27,11 +27,13 @@ public class RecipeActivity extends AppCompatActivity
     private TextView tex;
     private ImageView pic;
     private TabLayout tab;
+    private TextView TTM;
     ViewPager view;
     static boolean refreshNeeded = false;
     static String RecipeName = "Beef Salpicao"; // example for test purposes
     String defaultName =  "Beef Salpicao";
     static String imgName = null;
+    static String timeToMake = " ";
     String recipeTitle = null;
     public static int i = 1;
     @Override
@@ -43,13 +45,15 @@ public class RecipeActivity extends AppCompatActivity
         tex = findViewById(R.id.Recipe_Name);
         pic = findViewById(R.id.Image_of_Food);
         tab = findViewById(R.id.Tabs);
+        TTM = findViewById(R.id.Time);
+        TTM.setText(timeToMake);
+        if (imgName != null)
+            pic.setImageResource(getResources().getIdentifier(imgName,"drawable", getPackageName()));
         if (!refreshNeeded)
             refresh();
         tab.addTab(tab.newTab().setText("Ingredients"));
         tab.addTab(tab.newTab().setText("Directions"));
         tab.addTab(tab.newTab().setText("Similar Recipes"));
-        if (imgName != null)
-            pic.setImageResource(getResources().getIdentifier(imgName,"drawable", getPackageName()));
         tex.setText(RecipeName);
         tab.setTabGravity(TabLayout.GRAVITY_FILL);
         final MyTabAdapter adapter = new MyTabAdapter(this,getSupportFragmentManager(), tab.getTabCount());
@@ -96,5 +100,9 @@ public class RecipeActivity extends AppCompatActivity
     public static void triggerRefresh(boolean trigger)
     {
         refreshNeeded = trigger;
+    }
+    public static void setTime(String time)
+    {
+        timeToMake = time;
     }
 }

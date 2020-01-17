@@ -38,14 +38,26 @@
 
     <TextView
         android:id="@+id/Recipe_Name"
-        android:layout_width="407dp"
-        android:layout_height="89dp"
+        android:layout_width="312dp"
+        android:layout_height="92dp"
         android:layout_marginTop="56dp"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/Time"
+        android:layout_width="98dp"
+        android:layout_height="93dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginRight="1dp"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/Image_of_Food"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/Recipe_Name"
+        app:layout_constraintTop_toBottomOf="@+id/Recpie_Tool_Bar" />
 
     <ImageView
         android:id="@+id/Image_of_Food"
