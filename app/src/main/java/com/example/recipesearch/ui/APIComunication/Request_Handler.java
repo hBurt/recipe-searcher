@@ -199,7 +199,8 @@ public class Request_Handler extends AsyncTask<Void, Void, String>
                 .replace("0", "").replace("1", "").replace("2", "").replace("3", "").replace("4", "")
                 .replace("5", "").replace("6", "").replace("7", "").replace("8", "").replace("9", "")
                 .replace("step", "").replace("minutes", "").replace("equipment", ""));
-        RecipeActivity.setPic(oneObjectsItem4);//work on setting an img 
+        RecipeActivity.setPic(oneObjectsItem4);//work on setting an img
+        RecipeActivity.triggerRefresh(true);
         RecipeActivity.setRecipeName(oneObjectsItem2);
         Recipe_Directions_Tab_Fragment.setDirections(Directions);
         Recipe_Ingredient_Tab_Fragment.setIngredients(Ingredients);

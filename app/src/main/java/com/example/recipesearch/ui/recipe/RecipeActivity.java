@@ -28,6 +28,7 @@ public class RecipeActivity extends AppCompatActivity
     private ImageView pic;
     private TabLayout tab;
     ViewPager view;
+    static boolean refreshNeeded = false;
     static String RecipeName = "Beef Salpicao"; // example for test purposes
     String defaultName =  "Beef Salpicao";
     static String imgName = null;
@@ -42,6 +43,8 @@ public class RecipeActivity extends AppCompatActivity
         tex = findViewById(R.id.Recipe_Name);
         pic = findViewById(R.id.Image_of_Food);
         tab = findViewById(R.id.Tabs);
+        if (!refreshNeeded)
+            refresh();
         tab.addTab(tab.newTab().setText("Ingredients"));
         tab.addTab(tab.newTab().setText("Directions"));
         tab.addTab(tab.newTab().setText("Similar Recipes"));
@@ -89,5 +92,9 @@ public class RecipeActivity extends AppCompatActivity
     public static void setPic( String img)
     {
         imgName = img;
+    }
+    public static void triggerRefresh(boolean trigger)
+    {
+        refreshNeeded = trigger;
     }
 }
