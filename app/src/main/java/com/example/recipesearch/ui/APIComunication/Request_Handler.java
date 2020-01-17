@@ -6,6 +6,8 @@ import android.os.AsyncTask;
 
 
 import com.example.recipesearch.ui.recipe.RecipeActivity;
+import com.example.recipesearch.ui.recipe.Recipe_Directions_Tab_Fragment;
+import com.example.recipesearch.ui.recipe.Recipe_Ingredient_Tab_Fragment;
 import com.example.recipesearch.ui.search_result.SearchActivity;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
@@ -196,7 +198,10 @@ public class Request_Handler extends AsyncTask<Void, Void, String>
         Ingredients = new String(firstIngred.trim().replace("null", "").replace("id", "").replace("steps", "").replace("length", "")
                 .replace("0", "").replace("1", "").replace("2", "").replace("3", "").replace("4", "")
                 .replace("5", "").replace("6", "").replace("7", "").replace("8", "").replace("9", "")
-                .replace("step", ""));
+                .replace("step", "").replace("minutes", ""));
+        RecipeActivity.setRecipeName(oneObjectsItem2);
+        Recipe_Directions_Tab_Fragment.setDirections(Directions);
+        Recipe_Ingredient_Tab_Fragment.setIngredients(Ingredients);
        return null;
     }
     public static String getID()

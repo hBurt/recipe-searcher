@@ -13,6 +13,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.recipesearch.R;
+import com.example.recipesearch.database.Recipe;
 import com.example.recipesearch.ui.APIComunication.Request_Handler;
 import com.example.recipesearch.ui.search_result.SearchActivity;
 import com.google.android.material.tabs.TabItem;
@@ -28,8 +29,7 @@ public class RecipeActivity extends AppCompatActivity
     private TabLayout tab;
     ViewPager view;
     static String RecipeName = "Beef Salpicao"; // example for test purposes
-    static String Ingred= " ";
-    static String Direct = " ";
+    String defaultName =  "Beef Salpicao";
     String recipeTitle = null;
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -82,31 +82,4 @@ public class RecipeActivity extends AppCompatActivity
         overridePendingTransition(0, 0);
     }
 
-    @Override
-    protected void onStart()
-    {
-        super.onStart();
-        String test = " ";
-        String iTest = " ";
-        String dTest = " ";
-        if (Request_Handler.getDishName() != null)
-            test = Request_Handler.getDishName();
-        if (test.length() > 0)
-            RecipeName = test;
-
-        if (Request_Handler.getDirections() != null)
-            dTest = Request_Handler.getDirections();
-        if (dTest.length() > 0)
-            Direct = dTest;
-        Recipe_Directions_Tab_Fragment.setDirections(Direct);
-
-        if (Request_Handler.getIngredients() != null)
-            iTest = Request_Handler.getIngredients();
-        if (iTest.length() > 0)
-            Ingred = iTest;
-
-        Recipe_Ingredient_Tab_Fragment.setIngredients(Ingred);
-
-        refresh();
-    }
 }
