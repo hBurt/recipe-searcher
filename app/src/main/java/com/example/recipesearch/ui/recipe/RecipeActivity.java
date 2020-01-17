@@ -30,6 +30,7 @@ public class RecipeActivity extends AppCompatActivity
     ViewPager view;
     static String RecipeName = "Beef Salpicao"; // example for test purposes
     String defaultName =  "Beef Salpicao";
+    static String imgName = null;
     String recipeTitle = null;
     public static int i = 1;
     @Override
@@ -44,6 +45,8 @@ public class RecipeActivity extends AppCompatActivity
         tab.addTab(tab.newTab().setText("Ingredients"));
         tab.addTab(tab.newTab().setText("Directions"));
         tab.addTab(tab.newTab().setText("Similar Recipes"));
+        if (imgName != null)
+            pic.setImageResource(getResources().getIdentifier(imgName,"drawable", getPackageName()));
         tex.setText(RecipeName);
         tab.setTabGravity(TabLayout.GRAVITY_FILL);
         final MyTabAdapter adapter = new MyTabAdapter(this,getSupportFragmentManager(), tab.getTabCount());
@@ -82,5 +85,9 @@ public class RecipeActivity extends AppCompatActivity
         overridePendingTransition(0, 0);
         startActivity(getIntent());
         overridePendingTransition(0, 0);
+    }
+    public static void setPic( String img)
+    {
+        imgName = img;
     }
 }
