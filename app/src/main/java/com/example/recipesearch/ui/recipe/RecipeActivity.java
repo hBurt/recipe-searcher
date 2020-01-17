@@ -33,7 +33,7 @@ public class RecipeActivity extends AppCompatActivity
     static String RecipeName = "Beef Salpicao"; // example for test purposes
     String defaultName =  "Beef Salpicao";
     static String imgName = null;
-    static String timeToMake = " ";
+    static String timeToMake = "XX";
     String recipeTitle = null;
     public static int i = 1;
     @Override
@@ -46,10 +46,10 @@ public class RecipeActivity extends AppCompatActivity
         pic = findViewById(R.id.Image_of_Food);
         tab = findViewById(R.id.Tabs);
         TTM = findViewById(R.id.Time);
-        TTM.setText(timeToMake + "minutes");
+        TTM.setText(timeToMake + " minutes");
         if (imgName != null)
             pic.setImageResource(getResources().getIdentifier(imgName,"drawable", getPackageName()));
-        if (!refreshNeeded)
+        if (refreshNeeded != false)
             refresh();
         tab.addTab(tab.newTab().setText("Ingredients"));
         tab.addTab(tab.newTab().setText("Directions"));
