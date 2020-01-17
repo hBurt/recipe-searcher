@@ -31,6 +31,7 @@ public class RecipeActivity extends AppCompatActivity
     static String RecipeName = "Beef Salpicao"; // example for test purposes
     String defaultName =  "Beef Salpicao";
     String recipeTitle = null;
+    public static int i = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -63,6 +64,7 @@ public class RecipeActivity extends AppCompatActivity
             @Override
             public void onTabReselected(TabLayout.Tab tab)
             {
+                refresh();
             }
         });
     }
@@ -81,5 +83,4 @@ public class RecipeActivity extends AppCompatActivity
         startActivity(getIntent());
         overridePendingTransition(0, 0);
     }
-
 }
