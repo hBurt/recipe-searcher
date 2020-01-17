@@ -46,7 +46,7 @@ public class RecipeActivity extends AppCompatActivity
         pic = findViewById(R.id.Image_of_Food);
         tab = findViewById(R.id.Tabs);
         TTM = findViewById(R.id.Time);
-        TTM.setText(timeToMake);
+        TTM.setText(timeToMake + "minutes");
         if (imgName != null)
             pic.setImageResource(getResources().getIdentifier(imgName,"drawable", getPackageName()));
         if (!refreshNeeded)
