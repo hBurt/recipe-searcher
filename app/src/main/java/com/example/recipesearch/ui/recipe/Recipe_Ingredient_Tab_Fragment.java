@@ -19,6 +19,7 @@ import com.example.recipesearch.R;
 public class Recipe_Ingredient_Tab_Fragment extends Fragment
 {
     static String newText = " ";
+    String sampleText = "worcestershire sauce\n" + "green onions\n" + "spring-onions\n" + "mushrooms\n" + "olive oil\n" + "seasoning of choice\n" + "butter\n" + "garlic\n" + "pepper\n" + "all purpose flour\n";
     public Recipe_Ingredient_Tab_Fragment()
     {
         // Required empty public constructor
@@ -39,7 +40,7 @@ public class Recipe_Ingredient_Tab_Fragment extends Fragment
         if (newText.length() > 2)
             ingredient.setText(newText);
         else
-            ingredient.setText("worcestershire sauce\n" + "green onions\n" + "spring-onions\n" + "mushrooms\n" + "olive oil\n" + "seasoning of choice\n" + "butter\n" + "garlic\n" + "pepper\n" + "all purpose flour\n");
+            ingredient.setText(sampleText);
     }
     public static void setIngredients(String string)
     {
