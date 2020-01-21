@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -22,6 +24,7 @@ import androidx.appcompat.widget.Toolbar;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.recipesearch.MainActivity;
 import com.example.recipesearch.ui.APIComunication.Request_Handler;
 import com.example.recipesearch.ui.APIComunication.SearchSettingsActivity;
 
@@ -43,6 +46,7 @@ public class SearchActivity extends AppCompatActivity
     private ArrayAdapter silAd;
     private ListView list;
     Toolbar tool;
+    static Handler h;
     public static String SearchedFood = null; // static to share the query
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -67,6 +71,15 @@ public class SearchActivity extends AppCompatActivity
             connected = false;
         FsearchView = findViewById(R.id.searchFood);
         FsearchView.setQueryHint("Search Food or Ingredient");
+        h = new  Handler(){
+            @Override
+            public void handleMessage(Message msg)
+            {
+
+                Intent in = new Intent(SearchActivity.this, RecipeActivity.class);
+                startActivity(in);
+            }
+        };
         FsearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener()
         {
             @Override
@@ -76,8 +89,7 @@ public class SearchActivity extends AppCompatActivity
                 Request_Handler req = new Request_Handler();
                 req.execute(); // handles the search query
                 RecipeActivity.triggerRefresh(true);
-                Intent in = new Intent(SearchActivity.this, RecipeActivity.class);
-                startActivity(in);
+                h.sendEmptyMessageDelayed(0, 1200);
                 return false;
             }
 

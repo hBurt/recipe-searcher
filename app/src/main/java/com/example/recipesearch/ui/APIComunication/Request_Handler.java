@@ -2,6 +2,7 @@ package com.example.recipesearch.ui.APIComunication;
 
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 
 
@@ -19,6 +20,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.StringTokenizer;
 
 
@@ -27,8 +31,7 @@ public class Request_Handler extends AsyncTask<Void, Void, String>
     //API calls work, working on parsing and using the returns, will make 2 calls plus the similar recipe calls
     //the similar recipe calls will be handled in a different class but i want to save the extra returns for latter us
     // might create a random recipe func as the API does support that
-    String API_KEY = "7dba1c8b6dmsh8c3919fbe127d43p122d00jsn89f1b32d2216";
-    String API_URL = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/search?number=5&offset=0&instructionsRequired=true&query=";
+
     static String id = null;
     static String dishName = null;
     static  String id2 = null;
@@ -44,6 +47,8 @@ public class Request_Handler extends AsyncTask<Void, Void, String>
     String responseData2;
     static String Directions;
     static String Ingredients;
+    SharedPreferences mPrefs;
+    SharedPreferences.Editor edit;
     @Override
     protected String doInBackground(Void... voids)
     {
@@ -128,6 +133,16 @@ public class Request_Handler extends AsyncTask<Void, Void, String>
         // this is a test id
          id = "324694";
         }
+       /* if (mPrefs.contains(oneObjectsItem+"id"))
+        {
+            RecipeActivity.setPic(mPrefs.getString(oneObjectsItem+"pic"," "));//work on setting an img
+            RecipeActivity.setTime( mPrefs.getString(oneObjectsItem+"Time"," "));
+            RecipeActivity.setRecipeName(mPrefs.getString(oneObjectsItem+"Name"," "));
+            Recipe_Directions_Tab_Fragment.setDirections(mPrefs.getString(oneObjectsItem+"Directions", " "));
+            Recipe_Ingredient_Tab_Fragment.setIngredients(mPrefs.getString(oneObjectsItem+"Ingredients", " "));
+            return null;
+        }
+        else { }*/
         if (oneObjectsItem2 .length() > 0)
             dishName = oneObjectsItem2;
         // for having them be on different calls
@@ -199,11 +214,21 @@ public class Request_Handler extends AsyncTask<Void, Void, String>
                 .replace("0", "").replace("1", "").replace("2", "").replace("3", "").replace("4", "")
                 .replace("5", "").replace("6", "").replace("7", "").replace("8", "").replace("9", "")
                 .replace("step", "").replace("minutes", "").replace("equipment", ""));
+
         RecipeActivity.setPic(oneObjectsItem4);//work on setting an img
         RecipeActivity.setTime(oneObjectsItem3);
         RecipeActivity.setRecipeName(oneObjectsItem2);
         Recipe_Directions_Tab_Fragment.setDirections(Directions);
         Recipe_Ingredient_Tab_Fragment.setIngredients(Ingredients);
+        RecipeActivity.triggerRefresh(true);
+       /* edit = mPrefs.edit();
+        edit.putString(oneObjectsItem+"id", oneObjectsItem);
+        edit.putString(oneObjectsItem+"pic", oneObjectsItem4);
+        edit.putString( oneObjectsItem+"Time", oneObjectsItem3);
+        edit.putString(oneObjectsItem+"Name", oneObjectsItem2);
+        edit.putString(oneObjectsItem+"Ingredients", Ingredients);
+        edit.putString(oneObjectsItem+"Directions", Directions);
+        edit.apply();*/
         return null;
     }
     public static String getID()

@@ -1,11 +1,14 @@
 package com.example.recipesearch.ui.recipe;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
+import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,11 +18,13 @@ import com.example.recipesearch.R;
 import com.example.recipesearch.ui.APIComunication.Next_Similar_Activity;
 import com.example.recipesearch.ui.APIComunication.Next_recipe;
 import com.example.recipesearch.ui.APIComunication.Random_Recipe;
+import com.example.recipesearch.ui.search_result.SearchActivity;
 
 
 public class Recipe_Similar_Recipes_Tab_Fragment extends Fragment
 {
     private static String id = null;
+    static Handler h;
     public Recipe_Similar_Recipes_Tab_Fragment()
     {
         // Required empty public constructor
@@ -37,6 +42,14 @@ public class Recipe_Similar_Recipes_Tab_Fragment extends Fragment
         super.onViewCreated(view, savedInstanceState);
         Button next = view.findViewById(R.id.Sim_btn);
         Button Rand = view.findViewById(R.id.Random_Recipe_Btn);
+        h = new  Handler()
+        {
+            @Override
+            public void handleMessage(Message msg)
+            {
+                ((RecipeActivity)getActivity()).refresh();
+            }
+        };
         //wip
         next.setOnClickListener(new View.OnClickListener()
         {
@@ -60,8 +73,7 @@ public class Recipe_Similar_Recipes_Tab_Fragment extends Fragment
                 Recipe_Directions_Tab_Fragment.setDirections("Next Text");
                 String ingredient = " ";
                 Recipe_Ingredient_Tab_Fragment.setIngredients("Next Text");
-                ((RecipeActivity)getActivity()).refresh();
-                ((RecipeActivity)getActivity()).refresh();
+                h.sendEmptyMessageDelayed(0, 1200);
             }
         });
         // the rand recipe is a wip
@@ -81,8 +93,7 @@ public class Recipe_Similar_Recipes_Tab_Fragment extends Fragment
                 Recipe_Directions_Tab_Fragment.setDirections("Next Text");
                 String ingredient = " ";
                 Recipe_Ingredient_Tab_Fragment.setIngredients("Next Text");
-                ((RecipeActivity)getActivity()).refresh();
-                ((RecipeActivity)getActivity()).refresh();
+                h.sendEmptyMessageDelayed(0, 1200);
             }
         });
     }

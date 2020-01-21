@@ -41,7 +41,7 @@ public class RecipeActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recipe_page);
-        if (refreshNeeded == true)
+        if ( refreshNeeded == true)
         {
             refreshNeeded = false;
             refresh();
@@ -54,8 +54,6 @@ public class RecipeActivity extends AppCompatActivity
         TTM.setText(timeToMake + " minutes");
         if (imgName != null)
             pic.setImageResource(getResources().getIdentifier(imgName,"drawable", getPackageName()));
-        if (refreshNeeded != false)
-            refresh();
         tab.addTab(tab.newTab().setText("Ingredients"));
         tab.addTab(tab.newTab().setText("Directions"));
         tab.addTab(tab.newTab().setText("Next Recipe"));

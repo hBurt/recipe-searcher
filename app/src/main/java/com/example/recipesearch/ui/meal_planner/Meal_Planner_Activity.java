@@ -36,7 +36,8 @@ public class Meal_Planner_Activity extends AppCompatActivity
     ViewPager Mview;
     String Notes;
     String Today;
-    String Tomorrow;SharedPreferences mPrefs;
+    String Tomorrow;
+    SharedPreferences mPrefs;
     SharedPreferences.Editor edit;
     CalendarView Cal = null;
     @SuppressLint("CommitPrefEdits")
