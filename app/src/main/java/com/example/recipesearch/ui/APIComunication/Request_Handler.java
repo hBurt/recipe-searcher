@@ -133,16 +133,6 @@ public class Request_Handler extends AsyncTask<Void, Void, String>
         // this is a test id
          id = "324694";
         }
-       /* if (mPrefs.contains(oneObjectsItem+"id"))
-        {
-            RecipeActivity.setPic(mPrefs.getString(oneObjectsItem+"pic"," "));//work on setting an img
-            RecipeActivity.setTime( mPrefs.getString(oneObjectsItem+"Time"," "));
-            RecipeActivity.setRecipeName(mPrefs.getString(oneObjectsItem+"Name"," "));
-            Recipe_Directions_Tab_Fragment.setDirections(mPrefs.getString(oneObjectsItem+"Directions", " "));
-            Recipe_Ingredient_Tab_Fragment.setIngredients(mPrefs.getString(oneObjectsItem+"Ingredients", " "));
-            return null;
-        }
-        else { }*/
         if (oneObjectsItem2 .length() > 0)
             dishName = oneObjectsItem2;
         // for having them be on different calls
@@ -221,14 +211,6 @@ public class Request_Handler extends AsyncTask<Void, Void, String>
         Recipe_Directions_Tab_Fragment.setDirections(Directions);
         Recipe_Ingredient_Tab_Fragment.setIngredients(Ingredients);
         RecipeActivity.triggerRefresh(true);
-       /* edit = mPrefs.edit();
-        edit.putString(oneObjectsItem+"id", oneObjectsItem);
-        edit.putString(oneObjectsItem+"pic", oneObjectsItem4);
-        edit.putString( oneObjectsItem+"Time", oneObjectsItem3);
-        edit.putString(oneObjectsItem+"Name", oneObjectsItem2);
-        edit.putString(oneObjectsItem+"Ingredients", Ingredients);
-        edit.putString(oneObjectsItem+"Directions", Directions);
-        edit.apply();*/
         return null;
     }
     public static String getID()
