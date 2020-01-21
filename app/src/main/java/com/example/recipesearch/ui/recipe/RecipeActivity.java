@@ -41,6 +41,11 @@ public class RecipeActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recipe_page);
+        if (refreshNeeded == true)
+        {
+            refreshNeeded = false;
+            refresh();
+        }
         view = findViewById(R.id.viewPager);
         tex = findViewById(R.id.Recipe_Name);
         pic = findViewById(R.id.Image_of_Food);
@@ -53,7 +58,7 @@ public class RecipeActivity extends AppCompatActivity
             refresh();
         tab.addTab(tab.newTab().setText("Ingredients"));
         tab.addTab(tab.newTab().setText("Directions"));
-        tab.addTab(tab.newTab().setText("Similar Recipes"));
+        tab.addTab(tab.newTab().setText("Next Recipe"));
         tex.setText(RecipeName);
         tab.setTabGravity(TabLayout.GRAVITY_FILL);
         final MyTabAdapter adapter = new MyTabAdapter(this,getSupportFragmentManager(), tab.getTabCount());

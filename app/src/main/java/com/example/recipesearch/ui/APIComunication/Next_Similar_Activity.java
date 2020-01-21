@@ -1,4 +1,4 @@
-package com.example.recipesearch.ui.recipe;
+package com.example.recipesearch.ui.APIComunication;
 
 import android.os.AsyncTask;
 
@@ -13,7 +13,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.StringTokenizer;
-
+//the issue is the returned string it just too big to get just one id, still working on fixing it
 public class Next_Similar_Activity extends AsyncTask<Void, Void, String>
 {
     // this is basically a third call made by the similar recipes tab to be used when the button is pressed
@@ -60,7 +60,7 @@ public class Next_Similar_Activity extends AsyncTask<Void, Void, String>
                 .replace("_", "").replace("`", "").replace("{", "")
                 .replace("|", "").replace("}", "").replace("name", "")
                 .replace("image", "").replace(".jpg", "").replace("minutes", "")
-                .replace("\"", "").replace(".png", ""));
+                .replace("\"", " ").replace(".png", "").replace("id", ""));
         StringTokenizer tokens = new StringTokenizer(editedReturn, ":");
         String[] result = new String[tokens.countTokens()];
         int i = 0;

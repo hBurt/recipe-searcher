@@ -1,8 +1,5 @@
 package com.example.recipesearch.ui.recipe;
 
-import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,6 +12,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.recipesearch.R;
+import com.example.recipesearch.ui.APIComunication.Next_Similar_Activity;
+import com.example.recipesearch.ui.APIComunication.Next_recipe;
+import com.example.recipesearch.ui.APIComunication.Random_Recipe;
 
 
 public class Recipe_Similar_Recipes_Tab_Fragment extends Fragment
@@ -36,6 +36,8 @@ public class Recipe_Similar_Recipes_Tab_Fragment extends Fragment
     {
         super.onViewCreated(view, savedInstanceState);
         Button next = view.findViewById(R.id.Sim_btn);
+        Button Rand = view.findViewById(R.id.Random_Recipe_Btn);
+        //wip
         next.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -43,9 +45,10 @@ public class Recipe_Similar_Recipes_Tab_Fragment extends Fragment
             {
                 // when the button is pressed should get the info for the next dish
                 // will eventually add a check to see if the next is a repeat
-                Next_Similar_Activity nextS = new Next_Similar_Activity();
-                //nextS.execute(); // calls the func to get something similar
-                String id2 = Next_Similar_Activity.getNewID();
+                Next_recipe nextS = new Next_recipe();
+                //Next_Similar_Activity nextS = new Next_Similar_Activity();
+                nextS.execute(); // calls the func to get something similar
+                //String id2 = Next_Similar_Activity.getNewID();
                 //if (id2 != id)
                   //  id = id2;
                /* String test = Next_Similar_Activity.getName();
@@ -57,6 +60,28 @@ public class Recipe_Similar_Recipes_Tab_Fragment extends Fragment
                 Recipe_Directions_Tab_Fragment.setDirections("Next Text");
                 String ingredient = " ";
                 Recipe_Ingredient_Tab_Fragment.setIngredients("Next Text");
+                ((RecipeActivity)getActivity()).refresh();
+                ((RecipeActivity)getActivity()).refresh();
+            }
+        });
+        // the rand recipe is a wip
+        Rand.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Random_Recipe nRand = new Random_Recipe();
+                nRand.execute();
+                /* String test = Next_Similar_Activity.getName();
+                if (test.length() > 0) // in theory should be an error check for the name
+                      RecipeActivity.setRecipeName(test);
+                else*/
+                RecipeActivity.setRecipeName("Next Test"); // temp test
+                String direct = " ";
+                Recipe_Directions_Tab_Fragment.setDirections("Next Text");
+                String ingredient = " ";
+                Recipe_Ingredient_Tab_Fragment.setIngredients("Next Text");
+                ((RecipeActivity)getActivity()).refresh();
                 ((RecipeActivity)getActivity()).refresh();
             }
         });

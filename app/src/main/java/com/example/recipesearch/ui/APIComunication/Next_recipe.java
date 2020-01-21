@@ -1,9 +1,6 @@
 package com.example.recipesearch.ui.APIComunication;
 
-
-import android.content.Intent;
 import android.os.AsyncTask;
-
 
 import com.example.recipesearch.ui.recipe.RecipeActivity;
 import com.example.recipesearch.ui.recipe.Recipe_Directions_Tab_Fragment;
@@ -13,22 +10,18 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.StringTokenizer;
-
-
-public class Request_Handler extends AsyncTask<Void, Void, String>
+//will replace the similar recipe btn
+public class Next_recipe extends AsyncTask<Void, Void, String>
 {
     //API calls work, working on parsing and using the returns, will make 2 calls plus the similar recipe calls
     //the similar recipe calls will be handled in a different class but i want to save the extra returns for latter us
     // might create a random recipe func as the API does support that
-    String API_KEY = "7dba1c8b6dmsh8c3919fbe127d43p122d00jsn89f1b32d2216";
-    String API_URL = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/search?number=5&offset=0&instructionsRequired=true&query=";
     static String id = null;
     static String dishName = null;
     static  String id2 = null;
@@ -61,7 +54,7 @@ public class Request_Handler extends AsyncTask<Void, Void, String>
         // Do some validation here
         OkHttpClient client = new OkHttpClient();
         com.squareup.okhttp.Request request = new Request.Builder()
-                .url("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/search?number=1&offset=0&instructionsRequired=true&query="+ Food) // will use only the first result
+                .url("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/search?number=2&offset=1&instructionsRequired=true&query="+ Food) // will use only the first result
                 .get()
                 .addHeader("x-rapidapi-host", "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com")
                 .addHeader("x-rapidapi-key", "7dba1c8b6dmsh8c3919fbe127d43p122d00jsn89f1b32d2216")
@@ -99,24 +92,24 @@ public class Request_Handler extends AsyncTask<Void, Void, String>
         {
             e.printStackTrace();
         }
-                // Begin getting shit from the arrays
-                        for (int i=0; i < jArray.length(); i++)
-                        {
-                            try
-                            {
-                            JSONObject oneObject = jArray.getJSONObject(i);
-                             oneObjectsItem = oneObject.getString("id");
-                             oneObjectsItem2 = oneObject.getString("title");
-                             oneObjectsItem3 = oneObject.getString("readyInMinutes");
-                             oneObjectsItem4 = oneObject.getString("image");
-                            }
-                            catch (JSONException e)
-                            {
-                                // this is a test id
-                                id = "324694";
-                                // Crap
-                            }
-                        }
+        // Begin getting shit from the arrays
+        for (int i=0; i < jArray.length(); i++)
+        {
+            try
+            {
+                JSONObject oneObject = jArray.getJSONObject(i);
+                oneObjectsItem = oneObject.getString("id");
+                oneObjectsItem2 = oneObject.getString("title");
+                oneObjectsItem3 = oneObject.getString("readyInMinutes");
+                oneObjectsItem4 = oneObject.getString("image");
+            }
+            catch (JSONException e)
+            {
+                // this is a test id
+                id = "324694";
+                // Crap
+            }
+        }
         // will create a second api call
         // after received must get the item id from what was received
         if (oneObjectsItem.length() > 0)
@@ -125,15 +118,15 @@ public class Request_Handler extends AsyncTask<Void, Void, String>
         }
         else
         {
-        // this is a test id
-         id = "324694";
+            // this is a test id
+            id = "324694";
         }
         if (oneObjectsItem2 .length() > 0)
             dishName = oneObjectsItem2;
         // for having them be on different calls
         // wip for getting the instructions
         String newReturn = " ";
-       // id = "521510"; // testing id
+        // id = "521510"; // testing id
         OkHttpClient client2 = new OkHttpClient();
         Response response2 = null; // needs an id num or will cause an error
         com.squareup.okhttp.Request request2 = new Request.Builder()
@@ -169,7 +162,7 @@ public class Request_Handler extends AsyncTask<Void, Void, String>
                 .replace("_", "").replace("`", "").replace("{", "")
                 .replace("|", "").replace("}", "").replace("name", "")
                 .replace("image", "").replace(".jpg", "")
-                .replace("\"", " ").replace(".png", "").replace(".", ""));
+                .replace("\"", " ").replace(".png", ""));
         StringTokenizer tokens = new StringTokenizer(secondReturn, ":");
         String[] result = new String[tokens.countTokens()];
         int i = 0;
@@ -201,6 +194,7 @@ public class Request_Handler extends AsyncTask<Void, Void, String>
                 .replace("step", "").replace("minutes", "").replace("equipment", ""));
         RecipeActivity.setPic(oneObjectsItem4);//work on setting an img
         RecipeActivity.setTime(oneObjectsItem3);
+        RecipeActivity.triggerRefresh(true);
         RecipeActivity.setRecipeName(oneObjectsItem2);
         Recipe_Directions_Tab_Fragment.setDirections(Directions);
         Recipe_Ingredient_Tab_Fragment.setIngredients(Ingredients);
@@ -209,10 +203,10 @@ public class Request_Handler extends AsyncTask<Void, Void, String>
     public static String getID()
     {
         if (id.length() > 0)
-        return id;
+            return id;
         else {
             id = "324694"; // default test id
-        return id;
+            return id;
         }
     }
     public static String getDishName()
@@ -231,6 +225,7 @@ public class Request_Handler extends AsyncTask<Void, Void, String>
     // will be used for a bool check in the main func
     boolean checkCache(String ID)
     {
-       return false;
+        return false;
     }
+
 }

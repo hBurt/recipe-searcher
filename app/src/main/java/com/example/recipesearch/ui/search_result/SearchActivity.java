@@ -74,7 +74,8 @@ public class SearchActivity extends AppCompatActivity
             {
                 SearchedFood = query;
                 Request_Handler req = new Request_Handler();
-                //req.execute(); // handles the search query
+                req.execute(); // handles the search query
+                RecipeActivity.triggerRefresh(true);
                 Intent in = new Intent(SearchActivity.this, RecipeActivity.class);
                 startActivity(in);
                 return false;
