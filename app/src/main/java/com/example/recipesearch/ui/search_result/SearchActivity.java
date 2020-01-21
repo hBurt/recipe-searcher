@@ -70,7 +70,7 @@ public class SearchActivity extends AppCompatActivity
         else
             connected = false;
         FsearchView = findViewById(R.id.searchFood);
-        FsearchView.setQueryHint("Search Food or Ingredient");
+        FsearchView.setQueryHint("Search Food");
         h = new  Handler(){
             @Override
             public void handleMessage(Message msg)

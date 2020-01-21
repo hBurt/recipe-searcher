@@ -1,4 +1,5 @@
 package com.example.recipesearch.ui.recipe;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -18,6 +19,12 @@ import com.example.recipesearch.ui.APIComunication.Request_Handler;
 import com.example.recipesearch.ui.search_result.SearchActivity;
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
+import com.squareup.picasso.Picasso;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class RecipeActivity extends AppCompatActivity
 {
@@ -28,12 +35,14 @@ public class RecipeActivity extends AppCompatActivity
     private ImageView pic;
     private TabLayout tab;
     private TextView TTM;
+    Drawable image = null;
     ViewPager view;
     static boolean refreshNeeded = false;
     static String RecipeName = "Beef Salpicao"; // example for test purposes
     String defaultName =  "Beef Salpicao";
-    static String imgName = null;
+    static String imgName = " ";
     static String timeToMake = "XX";
+    String wantedImg;
     String recipeTitle = null;
     public static int i = 1;
     @Override
@@ -52,8 +61,8 @@ public class RecipeActivity extends AppCompatActivity
         tab = findViewById(R.id.Tabs);
         TTM = findViewById(R.id.Time);
         TTM.setText(timeToMake + " minutes");
-        if (imgName != null)
-            pic.setImageResource(getResources().getIdentifier(imgName,"drawable", getPackageName()));
+        wantedImg = imgName;
+        Picasso.get().load(wantedImg).into(pic);
         tab.addTab(tab.newTab().setText("Ingredients"));
         tab.addTab(tab.newTab().setText("Directions"));
         tab.addTab(tab.newTab().setText("Next Recipe"));

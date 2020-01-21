@@ -22,6 +22,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.StringTokenizer;
 
@@ -32,23 +33,15 @@ public class Request_Handler extends AsyncTask<Void, Void, String>
     //the similar recipe calls will be handled in a different class but i want to save the extra returns for latter us
     // might create a random recipe func as the API does support that
 
-    static String id = null;
-    static String dishName = null;
-    static  String id2 = null;
-    static  String id3 = null;
-    static  String id4 = null;
-    static  String id5 = null;
-    static String oneObjectsItem = null;
-    static String oneObjectsItem2 = null;
-    static String oneObjectsItem3 = null;
-    static String oneObjectsItem4 = null;
-    static String instructionDetail = "false"; // for use in filtering how detailed the instructions are
-    String responseData;
-    String responseData2;
-    static String Directions;
-    static String Ingredients;
-    SharedPreferences mPrefs;
-    SharedPreferences.Editor edit;
+    private static String id = null;
+    private static String dishName = null;
+    private static String oneObjectsItem = null;
+    private static String oneObjectsItem2 = null;
+    private static String oneObjectsItem3 = null;
+    private static String oneObjectsItem4 = null;
+    private String responseData;
+    private static String Directions;
+    private static String Ingredients;
     @Override
     protected String doInBackground(Void... voids)
     {
@@ -141,6 +134,8 @@ public class Request_Handler extends AsyncTask<Void, Void, String>
        // id = "521510"; // testing id
         OkHttpClient client2 = new OkHttpClient();
         Response response2 = null; // needs an id num or will cause an error
+        // for use in filtering how detailed the instructions are
+        String instructionDetail = "false";
         com.squareup.okhttp.Request request2 = new Request.Builder()
                 .url("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/" + id + "/analyzedInstructions?stepBreakdown="+ instructionDetail) // will fail if not given an id
                 .get()
@@ -150,7 +145,7 @@ public class Request_Handler extends AsyncTask<Void, Void, String>
         try
         {
             response2 = client2.newCall(request2).execute();
-            responseData2 = response2.body().string();
+            String responseData2 = response2.body().string();
             newReturn = responseData2;
         }
         catch (IOException e)
@@ -179,7 +174,7 @@ public class Request_Handler extends AsyncTask<Void, Void, String>
         String[] result = new String[tokens.countTokens()];
         int i = 0;
         String firstDirect = " ";
-        String firstIngred = " ";
+        List<String> firstIngred = new ArrayList<String>();
         String time = " ";
         while ( tokens.hasMoreTokens() )
         {
@@ -196,15 +191,19 @@ public class Request_Handler extends AsyncTask<Void, Void, String>
                 time += result[x];
             }
             else {
-                firstIngred += result[x];
+                firstIngred.add( result[x]);
             }
         }
+        HashSet<String> hashSet = new HashSet<String>();
+        hashSet.addAll(firstIngred);
+        firstIngred.clear();
+        firstIngred.addAll(hashSet);
+        String secondIngred = firstIngred.toString();
         Directions = new String(firstDirect.trim().replace("ingredients", ""));
-        Ingredients = new String(firstIngred.trim().replace("null", "").replace("id", "").replace("steps", "").replace("length", "")
+        Ingredients = new String(secondIngred.trim().replace("null", "").replace("id", "").replace("steps", "").replace("length", "")
                 .replace("0", "").replace("1", "").replace("2", "").replace("3", "").replace("4", "")
                 .replace("5", "").replace("6", "").replace("7", "").replace("8", "").replace("9", "")
                 .replace("step", "").replace("minutes", "").replace("equipment", ""));
-
         RecipeActivity.setPic(oneObjectsItem4);//work on setting an img
         RecipeActivity.setTime(oneObjectsItem3);
         RecipeActivity.setRecipeName(oneObjectsItem2);
