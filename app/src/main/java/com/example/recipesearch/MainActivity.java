@@ -1,11 +1,7 @@
 package com.example.recipesearch;
 
-import android.content.Context;
-import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
 import android.view.WindowManager;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,12 +14,17 @@ import com.example.recipesearch.database.LocalLoginDatabase;
 import com.example.recipesearch.helpers.DatabaseHelper;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import static androidx.core.content.ContextCompat.getSystemService;
-
 public class MainActivity extends AppCompatActivity {
 
     private CharSequence message;
     private DatabaseHelper databaseHelper;
+    private BottomNavigationView navView;
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //setBottomNavigationVisibility();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -36,10 +37,13 @@ public class MainActivity extends AppCompatActivity {
 
         databaseHelper = new DatabaseHelper(database, this);
 
-        BottomNavigationView navView = findViewById(R.id.nav_view);
+        navView = findViewById(R.id.nav_view);
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupWithNavController(navView, navController);
 
+
+        //setBottomNavigationVisibility();
+        
         // keep layout when keyboard is shown
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
 
@@ -55,5 +59,13 @@ public class MainActivity extends AppCompatActivity {
 
     public DatabaseHelper getDatabaseHelper() {
         return databaseHelper;
+    }
+
+    private void setBottomNavigationVisibility(){
+        navView.setVisibility(databaseHelper.loginCheck() ? View.VISIBLE : View.INVISIBLE);
+    }
+
+    public void setBottomNavigationVisibility(int viewID){
+        navView.setVisibility(viewID);
     }
 }

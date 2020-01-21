@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.example.recipesearch.MainActivity;
 import com.example.recipesearch.R;
 import com.example.recipesearch.database.LocalLoginDatabase;
 import com.example.recipesearch.database.User;
@@ -112,6 +113,11 @@ public class DatabaseHelper {
         }
         return isValid;
     }
+
+    public boolean loginCheck(){
+        return getCurrentUser() != null;
+    }
+
 
     public String getSharedPrefEmail(){
 

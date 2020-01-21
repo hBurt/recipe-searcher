@@ -1,21 +1,13 @@
 package com.example.recipesearch.ui.recipe;
-import android.os.Build;
+
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toolbar;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.recipesearch.R;
-import com.example.recipesearch.ui.APIComunication.Request_Handler;
-import com.example.recipesearch.ui.search_result.SearchActivity;
-import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 
 public class RecipeActivity extends AppCompatActivity

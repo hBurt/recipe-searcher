@@ -18,7 +18,9 @@ import com.example.recipesearch.MainActivity;
 import com.example.recipesearch.R;
 import com.example.recipesearch.database.User;
 import com.example.recipesearch.database.encryption.FactoryPBKDF2;
+import com.example.recipesearch.helpers.DatabaseHelper;
 import com.example.recipesearch.helpers.UiHelper;
+import com.example.recipesearch.ui.home_search.HomeSearchFragment;
 import com.example.recipesearch.ui.user.login.LoginFragment;
 
 public class SignUpFragment extends Fragment {
@@ -26,6 +28,8 @@ public class SignUpFragment extends Fragment {
     private Button login, signup;
     private EditText email, password, passwordConfirm;
     private TextView error_email, error_password;
+
+    DatabaseHelper databaseHelper;
 
     private enum errorMessage { EMAIL, PASSWORD }
 
@@ -51,6 +55,8 @@ public class SignUpFragment extends Fragment {
         error_email.setVisibility(View.INVISIBLE);
         error_password.setVisibility(View.INVISIBLE);
 
+        databaseHelper = ((MainActivity) getActivity()).getDatabaseHelper();
+
         //Listeners
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,6 +70,9 @@ public class SignUpFragment extends Fragment {
             public void onClick(View view) {
                 if(isSignupValid(isEmailValid(), isPasswordValid())){
                     addUserToDatabase();
+                    if(databaseHelper.login(email.getText().toString(), password.getText().toString()))
+                        ((MainActivity) getActivity()).setBottomNavigationVisibility(View.VISIBLE);
+                    ui.switchScreen(new HomeSearchFragment());
                 }
             }
         });
