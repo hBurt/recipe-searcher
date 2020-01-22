@@ -235,10 +235,4 @@ public class Request_Handler extends AsyncTask<Void, Void, String>
     {
         return Ingredients;
     }
-    // will check tha cache, returns true or false
-    // will be used for a bool check in the main func
-    boolean checkCache(String ID)
-    {
-       return false;
-    }
 }
