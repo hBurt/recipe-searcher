@@ -90,7 +90,7 @@ public class SearchActivity extends AppCompatActivity
                 Request_Handler req = new Request_Handler();
                 req.execute(); // handles the search query
                 RecipeActivity.triggerRefresh(true);
-                h.sendEmptyMessageDelayed(0, 1100);
+                h.sendEmptyMessageDelayed(0, 1100);// a delay to allow the search to finish before the recipe page pops up
                 return true;
             }
 
