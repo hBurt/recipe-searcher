@@ -206,6 +206,7 @@ public class Request_Handler extends AsyncTask<Void, Void, String>
                 .replace("step", "").replace("minutes", "").replace("equipment", "").replace(",", "").replace("[", "")
                 .replace("]", "").replace("temperature", "").replace("Fahrenheit", "").replace("stove", "").replace("oven", "")
                 .replace("Celsius", ""));
+        RecipeActivity.setID(oneObjectsItem);
         RecipeActivity.setPic(oneObjectsItem4);//work on setting an img
         RecipeActivity.setTime(oneObjectsItem3);
         RecipeActivity.setRecipeName(oneObjectsItem2);

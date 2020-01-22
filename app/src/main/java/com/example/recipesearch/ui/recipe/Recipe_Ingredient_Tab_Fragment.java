@@ -46,4 +46,8 @@ public class Recipe_Ingredient_Tab_Fragment extends Fragment
     {
         newText = string;
     }
+
+    public static String getIngredients() {
+        return newText;
+    }
 }

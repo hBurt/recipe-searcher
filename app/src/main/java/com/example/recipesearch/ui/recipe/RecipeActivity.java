@@ -1,4 +1,5 @@
 package com.example.recipesearch.ui.recipe;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -25,6 +26,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.sql.Time;
 
 public class RecipeActivity extends AppCompatActivity
 {
@@ -37,6 +39,9 @@ public class RecipeActivity extends AppCompatActivity
     private TextView TTM;
     Drawable image = null;
     ViewPager view;
+    static SharedPreferences mPrefs;
+    SharedPreferences.Editor edit;
+    static String ID = null;
     static boolean refreshNeeded = false;
     static String RecipeName = "Beef Salpicao"; // example for test purposes
     String defaultName =  "Beef Salpicao";
@@ -55,6 +60,7 @@ public class RecipeActivity extends AppCompatActivity
             refreshNeeded = false;
             refresh();
         }
+        mPrefs = getApplicationContext().getSharedPreferences("Recipe_Book", MODE_PRIVATE);
         view = findViewById(R.id.viewPager);
         tex = findViewById(R.id.Recipe_Name);
         pic = findViewById(R.id.Image_of_Food);
@@ -116,5 +122,40 @@ public class RecipeActivity extends AppCompatActivity
     public static void setTime(String time)
     {
         timeToMake = time;
+    }
+    public static void setID(String id)
+    {
+        ID = id;
+    }
+    public static void useOld(String id)
+    {
+        if (mPrefs.contains("Note"))
+            ID = mPrefs.getString(id+"id", " ");
+        if (mPrefs.contains("Day1"))
+            Recipe_Directions_Tab_Fragment.setDirections( mPrefs.getString(id+"Directions"," "));
+        if (mPrefs.contains("Day2"))
+             Recipe_Ingredient_Tab_Fragment.setIngredients( mPrefs.getString(id+"Ingredients"," "));
+        if (mPrefs.contains("Note"))
+            RecipeName = mPrefs.getString(id+"Name", " ");
+        if (mPrefs.contains("Day1"))
+            timeToMake = mPrefs.getString(id+"Time"," ");
+        if (mPrefs.contains("Day2"))
+            imgName = mPrefs.getString(id+"img"," ");
+    }
+    @Override
+    protected void onDestroy()
+    {
+        super.onDestroy();
+        if (ID != null)
+        {
+        edit = mPrefs.edit();
+        edit.putString(ID+"id", ID);
+        edit.putString(ID+"Directions", Recipe_Directions_Tab_Fragment.getDirections());
+        edit.putString(ID+"Ingredients", Recipe_Ingredient_Tab_Fragment.getIngredients());
+        edit.putString(ID+"Name", RecipeName);
+        edit.putString(ID+"Time", timeToMake);
+        edit.putString(ID+"img", imgName);
+        edit.apply();
+        }
     }
 }

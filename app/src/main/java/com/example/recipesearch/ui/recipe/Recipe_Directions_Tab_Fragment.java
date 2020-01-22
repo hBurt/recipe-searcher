@@ -46,4 +46,8 @@ public class Recipe_Directions_Tab_Fragment extends Fragment
     {
         newText = string;
     }
+
+    public static String getDirections() {
+        return newText;
+    }
 }

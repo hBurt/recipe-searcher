@@ -34,6 +34,7 @@ import com.example.recipesearch.ui.APIComunication.Request_Handler;
 import com.example.recipesearch.ui.APIComunication.SearchSettingsActivity;
 
 import com.example.recipesearch.R;
+import com.example.recipesearch.ui.Settings.settings_activity;
 import com.example.recipesearch.ui.meal_planner.Meal_Planner_Activity;
 import com.example.recipesearch.ui.recipe.RecipeActivity;
 import com.squareup.okhttp.OkHttpClient;
@@ -51,7 +52,8 @@ public class SearchActivity extends AppCompatActivity
     private ArrayAdapter silAd;
     private ListView list;
     Toolbar tool;
-    static Handler h;
+    private static Handler h;
+    Button settings;
     public static String SearchedFood = null; // static to share the query
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -60,6 +62,7 @@ public class SearchActivity extends AppCompatActivity
         setContentView(R.layout.fragmnt_search_results);
         tool = findViewById(R.id.tb);
         tool.inflateMenu(R.menu.menu_search);
+        settings = findViewById(R.id.Settings_Title);
         list = findViewById(R.id.listView);// list view use and creation of the adapter for iz
         ArrayList<String> foodArray = new ArrayList<>();
         foodArray.addAll(Arrays.asList(getResources().getStringArray(R.array.food_stuff)));
@@ -87,7 +90,7 @@ public class SearchActivity extends AppCompatActivity
                 Request_Handler req = new Request_Handler();
                 req.execute(); // handles the search query
                 RecipeActivity.triggerRefresh(true);
-                h.sendEmptyMessageDelayed(0, 1500);
+                h.sendEmptyMessageDelayed(0, 1100);
                 return true;
             }
 
@@ -96,6 +99,15 @@ public class SearchActivity extends AppCompatActivity
             {
                 silAd.getFilter().filter(newText);
                 return false;
+            }
+        });
+        settings.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent in = new Intent(SearchActivity.this, settings_activity.class);
+                startActivity(in);
             }
         });
     }
