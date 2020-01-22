@@ -137,7 +137,7 @@ public class Request_Handler extends AsyncTask<Void, Void, String>
         // for use in filtering how detailed the instructions are
         String instructionDetail = "false";
         com.squareup.okhttp.Request request2 = new Request.Builder()
-                .url("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/" + id + "/analyzedInstructions?stepBreakdown="+ instructionDetail) // will fail if not given an id
+                .url("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/" + id + "/analyzedInstructions?stepBreakdown=false") // will fail if not given an id
                 .get()
                 .addHeader("x-rapidapi-host", "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com")
                 .addHeader("x-rapidapi-key", "7dba1c8b6dmsh8c3919fbe127d43p122d00jsn89f1b32d2216")
@@ -200,10 +200,12 @@ public class Request_Handler extends AsyncTask<Void, Void, String>
         firstIngred.addAll(hashSet);
         String secondIngred = firstIngred.toString();
         Directions = new String(firstDirect.trim().replace("ingredients", ""));
-        Ingredients = new String(secondIngred.trim().replace("null", "").replace("id", "").replace("steps", "").replace("length", "")
+        Ingredients = new String(secondIngred.trim().replace("null", "").replace("id ", "").replace("steps", "").replace("length", "")
                 .replace("0", "").replace("1", "").replace("2", "").replace("3", "").replace("4", "")
                 .replace("5", "").replace("6", "").replace("7", "").replace("8", "").replace("9", "")
-                .replace("step", "").replace("minutes", "").replace("equipment", ""));
+                .replace("step", "").replace("minutes", "").replace("equipment", "").replace(",", "").replace("[", "")
+                .replace("]", "").replace("temperature", "").replace("Fahrenheit", "").replace("stove", "").replace("oven", "")
+                .replace("Celsius", ""));
         RecipeActivity.setPic(oneObjectsItem4);//work on setting an img
         RecipeActivity.setTime(oneObjectsItem3);
         RecipeActivity.setRecipeName(oneObjectsItem2);

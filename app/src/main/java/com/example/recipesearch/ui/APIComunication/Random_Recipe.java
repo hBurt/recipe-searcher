@@ -15,6 +15,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.StringTokenizer;
 //wip
 public class Random_Recipe extends AsyncTask<Void, Void, String>
@@ -152,7 +155,7 @@ public class Random_Recipe extends AsyncTask<Void, Void, String>
         String[] result = new String[tokens.countTokens()];
         int i = 0;
         String firstDirect = " ";
-        String firstIngred = " ";
+        List<String> firstIngred = new ArrayList<String>();
         String time = " ";
         while ( tokens.hasMoreTokens() )
         {
@@ -169,14 +172,21 @@ public class Random_Recipe extends AsyncTask<Void, Void, String>
                 time += result[x];
             }
             else {
-                firstIngred += result[x];
+                firstIngred.add( result[x]);
             }
         }
+        HashSet<String> hashSet = new HashSet<String>();
+        hashSet.addAll(firstIngred);
+        firstIngred.clear();
+        firstIngred.addAll(hashSet);
+        String secondIngred = firstIngred.toString();
         Directions = new String(firstDirect.trim().replace("ingredients", ""));
-        Ingredients = new String(firstIngred.trim().replace("null", "").replace("id", "").replace("steps", "").replace("length", "")
+        Ingredients = new String(secondIngred.trim().replace("null", "").replace("id", "").replace("steps", "").replace("length", "")
                 .replace("0", "").replace("1", "").replace("2", "").replace("3", "").replace("4", "")
                 .replace("5", "").replace("6", "").replace("7", "").replace("8", "").replace("9", "")
-                .replace("step", "").replace("minutes", "").replace("equipment", ""));
+                .replace("step", "").replace("minutes", "").replace("equipment", "").replace(",", "").replace("[", "")
+                .replace("]", "").replace("temperature", "").replace("Fahrenheit", "").replace("stove", "").replace("oven", "")
+                .replace("Celsius", ""));
         RecipeActivity.setPic(oneObjectsItem4);//work on setting an img
         RecipeActivity.setTime(oneObjectsItem3);
         RecipeActivity.setRecipeName(oneObjectsItem2);
