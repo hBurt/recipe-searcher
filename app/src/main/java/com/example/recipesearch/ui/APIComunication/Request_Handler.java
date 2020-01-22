@@ -135,7 +135,6 @@ public class Request_Handler extends AsyncTask<Void, Void, String>
         OkHttpClient client2 = new OkHttpClient();
         Response response2 = null; // needs an id num or will cause an error
         // for use in filtering how detailed the instructions are
-        String instructionDetail = "false";
         com.squareup.okhttp.Request request2 = new Request.Builder()
                 .url("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/" + id + "/analyzedInstructions?stepBreakdown=false") // will fail if not given an id
                 .get()
