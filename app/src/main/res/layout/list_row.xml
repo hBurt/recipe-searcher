@@ -53,28 +53,53 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:layout_width="10dp"
-                android:layout_height="10dp"
+                android:id="@+id/rating_1"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:paddingLeft="0dp"
+                android:paddingRight="2dp"
+                android:paddingStart="0dp"
+                android:paddingEnd="2dp"
                 app:srcCompat="@drawable/ic_favorite_black_24dp" />
 
             <ImageView
-                android:layout_width="10dp"
-                android:layout_height="10dp"
+                android:id="@+id/rating_2"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:paddingLeft="0dp"
+                android:paddingRight="2dp"
+                android:paddingStart="0dp"
+                android:paddingEnd="2dp"
                 app:srcCompat="@drawable/ic_favorite_black_24dp" />
 
             <ImageView
-                android:layout_width="10dp"
-                android:layout_height="10dp"
+                android:id="@+id/rating_3"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:paddingLeft="0dp"
+                android:paddingRight="2dp"
+                android:paddingStart="0dp"
+                android:paddingEnd="2dp"
                 app:srcCompat="@drawable/ic_favorite_black_24dp" />
 
             <ImageView
-                android:layout_width="10dp"
-                android:layout_height="10dp"
+                android:id="@+id/rating_4"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:paddingLeft="0dp"
+                android:paddingRight="2dp"
+                android:paddingStart="0dp"
+                android:paddingEnd="2dp"
                 app:srcCompat="@drawable/ic_favorite_black_24dp" />
 
             <ImageView
-                android:layout_width="10dp"
-                android:layout_height="10dp"
+                android:id="@+id/rating_5"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:paddingLeft="0dp"
+                android:paddingRight="2dp"
+                android:paddingStart="0dp"
+                android:paddingEnd="2dp"
                 app:srcCompat="@drawable/ic_favorite_black_24dp" />
 
         </LinearLayout>

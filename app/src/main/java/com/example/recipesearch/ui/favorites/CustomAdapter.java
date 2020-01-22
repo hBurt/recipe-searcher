@@ -10,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
+import androidx.core.content.ContextCompat;
+
 import com.example.recipesearch.R;
 import com.example.recipesearch.database.Favorite;
 import com.squareup.picasso.Picasso;
@@ -78,19 +80,9 @@ class CustomAdapter implements ListAdapter {
                 }
             });
 
-            TextView tittle = convertView.findViewById(R.id.title);
-            final ImageView imageView = convertView.findViewById(R.id.profile_image);
-
-            Picasso.with(context).load(Uri.parse(favorite.getRecipe().getImageURL())).placeholder(R.drawable.image_placeholder_blue).into(imageView);
-
-            String itemName = favorite.getRecipe().getTitle();
-
-            if(itemName.length() > 35){
-                String title = itemName.substring(0, 35);
-                tittle.setText(title.concat("..."));
-            } else{
-                tittle.setText(itemName);
-            }
+            loadImageIntoView(context, convertView, favorite);
+            concatTitle(convertView, favorite.getRecipe().getTitle());
+            colorizeRatings(convertView, favorite);
         }
         return convertView;
     }
@@ -105,9 +97,44 @@ class CustomAdapter implements ListAdapter {
         return arrayList.size();
     }
 
-
     @Override
     public boolean isEmpty() {
         return false;
+    }
+
+    private void setRatingStarColor(ImageView imageView){
+        imageView.setColorFilter(ContextCompat.getColor(context, R.color.yellow), android.graphics.PorterDuff.Mode.SRC_IN);
+    }
+
+    private void concatTitle(View view, String itemTitle){
+        TextView favoriteTitle = view.findViewById(R.id.title);
+
+        if(itemTitle.length() > 35){
+            String title = itemTitle.substring(0, 35);
+            favoriteTitle.setText(title.concat("..."));
+        } else{
+            favoriteTitle.setText(itemTitle);
+        }
+    }
+
+    private void colorizeRatings(View view, Favorite favorite){
+        ArrayList<ImageView> ratings = new ArrayList<>();
+
+        ratings.add((ImageView) view.findViewById(R.id.rating_1));
+        ratings.add((ImageView) view.findViewById(R.id.rating_2));
+        ratings.add((ImageView) view.findViewById(R.id.rating_3));
+        ratings.add((ImageView) view.findViewById(R.id.rating_4));
+        ratings.add((ImageView) view.findViewById(R.id.rating_5));
+
+        for (int i = 0; i < 5; ++i) {
+            if(i < favorite.getRating()){
+                setRatingStarColor(ratings.get(i));
+            }
+        }
+    }
+
+    private void loadImageIntoView(Context context, View view, Favorite favorite){
+        ImageView profileImageView = view.findViewById(R.id.profile_image);
+        Picasso.with(context).load(Uri.parse(favorite.getRecipe().getImageURL())).placeholder(R.drawable.image_placeholder_blue).into(profileImageView);
     }
 }
