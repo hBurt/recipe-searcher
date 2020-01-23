@@ -48,26 +48,21 @@
         app:layout_constraintTop_toTopOf="@+id/toolbar4"
         app:layout_constraintVertical_bias="0.39">
 
-        <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@color/navLight"
-            android:scaleType="center"
-            app:srcCompat="@drawable/ic_search_black_24dp" />
-        <!--            android:backgroundTint="@color/navigationGreen"-->
-
         <EditText
             android:id="@+id/search_bar_edit_text"
-            android:layout_width="500dp"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:autofillHints=""
             android:background="@color/navLight"
             android:hint="@string/search_default_text"
+            android:textColorHint="@color/black"
             android:inputType="textCapWords"
-            android:textColorHint="@color/black" />
+
+            android:paddingLeft="10dp"
+            android:drawablePadding="10dp"
+            android:drawableLeft="@drawable/ic_search_black_24dp"
+            android:drawableStart="@drawable/ic_search_black_24dp"/>
 
     </LinearLayout>
 

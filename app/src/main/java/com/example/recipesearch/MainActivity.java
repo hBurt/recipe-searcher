@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        //setBottomNavigationVisibility();
+        setBottomNavigationVisibility();
     }
 
     @Override
@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navView, navController);
 
 
-        //setBottomNavigationVisibility();
+        setBottomNavigationVisibility();
         
         // keep layout when keyboard is shown
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);

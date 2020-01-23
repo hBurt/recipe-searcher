@@ -14,6 +14,7 @@ import com.example.recipesearch.MainActivity;
 import com.example.recipesearch.R;
 import com.example.recipesearch.database.Favorite;
 import com.example.recipesearch.database.Recipe;
+import com.example.recipesearch.database.User;
 import com.example.recipesearch.helpers.DatabaseHelper;
 
 import java.util.ArrayList;
@@ -42,8 +43,7 @@ public class FavoritesFragment extends Fragment {
         ListView list = root.findViewById(R.id.list);
         ArrayList<Favorite> favoritesList = new ArrayList<>();//databaseHelper.getCurrentUser().getFavorites();
 
-
-        populateListWithHardcodedItems(favoritesList);
+        populateListWithUserData(favoritesList);
 
         CustomAdapter customAdapter = new CustomAdapter(getContext(), favoritesList);
         list.setAdapter(customAdapter);
@@ -51,36 +51,11 @@ public class FavoritesFragment extends Fragment {
         return root;
     }
 
-    private void populateListWithHardcodedItems(ArrayList<Favorite> list){
+    private void populateListWithUserData(ArrayList<Favorite> list){
+        User user = databaseHelper.getCurrentUser();
 
-        Recipe thaiSweetPotato = new Recipe();
-        thaiSweetPotato.setTitle("Thai Sweet Potato");
-        thaiSweetPotato.setImageURL("https://spoonacular.com/recipeImages/thai-sweet-potato-veggie-burgers-with-spicy-peanut-sauce-262682.jpg");
-
-        Recipe cajunSpiced = new Recipe();
-        cajunSpiced.setTitle("Cajun Spiced Black Bean and Sweet Potato Burgers");
-        cajunSpiced.setImageURL("https://spoonacular.com/recipeImages/Cajun-Spiced-Black-Bean-and-Sweet-Potato-Burgers-227961.jpg");
-
-        list.add(new Favorite(randomNumBetween(1, 5), thaiSweetPotato));
-        list.add(new Favorite(randomNumBetween(1, 5), cajunSpiced));
-        list.add(new Favorite(randomNumBetween(1, 5), thaiSweetPotato));
-        list.add(new Favorite(randomNumBetween(1, 5), cajunSpiced));
-        list.add(new Favorite(randomNumBetween(1, 5), thaiSweetPotato));
-        list.add(new Favorite(randomNumBetween(1, 5), cajunSpiced));
-        list.add(new Favorite(randomNumBetween(1, 5), thaiSweetPotato));
-        list.add(new Favorite(randomNumBetween(1, 5), cajunSpiced));
-        list.add(new Favorite(randomNumBetween(1, 5), thaiSweetPotato));
-        list.add(new Favorite(randomNumBetween(1, 5), cajunSpiced));
-        list.add(new Favorite(randomNumBetween(1, 5), thaiSweetPotato));
-        list.add(new Favorite(randomNumBetween(1, 5), cajunSpiced));
-        list.add(new Favorite(randomNumBetween(1, 5), thaiSweetPotato));
-        list.add(new Favorite(randomNumBetween(1, 5), cajunSpiced));
-        list.add(new Favorite(randomNumBetween(1, 5), thaiSweetPotato));
-        list.add(new Favorite(randomNumBetween(1, 5), cajunSpiced));
-    }
-
-    private int randomNumBetween(int min, int max){
-        Random r = new Random();
-        return r.nextInt((max - min) + 1) + min;
+        if(user.getFavorites() != null){
+            list.addAll(user.getFavorites());
+        }
     }
 }
