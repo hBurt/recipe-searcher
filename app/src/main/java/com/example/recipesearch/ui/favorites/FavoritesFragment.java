@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
@@ -13,18 +14,17 @@ import androidx.lifecycle.ViewModelProviders;
 import com.example.recipesearch.MainActivity;
 import com.example.recipesearch.R;
 import com.example.recipesearch.database.Favorite;
-import com.example.recipesearch.database.Recipe;
 import com.example.recipesearch.database.User;
 import com.example.recipesearch.helpers.DatabaseHelper;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 public class FavoritesFragment extends Fragment {
 
     private FavoritesViewModel favoritesViewModel;
 
     DatabaseHelper databaseHelper;
+    private EditText searchText;
 
     @Override
     public void onResume() {
@@ -38,15 +38,10 @@ public class FavoritesFragment extends Fragment {
                 ViewModelProviders.of(this).get(FavoritesViewModel.class);
         View root = inflater.inflate(R.layout.fragment_favorites, container, false);
 
+        searchText = root.findViewById(R.id.favorites_search_text);
         databaseHelper = ((MainActivity) getActivity()).getDatabaseHelper();
 
-        ListView list = root.findViewById(R.id.list);
-        ArrayList<Favorite> favoritesList = new ArrayList<>();//databaseHelper.getCurrentUser().getFavorites();
-
-        populateListWithUserData(favoritesList);
-
-        CustomAdapter customAdapter = new CustomAdapter(getContext(), favoritesList);
-        list.setAdapter(customAdapter);
+        initFavorites(root);
 
         return root;
     }
@@ -58,4 +53,15 @@ public class FavoritesFragment extends Fragment {
             list.addAll(user.getFavorites());
         }
     }
+
+    private void initFavorites(View root){
+        ListView list = root.findViewById(R.id.list);
+        ArrayList<Favorite> favoritesList = new ArrayList<>();//databaseHelper.getCurrentUser().getFavorites();
+
+        populateListWithUserData(favoritesList);
+
+        CustomAdapter customAdapter = new CustomAdapter(getContext(), favoritesList);
+        list.setAdapter(customAdapter);
+    }
+
 }
