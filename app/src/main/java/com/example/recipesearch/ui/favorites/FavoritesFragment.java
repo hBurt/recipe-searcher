@@ -41,7 +41,9 @@ public class FavoritesFragment extends Fragment {
         searchText = root.findViewById(R.id.favorites_search_text);
         databaseHelper = ((MainActivity) getActivity()).getDatabaseHelper();
 
-        initFavorites(root);
+        initFavoritesList(root);
+
+
 
         return root;
     }
@@ -54,7 +56,7 @@ public class FavoritesFragment extends Fragment {
         }
     }
 
-    private void initFavorites(View root){
+    private void initFavoritesList(View root){
         ListView list = root.findViewById(R.id.list);
         ArrayList<Favorite> favoritesList = new ArrayList<>();//databaseHelper.getCurrentUser().getFavorites();
 
