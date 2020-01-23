@@ -4,6 +4,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.TextureView;
 import android.view.View;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.example.recipesearch.R;
@@ -17,59 +18,72 @@ import org.w3c.dom.Text;
 public class settings_activity extends AppCompatActivity
 {
     // this will need some updates
-    SwitchCompat Switch_A, Switch_B;
-    boolean SwitchState_A, SwitchState_B;
+    Switch Switch_Dish, Switch_Ingredient;
+    boolean SwitchState_Dish, SwitchState_Ingredient;
     SharedPreferences Prefs;
+    SharedPreferences.Editor edit;
+    TextView hint1, hint2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
-        Prefs = getSharedPreferences("Pref", 0);
-        SwitchState_A = Prefs.getBoolean("Switch_A", true);
-        Switch_A = this.<SwitchCompat>findViewById(R.id.Dish_Search);
-        Switch_A.setChecked(SwitchState_A);
-        SwitchState_B = Prefs.getBoolean("Switch_B", false);
-        Switch_B = this.<SwitchCompat>findViewById(R.id.Dish_Search);
-        Switch_B.setChecked(SwitchState_B);
-        Switch_A.setOnClickListener(new View.OnClickListener()
+        Prefs = getSharedPreferences("Settings", MODE_PRIVATE);
+        if (Prefs.contains("Switch_A"))
+            SwitchState_Dish = Prefs.getBoolean("Switch_A", true);
+        else
+            SwitchState_Dish = true;
+        Switch_Dish = this.findViewById(R.id.Dish_Search);
+        if (Prefs.contains("Switch_B"))
+            SwitchState_Ingredient = Prefs.getBoolean("Switch_B", false);
+        else
+            SwitchState_Ingredient = false;
+        Switch_Ingredient = this.findViewById(R.id.Ingredient_Search);
+        hint1 = findViewById(R.id.Hint1);
+        hint2 = findViewById(R.id.Hint2);
+        hint1.setText("Enter the name of what you want to cook, can be a general name or the full name");
+        hint2.setText("Enter the name(s) of ingredients");
+        Switch_Dish.setChecked(SwitchState_Dish);
+        Switch_Ingredient.setChecked(SwitchState_Ingredient);
+        Switch_Dish.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-                SwitchState_A = !SwitchState_A;
-                Switch_A.setChecked(SwitchState_A);
-                SharedPreferences.Editor edit = Prefs.edit();
-                edit.putBoolean("Switch_A",SwitchState_A);
-                if (SwitchState_A == SwitchState_B)
-                {
-                    SwitchState_B = !SwitchState_A;
-                }
-                edit.apply();
+                if (SwitchState_Dish == true)
+                    SwitchState_Dish = false;
+                else
+                    SwitchState_Dish = true;
             }
         });
-        Switch_B.setOnClickListener(new View.OnClickListener()
+        Switch_Ingredient.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-                SwitchState_B = !SwitchState_B;
-                Switch_B.setChecked(SwitchState_B);
-                SharedPreferences.Editor edit = Prefs.edit();
-                edit.putBoolean("Switch_B",SwitchState_B);
-                if (SwitchState_B == SwitchState_A)
-                {
-                    SwitchState_A = !SwitchState_B;
-                }
-                edit.apply();
+                if (SwitchState_Ingredient == false)
+                    SwitchState_Ingredient = true;
+                else
+                    SwitchState_Ingredient = false;
             }
         });
     }
-        public boolean GetSwitchA()
+
+    @Override
+    protected void onDestroy()
     {
-        return SwitchState_A;
+        super.onDestroy();
+        edit = Prefs.edit();
+        edit.putBoolean("Switch_A", SwitchState_Dish);
+        edit.putBoolean("Switch_B", SwitchState_Ingredient);
+        edit.apply();
+    }
+
+    public boolean GetSwitchA()
+    {
+        return SwitchState_Dish;
     }
       public boolean GetSwitchB()
     {
-        return SwitchState_B;
+        return SwitchState_Ingredient;
     }
 }

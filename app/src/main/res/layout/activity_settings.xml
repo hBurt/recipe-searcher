@@ -9,29 +9,64 @@
 
     <Switch
         android:id="@+id/Ingredient_Search"
-        android:layout_width="380dp"
-        android:layout_height="76dp"
+        android:layout_width="334dp"
+        android:layout_height="66dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
         android:text="@string/ingredient"
         android:textSize="36sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/Hint2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.516"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.285" />
+        app:layout_constraintTop_toBottomOf="@+id/Hint1" />
+
+    <TextView
+        android:id="@+id/Hint2"
+        android:layout_width="336dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="250dp"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Ingredient_Search" />
 
     <Switch
         android:id="@+id/Dish_Search"
-        android:layout_width="380dp"
-        android:layout_height="76dp"
+        android:layout_width="334dp"
+        android:layout_height="73dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
         android:text="@string/dish"
         android:textSize="36sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/Hint1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.516"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.169" />
+        app:layout_constraintTop_toBottomOf="@+id/Settings_Title" />
+
+    <TextView
+        android:id="@+id/Hint1"
+        android:layout_width="327dp"
+        android:layout_height="103dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/Ingredient_Search"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Dish_Search" />
 
     <TextView
         android:id="@+id/Settings_Title"

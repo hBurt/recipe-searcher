@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/Settings_Title"
+        android:id="@+id/Settings_BTN"
         android:icon="@android:drawable/ic_menu_preferences"
         android:orderInCategory="100"
         android:title="@string/settings"
         app:actionViewClass="android.widget.Button"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="always" />
     <item
         android:id = "@+id/searchFood"
         android:orderInCategory="100"

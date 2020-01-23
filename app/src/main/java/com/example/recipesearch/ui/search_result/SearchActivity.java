@@ -68,7 +68,7 @@ public class SearchActivity extends AppCompatActivity
         mPrefs = getApplicationContext().getSharedPreferences("Recipe_Book", MODE_PRIVATE);
         tool = findViewById(R.id.tb);
         tool.inflateMenu(R.menu.menu_search);
-        settings = findViewById(R.id.Settings_Title);
+        settings = findViewById(R.id.Settings_BTN);
         list = findViewById(R.id.listView);// list view use and creation of the adapter for iz
         ArrayList<String> foodArray = new ArrayList<>();
         foodArray.addAll(Arrays.asList(getResources().getStringArray(R.array.food_stuff)));
@@ -118,8 +118,8 @@ public class SearchActivity extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Intent in = new Intent(SearchActivity.this, settings_activity.class);
-                startActivity(in);
+                Intent ln = new Intent(SearchActivity.this, settings_activity.class);
+                startActivity(ln);
             }
         });
     }

@@ -8,8 +8,8 @@
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewPager"
-        android:layout_width="371dp"
-        android:layout_height="377dp"
+        android:layout_width="342dp"
+        android:layout_height="290dp"
         android:layout_marginStart="30dp"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="2dp"
@@ -17,7 +17,7 @@
         android:layout_marginRight="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.93"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/Tabs"
         app:layout_constraintTop_toBottomOf="@+id/Tabs"
         app:layout_constraintVertical_bias="1.0" />
