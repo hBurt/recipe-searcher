@@ -78,7 +78,7 @@ public class SearchActivity extends AppCompatActivity
                        break;
                        default:
                            return false;
-                           
+
                 }
                 return true;
             }

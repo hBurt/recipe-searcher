@@ -204,7 +204,7 @@ public class Next_recipe extends AsyncTask<Void, Void, String>
                 .replace("5", "").replace("6", "").replace("7", "").replace("8", "").replace("9", "")
                 .replace("step", "").replace("minutes", "").replace("equipment", "").replace(",", "").replace("[", "")
                 .replace("]", "").replace("temperature", "").replace("Fahrenheit", "").replace("stove", "").replace("oven", "")
-                .replace("Celsius", "").replace(" . ", "").replace(".", ""));
+                .replace("Celsius", "").replace(" . ", "").replace(".", "").replace(" Fahrenheit ", "").replace(" Celsius ", ""));
         RecipeActivity.setID(oneObjectsItem);
         RecipeActivity.setPic(oneObjectsItem4);
         RecipeActivity.setTime(oneObjectsItem3);
