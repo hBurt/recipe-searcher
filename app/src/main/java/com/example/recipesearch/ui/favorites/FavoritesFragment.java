@@ -1,6 +1,8 @@
 package com.example.recipesearch.ui.favorites;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,27 +45,38 @@ public class FavoritesFragment extends Fragment {
 
         initFavoritesList(root);
 
+        searchText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
 
         return root;
     }
 
-    private void populateListWithUserData(ArrayList<Favorite> list){
-        User user = databaseHelper.getCurrentUser();
+    private void initFavoritesList(View root){
+        ListView list = root.findViewById(R.id.list);
+        ArrayList<Favorite> favoritesList = databaseHelper.getCurrentUser().getFavorites();
 
-        if(user.getFavorites() != null){
-            list.addAll(user.getFavorites());
+        if(favoritesList.size() > 0){
+            CustomAdapter customAdapter = new CustomAdapter(getContext(), favoritesList);
+            list.setAdapter(customAdapter);
         }
     }
 
-    private void initFavoritesList(View root){
-        ListView list = root.findViewById(R.id.list);
-        ArrayList<Favorite> favoritesList = new ArrayList<>();//databaseHelper.getCurrentUser().getFavorites();
+    private void updateList(String searchValue){
 
-        populateListWithUserData(favoritesList);
-
-        CustomAdapter customAdapter = new CustomAdapter(getContext(), favoritesList);
-        list.setAdapter(customAdapter);
     }
 
 }
