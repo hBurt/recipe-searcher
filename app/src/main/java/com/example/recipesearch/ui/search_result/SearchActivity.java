@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -44,6 +45,7 @@ import com.squareup.okhttp.Response;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 
 public class SearchActivity extends AppCompatActivity
@@ -55,11 +57,15 @@ public class SearchActivity extends AppCompatActivity
     private static Handler h;
     Button settings;
     public static String SearchedFood = null; // static to share the query
+    static SharedPreferences mPrefs;
+    SharedPreferences.Editor edit;
+    static List<String> IDList;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragmnt_search_results);
+        mPrefs = getApplicationContext().getSharedPreferences("Recipe_Book", MODE_PRIVATE);
         tool = findViewById(R.id.tb);
         tool.inflateMenu(R.menu.menu_search);
         settings = findViewById(R.id.Settings_Title);
@@ -87,10 +93,16 @@ public class SearchActivity extends AppCompatActivity
             public boolean onQueryTextSubmit(String query)
             {
                 SearchedFood = query;
+                IDList = new ArrayList<String>();
+                for (int i = 0; i > 11; i++)
+                {
+                    if (mPrefs.contains(i+"id"))
+                    IDList.add(mPrefs.getString(i+"id", " "));
+                }
                 Request_Handler req = new Request_Handler();
                 req.execute(); // handles the search query
                 RecipeActivity.triggerRefresh(true);
-                h.sendEmptyMessageDelayed(0, 1100);// a delay to allow the search to finish before the recipe page pops up
+                h.sendEmptyMessageDelayed(0, 2000);// a delay to allow the search to finish before the recipe page pops up
                 return true;
             }
 
@@ -116,6 +128,10 @@ public class SearchActivity extends AppCompatActivity
      return SearchedFood;
     }
     public static void setSearchedFood(String dish){ SearchedFood = dish;}
+    public static  List<String> getIDList()
+    {
+        return IDList;
+    }
 
 
 }

@@ -4,6 +4,7 @@ package com.example.recipesearch.ui.APIComunication;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.widget.SearchView;
 
 
 import com.example.recipesearch.ui.recipe.RecipeActivity;
@@ -42,10 +43,12 @@ public class Request_Handler extends AsyncTask<Void, Void, String>
     private String responseData;
     private static String Directions;
     private static String Ingredients;
+    List<String> IDList;
     @Override
     protected String doInBackground(Void... voids)
     {
         String RetreivedFood = SearchActivity.getSearchedFood();
+        IDList = SearchActivity.getIDList();
         String Food = new String(RetreivedFood.trim().replace(" ", "%20").replace("&", "%26")
                 .replace(",", "%2c").replace("(", "%28").replace(")", "%29")
                 .replace("!", "%21").replace("=", "%3D").replace("<", "%3C")
@@ -125,6 +128,12 @@ public class Request_Handler extends AsyncTask<Void, Void, String>
         {
         // this is a test id
          id = "324694";
+        }
+        for (int i = 0; i > 11; i++)
+        if (id == IDList.get(i))
+        {
+            RecipeActivity.useOld(id);
+            return null;
         }
         if (oneObjectsItem2 .length() > 0)
             dishName = oneObjectsItem2;
@@ -206,7 +215,7 @@ public class Request_Handler extends AsyncTask<Void, Void, String>
                 .replace("]", "").replace("temperature", "").replace("Fahrenheit", "").replace("stove", "").replace("oven", "")
                 .replace("Celsius", ""));
         RecipeActivity.setID(oneObjectsItem);
-        RecipeActivity.setPic(oneObjectsItem4);//work on setting an img
+        RecipeActivity.setPic(oneObjectsItem4);
         RecipeActivity.setTime(oneObjectsItem3);
         RecipeActivity.setRecipeName(oneObjectsItem2);
         Recipe_Directions_Tab_Fragment.setDirections(Directions);

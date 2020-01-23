@@ -61,14 +61,7 @@ public class Recipe_Similar_Recipes_Tab_Fragment extends Fragment
                 Next_recipe nextS = new Next_recipe();
                 //Next_Similar_Activity nextS = new Next_Similar_Activity();
                 nextS.execute(); // calls the func to get something similar
-                //String id2 = Next_Similar_Activity.getNewID();
-                //if (id2 != id)
-                  //  id = id2;
-               /* String test = Next_Similar_Activity.getName();
-                if (test.length() > 0) // in theory should be an error check for the name
-                      RecipeActivity.setRecipeName(test);
-                else*/
-                    RecipeActivity.setRecipeName("Next Test"); // temp test
+                RecipeActivity.setRecipeName("Next Test"); // temp test
                 String direct = " ";
                 Recipe_Directions_Tab_Fragment.setDirections("Next Text");
                 String ingredient = " ";

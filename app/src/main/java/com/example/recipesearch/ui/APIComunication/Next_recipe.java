@@ -15,6 +15,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.StringTokenizer;
 //will replace the similar recipe btn
 public class Next_recipe extends AsyncTask<Void, Void, String>
@@ -38,6 +41,7 @@ public class Next_recipe extends AsyncTask<Void, Void, String>
     String responseData2;
     static String Directions;
     static String Ingredients;
+    int recipeOffset = 1;
     @Override
     protected String doInBackground(Void... voids)
     {
@@ -55,7 +59,7 @@ public class Next_recipe extends AsyncTask<Void, Void, String>
         // Do some validation here
         OkHttpClient client = new OkHttpClient();
         com.squareup.okhttp.Request request = new Request.Builder()
-                .url("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/search?number=2&offset=1&instructionsRequired=true&query="+ Food) // will use only the first result
+                .url("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/search?number=2&offset="+ recipeOffset+"&instructionsRequired=true&query="+ Food) // will use only the first result
                 .get()
                 .addHeader("x-rapidapi-host", "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com")
                 .addHeader("x-rapidapi-key", "7dba1c8b6dmsh8c3919fbe127d43p122d00jsn89f1b32d2216")
@@ -67,6 +71,7 @@ public class Next_recipe extends AsyncTask<Void, Void, String>
             response = client.newCall(request).execute(); // provides a val for the first search and preforms it
             responseData = response.body().string();
             String test = responseData;
+
 
         }
         catch (IOException e)
@@ -168,7 +173,7 @@ public class Next_recipe extends AsyncTask<Void, Void, String>
         String[] result = new String[tokens.countTokens()];
         int i = 0;
         String firstDirect = " ";
-        String firstIngred = " ";
+        List<String> firstIngred = new ArrayList<String>();
         String time = " ";
         while ( tokens.hasMoreTokens() )
         {
@@ -185,20 +190,28 @@ public class Next_recipe extends AsyncTask<Void, Void, String>
                 time += result[x];
             }
             else {
-                firstIngred += result[x];
+                firstIngred.add( result[x]);
             }
         }
+        HashSet<String> hashSet = new HashSet<String>();
+        hashSet.addAll(firstIngred);
+        firstIngred.clear();
+        firstIngred.addAll(hashSet);
+        String secondIngred = firstIngred.toString();
         Directions = new String(firstDirect.trim().replace("ingredients", ""));
-        Ingredients = new String(firstIngred.trim().replace("null", "").replace("id", "").replace("steps", "").replace("length", "")
+        Ingredients = new String(secondIngred.trim().replace("null", "").replace("id ", "").replace("steps", "").replace("length", "")
                 .replace("0", "").replace("1", "").replace("2", "").replace("3", "").replace("4", "")
                 .replace("5", "").replace("6", "").replace("7", "").replace("8", "").replace("9", "")
-                .replace("step", "").replace("minutes", "").replace("equipment", ""));
-        RecipeActivity.setPic(oneObjectsItem4);//work on setting an img
+                .replace("step", "").replace("minutes", "").replace("equipment", "").replace(",", "").replace("[", "")
+                .replace("]", "").replace("temperature", "").replace("Fahrenheit", "").replace("stove", "").replace("oven", "")
+                .replace("Celsius", "").replace(" . ", "").replace(".", ""));
+        RecipeActivity.setID(oneObjectsItem);
+        RecipeActivity.setPic(oneObjectsItem4);
         RecipeActivity.setTime(oneObjectsItem3);
-        RecipeActivity.triggerRefresh(true);
         RecipeActivity.setRecipeName(oneObjectsItem2);
         Recipe_Directions_Tab_Fragment.setDirections(Directions);
         Recipe_Ingredient_Tab_Fragment.setIngredients(Ingredients);
+        RecipeActivity.triggerRefresh(true);
         return null;
     }
     public static String getID()

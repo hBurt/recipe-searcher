@@ -1,8 +1,11 @@
 package com.example.recipesearch.ui.recipe;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toolbar;
@@ -37,6 +40,7 @@ public class RecipeActivity extends AppCompatActivity
     private ImageView pic;
     private TabLayout tab;
     private TextView TTM;
+    private static Handler h;
     Drawable image = null;
     ViewPager view;
     static SharedPreferences mPrefs;
@@ -55,11 +59,6 @@ public class RecipeActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recipe_page);
-        if ( refreshNeeded == true)
-        {
-            refreshNeeded = false;
-            refresh();
-        }
         mPrefs = getApplicationContext().getSharedPreferences("Recipe_Book", MODE_PRIVATE);
         view = findViewById(R.id.viewPager);
         tex = findViewById(R.id.Recipe_Name);
@@ -68,6 +67,7 @@ public class RecipeActivity extends AppCompatActivity
         TTM = findViewById(R.id.Time);
         TTM.setText(timeToMake + " minutes");
         wantedImg = imgName;
+        if (wantedImg.length() > 3)
         Picasso.get().load(wantedImg).into(pic);
         tab.addTab(tab.newTab().setText("Ingredients"));
         tab.addTab(tab.newTab().setText("Directions"));
@@ -95,6 +95,7 @@ public class RecipeActivity extends AppCompatActivity
                 refresh();
             }
         });
+
     }
     public static void setRecipeName(String someName)
     {
@@ -129,27 +130,37 @@ public class RecipeActivity extends AppCompatActivity
     }
     public static void useOld(String id)
     {
-        if (mPrefs.contains("Note"))
-            ID = mPrefs.getString(id+"id", " ");
-        if (mPrefs.contains("Day1"))
+        if (mPrefs.contains(id+"Directions"))
             Recipe_Directions_Tab_Fragment.setDirections( mPrefs.getString(id+"Directions"," "));
-        if (mPrefs.contains("Day2"))
+        if (mPrefs.contains(id+"Ingredients"))
              Recipe_Ingredient_Tab_Fragment.setIngredients( mPrefs.getString(id+"Ingredients"," "));
-        if (mPrefs.contains("Note"))
+        if (mPrefs.contains(id+"Name"))
             RecipeName = mPrefs.getString(id+"Name", " ");
-        if (mPrefs.contains("Day1"))
+        if (mPrefs.contains(id+"Time"))
             timeToMake = mPrefs.getString(id+"Time"," ");
-        if (mPrefs.contains("Day2"))
+        if (mPrefs.contains(id+"img"))
             imgName = mPrefs.getString(id+"img"," ");
     }
     @Override
     protected void onDestroy()
     {
         super.onDestroy();
+        // should save as long as i have the id
         if (ID != null)
         {
         edit = mPrefs.edit();
-        edit.putString(ID+"id", ID);
+        if (mPrefs.contains(0+"id"))
+        edit.putString(0+"id", ID);
+        else {
+            for (int i = 0; i > 10; i++)
+            {
+                if (mPrefs.contains(i+"id"))
+                {
+                    edit.putString(i + "id", ID);
+                    break;
+                }
+            }
+        }
         edit.putString(ID+"Directions", Recipe_Directions_Tab_Fragment.getDirections());
         edit.putString(ID+"Ingredients", Recipe_Ingredient_Tab_Fragment.getIngredients());
         edit.putString(ID+"Name", RecipeName);
