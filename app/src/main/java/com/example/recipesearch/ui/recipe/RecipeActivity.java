@@ -46,7 +46,6 @@ public class RecipeActivity extends AppCompatActivity
     static SharedPreferences mPrefs;
     SharedPreferences.Editor edit;
     static String ID = null;
-    static boolean refreshNeeded = false;
     static String RecipeName = "Beef Salpicao"; // example for test purposes
     String defaultName =  "Beef Salpicao";
     static String imgName = " ";
@@ -115,10 +114,6 @@ public class RecipeActivity extends AppCompatActivity
     public static void setPic( String img)
     {
         imgName = img;
-    }
-    public static void triggerRefresh(boolean trigger)
-    {
-        refreshNeeded = trigger;
     }
     public static void setTime(String time)
     {

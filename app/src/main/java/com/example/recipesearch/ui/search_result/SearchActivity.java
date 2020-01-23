@@ -31,6 +31,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.recipesearch.MainActivity;
+import com.example.recipesearch.ui.APIComunication.Ingredient_Request;
 import com.example.recipesearch.ui.APIComunication.Request_Handler;
 import com.example.recipesearch.ui.APIComunication.SearchSettingsActivity;
 
@@ -99,9 +100,16 @@ public class SearchActivity extends AppCompatActivity
                     if (mPrefs.contains(i+"id"))
                     IDList.add(mPrefs.getString(i+"id", " "));
                 }
+                if (settings_activity.GetSwitchA() == true)
+                {
                 Request_Handler req = new Request_Handler();
                 req.execute(); // handles the search query
-                RecipeActivity.triggerRefresh(true);
+                }
+                else if (settings_activity.GetSwitchB() == true)
+                {
+                    Ingredient_Request IR = new Ingredient_Request();
+                    IR.execute();
+                }
                 h.sendEmptyMessageDelayed(0, 2000);// a delay to allow the search to finish before the recipe page pops up
                 return true;
             }

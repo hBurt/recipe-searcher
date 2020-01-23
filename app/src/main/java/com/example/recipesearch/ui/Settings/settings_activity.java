@@ -19,7 +19,7 @@ public class settings_activity extends AppCompatActivity
 {
     // this will need some updates
     Switch Switch_Dish, Switch_Ingredient;
-    boolean SwitchState_Dish, SwitchState_Ingredient;
+    static boolean SwitchState_Dish, SwitchState_Ingredient;
     SharedPreferences Prefs;
     SharedPreferences.Editor edit;
     TextView hint1, hint2, discription;
@@ -86,11 +86,11 @@ public class settings_activity extends AppCompatActivity
         edit.apply();
     }
 
-    public boolean GetSwitchA()
+    public static boolean GetSwitchA()
     {
         return SwitchState_Dish;
     }
-      public boolean GetSwitchB()
+      public static boolean GetSwitchB()
     {
         return SwitchState_Ingredient;
     }

@@ -211,7 +211,6 @@ public class Next_recipe extends AsyncTask<Void, Void, String>
         RecipeActivity.setRecipeName(oneObjectsItem2);
         Recipe_Directions_Tab_Fragment.setDirections(Directions);
         Recipe_Ingredient_Tab_Fragment.setIngredients(Ingredients);
-        RecipeActivity.triggerRefresh(true);
         return null;
     }
     public static String getID()
