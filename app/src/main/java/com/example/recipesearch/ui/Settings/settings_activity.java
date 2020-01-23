@@ -22,7 +22,7 @@ public class settings_activity extends AppCompatActivity
     boolean SwitchState_Dish, SwitchState_Ingredient;
     SharedPreferences Prefs;
     SharedPreferences.Editor edit;
-    TextView hint1, hint2;
+    TextView hint1, hint2, discription;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +44,8 @@ public class settings_activity extends AppCompatActivity
         hint2.setText("Enter the name(s) of ingredients");
         Switch_Dish.setChecked(SwitchState_Dish);
         Switch_Ingredient.setChecked(SwitchState_Ingredient);
+        discription = findViewById(R.id.Discription);
+        discription.setText("Changes the method of searching for a recipe, search by Dish is the default, and will be on if both are either turned off or on.");
         Switch_Dish.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -53,6 +55,7 @@ public class settings_activity extends AppCompatActivity
                     SwitchState_Dish = false;
                 else
                     SwitchState_Dish = true;
+
             }
         });
         Switch_Ingredient.setOnClickListener(new View.OnClickListener()
@@ -73,6 +76,11 @@ public class settings_activity extends AppCompatActivity
     {
         super.onDestroy();
         edit = Prefs.edit();
+        if (SwitchState_Dish == SwitchState_Ingredient)
+        {
+            SwitchState_Dish = true;
+            SwitchState_Ingredient = false;
+        }
         edit.putBoolean("Switch_A", SwitchState_Dish);
         edit.putBoolean("Switch_B", SwitchState_Ingredient);
         edit.apply();
