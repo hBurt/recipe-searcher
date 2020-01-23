@@ -21,10 +21,11 @@
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:popupTheme="@style/Theme.AppCompat.Light"/>
+
     <ListView
-        android:id="@+id/listView"
+        android:id="@+id/suggestList"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="644dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

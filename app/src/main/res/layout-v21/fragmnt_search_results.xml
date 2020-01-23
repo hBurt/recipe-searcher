@@ -23,7 +23,7 @@
         app:popupTheme="@style/Theme.AppCompat.Light" />
 
     <ListView
-        android:id="@+id/listView"
+        android:id="@+id/suggestList"
         android:layout_width="511dp"
         android:layout_height="620dp"
         app:layout_constraintBottom_toBottomOf="parent"

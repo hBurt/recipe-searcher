@@ -1,25 +1,17 @@
 package com.example.recipesearch.ui.search_result;
 
-import android.annotation.TargetApi;
-import android.app.SearchManager;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.view.ContextMenu;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.SearchView;
 
@@ -27,23 +19,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
-import com.example.recipesearch.MainActivity;
 import com.example.recipesearch.ui.APIComunication.Ingredient_Request;
 import com.example.recipesearch.ui.APIComunication.Request_Handler;
-import com.example.recipesearch.ui.APIComunication.SearchSettingsActivity;
 
 import com.example.recipesearch.R;
 import com.example.recipesearch.ui.Settings.settings_activity;
-import com.example.recipesearch.ui.meal_planner.Meal_Planner_Activity;
 import com.example.recipesearch.ui.recipe.RecipeActivity;
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.Response;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -56,7 +38,6 @@ public class SearchActivity extends AppCompatActivity
     private ListView list;
     Toolbar tool;
     private static Handler h;
-    Button settings;
     public static String SearchedFood = null; // static to share the query
     static SharedPreferences mPrefs;
     SharedPreferences.Editor edit;
@@ -69,14 +50,39 @@ public class SearchActivity extends AppCompatActivity
         mPrefs = getApplicationContext().getSharedPreferences("Recipe_Book", MODE_PRIVATE);
         tool = findViewById(R.id.tb);
         tool.inflateMenu(R.menu.menu_search);
-        settings = findViewById(R.id.Settings_BTN);
-        list = findViewById(R.id.listView);// list view use and creation of the adapter for iz
+        list = findViewById(R.id.suggestList);// list view use and creation of the adapter for iz
         ArrayList<String> foodArray = new ArrayList<>();
         foodArray.addAll(Arrays.asList(getResources().getStringArray(R.array.food_stuff)));
         silAd = new ArrayAdapter<String>(SearchActivity.this, android.R.layout.simple_list_item_1, foodArray);
         list.setAdapter(silAd);
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+            {
+                FsearchView.setQuery(list.getItemAtPosition(position).toString(), false);
+            }
+        });
 
 
+        tool.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener()
+        {
+            @Override
+            public boolean onMenuItemClick(MenuItem item)
+            {
+                switch (item.getItemId())
+                {
+                    case R.id.Settings_BTN:
+                        Intent in = new Intent(SearchActivity.this, settings_activity.class);
+                        startActivity(in);
+                       break;
+                       default:
+                           return false;
+                           
+                }
+                return true;
+            }
+        });
         FsearchView = findViewById(R.id.searchFood);
         FsearchView.setQueryHint("Search Food");
         h = new  Handler(){
@@ -121,15 +127,6 @@ public class SearchActivity extends AppCompatActivity
                 return false;
             }
         });
-        settings.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                Intent ln = new Intent(SearchActivity.this, settings_activity.class);
-                startActivity(ln);
-            }
-        });
     }
     public static String getSearchedFood()
     {
@@ -141,5 +138,11 @@ public class SearchActivity extends AppCompatActivity
         return IDList;
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        getMenuInflater().inflate(R.menu.menu_search, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 
 }
