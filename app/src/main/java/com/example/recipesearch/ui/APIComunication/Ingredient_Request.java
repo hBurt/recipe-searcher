@@ -22,10 +22,6 @@ import java.util.StringTokenizer;
 
 public class Ingredient_Request extends AsyncTask<Void, Void, String>
 {
-    //API calls work, working on parsing and using the returns, will make 2 calls plus the similar recipe calls
-    //the similar recipe calls will be handled in a different class but i want to save the extra returns for latter us
-    // might create a random recipe func as the API does support that
-
     private static String id = null;
     private static String dishName = null;
     private static String oneObjectsItem = null;
