@@ -142,22 +142,21 @@ public class SignUpFragment extends Fragment {
         cajunSpiced.setTitle("Cajun Spiced Black Bean and Sweet Potato Burgers");
         cajunSpiced.setImageURL("https://spoonacular.com/recipeImages/Cajun-Spiced-Black-Bean-and-Sweet-Potato-Burgers-227961.jpg");
 
-        list.add(new Favorite(4, thaiSweetPotato));
+        list.add(new Favorite(5, thaiSweetPotato));
+        list.add(new Favorite(5, cajunSpiced));
+        list.add(new Favorite(5, thaiSweetPotato));
         list.add(new Favorite(4, cajunSpiced));
         list.add(new Favorite(4, thaiSweetPotato));
         list.add(new Favorite(4, cajunSpiced));
-        list.add(new Favorite(4, thaiSweetPotato));
-        list.add(new Favorite(4, cajunSpiced));
-        list.add(new Favorite(4, thaiSweetPotato));
-        list.add(new Favorite(4, cajunSpiced));
-        list.add(new Favorite(4, thaiSweetPotato));
-        list.add(new Favorite(4, cajunSpiced));
-        list.add(new Favorite(4, thaiSweetPotato));
-        list.add(new Favorite(4, cajunSpiced));
-        list.add(new Favorite(4, thaiSweetPotato));
-        list.add(new Favorite(4, cajunSpiced));
-        list.add(new Favorite(4, thaiSweetPotato));
-        list.add(new Favorite(4, cajunSpiced));
+        list.add(new Favorite(3, thaiSweetPotato));
+        list.add(new Favorite(3, cajunSpiced));
+        list.add(new Favorite(3, thaiSweetPotato));
+        list.add(new Favorite(2, cajunSpiced));
+        list.add(new Favorite(2, thaiSweetPotato));
+        list.add(new Favorite(2, cajunSpiced));
+        list.add(new Favorite(1, thaiSweetPotato));
+        list.add(new Favorite(1, cajunSpiced));
+        list.add(new Favorite(1, thaiSweetPotato));
     }
 
     private boolean isSignupValid(boolean emailIsValid, boolean passwordIsValid){

@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupWithNavController(navView, navController);
 
-        autoLogin("test1@test.com", "1234");
+        autoLogin("Test2@test.com", "1234");
 
         setBottomNavigationVisibility();
         
