@@ -111,7 +111,7 @@ public class SearchActivity extends AppCompatActivity
                 Request_Handler req = new Request_Handler();
                 req.execute(); // handles the search query
                 }
-                else if (settings_activity.GetSwitchB() == true)
+                else if (settings_activity.GetSwitchA() == false)
                 {
                     Ingredient_Request IR = new Ingredient_Request();
                     IR.execute();
