@@ -50,7 +50,7 @@ public class Ingredient_Request extends AsyncTask<Void, Void, String>
         // Do some validation here
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
-                .url("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/findByIngredients?number=1&ignorePantry=true&ingredients="+Food)
+                .url("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/findByIngredients?number=1&ingredients="+Food)
                 .get()
                 .addHeader("x-rapidapi-host", "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com")
                 .addHeader("x-rapidapi-key", "7dba1c8b6dmsh8c3919fbe127d43p122d00jsn89f1b32d2216")
@@ -68,44 +68,25 @@ public class Ingredient_Request extends AsyncTask<Void, Void, String>
         {
             e.printStackTrace();
         }
-
+        // test string
+        //String testing  ="[{\"id\":933310,\"title\":\"2 Ingredient Instant Pot Applesauce\",\"image\":\"https://spoonacular.com/recipeImages/933310-312x231.jpg\",\"imageType\":\"jpg\",\"usedIngredientCount\":1,\"missedIngredientCount\":0,\"missedIngredients\":[],\"usedIngredients\":[{\"id\":9003,\"amount\":11.0,\"unit\":\"large\",\"unitLong\":\"larges\",\"unitShort\":\"large\",\"aisle\":\"Produce\",\"name\":\"apples\",\"original\":\"11 Apples, peeled and chopped in large pieces *see note\",\"originalString\":\"11 Apples, peeled and chopped in large pieces *see note\",\"originalName\":\"11 Apples, peeled and chopped in large pieces *see note\",\"metaInformation\":[\"peeled\",\"chopped\"],\"meta\":[\"peeled\",\"chopped\"],\"image\":\"https://spoonacular.com/cdn/ingredients_100x100/apple.jpg\"}],\"unusedIngredients\":[],\"likes\":0}]" ;
         // begins parsing to get the id, will just get the first id
-        JSONObject jObject = null;
-        JSONArray jArray = null;
-        try
+        StringTokenizer tokensa = new StringTokenizer(responseData, ":");
+        String[] resulta = new String[tokensa.countTokens()];
+        int z = 0;
+        List<String> cleaned = new ArrayList<String>();
+        while ( tokensa.hasMoreTokens() )
         {
-            jObject = new JSONObject(String.valueOf(responseData));
+            resulta[z++] = tokensa.nextToken();
         }
-        catch (JSONException e)
-        {
-            e.printStackTrace();
-        }
-        try
-        {
-            jArray = jObject.getJSONArray("results");
-        }
-        catch (JSONException e)
-        {
-            e.printStackTrace();
-        }
-        // Begin getting shit from the arrays
-        for (int i=0; i < jArray.length(); i++)
-        {
-            try
-            {
-                JSONObject oneObject = jArray.getJSONObject(i);
-                oneObjectsItem = oneObject.getString("id");
-                oneObjectsItem2 = oneObject.getString("title");
-                oneObjectsItem3 = oneObject.getString("readyInMinutes");
-                oneObjectsItem4 = oneObject.getString("image");
-            }
-            catch (JSONException e)
-            {
-                // this is a test id
-                id = "324694";
-                // Crap
-            }
-        }
+        String needsCleaning1  = resulta[1];
+        String needsCleaning2  = resulta[2];
+        String needsCleaning3  = resulta[3];
+        String needsCleaning4  = resulta[4];
+        oneObjectsItem = new String(needsCleaning1.trim().replace(",", "").replace("\"", "").replace("title", ""));
+        oneObjectsItem2 = new String(needsCleaning2.trim().replace(",", "").replace("\"", "").replace("image", ""));
+        oneObjectsItem3 = needsCleaning3+ " "+ needsCleaning4;
+        oneObjectsItem4 = new String(oneObjectsItem3.trim().replace("imageType", "").replace(",", "").replace(" ", ":").replace("\"", ""));
         // will create a second api call
         // after received must get the item id from what was received
         if (oneObjectsItem.length() > 0)
@@ -204,7 +185,7 @@ public class Ingredient_Request extends AsyncTask<Void, Void, String>
                 .replace("Celsius", ""));
         RecipeActivity.setID(oneObjectsItem);
         RecipeActivity.setPic(oneObjectsItem4);
-        RecipeActivity.setTime(oneObjectsItem3);
+        //RecipeActivity.setTime(oneObjectsItem3);
         RecipeActivity.setRecipeName(oneObjectsItem2);
         Recipe_Directions_Tab_Fragment.setDirections(Directions);
         Recipe_Ingredient_Tab_Fragment.setIngredients(Ingredients);

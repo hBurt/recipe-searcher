@@ -116,7 +116,11 @@ public class SearchActivity extends AppCompatActivity
                     Ingredient_Request IR = new Ingredient_Request();
                     IR.execute();
                 }
-                h.sendEmptyMessageDelayed(0, 2000);// a delay to allow the search to finish before the recipe page pops up
+                else {
+                    Request_Handler req = new Request_Handler();
+                    req.execute(); //default search
+                    }
+                h.sendEmptyMessageDelayed(0, 2500);// a delay to allow the search to finish before the recipe page pops up
                 return true;
             }
 
