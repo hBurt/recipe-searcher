@@ -195,12 +195,33 @@ public class Next_recipe extends AsyncTask<Void, Void, String>
         firstIngred.addAll(hashSet);
         String secondIngred = firstIngred.toString();
         Directions = new String(firstDirect.trim().replace("ingredients", ""));
-        Ingredients = new String(secondIngred.trim().replace("null", "").replace("id ", "").replace("steps", "").replace("length", "")
+        String thirdIngred = new String(secondIngred.trim().replace("null", "").replace("id ", "").replace("steps", "").replace("length", "")
                 .replace("0", "").replace("1", "").replace("2", "").replace("3", "").replace("4", "")
                 .replace("5", "").replace("6", "").replace("7", "").replace("8", "").replace("9", "")
                 .replace("step", "").replace("minutes", "").replace("equipment", "").replace(",", "").replace("[", "")
                 .replace("]", "").replace("temperature", "").replace("Fahrenheit", "").replace("stove", "").replace("oven", "")
-                .replace("Celsius", "").replace(" . ", "").replace(".", "").replace(" Fahrenheit ", "").replace(" Celsius ", ""));
+                .replace("Celsius", "").replace("  ", " ").replace(" and ", " ").replace("instant", "").replace(" pot ", "")
+                .replace(" kitchen", "").replace(" timer ", ""));
+        StringTokenizer tokensb = new StringTokenizer(thirdIngred, " ");
+        String[] resultb = new String[tokensb.countTokens()];
+        List<String> fourthIngred = new ArrayList<String>();
+        int c = 0;
+        while ( tokensb.hasMoreTokens() )
+        {
+            resultb[c++] = tokensb.nextToken();
+        }
+        for (int a = 0; a < resultb.length;a++ )
+        {
+            fourthIngred.add(resultb[a]);
+        }
+        HashSet<String> hashSetb = new HashSet<String>();
+        hashSetb.addAll(fourthIngred);
+        fourthIngred.clear();
+        fourthIngred.addAll(hashSetb);
+        String fifthIngred = fourthIngred.toString();
+        String sixthIngred = new String(fifthIngred.trim().replace("[", "").replace("]", "").replace(",", " ").replace(".", " ")
+                .replace(" in ", "") .replace(" dutch ", ""));
+        Ingredients = sixthIngred;
         RecipeActivity.setID(oneObjectsItem);
         RecipeActivity.setPic(oneObjectsItem4);
         RecipeActivity.setTime(oneObjectsItem3);
