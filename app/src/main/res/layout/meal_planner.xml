@@ -5,6 +5,7 @@
     android:id="@+id/Planer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#2EAD29"
     android:orientation="vertical">
 
     <TextView
@@ -15,7 +16,7 @@
         android:layout_marginRight="2dp"
         android:layout_marginBottom="1dp"
         android:text="@string/Planner"
-        android:textColor="#6BC964"
+        android:textColor="#11FF00"
         android:textSize="36sp"
         app:layout_constraintBottom_toTopOf="@+id/calendarView"
         app:layout_constraintEnd_toEndOf="parent"
