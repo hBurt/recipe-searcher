@@ -1,4 +1,4 @@
-package com.example.recipesearch.ui.Settings;
+package com.example.recipesearch.ui.recipe;
 
 import android.app.Activity;
 import android.content.Context;

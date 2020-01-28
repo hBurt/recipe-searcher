@@ -1,12 +1,8 @@
 package com.example.recipesearch.ui.recipe;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Message;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,19 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.recipesearch.R;
-import com.example.recipesearch.database.Recipe;
-import com.example.recipesearch.ui.APIComunication.Request_Handler;
-import com.example.recipesearch.ui.Settings.RecipeStorage;
-import com.example.recipesearch.ui.search_result.SearchActivity;
-import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 import com.squareup.picasso.Picasso;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.sql.Time;
 
 public class RecipeActivity extends AppCompatActivity
 {
