@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupWithNavController(navView, navController);
 
-        autoLogin("Test2@test.com", "1234");
+        autoLogin("test2@test.com", "1234");
 
         setBottomNavigationVisibility();
         
@@ -71,7 +71,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void autoLogin(String email, String pass){
-        databaseHelper.login(email, pass);
+
+        //if(databaseHelper.isLoginStateSaved()){
+        //    System.out.println("Saved state login");
+        //    databaseHelper.login(databaseHelper.getSharedPrefEmail(), databaseHelper.getSharedPrefPass());
+        //} else {
+        //    System.out.println("input login");
+            databaseHelper.login(email, pass);
+        //}
     }
 
 }

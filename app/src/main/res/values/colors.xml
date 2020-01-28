@@ -14,6 +14,7 @@
     <!-- ****** Main color palette ****** -->
 
     <color name="paletteLightGreen">#5EA259</color>
+    <color name="paletteLightGreenAplha">#855EA259</color>
     <color name="paletteDarkGreen">#498D50</color>
     <color name="paletteLightCreme">#FFF0D9</color>
     <color name="paletteDarkCreme">#FBDAB9</color>
