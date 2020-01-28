@@ -109,7 +109,7 @@ public class SearchActivity extends AppCompatActivity
                 if (storage.isThisInTheBook())
                 {
                     RecipeActivity.setReadTheBook(true);
-                    h.sendEmptyMessageDelayed(0, 1500);// a delay to allow the search to finish before the recipe page pops up
+                    h.sendEmptyMessageDelayed(0, 1250);// a delay to allow the search to finish before the recipe page pops up
                 }
                 if (settings_activity.GetSwitchA() == true)
                 {
