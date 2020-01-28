@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    android:padding="5dip">
+
+    <LinearLayout
+        android:id="@+id/thumbnail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginRight="5dip"
+        android:padding="3dip">
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            app:cardElevation="0dp"
+            app:cardCornerRadius="50dp">
+
+            <ImageView
+            android:id="@+id/profile_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY" />
+
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="325dp"
+            android:layout_height="31dp"
+            android:gravity="start"
+            android:textColor="#040404"
+            android:textSize="15dip"
+            android:textStyle="bold"
+            android:typeface="sans" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/rating_1"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:paddingLeft="0dp"
+                android:paddingRight="2dp"
+                android:paddingStart="0dp"
+                android:paddingEnd="2dp"
+                app:srcCompat="@drawable/ic_favorite_black_24dp" />
+
+            <ImageView
+                android:id="@+id/rating_2"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:paddingLeft="0dp"
+                android:paddingRight="2dp"
+                android:paddingStart="0dp"
+                android:paddingEnd="2dp"
+                app:srcCompat="@drawable/ic_favorite_black_24dp" />
+
+            <ImageView
+                android:id="@+id/rating_3"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:paddingLeft="0dp"
+                android:paddingRight="2dp"
+                android:paddingStart="0dp"
+                android:paddingEnd="2dp"
+                app:srcCompat="@drawable/ic_favorite_black_24dp" />
+
+            <ImageView
+                android:id="@+id/rating_4"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:paddingLeft="0dp"
+                android:paddingRight="2dp"
+                android:paddingStart="0dp"
+                android:paddingEnd="2dp"
+                app:srcCompat="@drawable/ic_favorite_black_24dp" />
+
+            <ImageView
+                android:id="@+id/rating_5"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:paddingLeft="0dp"
+                android:paddingRight="2dp"
+                android:paddingStart="0dp"
+                android:paddingEnd="2dp"
+                app:srcCompat="@drawable/ic_favorite_black_24dp" />
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

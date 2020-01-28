@@ -66,6 +66,8 @@ public class LoginFragment extends Fragment {
 
     private void login(){
         if(databaseHelper.login(et_user.getText().toString(), et_pass.getText().toString()))
+            ((MainActivity) getActivity()).setBottomNavigationVisibility(View.VISIBLE);
+
             ui.switchScreen(new HomeSearchFragment());
     }
 

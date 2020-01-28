@@ -10,4 +10,17 @@
     <color name="navLight">#BECABA</color>
 
     <color name="errorRed">#FF0000</color>
+
+    <!-- ****** Main color palette ****** -->
+
+    <color name="paletteLightGreen">#5EA259</color>
+    <color name="paletteLightGreenAplha">#855EA259</color>
+    <color name="paletteDarkGreen">#498D50</color>
+    <color name="paletteLightCreme">#FFF0D9</color>
+    <color name="paletteDarkCreme">#FBDAB9</color>
+    <color name="paletteLightGray">#505050</color>
+    <color name="paletteDarkGray">#373737</color>
+
+    <!-- ************** End ************* -->
+    
 </resources>

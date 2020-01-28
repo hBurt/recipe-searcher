@@ -7,7 +7,12 @@ public class Favorite {
     private Recipe recipe;
 
     public Favorite(Recipe recipe) {
-        rating = 0;
+        setRating(0);
+        setRecipe(recipe);
+    }
+
+    public Favorite(int rating, Recipe recipe) {
+        setRating(rating);
         setRecipe(recipe);
     }
 
