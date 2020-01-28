@@ -102,11 +102,18 @@ public class SearchActivity extends AppCompatActivity
                 Intent se = new Intent(SearchActivity.this, SearchingActivity.class);
                 startActivity(se);
                 SearchedFood = query;
+                boolean testb = settings_activity.GetSwitchB();
+                boolean testa = settings_activity.GetSwitchA();
+                if (testa == testb)
+                    settings_activity.setSwitchA(true);
                 IDList = new ArrayList<String>();
-                for (int i = 0; i > 11; i++)
+                for (int i = 0; i < 11; i++)
                 {
-                    if (mPrefs.contains(i+"id"))
-                    IDList.add(mPrefs.getString(i+"id", " "));
+                    if (mPrefs.contains(i+SearchedFood))
+                    {
+                        IDList.add(mPrefs.getString(i+SearchedFood, " "));
+
+                    }
                 }
                 if (settings_activity.GetSwitchA() == true)
                 {
@@ -122,7 +129,7 @@ public class SearchActivity extends AppCompatActivity
                     Request_Handler req = new Request_Handler();
                     req.execute(); //default search
                     }
-                h.sendEmptyMessageDelayed(0, 2500);// a delay to allow the search to finish before the recipe page pops up
+                h.sendEmptyMessageDelayed(0, 3000);// a delay to allow the search to finish before the recipe page pops up
                 return true;
             }
 

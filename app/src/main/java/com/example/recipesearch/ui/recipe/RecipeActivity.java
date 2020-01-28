@@ -156,11 +156,11 @@ public class RecipeActivity extends AppCompatActivity
                 }
             }
         }
-        edit.putString(ID+"Directions", Recipe_Directions_Tab_Fragment.getDirections());
-        edit.putString(ID+"Ingredients", Recipe_Ingredient_Tab_Fragment.getIngredients());
-        edit.putString(ID+"Name", RecipeName);
-        edit.putString(ID+"Time", timeToMake);
-        edit.putString(ID+"img", imgName);
+        edit.putString(SearchActivity.getSearchedFood()+"Directions", Recipe_Directions_Tab_Fragment.getDirections());
+        edit.putString(SearchActivity.getSearchedFood()+"Ingredients", Recipe_Ingredient_Tab_Fragment.getIngredients());
+        edit.putString(SearchActivity.getSearchedFood()+"Name", RecipeName);
+        edit.putString(SearchActivity.getSearchedFood()+"Time", timeToMake);
+        edit.putString(SearchActivity.getSearchedFood()+"img", imgName);
         edit.apply();
         }
     }

@@ -94,4 +94,5 @@ public class settings_activity extends AppCompatActivity
     {
         return SwitchState_Ingredient;
     }
+    public static void setSwitchA(boolean bool){ SwitchState_Dish = bool;}
 }

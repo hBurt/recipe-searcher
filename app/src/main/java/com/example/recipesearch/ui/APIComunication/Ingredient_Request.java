@@ -66,7 +66,11 @@ public class Ingredient_Request extends AsyncTask<Void, Void, String>
         }
         catch (IOException e)
         {
-            e.printStackTrace();
+            RecipeActivity.setTime("ERROR:04");
+            RecipeActivity.setRecipeName("ERROR: Failed to retrieve recipe");
+            Recipe_Directions_Tab_Fragment.setDirections("ERROR: Failed to retrieve recipe, Bad or misspelled ingredient(s)");
+            Recipe_Ingredient_Tab_Fragment.setIngredients("ERROR: Failed to retrieve recipe, Bad or misspelled ingredient(s)");
+            return null;
         }
         // test string
         //String testing  ="[{\"id\":933310,\"title\":\"2 Ingredient Instant Pot Applesauce\",\"image\":\"https://spoonacular.com/recipeImages/933310-312x231.jpg\",\"imageType\":\"jpg\",\"usedIngredientCount\":1,\"missedIngredientCount\":0,\"missedIngredients\":[],\"usedIngredients\":[{\"id\":9003,\"amount\":11.0,\"unit\":\"large\",\"unitLong\":\"larges\",\"unitShort\":\"large\",\"aisle\":\"Produce\",\"name\":\"apples\",\"original\":\"11 Apples, peeled and chopped in large pieces *see note\",\"originalString\":\"11 Apples, peeled and chopped in large pieces *see note\",\"originalName\":\"11 Apples, peeled and chopped in large pieces *see note\",\"metaInformation\":[\"peeled\",\"chopped\"],\"meta\":[\"peeled\",\"chopped\"],\"image\":\"https://spoonacular.com/cdn/ingredients_100x100/apple.jpg\"}],\"unusedIngredients\":[],\"likes\":0}]" ;
