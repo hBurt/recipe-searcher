@@ -102,7 +102,7 @@ public class RecipeStorage extends Activity
         else
             return null;
     }
-    public static boolean isThisInTHeBook()
+    public  boolean isThisInTheBook()
     {
         if(mPrefs.contains(SearchActivity.getSearchedFood()+"id"))
         {

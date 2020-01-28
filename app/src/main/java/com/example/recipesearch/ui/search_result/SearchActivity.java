@@ -106,7 +106,7 @@ public class SearchActivity extends AppCompatActivity
                     settings_activity.setSwitchA(true);
                 IDList = new ArrayList<String>();
                 RecipeStorage storage = new RecipeStorage(getApplicationContext());
-                if (storage.isThisInTHeBook())
+                if (storage.isThisInTheBook())
                 {
                     RecipeActivity.setReadTheBook(true);
                     h.sendEmptyMessageDelayed(0, 1500);// a delay to allow the search to finish before the recipe page pops up
