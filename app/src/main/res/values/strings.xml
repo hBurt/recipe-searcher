@@ -19,6 +19,14 @@
     <string name="similar_recipes">Similar Recipes</string>
     <string name="directions">Directions</string>
     <string name="place_holder">Place_Holder</string>
+
+    <!-- ******** Favorites fragment ******** -->
+
+    <string name="recipe">Recipe</string>
+
+    <!-- *************** End **************** -->
+
+
     <!-- ******* User login / sign up ******* -->
 
     <string name="email">E-mail</string>

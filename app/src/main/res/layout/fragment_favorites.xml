@@ -3,23 +3,72 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_marginBottom="60dp">
 
-    <ScrollView
-        android:layout_width="409dp"
-        android:layout_height="729dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <LinearLayout
-            android:id="@+id/fav_frag_linearLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
 
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent">
+
+                <EditText
+                    android:id="@+id/favorites_search_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:drawableStart="@drawable/ic_search_black_24dp"
+                    android:drawableLeft="@drawable/ic_search_black_24dp"
+                    android:drawablePadding="10dp"
+                    android:hint="@string/recipe"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    android:paddingStart="10dp"
+                    android:paddingLeft="10dp"
+                    android:paddingEnd="0dp"
+                    android:paddingRight="0dp"
+                    android:textColorHint="@android:color/black" />
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/favorites_filter_alphabetical"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingStart="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingEnd="10dp"
+                android:background="?selectableItemBackground"
+                app:srcCompat="@drawable/ic_atoz_24dp" />
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/favorites_filter_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingStart="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingEnd="10dp"
+                android:background="?selectableItemBackground"
+                app:srcCompat="@drawable/ic_favoriteup_24dp" />
         </LinearLayout>
-    </ScrollView>
+
+        <ListView
+            android:id="@+id/list"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:divider="#000"
+            android:dividerHeight="1dp"
+            android:footerDividersEnabled="false"
+            android:headerDividersEnabled="false" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
