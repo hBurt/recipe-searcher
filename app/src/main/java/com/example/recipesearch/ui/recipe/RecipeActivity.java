@@ -145,6 +145,7 @@ public class RecipeActivity extends AppCompatActivity
         if (ID != null)
         {
             RecipeStorage storage = new RecipeStorage(getApplicationContext());
+            storage.removePref();
             storage.removeFirstPref();
             storage.setDirections();
             storage.setIngred();
