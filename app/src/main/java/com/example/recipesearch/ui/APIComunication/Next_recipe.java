@@ -44,6 +44,10 @@ public class Next_recipe extends AsyncTask<Void, Void, String>
     {
         String RetreivedFood = SearchActivity.getSearchedFood();
         recipeOffset = Recipe_Similar_Recipes_Tab_Fragment.getOffset();
+        if (Request_Handler.getID() == null)
+        {
+            return null;
+        }
         String Food = new String(RetreivedFood.trim().replace(" ", "%20").replace("&", "%26")
                 .replace(",", "%2c").replace("(", "%28").replace(")", "%29")
                 .replace("!", "%21").replace("=", "%3D").replace("<", "%3C")

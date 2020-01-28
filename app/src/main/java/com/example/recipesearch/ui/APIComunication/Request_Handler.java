@@ -257,12 +257,7 @@ public class Request_Handler extends AsyncTask<Void, Void, String>
     }
     public static String getID()
     {
-        if (id.length() > 0)
         return id;
-        else {
-            id = "324694"; // default test id
-        return id;
-        }
     }
     public static String getDishName()
     {

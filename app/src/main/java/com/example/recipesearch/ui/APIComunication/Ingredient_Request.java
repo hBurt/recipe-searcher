@@ -68,6 +68,7 @@ public class Ingredient_Request extends AsyncTask<Void, Void, String>
         {
             RecipeActivity.setTime("ERROR:04");
             RecipeActivity.setRecipeName("ERROR: Failed to retrieve recipe");
+            RecipeActivity.setPic(" ");
             Recipe_Directions_Tab_Fragment.setDirections("ERROR: Failed to retrieve recipe, Bad or misspelled ingredient(s)");
             Recipe_Ingredient_Tab_Fragment.setIngredients("ERROR: Failed to retrieve recipe, Bad or misspelled ingredient(s)");
             return null;
@@ -93,23 +94,27 @@ public class Ingredient_Request extends AsyncTask<Void, Void, String>
         oneObjectsItem4 = new String(oneObjectsItem3.trim().replace("imageType", "").replace(",", "").replace(" ", ":").replace("\"", ""));
         // will create a second api call
         // after received must get the item id from what was received
-        if (oneObjectsItem.length() > 0)
-        {
-            id = oneObjectsItem;
-        }
-        else
-        {
-            // this is a test id
-            id = "324694";
-        }
-        for (int i = 0; i > 11; i++)
-            if (id == IDList.get(i))
-            {
-                RecipeActivity.useOld(id);
-                return null;
+        if (oneObjectsItem != null) {
+            if (oneObjectsItem.length() > 0) {
+                id = oneObjectsItem;
             }
-        if (oneObjectsItem2 .length() > 0)
-            dishName = oneObjectsItem2;
+            for (int i = 0; i > 11; i++)
+                if (id == IDList.get(i)) {
+                    RecipeActivity.useOld(id);
+                    return null;
+                }
+            if (oneObjectsItem2.length() > 0)
+                dishName = oneObjectsItem2;
+        }
+        if (oneObjectsItem == null)
+        {
+            RecipeActivity.setTime("ERROR:04");
+            RecipeActivity.setRecipeName("ERROR: Failed to retrieve recipe");
+            RecipeActivity.setPic(" ");
+            Recipe_Directions_Tab_Fragment.setDirections("ERROR: Failed to retrieve recipe, Bad or misspelled ingredient(s)");
+            Recipe_Ingredient_Tab_Fragment.setIngredients("ERROR: Failed to retrieve recipe, Bad or misspelled ingredient(s)");
+            return null;
+        }
         // for having them be on different calls
         // wip for getting the instructions
         String newReturn = " ";
@@ -210,7 +215,7 @@ public class Ingredient_Request extends AsyncTask<Void, Void, String>
         Ingredients = sixthIngred;
         RecipeActivity.setID(oneObjectsItem);
         RecipeActivity.setPic(oneObjectsItem4);
-        //RecipeActivity.setTime(oneObjectsItem3);
+        RecipeActivity.setTime("Unavailable");
         RecipeActivity.setRecipeName(oneObjectsItem2);
         Recipe_Directions_Tab_Fragment.setDirections(Directions);
         Recipe_Ingredient_Tab_Fragment.setIngredients(Ingredients);
