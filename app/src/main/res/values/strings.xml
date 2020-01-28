@@ -19,7 +19,7 @@
     <string name="similar_recipes">Similar Recipes</string>
     <string name="directions">Directions</string>
     <string name="place_holder">Place_Holder</string>
-<!-- ******* User login / sign up ******* -->
+    <!-- ******* User login / sign up ******* -->
 
     <string name="email">E-mail</string>
     <string name="password">Password</string>
@@ -37,7 +37,8 @@
     <string name="saved_user">savedUser</string>
     <string name="saved_pass">savedPass</string>
 
-    <!-- *************** End **************** -->    <string-array name="food_stuff">
+    <!-- *************** End **************** -->
+    <string-array name="food_stuff">
         <item>Beef Burger</item>
         <item>Lamb Burger</item>
         <item>Cheese Pizza</item>
@@ -74,7 +75,7 @@
     <string name="notes">Notes</string>
     <string name="what_you_want_to_make_tomarrow">What You Want to make Tomarrow</string>
     <string name="planner">Planner</string>
-    <string name="Planner" >Meal Planner</string>
+    <string name="Planner">Meal Planner</string>
     <string name="meal_planner_menu">Meal Planner</string>
     <string name="save_changes">Save changes</string>
     <string name="planer">Planer</string>
@@ -84,4 +85,5 @@
     <string name="exampleIngredients">worcestershire sauce, green onions, spring-onions, mushrooms, olive oil, seasoning of choice, butter, garlic, pepper, all purpose flour</string>
     <string name="next_recipe">Next Recipe</string>
     <string name="random_recipe">Random Recipe</string>
+    <string name="searching_for_recipe">Searching for Recipe</string>
 </resources>

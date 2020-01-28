@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import com.example.recipesearch.ui.recipe.RecipeActivity;
 import com.example.recipesearch.ui.recipe.Recipe_Directions_Tab_Fragment;
 import com.example.recipesearch.ui.recipe.Recipe_Ingredient_Tab_Fragment;
+import com.example.recipesearch.ui.recipe.Recipe_Similar_Recipes_Tab_Fragment;
 import com.example.recipesearch.ui.search_result.SearchActivity;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
@@ -42,6 +43,7 @@ public class Next_recipe extends AsyncTask<Void, Void, String>
     protected String doInBackground(Void... voids)
     {
         String RetreivedFood = SearchActivity.getSearchedFood();
+        recipeOffset = Recipe_Similar_Recipes_Tab_Fragment.getOffset();
         String Food = new String(RetreivedFood.trim().replace(" ", "%20").replace("&", "%26")
                 .replace(",", "%2c").replace("(", "%28").replace(")", "%29")
                 .replace("!", "%21").replace("=", "%3D").replace("<", "%3C")
