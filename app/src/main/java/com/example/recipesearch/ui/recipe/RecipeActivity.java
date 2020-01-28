@@ -55,7 +55,10 @@ public class RecipeActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recipe_page);
         if (ReadTheDamBook == true)
+        {
             useOld();
+            ReadTheDamBook = false;
+        }
         view = findViewById(R.id.viewPager);
         tex = findViewById(R.id.Recipe_Name);
         pic = findViewById(R.id.Image_of_Food);
