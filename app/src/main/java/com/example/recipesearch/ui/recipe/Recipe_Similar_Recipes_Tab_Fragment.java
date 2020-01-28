@@ -25,6 +25,7 @@ public class Recipe_Similar_Recipes_Tab_Fragment extends Fragment
 {
     private static String id = null;
     static Handler h;
+    static int offSet = 1;
     public Recipe_Similar_Recipes_Tab_Fragment()
     {
         // Required empty public constructor
@@ -48,6 +49,7 @@ public class Recipe_Similar_Recipes_Tab_Fragment extends Fragment
             public void handleMessage(Message msg)
             {
                 ((RecipeActivity)getActivity()).refresh();
+                offSet = offSet + 1;
             }
         };
         //wip
@@ -59,7 +61,6 @@ public class Recipe_Similar_Recipes_Tab_Fragment extends Fragment
                 // when the button is pressed should get the info for the next dish
                 // will eventually add a check to see if the next is a repeat
                 Next_recipe nextS = new Next_recipe();
-                //Next_Similar_Activity nextS = new Next_Similar_Activity();
                 nextS.execute(); // calls the func to get something similar
                 RecipeActivity.setRecipeName("Next Test"); // temp test
                 String direct = " ";
@@ -98,4 +99,5 @@ public class Recipe_Similar_Recipes_Tab_Fragment extends Fragment
     {
         id = newID;
     }
+    public static int getOffset(){return offSet;}
 }

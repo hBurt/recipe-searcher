@@ -81,7 +81,7 @@ class CustomAdapter implements ListAdapter {
             });
 
             loadImageIntoView(convertView, favorite);
-            
+
             concatTitle(convertView, favorite.getRecipe().getTitle());
             colorizeRatings(convertView, favorite);
         }

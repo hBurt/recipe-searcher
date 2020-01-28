@@ -99,6 +99,8 @@ public class SearchActivity extends AppCompatActivity
             @Override
             public boolean onQueryTextSubmit(String query)
             {
+                Intent se = new Intent(SearchActivity.this, SearchingActivity.class);
+                startActivity(se);
                 SearchedFood = query;
                 IDList = new ArrayList<String>();
                 for (int i = 0; i > 11; i++)
