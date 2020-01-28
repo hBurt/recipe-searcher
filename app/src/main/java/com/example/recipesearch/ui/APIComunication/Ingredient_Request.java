@@ -98,11 +98,7 @@ public class Ingredient_Request extends AsyncTask<Void, Void, String>
             if (oneObjectsItem.length() > 0) {
                 id = oneObjectsItem;
             }
-            for (int i = 0; i > 11; i++)
-                if (id == IDList.get(i)) {
-                    RecipeActivity.useOld(id);
-                    return null;
-                }
+
             if (oneObjectsItem2.length() > 0)
                 dishName = oneObjectsItem2;
         }

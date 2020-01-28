@@ -23,6 +23,7 @@ import com.example.recipesearch.ui.APIComunication.Ingredient_Request;
 import com.example.recipesearch.ui.APIComunication.Request_Handler;
 
 import com.example.recipesearch.R;
+import com.example.recipesearch.ui.Settings.RecipeStorage;
 import com.example.recipesearch.ui.Settings.settings_activity;
 import com.example.recipesearch.ui.recipe.RecipeActivity;
 
@@ -107,29 +108,29 @@ public class SearchActivity extends AppCompatActivity
                 if (testa == testb)
                     settings_activity.setSwitchA(true);
                 IDList = new ArrayList<String>();
-                for (int i = 0; i < 11; i++)
+                RecipeStorage storage = new RecipeStorage(getApplicationContext());
+                if (storage.isThisInTHeBook())
                 {
-                    if (mPrefs.contains(i+SearchedFood))
-                    {
-                        IDList.add(mPrefs.getString(i+SearchedFood, " "));
-
-                    }
+                    RecipeActivity.setReadTheBook(true);
+                    h.sendEmptyMessageDelayed(0, 1500);// a delay to allow the search to finish before the recipe page pops up
                 }
                 if (settings_activity.GetSwitchA() == true)
                 {
                 Request_Handler req = new Request_Handler();
-                req.execute(); // handles the search query
+                req.execute();// handles the search query
+                h.sendEmptyMessageDelayed(0, 3000);// a delay to allow the search to finish before the recipe page pops up
                 }
                 else if (settings_activity.GetSwitchA() == false)
                 {
                     Ingredient_Request IR = new Ingredient_Request();
                     IR.execute();
+                    h.sendEmptyMessageDelayed(0, 3000);// a delay to allow the search to finish before the recipe page pops up
                 }
                 else {
                     Request_Handler req = new Request_Handler();
                     req.execute(); //default search
+                    h.sendEmptyMessageDelayed(0, 3000);// a delay to allow the search to finish before the recipe page pops up
                     }
-                h.sendEmptyMessageDelayed(0, 3000);// a delay to allow the search to finish before the recipe page pops up
                 return true;
             }
 
