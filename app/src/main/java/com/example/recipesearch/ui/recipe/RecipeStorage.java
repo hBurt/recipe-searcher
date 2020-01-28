@@ -103,4 +103,77 @@ public class RecipeStorage extends Activity
         else
             return false;
     }
+    public void removePref()
+    {
+        if (mPrefs.contains(SearchActivity.getSearchedFood()+"Name" ))
+        {
+            mPrefs.edit().remove(SearchActivity.getSearchedFood()+"Name").apply();
+            mPrefs.edit().remove(SearchActivity.getSearchedFood()+"id").apply();
+            mPrefs.edit().remove(SearchActivity.getSearchedFood()+"img").apply();
+            mPrefs.edit().remove(SearchActivity.getSearchedFood()+"Ingredients").apply();
+            mPrefs.edit().remove(SearchActivity.getSearchedFood()+"Directions").apply();
+            mPrefs.edit().remove(SearchActivity.getSearchedFood()+"Time").apply();
+        }
+    }
+    public void removeFirstPref()
+    {
+        String nameToRemove = " " ;
+        String followingName0 = " ";
+        String followingName1 = " ";
+        String followingName2 = " ";
+        String followingName3 = " ";
+        String followingName4 = " ";
+        String followingName5 = " ";
+        String followingName6 = " ";
+        String followingName7 = " ";
+        String followingName8 = " ";
+        for (int a = 0; a < 11; a++)
+        {
+
+            if (mPrefs.contains(a+"Name" ))
+            {
+                if (a > 9)// because i want this to happen if there are 10 or more saved sets
+                {
+                    nameToRemove = mPrefs.getString(0+"Name", " ");
+                    followingName0= mPrefs.getString(1+"Name", " ");
+                    followingName1= mPrefs.getString(2+"Name", " ");
+                    followingName2= mPrefs.getString(3+"Name", " ");
+                    followingName3= mPrefs.getString(4+"Name", " ");
+                    followingName4= mPrefs.getString(5+"Name", " ");
+                    followingName5= mPrefs.getString(6+"Name", " ");
+                    followingName6= mPrefs.getString(7+"Name", " ");
+                    followingName7= mPrefs.getString(8+"Name", " ");
+                    followingName8= mPrefs.getString(9+"Name", " ");
+                    mPrefs.edit().remove(0+"Name").apply();
+                    mPrefs.edit().remove(1+"Name").apply();
+                    mPrefs.edit().remove(2+"Name").apply();
+                    mPrefs.edit().remove(3+"Name").apply();
+                    mPrefs.edit().remove(4+"Name").apply();
+                    mPrefs.edit().remove(5+"Name").apply();
+                    mPrefs.edit().remove(6+"Name").apply();
+                    mPrefs.edit().remove(7+"Name").apply();
+                    mPrefs.edit().remove(8+"Name").apply();
+                    mPrefs.edit().remove(9+"Name").apply();
+                    edit = mPrefs.edit();
+                    edit.putString(0+"Name", followingName0);
+                    edit.putString(1+"Name", followingName1);
+                    edit.putString(2+"Name", followingName2);
+                    edit.putString(3+"Name", followingName3);
+                    edit.putString(4+"Name", followingName4);
+                    edit.putString(5+"Name", followingName5);
+                    edit.putString(6+"Name", followingName6);
+                    edit.putString(7+"Name", followingName7);
+                    edit.putString(8+"Name", followingName8);
+                    edit.apply();
+                    mPrefs.edit().remove(nameToRemove+"Name").apply();
+                    mPrefs.edit().remove(nameToRemove+"id").apply();
+                    mPrefs.edit().remove(nameToRemove+"img").apply();
+                    mPrefs.edit().remove(nameToRemove+"Ingredients").apply();
+                    mPrefs.edit().remove(nameToRemove+"Directions").apply();
+                    mPrefs.edit().remove(nameToRemove+"Time").apply();
+                }
+            }
+        }
+
+    }
 }
