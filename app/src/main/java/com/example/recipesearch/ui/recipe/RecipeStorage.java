@@ -32,6 +32,14 @@ public class RecipeStorage extends Activity
     {
         edit = mPrefs.edit();
         edit.putString(SearchActivity.getSearchedFood()+"Name", string);
+        for (int i = 0; i < 11; i++)
+        {
+            if (mPrefs.contains(i+"Name")){}
+            else {
+                edit.putString(i + "Name", string);
+                break;
+            }
+        }
         edit.apply();
     }
     public void setTimeAmount(String string)
