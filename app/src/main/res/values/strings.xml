@@ -103,4 +103,5 @@
     <string name="submit">Submit</string>
     <string name="food_you_want_to_exclude">Food you want to exclude(Optional)</string>
     <string name="diet2">Diet</string>
+    <string name="time_frame2">Time Frame</string>
 </resources>
