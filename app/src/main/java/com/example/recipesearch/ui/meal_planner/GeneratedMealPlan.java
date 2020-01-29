@@ -17,6 +17,5 @@ public class GeneratedMealPlan extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_generated_meal_plan);
-
     }
 }

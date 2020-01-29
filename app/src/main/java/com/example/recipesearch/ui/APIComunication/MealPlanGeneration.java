@@ -18,29 +18,28 @@ import java.io.IOException;
 
 public class MealPlanGeneration extends AsyncTask<Void, Void, String>
 {
-
+    static String Nutrient1 = null;
+    static String Nutrient2 = null;
+    static String Nutrient3 = null;
+    static String Nutrient4 = null;
+    static String id1 = null;
+    static String title1 = null;
+    static String rim1 = null;
+    static String image1 = null;
+    static String id2 = null;
+    static String title2 = null;
+    static String rim2 = null;
+    static String image2 = null;
+    static String id3 = null;
+    static String title3 = null;
+    static String rim3 = null;
+    static String image3 = null;
 
     @Override
     protected String doInBackground(Void... voids)
     {
         String responseData = "";
         Response response = null;
-        String Nutrient1 = null;
-        String Nutrient2 = null;
-        String Nutrient3 = null;
-        String Nutrient4 = null;
-        String id1 = null;
-        String title1 = null;
-        String rim1 = null;
-        String image1 = null;
-        String id2 = null;
-        String title2 = null;
-        String rim2 = null;
-        String image2 = null;
-        String id3 = null;
-        String title3 = null;
-        String rim3 = null;
-        String image3 = null;
         String TF = new String(MealPlanActivity.getTimePeriod().trim().replace(" ", "%20").replace("&", "%26")
                 .replace(",", "%2c").replace("(", "%28").replace(")", "%29")
                 .replace("!", "%21").replace("=", "%3D").replace("<", "%3C")
@@ -187,4 +186,9 @@ public class MealPlanGeneration extends AsyncTask<Void, Void, String>
         }
         return null;
     }
+    static String getCals()
+    {return Nutrient1;}
+    static String getProtin(){return Nutrient2;}
+    static String getFat() {return Nutrient3;}
+    static String getCarbohydrates() {return Nutrient4;}
 }
