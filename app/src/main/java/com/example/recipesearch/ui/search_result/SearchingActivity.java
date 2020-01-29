@@ -15,4 +15,8 @@ public class SearchingActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_searching);
     }
+    public void destroy()
+    {
+        finish();
+    }
 }

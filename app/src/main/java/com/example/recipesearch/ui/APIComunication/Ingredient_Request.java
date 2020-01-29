@@ -188,7 +188,9 @@ public class Ingredient_Request extends AsyncTask<Void, Void, String>
                 .replace("step", "").replace("minutes", "").replace("equipment", "").replace(",", "").replace("[", "")
                 .replace("]", "").replace("temperature", "").replace("Fahrenheit", "").replace("stove", "").replace("oven", "")
                 .replace("Celsius", "").replace("  ", " ").replace(" and ", " ").replace("instant", "").replace(" pot ", "")
-                .replace(" kitchen", "").replace(" timer ", ""));
+                .replace(" kitchen", "").replace(" timer ", "").replace(" Form ", "").replace(" Cook ", "").replace(" Grill ", "")
+                .replace(" or ", "").replace(" frying ", "").replace(" pan ", "").replace(" grill ", "").replace(" fry ", "")
+                .replace(" fresh ", "").replace(" brown ", "").replace(" the ", ""));
         StringTokenizer tokensb = new StringTokenizer(thirdIngred, " ");
         String[] resultb = new String[tokensb.countTokens()];
         List<String> fourthIngred = new ArrayList<String>();

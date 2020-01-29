@@ -123,6 +123,10 @@ public class RecipeStorage extends Activity
             mPrefs.edit().remove(SearchActivity.getSearchedFood()+"Time").apply();
         }
     }
+    public void ClearPrefs()
+    {
+        mPrefs.edit().clear().apply();
+    }
     public void removeFirstPref()
     {
         String nameToRemove = " " ;

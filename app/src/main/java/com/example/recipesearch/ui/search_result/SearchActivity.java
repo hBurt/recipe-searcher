@@ -90,6 +90,8 @@ public class SearchActivity extends AppCompatActivity
 
                 Intent in = new Intent(SearchActivity.this, RecipeActivity.class);
                 startActivity(in);
+                SearchingActivity sercAct = new SearchingActivity();
+                sercAct.destroy();
             }
         };
         FsearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener()
@@ -109,9 +111,9 @@ public class SearchActivity extends AppCompatActivity
                 if (storage.isThisInTheBook())
                 {
                     RecipeActivity.setReadTheBook(true);
-                    h.sendEmptyMessageDelayed(0, 1250);// a delay to allow the search to finish before the recipe page pops up
+                    h.sendEmptyMessageDelayed(0, 500);// a delay to allow the search to finish before the recipe page pops up
                 }
-                if (settings_activity.GetSwitchA() == true)
+                else if (settings_activity.GetSwitchA() == true)
                 {
                 Request_Handler req = new Request_Handler();
                 req.execute();// handles the search query
