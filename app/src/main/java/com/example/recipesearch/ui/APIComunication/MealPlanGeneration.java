@@ -25,22 +25,22 @@ public class MealPlanGeneration extends AsyncTask<Void, Void, String>
     {
         String responseData = "";
         Response response = null;
-        String oneObjectsItem = null;
-        String oneObjectsItem2 = null;
-        String oneObjectsItem3 = null;
-        String oneObjectsItem4 = null;//1-4 are nutrient info
-        String oneObjectsItem5 = null;
-        String oneObjectsItem6 = null;
-        String oneObjectsItem7 = null;
-        String oneObjectsItem8 = null;// 5-8 are meal 1
-        String oneObjectsItem9 = null;
-        String oneObjectsItem10 = null;
-        String oneObjectsItem11 = null;
-        String oneObjectsItem12 = null;// 9-12 are meal 2
-        String oneObjectsItem13 = null;
-        String oneObjectsItem14 = null;
-        String oneObjectsItem15 = null;
-        String oneObjectsItem16 = null;// 13-16 are meal 3
+        String Nutrient1 = null;
+        String Nutrient2 = null;
+        String Nutrient3 = null;
+        String Nutrient4 = null;
+        String id1 = null;
+        String title1 = null;
+        String rim1 = null;
+        String image1 = null;
+        String id2 = null;
+        String title2 = null;
+        String rim2 = null;
+        String image2 = null;
+        String id3 = null;
+        String title3 = null;
+        String rim3 = null;
+        String image3 = null;
         String TF = new String(MealPlanActivity.getTimePeriod().trim().replace(" ", "%20").replace("&", "%26")
                 .replace(",", "%2c").replace("(", "%28").replace(")", "%29")
                 .replace("!", "%21").replace("=", "%3D").replace("<", "%3C")
@@ -130,10 +130,10 @@ public class MealPlanGeneration extends AsyncTask<Void, Void, String>
             JSONObject oneObject = null;
             try {
                 oneObject = jArray2.getJSONObject(i);
-                oneObjectsItem = oneObject.getString("calories");
-                oneObjectsItem2 = oneObject.getString("protein");
-                oneObjectsItem3 = oneObject.getString("fat");
-                oneObjectsItem4 = oneObject.getString("carbohydrates");
+                Nutrient1 = oneObject.getString("calories");
+                Nutrient2 = oneObject.getString("protein");
+                Nutrient3 = oneObject.getString("fat");
+                Nutrient4 = oneObject.getString("carbohydrates");
             }
             catch (JSONException e)
             {
@@ -145,10 +145,10 @@ public class MealPlanGeneration extends AsyncTask<Void, Void, String>
             JSONObject oneObject = null;
             try {
                 oneObject = jArrayM1.getJSONObject(i);
-                oneObjectsItem5 = oneObject.getString("id");
-                oneObjectsItem6 = oneObject.getString("title");
-                oneObjectsItem7 = oneObject.getString("readyInMinutes");
-                oneObjectsItem8 = oneObject.getString("image");
+                id1 = oneObject.getString("id");
+                title1 = oneObject.getString("title");
+                rim1 = oneObject.getString("readyInMinutes");
+                image1 = oneObject.getString("image");
             }
             catch (JSONException e)
             {
@@ -160,10 +160,10 @@ public class MealPlanGeneration extends AsyncTask<Void, Void, String>
             JSONObject oneObject = null;
             try {
                 oneObject = jArrayM2.getJSONObject(i);
-                oneObjectsItem9 = oneObject.getString("id");
-                oneObjectsItem10 = oneObject.getString("title");
-                oneObjectsItem11 = oneObject.getString("readyInMinutes");
-                oneObjectsItem12 = oneObject.getString("image");
+                id2 = oneObject.getString("id");
+                title2 = oneObject.getString("title");
+                rim2 = oneObject.getString("readyInMinutes");
+                image2 = oneObject.getString("image");
             }
             catch (JSONException e)
             {
@@ -175,10 +175,10 @@ public class MealPlanGeneration extends AsyncTask<Void, Void, String>
             JSONObject oneObject = null;
             try {
                 oneObject = jArrayM3.getJSONObject(i);
-                oneObjectsItem13 = oneObject.getString("id");
-                oneObjectsItem14 = oneObject.getString("title");
-                oneObjectsItem15 = oneObject.getString("readyInMinutes");
-                oneObjectsItem16 = oneObject.getString("image");
+                id3 = oneObject.getString("id");
+                title3 = oneObject.getString("title");
+                rim3 = oneObject.getString("readyInMinutes");
+                image3 = oneObject.getString("image");
             }
             catch (JSONException e)
             {
