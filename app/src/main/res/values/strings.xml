@@ -97,11 +97,12 @@
     <string name="meal_plan_generator">Meal Plan Generator</string>
     <string name="time_frame">Time Frame (Optional)</string>
     <string name="calorie_target">Calorie Target</string>
-    <string name="calories">Calories(Optional)</string>
-    <string name="diet">Diet(Optional)</string>
+    <string name="calories">Calories</string>
+    <string name="diet">Diet</string>
     <string name="exclusions">Exclusions</string>
     <string name="submit">Submit</string>
-    <string name="food_you_want_to_exclude">Food you want to exclude(Optional)</string>
-    <string name="diet2">Diet</string>
+    <string name="food_you_want_to_exclude">Food you want to exclude</string>
+    <string name="diet2" translatable="false">Diet</string>
     <string name="time_frame2">Time Frame</string>
+    <string name="day_or_night">"Day or Night "</string>
 </resources>

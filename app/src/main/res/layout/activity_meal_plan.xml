@@ -50,7 +50,7 @@
         android:ems="10"
         android:importantForAutofill="no"
         android:inputType="textPersonName"
-        android:text="@string/time_frame"
+        android:text="@string/day_or_night"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/timeFrame" />
