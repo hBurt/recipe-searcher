@@ -30,17 +30,38 @@
                 android:layout_height="102dp"
                 android:textSize="24sp" />
 
+            <ImageView
+                android:id="@+id/Meal1Img"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/image_of_meal"
+                tools:srcCompat="@tools:sample/avatars" />
+
             <TextView
                 android:id="@+id/Meal2"
                 android:layout_width="match_parent"
                 android:layout_height="108dp"
                 android:textSize="24sp" />
 
+            <ImageView
+                android:id="@+id/Meal2Img"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/image_of_meal"
+                tools:srcCompat="@tools:sample/avatars" />
+
             <TextView
                 android:id="@+id/Meal3"
                 android:layout_width="match_parent"
                 android:layout_height="134dp"
                 android:textSize="24sp" />
+
+            <ImageView
+                android:id="@+id/Meal3Img"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/image_of_meal"
+                tools:srcCompat="@tools:sample/avatars" />
 
             <TextView
                 android:id="@+id/NutrientInfo"
