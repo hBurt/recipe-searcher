@@ -7,7 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
@@ -36,6 +38,9 @@ public class FavoritesFragment extends Fragment {
     private AppCompatImageButton buttonFilterAlphabetical;
     private AppCompatImageButton buttonFilterRating;
     CustomAdapter customAdapter;
+    private AdapterView<?> adapterView;
+
+    private Button favoriteButtonDelete;
 
     private boolean isAlphabetical = false;
     private boolean isRating = false;
@@ -57,6 +62,8 @@ public class FavoritesFragment extends Fragment {
 
         buttonFilterAlphabetical = root.findViewById(R.id.favorites_filter_alphabetical);
         buttonFilterRating = root.findViewById(R.id.favorites_filter_rating);
+
+        favoriteButtonDelete = root.findViewById(R.id.favorite_button_delete);
 
         initFavoritesList(root);
 
@@ -111,25 +118,47 @@ public class FavoritesFragment extends Fragment {
 
         list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
-            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, final int i, long l) {
 
-                // save index and top position
-                int index = adapterView.getFirstVisiblePosition();
-                View v = adapterView.getChildAt(0);
-                int top = (v == null) ? 0 : (v.getTop() - adapterView.getPaddingTop());
+                setAdapterView(adapterView);
 
-                ((CustomAdapter) adapterView.getAdapter()).removeItemAtIndex(i);
-                ((CustomAdapter) adapterView.getAdapter()).notifyDataSetChanged();
-                setAdapter(favoritesListSecondary);
+                favoriteButtonDelete = view.findViewById(R.id.favorite_button_delete);
 
-                // restore index and position
-                ((ListView) adapterView).setSelectionFromTop(index, top);
+                LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        1.0f
+                );
+
+                favoriteButtonDelete.setLayoutParams(param);
+                favoriteButtonDelete.setVisibility(View.VISIBLE);
+
+                favoriteButtonDelete.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        int index = getAdapterView().getFirstVisiblePosition();
+                        View v = getAdapterView().getChildAt(0);
+                        int top = (v == null) ? 0 : (v.getTop() - getAdapterView().getPaddingTop());
+
+                        ((CustomAdapter) getAdapterView().getAdapter()).removeItemAtIndex(i);
+                        ((CustomAdapter) getAdapterView().getAdapter()).refreshItems();
+                        //((CustomAdapter) getAdapterView().getAdapter()).notifyDataSetChanged();
+
+                        setAdapter(favoritesListSecondary);
+
+                        // restore index and position
+                        ((ListView) getAdapterView()).setSelectionFromTop(index, top);
+                    }
+                });
                 return false;
             }
         });
 
 
         return root;
+
+
     }
 
     private void initFavoritesList(View root){
@@ -139,7 +168,7 @@ public class FavoritesFragment extends Fragment {
         favoritesListSecondary = new ArrayList<>(favoritesList);
 
         if(favoritesList.size() > 0){
-            customAdapter = new CustomAdapter(getContext(), favoritesList);
+            customAdapter = new CustomAdapter(getContext(), favoritesList, list);
             list.setAdapter(customAdapter);
         }
     }
@@ -171,9 +200,16 @@ public class FavoritesFragment extends Fragment {
 
     private void setAdapter(ArrayList<Favorite> newList){
         if(newList.size() > 0) {
-            CustomAdapter customAdapter = new CustomAdapter(getContext(), newList);
+            CustomAdapter customAdapter = new CustomAdapter(getContext(), newList, list);
             list.setAdapter(customAdapter);
         }
     }
 
+    public AdapterView<?> getAdapterView() {
+        return adapterView;
+    }
+
+    public void setAdapterView(AdapterView<?> adapterView) {
+        this.adapterView = adapterView;
+    }
 }

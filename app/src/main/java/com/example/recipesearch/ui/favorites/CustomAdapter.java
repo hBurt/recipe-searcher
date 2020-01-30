@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
@@ -22,10 +23,12 @@ import java.util.ArrayList;
 class CustomAdapter extends BaseAdapter implements ListAdapter {
     ArrayList<Favorite> arrayList;
     Context context;
+    ListView listView;
 
-    public CustomAdapter(Context context, ArrayList<Favorite> arrayList) {
+    public CustomAdapter(Context context, ArrayList<Favorite> arrayList, ListView listView) {
         this.arrayList = arrayList;
         this.context = context;
+        this.listView = listView;
     }
 
     @Override
@@ -74,7 +77,7 @@ class CustomAdapter extends BaseAdapter implements ListAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, final ViewGroup parent) {
         Favorite favorite = arrayList.get(position);
         if (convertView == null) {
             LayoutInflater layoutInflater = LayoutInflater.from(context);
@@ -90,6 +93,7 @@ class CustomAdapter extends BaseAdapter implements ListAdapter {
 
             concatTitle(convertView, favorite.getRecipe().getTitle());
             colorizeRatings(convertView, favorite);
+
         }
         return convertView;
     }
@@ -145,5 +149,12 @@ class CustomAdapter extends BaseAdapter implements ListAdapter {
         Picasso.get().load(Uri.parse(favorite.getRecipe().getImageURL())).placeholder(R.drawable.image_placeholder_blue).into(profileImageView);
     }
 
+    public void refreshItems()
+    {
+        ArrayList<Favorite> copy = new ArrayList<>(arrayList);
+        this.arrayList.clear();
+        this.arrayList.addAll(copy);
+        notifyDataSetChanged();
+    }
 
 }
