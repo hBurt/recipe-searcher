@@ -89,7 +89,7 @@ public class MealPlanGeneration extends AsyncTask<Void, Void, String>
                 .replace("[", "%5B").replace("\\", "%5C").replace("]", "%5D")
                 .replace("_", "%5F").replace("`", "%60").replace("{", "%7B")
                 .replace("|", "%7C").replace("}", "%7D"));
-        /*if(TF != null && Cal != null && Exclu != null && Diet != null)
+        if(TF != null && Cal != null && Exclu != null && Diet != null)
         URL = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/mealplans/generate?timeFrame="+TF+"&targetCalories="+Cal+"&diet="+Diet+"&exclude="+Exclu;
         else if (TF != null && Cal != null && Diet != null)
             URL = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/mealplans/generate?timeFrame="+TF+"&targetCalories="+Cal+"&diet="+Diet;
@@ -115,7 +115,7 @@ public class MealPlanGeneration extends AsyncTask<Void, Void, String>
         catch (IOException e)
         {
             e.printStackTrace();
-        }*/
+        }
         JSONObject jObject = null;
         JSONObject jObject1 = null;
         JSONObject jObject2 = null;
@@ -125,7 +125,7 @@ public class MealPlanGeneration extends AsyncTask<Void, Void, String>
         try
         {
             //this response data is for testing only
-            responseData = "{\"meals\":[{\"id\":1158522,\"title\":\"Rum Raisin Scones\",\"readyInMinutes\":508,\"servings\":8,\"image\":\"rum-raisin-scones-1158522.jpg.jpg.jpg.jpg\",\"imageUrls\":[\"rum-raisin-scones-1158522.jpg.jpg.jpg.jpg\",\"rum-raisin-scones-1158522.jpg.jpg.jpg\",\"rum-raisin-scones-1158522.jpg.jpg\",\"rum-raisin-scones-1158522.jpg\"]},{\"id\":655269,\"title\":\"Peanut Butter Chocolate Cream Pie\",\"readyInMinutes\":45,\"servings\":6,\"image\":\"Peanut-Butter-Chocolate-Cream-Pie-655269.jpg\",\"imageUrls\":[\"Peanut-Butter-Chocolate-Cream-Pie-655269.jpg\"]},{\"id\":716429,\"title\":\"Pasta with Garlic, Scallions, Cauliflower & Breadcrumbs\",\"readyInMinutes\":45,\"servings\":2,\"image\":\"pasta-with-garlic-scallions-cauliflower-bread-crumbs-716429.jpg\",\"imageUrls\":[\"pasta-with-garlic-scallions-cauliflower-bread-crumbs-716429.jpg\"]}],\"nutrients\":{\"calories\":1754.4,\"protein\":44.09,\"fat\":70.38,\"carbohydrates\":233.06}}";
+            //responseData = "{\"meals\":[{\"id\":1158522,\"title\":\"Rum Raisin Scones\",\"readyInMinutes\":508,\"servings\":8,\"image\":\"rum-raisin-scones-1158522.jpg.jpg.jpg.jpg\",\"imageUrls\":[\"rum-raisin-scones-1158522.jpg.jpg.jpg.jpg\",\"rum-raisin-scones-1158522.jpg.jpg.jpg\",\"rum-raisin-scones-1158522.jpg.jpg\",\"rum-raisin-scones-1158522.jpg\"]},{\"id\":655269,\"title\":\"Peanut Butter Chocolate Cream Pie\",\"readyInMinutes\":45,\"servings\":6,\"image\":\"Peanut-Butter-Chocolate-Cream-Pie-655269.jpg\",\"imageUrls\":[\"Peanut-Butter-Chocolate-Cream-Pie-655269.jpg\"]},{\"id\":716429,\"title\":\"Pasta with Garlic, Scallions, Cauliflower & Breadcrumbs\",\"readyInMinutes\":45,\"servings\":2,\"image\":\"pasta-with-garlic-scallions-cauliflower-bread-crumbs-716429.jpg\",\"imageUrls\":[\"pasta-with-garlic-scallions-cauliflower-bread-crumbs-716429.jpg\"]}],\"nutrients\":{\"calories\":1754.4,\"protein\":44.09,\"fat\":70.38,\"carbohydrates\":233.06}}";
             jObject = new JSONObject(String.valueOf(responseData));
         }
         catch (JSONException e)
