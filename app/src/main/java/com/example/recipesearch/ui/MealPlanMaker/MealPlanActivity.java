@@ -2,7 +2,10 @@ package com.example.recipesearch.ui.MealPlanMaker;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -11,6 +14,9 @@ import android.widget.EditText;
 
 import com.example.recipesearch.R;
 import com.example.recipesearch.ui.APIComunication.MealPlanGeneration;
+import com.example.recipesearch.ui.recipe.RecipeActivity;
+import com.example.recipesearch.ui.search_result.SearchActivity;
+import com.example.recipesearch.ui.search_result.SearchingActivity;
 
 public class MealPlanActivity extends AppCompatActivity
 {
@@ -18,6 +24,7 @@ public class MealPlanActivity extends AppCompatActivity
     static String dietaryPrefrence = "";
     static String caloricNum = "";
     static String exclusions= "";
+    private static Handler h;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -73,6 +80,18 @@ public class MealPlanActivity extends AppCompatActivity
                 exclusions = s.toString();
             }
         });
+        h = new  Handler(){
+            @Override
+            public void handleMessage(Message msg)
+            {
+
+                Intent in = new Intent(MealPlanActivity.this, GeneratedMealPlan.class);
+                startActivity(in);
+                LoadingScreenMP generating = new LoadingScreenMP();
+                generating.destroy();
+            }
+        };
+
         begin.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -80,6 +99,7 @@ public class MealPlanActivity extends AppCompatActivity
             {
                 MealPlanGeneration gen = new MealPlanGeneration();
                 gen.execute(); // will generate the meal plan
+                h.sendEmptyMessageAtTime(0, 3000);
             }
         });
     }

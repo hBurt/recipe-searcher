@@ -107,4 +107,5 @@
     <string name="day_or_night">"Day or Night "</string>
     <string name="meal_plan">Meal Plan</string>
     <string name="image_of_meal">image of meal</string>
+    <string name="generating_meal_plan">Generating Meal Plan</string>
 </resources>
