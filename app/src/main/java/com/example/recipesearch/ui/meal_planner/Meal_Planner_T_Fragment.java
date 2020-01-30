@@ -25,7 +25,7 @@ import static android.content.Context.MODE_PRIVATE;
 public class Meal_Planner_T_Fragment extends Fragment {
 
     private TextView editToday;
-    private  String today;
+    private static String today;
 
     public Meal_Planner_T_Fragment()
     {

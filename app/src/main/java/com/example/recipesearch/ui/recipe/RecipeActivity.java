@@ -53,7 +53,15 @@ public class RecipeActivity extends AppCompatActivity
         TTM.setText(timeToMake + " minutes");
         wantedImg = imgName;
         if (wantedImg.length() > 3)
-        Picasso.get().load(wantedImg).into(pic);
+        {
+            if (!wantedImg.contains("https://spoonacular.com/recipeImages/"))
+            {
+                String nWantedImg = "https://spoonacular.com/recipeImages/" + wantedImg;
+                Picasso.get().load(nWantedImg).into(pic);
+            }
+            else 
+            Picasso.get().load(wantedImg).into(pic);
+        }
         tab.addTab(tab.newTab().setText("Ingredients"));
         tab.addTab(tab.newTab().setText("Directions"));
         tab.addTab(tab.newTab().setText("Next Recipe"));

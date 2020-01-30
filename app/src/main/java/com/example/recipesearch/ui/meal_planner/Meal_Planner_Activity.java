@@ -101,13 +101,13 @@ public class Meal_Planner_Activity extends AppCompatActivity
     {
         return Notes;
     }
-
-
-    @Override
-    public void onBackPressed()
+    public void setTodayNew(String string)
     {
-        super.onBackPressed();
+        edit = mPrefs.edit();
+        edit.putString("Day1", string);
+        edit.apply();
     }
+
     @Override
     protected void onDestroy()
     {

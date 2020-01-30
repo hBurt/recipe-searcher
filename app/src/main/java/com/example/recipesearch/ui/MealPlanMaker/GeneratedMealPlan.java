@@ -8,6 +8,8 @@ import android.widget.TextView;
 
 import com.example.recipesearch.R;
 import com.example.recipesearch.ui.APIComunication.MealPlanGeneration;
+import com.example.recipesearch.ui.meal_planner.Meal_Planner_Activity;
+import com.example.recipesearch.ui.meal_planner.Meal_Planner_T_Fragment;
 import com.squareup.picasso.Picasso;
 
 public class GeneratedMealPlan extends AppCompatActivity
@@ -92,4 +94,12 @@ public class GeneratedMealPlan extends AppCompatActivity
     public static void setProtin (String s){Protin = s;}
     public static void setFat (String s ) {Fat = s;}
     public static void setCarbohydrates(String s) {Carbohydrates = s;}
+
+    /*@Override
+    protected void onDestroy()
+    {
+        super.onDestroy();
+        Meal_Planner_Activity plan = new Meal_Planner_Activity();
+        plan.setTodayNew(Meal1Name + "\n"+Meal2Name+ "\n"+Meal3Name );
+    }*/
 }
