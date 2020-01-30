@@ -12,25 +12,31 @@ import com.squareup.picasso.Picasso;
 
 public class GeneratedMealPlan extends AppCompatActivity
 {
-    String Meal1Name = "";
-    String Meal2Name = "";
-    String Meal3Name = "";
-    String readyInMin1 = "";
-    String readyInMin2 = "";
-    String readyInMin3 = "";
-    String mealImg1 = "";
-    String mealImg2 = "";
-    String mealImg3 = "";
-    String Cals = "";
-    String Protin = "";
-    String Fat = "";
-    String Carbohydrates = "";
+    private static String Meal1Name = "";
+    private static String Meal2Name = "";
+    private static String Meal3Name = "";
+    private static String readyInMin1 = "";
+    private static String readyInMin2 = "";
+    private static String readyInMin3 = "";
+    private static String mealImg1 = "";
+    private static String mealImg2 = "";
+    private static String mealImg3 = "";
+    private static String Cals = "";
+    private static String Protin = "";
+    private static String Fat = "";
+    private static String Carbohydrates = "";
     String ErrorOutput = "Error: Bad Input";
+    private static boolean reset = false;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_generated_meal_plan);
+        if (reset == true)
+        {
+            reset = false;
+            refresh();
+        }
         TextView meal1 = findViewById(R.id.Meal1);
         TextView meal2 = findViewById(R.id.Meal2);
         TextView meal3 = findViewById(R.id.Meal3);
@@ -38,28 +44,18 @@ public class GeneratedMealPlan extends AppCompatActivity
         ImageView img1 = findViewById(R.id.Meal1Img);
         ImageView img2 = findViewById(R.id.Meal2Img);
         ImageView img3 = findViewById(R.id.Meal3Img);
-        Cals = MealPlanGeneration.getCals();
-        Protin = MealPlanGeneration.getProtin();
-        Fat = MealPlanGeneration.getFat();
-        Carbohydrates = MealPlanGeneration.getCarbohydrates();
-        Meal1Name = MealPlanGeneration.getTitle1();
-        Meal2Name = MealPlanGeneration.getTitle2();
-        Meal3Name = MealPlanGeneration.getTitle3();
         if (Meal1Name != null)
         {
-            readyInMin1 = " Ready in " + MealPlanGeneration.getRim1() + " minutes ";
-            readyInMin2 = " Ready in " + MealPlanGeneration.getRim2() + " minutes ";
-            readyInMin3 = " Ready in " + MealPlanGeneration.getRim3() + " minutes ";
-            mealImg1 = MealPlanGeneration.getImage1();
-            mealImg2 = MealPlanGeneration.getImage2();
-            mealImg3 = MealPlanGeneration.getImage3();
+           String readyInMin1v2 = " Ready in " + readyInMin1 + " minutes ";
+           String readyInMin2v2 = " Ready in " + readyInMin2 + " minutes ";
+           String readyInMin3v2 = " Ready in " + readyInMin3 + " minutes ";
             Picasso.get().load(mealImg1).into(img1);
             Picasso.get().load(mealImg2).into(img2);
             Picasso.get().load(mealImg3).into(img3);
             String Nutrients = "Calories: " + Cals + "\n" + "Protein: " + Protin + "\n" + "Fat: " + Fat + "\n" + "Carbohydrates: " + Carbohydrates;
-            String M1 = Meal1Name + "\n" + readyInMin1;
-            String M2 = Meal2Name + "\n" + readyInMin2;
-            String M3 = Meal3Name + "\n" + readyInMin3;
+            String M1 = Meal1Name + "\n" + readyInMin1v2;
+            String M2 = Meal2Name + "\n" + readyInMin2v2;
+            String M3 = Meal3Name + "\n" + readyInMin3v2;
             meal1.setText(M1);
             meal2.setText(M2);
             meal3.setText(M3);
@@ -72,4 +68,28 @@ public class GeneratedMealPlan extends AppCompatActivity
             Nutrient.setText(ErrorOutput);
         }
     }
+    public void refresh()
+    {
+        finish();
+        overridePendingTransition(0, 0);
+        startActivity(getIntent());
+        overridePendingTransition(0, 0);
+    }
+    public static void doReset ()
+    {
+        reset = true;
+    }
+    public static void setMeal1Name(String string){ Meal1Name = string;}
+    public static void setMeal2Name(String string){ Meal2Name = string;}
+    public static void setMeal3Name(String string){ Meal3Name = string;}
+    public static void setReadyInMin1(String s){readyInMin1 = s;}
+    public static void setReadyInMin2(String s){readyInMin2 = s;}
+    public static void setReadyInMin3(String s){readyInMin3 = s;}
+    public static void setMealImg1 (String s){mealImg1 = s;}
+    public static void setMealImg2 (String s){mealImg2 = s;}
+    public static void setMealImg3 (String s){mealImg3 = s;}
+    public static void setCals (String s){Cals = s;}
+    public static void setProtin (String s){Protin = s;}
+    public static void setFat (String s ) {Fat = s;}
+    public static void setCarbohydrates(String s) {Carbohydrates = s;}
 }

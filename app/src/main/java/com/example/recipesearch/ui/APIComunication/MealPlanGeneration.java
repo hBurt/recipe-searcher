@@ -2,6 +2,7 @@ package com.example.recipesearch.ui.APIComunication;
 
 import android.os.AsyncTask;
 
+import com.example.recipesearch.ui.MealPlanMaker.GeneratedMealPlan;
 import com.example.recipesearch.ui.MealPlanMaker.MealPlanActivity;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
@@ -43,6 +44,7 @@ public class MealPlanGeneration extends AsyncTask<Void, Void, String>
         String TF = null;
         String responseData = "";
         Response response = null;
+        if (MealPlanActivity.getTimePeriod() != null)
         TF = new String(MealPlanActivity.getTimePeriod().trim().replace(" ", "%20").replace("&", "%26")
                 .replace(",", "%2c").replace("(", "%28").replace(")", "%29")
                 .replace("!", "%21").replace("=", "%3D").replace("<", "%3C")
@@ -53,6 +55,7 @@ public class MealPlanGeneration extends AsyncTask<Void, Void, String>
                 .replace("[", "%5B").replace("\\", "%5C").replace("]", "%5D")
                 .replace("_", "%5F").replace("`", "%60").replace("{", "%7B")
                 .replace("|", "%7C").replace("}", "%7D"));
+        if (MealPlanActivity.getCaloricNum() != null)
         Cal = new String(MealPlanActivity.getCaloricNum().trim().replace(" ", "%20").replace("&", "%26")
                 .replace(",", "%2c").replace("(", "%28").replace(")", "%29")
                 .replace("!", "%21").replace("=", "%3D").replace("<", "%3C")
@@ -63,6 +66,7 @@ public class MealPlanGeneration extends AsyncTask<Void, Void, String>
                 .replace("[", "%5B").replace("\\", "%5C").replace("]", "%5D")
                 .replace("_", "%5F").replace("`", "%60").replace("{", "%7B")
                 .replace("|", "%7C").replace("}", "%7D"));
+        if (MealPlanActivity.getDietaryPrefrence() != null)
         Diet = new String(MealPlanActivity.getDietaryPrefrence().trim().replace(" ", "%20").replace("&", "%26")
                 .replace(",", "%2c").replace("(", "%28").replace(")", "%29")
                 .replace("!", "%21").replace("=", "%3D").replace("<", "%3C")
@@ -73,6 +77,7 @@ public class MealPlanGeneration extends AsyncTask<Void, Void, String>
                 .replace("[", "%5B").replace("\\", "%5C").replace("]", "%5D")
                 .replace("_", "%5F").replace("`", "%60").replace("{", "%7B")
                 .replace("|", "%7C").replace("}", "%7D"));
+        if (MealPlanActivity.getExclusions() != null)
         Exclu = new String(MealPlanActivity.getExclusions().trim().replace(" ", "%20").replace("&", "%26")
                 .replace(",", "%2c").replace("(", "%28").replace(")", "%29")
                 .replace("!", "%21").replace("=", "%3D").replace("<", "%3C")
@@ -197,22 +202,20 @@ public class MealPlanGeneration extends AsyncTask<Void, Void, String>
                 e.printStackTrace();
             }
         }
+        GeneratedMealPlan.setCals(Nutrient1);
+        GeneratedMealPlan.setFat(Nutrient3);
+        GeneratedMealPlan.setCarbohydrates(Nutrient4);
+        GeneratedMealPlan.setProtin(Nutrient2);
+        GeneratedMealPlan.setMeal1Name(title1);
+        GeneratedMealPlan.setMeal2Name(title2);
+        GeneratedMealPlan.setMeal3Name(title3);
+        GeneratedMealPlan.setReadyInMin1(rim1);
+        GeneratedMealPlan.setReadyInMin2(rim2);
+        GeneratedMealPlan.setReadyInMin3(rim3);
+        GeneratedMealPlan.setMealImg1(image1);
+        GeneratedMealPlan.setMealImg2(image2);
+        GeneratedMealPlan.setMealImg3(image3);
         return null;
     }
-    public static String getCals() {return Nutrient1;}
-    public static String getProtin(){return Nutrient2;}
-    public static String getFat() {return Nutrient3;}
-    public static String getCarbohydrates() {return Nutrient4;}
-    public static String getId1() {return id1;}
-    public static String getTitle1() {return title1;}
-    public static String getRim1() {return rim1;}
-    public static String getImage1() {return image1;}
-    public static String getId2() {return id2;}
-    public static String getTitle2() {return title2;}
-    public static String getRim2() {return rim2;}
-    public static String getImage2() {return image2;}
-    public static String getId3() {return id3;}
-    public static String getTitle3() {return title3;}
-    public static String getRim3() {return rim3;}
-    public static String getImage3() {return image3;}
+
 }

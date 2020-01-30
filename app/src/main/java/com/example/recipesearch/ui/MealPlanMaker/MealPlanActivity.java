@@ -36,6 +36,7 @@ public class MealPlanActivity extends AppCompatActivity
         EditText DietPref = findViewById(R.id.DietPrefrence); // might be used
         EditText exception = findViewById(R.id.foodExceptions);
         Button begin = findViewById(R.id.submit);
+        final LoadingScreenMP generating = new LoadingScreenMP();
         TOD.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
@@ -87,7 +88,6 @@ public class MealPlanActivity extends AppCompatActivity
 
                 Intent in = new Intent(MealPlanActivity.this, GeneratedMealPlan.class);
                 startActivity(in);
-                LoadingScreenMP generating = new LoadingScreenMP();
                 generating.destroy();
             }
         };
@@ -97,14 +97,41 @@ public class MealPlanActivity extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
+                GeneratedMealPlan.doReset();
+                Intent loading = new Intent(MealPlanActivity.this, LoadingScreenMP.class);
+                startActivity(loading);
                 MealPlanGeneration gen = new MealPlanGeneration();
                 gen.execute(); // will generate the meal plan
-                h.sendEmptyMessageAtTime(0, 3000);
+                h.sendEmptyMessageDelayed(0, 3000);
             }
         });
     }
-    public static String getTimePeriod(){return timePeriod;}
-    public static String getDietaryPrefrence() {return dietaryPrefrence;}
-    public static String getCaloricNum() {return caloricNum;}
-    public static String getExclusions() {return exclusions;}
+    public static String getTimePeriod()
+    {
+        if (timePeriod.length() > 2)
+        return timePeriod;
+        else
+            return null;
+    }
+    public static String getDietaryPrefrence()
+    {
+        if (dietaryPrefrence.length() > 2)
+        return dietaryPrefrence;
+        else
+            return null;
+    }
+    public static String getCaloricNum()
+    {
+        if(caloricNum.length() > 2)
+        return caloricNum;
+        else
+            return null;
+    }
+    public static String getExclusions()
+    {
+        if (exclusions.length() > 2)
+        return exclusions;
+        else
+            return null;
+    }
 }
