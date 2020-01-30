@@ -186,9 +186,20 @@ public class MealPlanGeneration extends AsyncTask<Void, Void, String>
         }
         return null;
     }
-    static String getCals()
-    {return Nutrient1;}
+    static String getCals() {return Nutrient1;}
     static String getProtin(){return Nutrient2;}
     static String getFat() {return Nutrient3;}
     static String getCarbohydrates() {return Nutrient4;}
+    static String getId1() {return id1;}
+    static String getTitle1() {return title1;}
+    static String getRim1() {return rim1;}
+    static String getImage1() {return image1;}
+    static String getId2() {return id2;}
+    static String getTitle2() {return title2;}
+    static String getRim2() {return rim2;}
+    static String getImage2() {return image2;}
+    static String getId3() {return id3;}
+    static String getTitle3() {return title3;}
+    static String getRim3() {return rim3;}
+    static String getImage3() {return image3;}
 }
