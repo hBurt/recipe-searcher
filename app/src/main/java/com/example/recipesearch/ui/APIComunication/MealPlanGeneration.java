@@ -2,10 +2,7 @@ package com.example.recipesearch.ui.APIComunication;
 
 import android.os.AsyncTask;
 
-import com.example.recipesearch.ui.recipe.RecipeActivity;
-import com.example.recipesearch.ui.recipe.Recipe_Directions_Tab_Fragment;
-import com.example.recipesearch.ui.recipe.Recipe_Ingredient_Tab_Fragment;
-import com.example.recipesearch.ui.user.MealPlanActivity;
+import com.example.recipesearch.ui.MealPlanMaker.MealPlanActivity;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;

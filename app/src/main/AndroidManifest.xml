@@ -12,8 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.meal_planner.GeneratedMealPlan"></activity>
-        <activity android:name=".ui.user.MealPlanActivity" />
+        <activity android:name=".ui.MealPlanMaker.GeneratedMealPlan"></activity>
+        <activity android:name=".ui.MealPlanMaker.MealPlanActivity" />
         <activity android:name=".ui.search_result.SearchingActivity" />
 
         <meta-data

@@ -1,4 +1,4 @@
-package com.example.recipesearch.ui.user;
+package com.example.recipesearch.ui.MealPlanMaker;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -79,7 +79,7 @@ public class MealPlanActivity extends AppCompatActivity
             public void onClick(View v)
             {
                 MealPlanGeneration gen = new MealPlanGeneration();
-               // gen.execute(); // will generate the meal plan
+                gen.execute(); // will generate the meal plan
             }
         });
     }

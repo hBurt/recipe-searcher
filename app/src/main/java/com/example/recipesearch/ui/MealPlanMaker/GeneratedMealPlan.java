@@ -1,15 +1,13 @@
-package com.example.recipesearch.ui.meal_planner;
+package com.example.recipesearch.ui.MealPlanMaker;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.recipesearch.R;
 import com.example.recipesearch.ui.APIComunication.MealPlanGeneration;
-import com.example.recipesearch.ui.user.MealPlanActivity;
 import com.squareup.picasso.Picasso;
 
 public class GeneratedMealPlan extends AppCompatActivity
