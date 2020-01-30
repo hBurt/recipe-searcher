@@ -59,7 +59,7 @@ public class RecipeActivity extends AppCompatActivity
                 String nWantedImg = "https://spoonacular.com/recipeImages/" + wantedImg;
                 Picasso.get().load(nWantedImg).into(pic);
             }
-            else 
+            else
             Picasso.get().load(wantedImg).into(pic);
         }
         tab.addTab(tab.newTab().setText("Ingredients"));
