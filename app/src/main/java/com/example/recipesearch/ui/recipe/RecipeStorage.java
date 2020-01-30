@@ -11,10 +11,12 @@ import com.example.recipesearch.ui.search_result.SearchActivity;
 public class RecipeStorage extends Activity
 {
     static SharedPreferences mPrefs;
+    static SharedPreferences plannedPrefs;
     SharedPreferences.Editor edit;
     public RecipeStorage(Context context)
     {
         mPrefs = context.getSharedPreferences("Recipe_Book", MODE_PRIVATE);
+        plannedPrefs =  context.getSharedPreferences("Day_Plan", MODE_PRIVATE);
     }
     public void setDirections ()
     {
@@ -123,9 +125,26 @@ public class RecipeStorage extends Activity
             mPrefs.edit().remove(SearchActivity.getSearchedFood()+"Time").apply();
         }
     }
-    public void ClearPrefs()
+    public void clearRecipeBook()
     {
         mPrefs.edit().clear().apply();
+    }
+    public void clearDayPlan()
+    {
+        plannedPrefs.edit().clear().apply();
+    }
+    public void setDayPlan(String s)
+    {
+        edit = plannedPrefs.edit();
+        edit.putString("good_Plan", s);
+        edit.apply();
+    }
+    public String getPlan()
+    {
+        if (plannedPrefs.contains("good_Plan"))
+            return plannedPrefs.getString("good_Plan", " ");
+        else
+            return " ";
     }
     public void removeFirstPref()
     {

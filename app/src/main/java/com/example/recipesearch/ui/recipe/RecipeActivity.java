@@ -15,9 +15,6 @@ import com.squareup.picasso.Picasso;
 
 public class RecipeActivity extends AppCompatActivity
 {
-    Recipe_Directions_Tab_Fragment RDTF = new Recipe_Directions_Tab_Fragment(); // case 1
-    Recipe_Ingredient_Tab_Fragment RITF = new Recipe_Ingredient_Tab_Fragment(); // case 0
-    Recipe_Similar_Recipes_Tab_Fragment RSRTF = new Recipe_Similar_Recipes_Tab_Fragment(); //case 2
     private TextView tex;
     private ImageView pic;
     private TabLayout tab;
