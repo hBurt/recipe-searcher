@@ -10,21 +10,25 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.SearchView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.room.Room;
 
+import com.example.recipesearch.MainActivity;
+import com.example.recipesearch.R;
+import com.example.recipesearch.database.Favorite;
+import com.example.recipesearch.database.LocalLoginDatabase;
+import com.example.recipesearch.database.Recipe;
+import com.example.recipesearch.database.User;
+import com.example.recipesearch.helpers.DatabaseHelper;
 import com.example.recipesearch.ui.APIComunication.Ingredient_Request;
 import com.example.recipesearch.ui.APIComunication.Request_Handler;
-
-import com.example.recipesearch.R;
 import com.example.recipesearch.ui.Settings.settings_activity;
 import com.example.recipesearch.ui.recipe.RecipeActivity;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -42,11 +46,24 @@ public class SearchActivity extends AppCompatActivity
     static SharedPreferences mPrefs;
     SharedPreferences.Editor edit;
     static List<String> IDList;
+
+    User user;
+    DatabaseHelper databaseHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragmnt_search_results);
+
+        user = (User) getIntent().getSerializableExtra("databaseUser");
+
+        //user.getFavorites().add(new Favorite(new Recipe(0, "Random title", 25, "https://thumbs.dreamstime.com/b/indian-bengali-thali-meal-x-consisting-different-curry-flat-bread-rice-papad-77486943.jpg")));
+
+        databaseHelper = new DatabaseHelper(this);
+        databaseHelper.rebuildDatabase();
+
+        //databaseHelper.getDatabase().getUserDao().updateDetails(user);
+
         mPrefs = getApplicationContext().getSharedPreferences("Recipe_Book", MODE_PRIVATE);
         tool = findViewById(R.id.tb);
         tool.inflateMenu(R.menu.menu_search);
@@ -100,6 +117,7 @@ public class SearchActivity extends AppCompatActivity
             public boolean onQueryTextSubmit(String query)
             {
                 Intent se = new Intent(SearchActivity.this, SearchingActivity.class);
+                //se.putExtra("databaseHelper", databaseString);
                 startActivity(se);
                 SearchedFood = query;
                 IDList = new ArrayList<String>();

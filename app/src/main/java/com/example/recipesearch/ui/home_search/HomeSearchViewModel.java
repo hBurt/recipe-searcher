@@ -11,8 +11,8 @@ public class HomeSearchViewModel extends ViewModel {
     public HomeSearchViewModel() {
         mText = new MutableLiveData<>();
         mText.setValue("Recipe\n   Search");
-    }
 
+    }
 
 
     public LiveData<String> getText() {

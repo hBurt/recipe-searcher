@@ -8,9 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
-import androidx.room.Room;
 
-import com.example.recipesearch.database.LocalLoginDatabase;
 import com.example.recipesearch.helpers.DatabaseHelper;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -32,10 +30,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        LocalLoginDatabase database = Room.databaseBuilder(this, LocalLoginDatabase.class, "LOCAL_LOGIN_DATABASE")
-                .allowMainThreadQueries().build();
-
-        databaseHelper = new DatabaseHelper(database, this);
+        databaseHelper = new DatabaseHelper(this);
+        databaseHelper.rebuildDatabase();
 
         navView = findViewById(R.id.nav_view);
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);

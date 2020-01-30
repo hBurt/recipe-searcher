@@ -4,7 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.example.recipesearch.MainActivity;
+import androidx.room.Room;
+
 import com.example.recipesearch.R;
 import com.example.recipesearch.database.LocalLoginDatabase;
 import com.example.recipesearch.database.User;
@@ -23,13 +24,10 @@ public class DatabaseHelper {
 
     SharedPreferences sharedPref;
 
-    public DatabaseHelper(LocalLoginDatabase database, Activity activity){
+    public DatabaseHelper(Activity activity){
 
-        setDatabase(database);
         setActivity(activity);
-
         encrypt = new FactoryPBKDF2();
-
         sharedPref = activity.getPreferences(Context.MODE_PRIVATE);
     }
 
@@ -131,6 +129,13 @@ public class DatabaseHelper {
         String defaultPass = null;
 
         return sharedPref.getString(activity.getResources().getString(R.string.saved_pass), defaultPass);
+    }
+
+    public void rebuildDatabase(){
+        LocalLoginDatabase lld = Room.databaseBuilder(activity.getApplicationContext(), LocalLoginDatabase.class, "LOCAL_LOGIN_DATABASE")
+                .allowMainThreadQueries().build();
+
+        setDatabase(lld);
     }
 
 }

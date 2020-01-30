@@ -6,6 +6,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 
@@ -28,13 +29,13 @@ public class FavoritesFragment extends Fragment {
 
     private ArrayList<Favorite> favoritesList;
     private ArrayList<Favorite> favoritesListSecondary;
-    //private ArrayList<Favorite> favoritesListTertiary;
 
     DatabaseHelper databaseHelper;
     private EditText searchText;
     private ListView list;
     private AppCompatImageButton buttonFilterAlphabetical;
     private AppCompatImageButton buttonFilterRating;
+    CustomAdapter customAdapter;
 
     private boolean isAlphabetical = false;
     private boolean isRating = false;
@@ -108,6 +109,25 @@ public class FavoritesFragment extends Fragment {
             }
         });
 
+        list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                // save index and top position
+                int index = adapterView.getFirstVisiblePosition();
+                View v = adapterView.getChildAt(0);
+                int top = (v == null) ? 0 : (v.getTop() - adapterView.getPaddingTop());
+
+                ((CustomAdapter) adapterView.getAdapter()).removeItemAtIndex(i);
+                ((CustomAdapter) adapterView.getAdapter()).notifyDataSetChanged();
+                setAdapter(favoritesListSecondary);
+
+                // restore index and position
+                ((ListView) adapterView).setSelectionFromTop(index, top);
+                return false;
+            }
+        });
+
 
         return root;
     }
@@ -119,7 +139,7 @@ public class FavoritesFragment extends Fragment {
         favoritesListSecondary = new ArrayList<>(favoritesList);
 
         if(favoritesList.size() > 0){
-            CustomAdapter customAdapter = new CustomAdapter(getContext(), favoritesList);
+            customAdapter = new CustomAdapter(getContext(), favoritesList);
             list.setAdapter(customAdapter);
         }
     }

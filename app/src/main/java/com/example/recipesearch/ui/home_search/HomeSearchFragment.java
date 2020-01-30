@@ -60,9 +60,10 @@ public class HomeSearchFragment extends Fragment {
         planer = root.findViewById(R.id.Planer);
         textView_or = root.findViewById(R.id.textView_or2);
 
-        DatabaseHelper databaseHelper = ((MainActivity) getActivity()).getDatabaseHelper();
+        final DatabaseHelper databaseHelper = ((MainActivity) getActivity()).getDatabaseHelper();
 
-        if(databaseHelper.isLoginStateSaved()){
+
+        /*if(databaseHelper.isLoginStateSaved()){
             System.out.println("Login state is saved");
 
             String email = databaseHelper.getSharedPrefEmail();
@@ -74,7 +75,7 @@ public class HomeSearchFragment extends Fragment {
 
         } else {
             System.out.println("Login state is NOT saved");
-        }
+        }*/
 
         //Do img color overlay
         imgColorOverlay();
@@ -86,6 +87,7 @@ public class HomeSearchFragment extends Fragment {
             public void onClick(View v)
             {
                 Intent in = new Intent(getActivity(), SearchActivity.class);
+                in.putExtra("databaseUser", databaseHelper.getCurrentUser());
                 startActivity(in);
             }
         });
@@ -110,6 +112,7 @@ public class HomeSearchFragment extends Fragment {
                     }
                     canSwitch = false;
                     Intent in = new Intent(getActivity(), SearchActivity.class);
+                    in.putExtra("databaseUser", databaseHelper.getCurrentUser());
                     startActivity(in);
                 }
             }

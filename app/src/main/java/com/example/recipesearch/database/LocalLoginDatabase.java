@@ -9,4 +9,6 @@ import androidx.room.TypeConverters;
 public abstract class LocalLoginDatabase extends RoomDatabase {
 
     public abstract UserDao getUserDao();
+
+
 }

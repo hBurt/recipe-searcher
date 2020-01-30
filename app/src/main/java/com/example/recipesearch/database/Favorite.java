@@ -1,6 +1,8 @@
 package com.example.recipesearch.database;
 
-public class Favorite {
+import java.io.Serializable;
+
+public class Favorite implements Serializable {
 
     private int rating;
 

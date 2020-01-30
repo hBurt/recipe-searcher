@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.TextView;
@@ -18,7 +19,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-class CustomAdapter implements ListAdapter {
+class CustomAdapter extends BaseAdapter implements ListAdapter {
     ArrayList<Favorite> arrayList;
     Context context;
 
@@ -47,6 +48,7 @@ class CustomAdapter implements ListAdapter {
 
     }
 
+
     @Override
     public int getCount() {
         return arrayList.size();
@@ -65,6 +67,10 @@ class CustomAdapter implements ListAdapter {
     @Override
     public boolean hasStableIds() {
         return false;
+    }
+
+    public void removeItemAtIndex(int i){
+        arrayList.remove(i);
     }
 
     @Override
@@ -138,4 +144,6 @@ class CustomAdapter implements ListAdapter {
         ImageView profileImageView = view.findViewById(R.id.profile_image);
         Picasso.get().load(Uri.parse(favorite.getRecipe().getImageURL())).placeholder(R.drawable.image_placeholder_blue).into(profileImageView);
     }
+
+
 }

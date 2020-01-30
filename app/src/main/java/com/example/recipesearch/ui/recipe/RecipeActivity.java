@@ -15,10 +15,13 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.recipesearch.R;
 import com.example.recipesearch.database.Recipe;
+import com.example.recipesearch.database.User;
+import com.example.recipesearch.helpers.DatabaseHelper;
 import com.example.recipesearch.ui.APIComunication.Request_Handler;
 import com.example.recipesearch.ui.search_result.SearchActivity;
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
+import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
@@ -49,11 +52,19 @@ public class RecipeActivity extends AppCompatActivity
     String wantedImg;
     String recipeTitle = null;
     public static int i = 1;
+
+    DatabaseHelper databaseHelper;
+    User user;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recipe_page);
+
+        user = (User) getIntent().getSerializableExtra("databaseUser");
+
+
         mPrefs = getApplicationContext().getSharedPreferences("Recipe_Book", MODE_PRIVATE);
         view = findViewById(R.id.viewPager);
         tex = findViewById(R.id.Recipe_Name);
