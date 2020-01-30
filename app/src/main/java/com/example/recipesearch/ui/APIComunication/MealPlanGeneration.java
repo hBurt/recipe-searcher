@@ -15,29 +15,35 @@ import java.io.IOException;
 
 public class MealPlanGeneration extends AsyncTask<Void, Void, String>
 {
-    static String Nutrient1 = null;
-    static String Nutrient2 = null;
-    static String Nutrient3 = null;
-    static String Nutrient4 = null;
-    static String id1 = null;
-    static String title1 = null;
-    static String rim1 = null;
-    static String image1 = null;
-    static String id2 = null;
-    static String title2 = null;
-    static String rim2 = null;
-    static String image2 = null;
-    static String id3 = null;
-    static String title3 = null;
-    static String rim3 = null;
-    static String image3 = null;
+    private static String Nutrient1 = null;
+    private static String Nutrient2 = null;
+    private static String Nutrient3 = null;
+    private static String Nutrient4 = null;
+    private static String id1 = null;
+    private static String title1 = null;
+    private static String rim1 = null;
+    private static String image1 = null;
+    private static String id2 = null;
+    private static String title2 = null;
+    private static String rim2 = null;
+    private static String image2 = null;
+    private static String id3 = null;
+    private static String title3 = null;
+    private static String rim3 = null;
+    private static String image3 = null;
+
 
     @Override
     protected String doInBackground(Void... voids)
     {
+        String URL = null;
+        String Exclu = null;
+        String Diet = null;
+        String Cal = null;
+        String TF = null;
         String responseData = "";
         Response response = null;
-        String TF = new String(MealPlanActivity.getTimePeriod().trim().replace(" ", "%20").replace("&", "%26")
+        TF = new String(MealPlanActivity.getTimePeriod().trim().replace(" ", "%20").replace("&", "%26")
                 .replace(",", "%2c").replace("(", "%28").replace(")", "%29")
                 .replace("!", "%21").replace("=", "%3D").replace("<", "%3C")
                 .replace(">", "%3E").replace("#", "%23").replace("$", "%24")
@@ -47,7 +53,7 @@ public class MealPlanGeneration extends AsyncTask<Void, Void, String>
                 .replace("[", "%5B").replace("\\", "%5C").replace("]", "%5D")
                 .replace("_", "%5F").replace("`", "%60").replace("{", "%7B")
                 .replace("|", "%7C").replace("}", "%7D"));
-        String Cal = new String(MealPlanActivity.getCaloricNum().trim().replace(" ", "%20").replace("&", "%26")
+        Cal = new String(MealPlanActivity.getCaloricNum().trim().replace(" ", "%20").replace("&", "%26")
                 .replace(",", "%2c").replace("(", "%28").replace(")", "%29")
                 .replace("!", "%21").replace("=", "%3D").replace("<", "%3C")
                 .replace(">", "%3E").replace("#", "%23").replace("$", "%24")
@@ -57,7 +63,7 @@ public class MealPlanGeneration extends AsyncTask<Void, Void, String>
                 .replace("[", "%5B").replace("\\", "%5C").replace("]", "%5D")
                 .replace("_", "%5F").replace("`", "%60").replace("{", "%7B")
                 .replace("|", "%7C").replace("}", "%7D"));
-        String Diet = new String(MealPlanActivity.getDietaryPrefrence().trim().replace(" ", "%20").replace("&", "%26")
+        Diet = new String(MealPlanActivity.getDietaryPrefrence().trim().replace(" ", "%20").replace("&", "%26")
                 .replace(",", "%2c").replace("(", "%28").replace(")", "%29")
                 .replace("!", "%21").replace("=", "%3D").replace("<", "%3C")
                 .replace(">", "%3E").replace("#", "%23").replace("$", "%24")
@@ -67,7 +73,7 @@ public class MealPlanGeneration extends AsyncTask<Void, Void, String>
                 .replace("[", "%5B").replace("\\", "%5C").replace("]", "%5D")
                 .replace("_", "%5F").replace("`", "%60").replace("{", "%7B")
                 .replace("|", "%7C").replace("}", "%7D"));
-        String Exclu = new String(MealPlanActivity.getExclusions().trim().replace(" ", "%20").replace("&", "%26")
+        Exclu = new String(MealPlanActivity.getExclusions().trim().replace(" ", "%20").replace("&", "%26")
                 .replace(",", "%2c").replace("(", "%28").replace(")", "%29")
                 .replace("!", "%21").replace("=", "%3D").replace("<", "%3C")
                 .replace(">", "%3E").replace("#", "%23").replace("$", "%24")
@@ -77,9 +83,19 @@ public class MealPlanGeneration extends AsyncTask<Void, Void, String>
                 .replace("[", "%5B").replace("\\", "%5C").replace("]", "%5D")
                 .replace("_", "%5F").replace("`", "%60").replace("{", "%7B")
                 .replace("|", "%7C").replace("}", "%7D"));
+        if(TF != null && Cal != null && Exclu != null && Diet != null)
+        URL = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/mealplans/generate?timeFrame="+TF+"&targetCalories="+Cal+"&diet="+Diet+"&exclude="+Exclu;
+        else if (TF != null && Cal != null && Diet != null)
+            URL = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/mealplans/generate?timeFrame="+TF+"&targetCalories="+Cal+"&diet="+Diet;
+        else if (TF != null && Cal != null )
+            URL = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/mealplans/generate?timeFrame="+TF+"&targetCalories="+Cal;
+        else if (TF != null )
+            URL = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/mealplans/generate?timeFrame="+TF;
+        else
+            URL = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/mealplans/generate";
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
-                .url("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/mealplans/generate?timeFrame="+TF+"&targetCalories="+Cal+"&diet="+Diet+"&exclude="+Exclu)
+                .url(URL)
                 .get()
                 .addHeader("x-rapidapi-host", "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com")
                 .addHeader("x-rapidapi-key", "7dba1c8b6dmsh8c3919fbe127d43p122d00jsn89f1b32d2216")
