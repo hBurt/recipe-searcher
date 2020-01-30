@@ -13,6 +13,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.Map;
 
 public class MealPlanGeneration extends AsyncTask<Void, Void, String>
 {
@@ -88,7 +89,7 @@ public class MealPlanGeneration extends AsyncTask<Void, Void, String>
                 .replace("[", "%5B").replace("\\", "%5C").replace("]", "%5D")
                 .replace("_", "%5F").replace("`", "%60").replace("{", "%7B")
                 .replace("|", "%7C").replace("}", "%7D"));
-        if(TF != null && Cal != null && Exclu != null && Diet != null)
+       /* if(TF != null && Cal != null && Exclu != null && Diet != null)
         URL = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/mealplans/generate?timeFrame="+TF+"&targetCalories="+Cal+"&diet="+Diet+"&exclude="+Exclu;
         else if (TF != null && Cal != null && Diet != null)
             URL = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/mealplans/generate?timeFrame="+TF+"&targetCalories="+Cal+"&diet="+Diet;
@@ -97,7 +98,7 @@ public class MealPlanGeneration extends AsyncTask<Void, Void, String>
         else if (TF != null )
             URL = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/mealplans/generate?timeFrame="+TF;
         else
-            URL = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/mealplans/generate";
+            URL = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/mealplans/generate?timeFrame=day";
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
                 .url(URL)
@@ -114,15 +115,16 @@ public class MealPlanGeneration extends AsyncTask<Void, Void, String>
         catch (IOException e)
         {
             e.printStackTrace();
-        }
+        }*/
         JSONObject jObject = null;
+        JSONObject jObject1 = null;
+        JSONObject jObject2 = null;
+        JSONObject jObject3 = null;
         JSONArray jArray = null;
         JSONArray jArray2 = null;
-        JSONArray jArrayM1 = null;
-        JSONArray jArrayM2 = null;
-        JSONArray jArrayM3 = null;
         try
         {
+            responseData = "{\"meals\":[{\"id\":1158522,\"title\":\"Rum Raisin Scones\",\"readyInMinutes\":508,\"servings\":8,\"image\":\"rum-raisin-scones-1158522.jpg.jpg.jpg.jpg\",\"imageUrls\":[\"rum-raisin-scones-1158522.jpg.jpg.jpg.jpg\",\"rum-raisin-scones-1158522.jpg.jpg.jpg\",\"rum-raisin-scones-1158522.jpg.jpg\",\"rum-raisin-scones-1158522.jpg\"]},{\"id\":655269,\"title\":\"Peanut Butter Chocolate Cream Pie\",\"readyInMinutes\":45,\"servings\":6,\"image\":\"Peanut-Butter-Chocolate-Cream-Pie-655269.jpg\",\"imageUrls\":[\"Peanut-Butter-Chocolate-Cream-Pie-655269.jpg\"]},{\"id\":716429,\"title\":\"Pasta with Garlic, Scallions, Cauliflower & Breadcrumbs\",\"readyInMinutes\":45,\"servings\":2,\"image\":\"pasta-with-garlic-scallions-cauliflower-bread-crumbs-716429.jpg\",\"imageUrls\":[\"pasta-with-garlic-scallions-cauliflower-bread-crumbs-716429.jpg\"]}],\"nutrients\":{\"calories\":1754.4,\"protein\":44.09,\"fat\":70.38,\"carbohydrates\":233.06}}";
             jObject = new JSONObject(String.valueOf(responseData));
         }
         catch (JSONException e)
@@ -132,17 +134,18 @@ public class MealPlanGeneration extends AsyncTask<Void, Void, String>
         try
         {
             jArray = jObject.getJSONArray("meals");
-            jArray2 = jObject.getJSONArray("nutrients");
-            jArrayM1 = jArray.getJSONArray(0);
-            jArrayM2 = jArray.getJSONArray(1);
-            jArrayM3 = jArray.getJSONArray(3);
+           // jArray2 = jObject.getJSONArray("nutrients");
+            jObject1 = jArray.getJSONObject(0);
+            jObject2 = jArray.getJSONObject(1);
+            jObject3 = jArray.getJSONObject(2);
+
         }
         catch (JSONException e)
         {
             e.printStackTrace();
         }
         // Begin getting shit from the arrays
-        for (int i=0; i < jArray.length(); i++)
+       /* for (int i=0; i < jArray2.length(); i++)
         {
             JSONObject oneObject = null;
             try {
@@ -156,51 +159,24 @@ public class MealPlanGeneration extends AsyncTask<Void, Void, String>
             {
                 e.printStackTrace();
             }
-        }
-        for (int i=0; i < jArray.length(); i++)
+        }*/
+
+        try {
+            id1 = jObject1.getString("id");
+            title1 = jObject1.getString("title");
+            rim1 = jObject1.getString("readyInMinutes");
+            image1 = jObject1.getString("image");
+            id2 = jObject2.getString("id");
+            title2 = jObject2.getString("title");
+            rim2 = jObject2.getString("readyInMinutes");
+            image2 = jObject2.getString("image");
+            id3 = jObject3.getString("id");
+            title3 = jObject3.getString("title");
+            rim3 = jObject3.getString("readyInMinutes");
+            image3 = jObject3.getString("image");
+        } catch (JSONException e)
         {
-            JSONObject oneObject = null;
-            try {
-                oneObject = jArrayM1.getJSONObject(i);
-                id1 = oneObject.getString("id");
-                title1 = oneObject.getString("title");
-                rim1 = oneObject.getString("readyInMinutes");
-                image1 = oneObject.getString("image");
-            }
-            catch (JSONException e)
-            {
-                e.printStackTrace();
-            }
-        }
-        for (int i=0; i < jArray.length(); i++)
-        {
-            JSONObject oneObject = null;
-            try {
-                oneObject = jArrayM2.getJSONObject(i);
-                id2 = oneObject.getString("id");
-                title2 = oneObject.getString("title");
-                rim2 = oneObject.getString("readyInMinutes");
-                image2 = oneObject.getString("image");
-            }
-            catch (JSONException e)
-            {
-                e.printStackTrace();
-            }
-        }
-        for (int i=0; i < jArray.length(); i++)
-        {
-            JSONObject oneObject = null;
-            try {
-                oneObject = jArrayM3.getJSONObject(i);
-                id3 = oneObject.getString("id");
-                title3 = oneObject.getString("title");
-                rim3 = oneObject.getString("readyInMinutes");
-                image3 = oneObject.getString("image");
-            }
-            catch (JSONException e)
-            {
-                e.printStackTrace();
-            }
+            e.printStackTrace();
         }
         GeneratedMealPlan.setCals(Nutrient1);
         GeneratedMealPlan.setFat(Nutrient3);
