@@ -46,9 +46,9 @@ public class GeneratedMealPlan extends AppCompatActivity
         ImageView img3 = findViewById(R.id.Meal3Img);
         if (Meal1Name != null)
         {
-           String readyInMin1v2 = " Ready in " + readyInMin1 + " minutes ";
-           String readyInMin2v2 = " Ready in " + readyInMin2 + " minutes ";
-           String readyInMin3v2 = " Ready in " + readyInMin3 + " minutes ";
+           String readyInMin1v2 = "Ready in " + readyInMin1 + " minutes ";
+           String readyInMin2v2 = "Ready in " + readyInMin2 + " minutes ";
+           String readyInMin3v2 = "Ready in " + readyInMin3 + " minutes ";
             Picasso.get().load(mealImg1).into(img1);
             Picasso.get().load(mealImg2).into(img2);
             Picasso.get().load(mealImg3).into(img3);
