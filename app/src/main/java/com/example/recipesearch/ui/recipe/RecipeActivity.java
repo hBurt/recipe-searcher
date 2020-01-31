@@ -151,6 +151,7 @@ public class RecipeActivity extends AppCompatActivity
         // should save as long as i have the id
         if (ID != null)
         {
+            // should prevent rand and next from overwriting the original
             RecipeStorage storage = new RecipeStorage(getApplicationContext());
             if (storage.getOGName().equals(RecipeName))
             {
