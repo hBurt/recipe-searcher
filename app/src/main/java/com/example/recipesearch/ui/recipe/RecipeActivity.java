@@ -7,13 +7,17 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.recipesearch.MainActivity;
 import com.example.recipesearch.R;
+import com.example.recipesearch.database.Favorite;
 import com.example.recipesearch.database.Recipe;
 import com.example.recipesearch.database.User;
 import com.example.recipesearch.helpers.DatabaseHelper;
@@ -53,6 +57,8 @@ public class RecipeActivity extends AppCompatActivity
     String recipeTitle = null;
     public static int i = 1;
 
+    Button saveRecipe, btnHome;
+
     DatabaseHelper databaseHelper;
     User user;
 
@@ -62,7 +68,8 @@ public class RecipeActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recipe_page);
 
-        user = (User) getIntent().getSerializableExtra("databaseUser");
+        saveRecipe = findViewById(R.id.btn_save_recipe);
+        btnHome = findViewById(R.id.button_home);
 
 
         mPrefs = getApplicationContext().getSharedPreferences("Recipe_Book", MODE_PRIVATE);
@@ -99,6 +106,22 @@ public class RecipeActivity extends AppCompatActivity
             public void onTabReselected(TabLayout.Tab tab)
             {
                 refresh();
+            }
+        });
+
+        saveRecipe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                saveRecipe();
+                System.out.println("Saving recipe");
+            }
+        });
+
+        btnHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent in = new Intent(RecipeActivity.this, MainActivity.class);
+                startActivity(in);
             }
         });
 
@@ -170,5 +193,19 @@ public class RecipeActivity extends AppCompatActivity
         edit.putString(ID+"img", imgName);
         edit.apply();
         }
+    }
+
+    private void saveRecipe(){
+
+        user = (User) getIntent().getSerializableExtra("databaseUserr");
+
+        databaseHelper = new DatabaseHelper(this);
+        databaseHelper.rebuildDatabase();
+
+        Recipe recipe = new Recipe(0, "Title" + recipeTitle, 20, imgName);
+        Favorite favoite = new Favorite(0 ,recipe);
+
+        user.getFavorites().add(favoite);
+        databaseHelper.getDatabase().getUserDao().updateDetails(user);
     }
 }

@@ -90,4 +90,26 @@
         app:layout_constraintTop_toBottomOf="@+id/Image_of_Food"
         app:tabInlineLabel="true" />
 
+    <Button
+        android:id="@+id/btn_save_recipe"
+        android:layout_width="95dp"
+        android:layout_height="53dp"
+        android:text="@string/save_recipe"
+        app:layout_constraintBottom_toTopOf="@+id/Time"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/Recpie_Tool_Bar"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button_home"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="@string/title_home"
+        app:layout_constraintEnd_toStartOf="@+id/btn_save_recipe"
+        app:layout_constraintHorizontal_bias="0.069"
+        app:layout_constraintStart_toStartOf="@+id/Recpie_Tool_Bar"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

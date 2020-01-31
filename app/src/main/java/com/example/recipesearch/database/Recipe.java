@@ -5,15 +5,16 @@ import java.io.Serializable;
 public class Recipe implements Serializable {
 
     private int id;
-    private String title;
+    private String title, imageURL, baseImageURI, ingredients, directions;
     private int readyInMinutes;
-    private String imageURL;
 
     public Recipe(){
         setId(0);
         setTitle("");
         setReadyInMiniutes(0);
         setImageURL("");
+        setIngredients("");
+        setDirections("");
     }
 
     public Recipe(int id, String title, int readyInMinutes, String imageURL) {
@@ -53,5 +54,29 @@ public class Recipe implements Serializable {
 
     public void setImageURL(String imageURL) {
         this.imageURL = imageURL;
+    }
+
+    public String getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(String ingredients) {
+        this.ingredients = ingredients;
+    }
+
+    public String getDirections() {
+        return directions;
+    }
+
+    public void setDirections(String directions) {
+        this.directions = directions;
+    }
+
+    public String getBaseImageURI() {
+        return baseImageURI;
+    }
+
+    public void setBaseImageURI(String baseImageURI) {
+        this.baseImageURI = baseImageURI;
     }
 }

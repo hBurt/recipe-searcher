@@ -68,6 +68,8 @@ public class Next_recipe extends AsyncTask<Void, Void, String>
         {
             response = client.newCall(request).execute(); // provides a val for the first search and preforms it
             responseData = response.body().string();
+
+            System.out.println("Data: " + responseData);
             String test = responseData;
 
 

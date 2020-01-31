@@ -57,12 +57,12 @@ public class SearchActivity extends AppCompatActivity
 
         user = (User) getIntent().getSerializableExtra("databaseUser");
 
-        //user.getFavorites().add(new Favorite(new Recipe(0, "Random title", 25, "https://thumbs.dreamstime.com/b/indian-bengali-thali-meal-x-consisting-different-curry-flat-bread-rice-papad-77486943.jpg")));
+        //user.getFavorites().add(new Favorite(new Recipe(0, "Random title2", 25, "https://thumbs.dreamstime.com/b/indian-bengali-thali-meal-x-consisting-different-curry-flat-bread-rice-papad-77486943.jpg")));
 
         databaseHelper = new DatabaseHelper(this);
         databaseHelper.rebuildDatabase();
 
-        //databaseHelper.getDatabase().getUserDao().updateDetails(user);
+        databaseHelper.getDatabase().getUserDao().updateDetails(user);
 
         mPrefs = getApplicationContext().getSharedPreferences("Recipe_Book", MODE_PRIVATE);
         tool = findViewById(R.id.tb);
@@ -108,6 +108,7 @@ public class SearchActivity extends AppCompatActivity
             {
 
                 Intent in = new Intent(SearchActivity.this, RecipeActivity.class);
+                in.putExtra("databaseUserr", user);
                 startActivity(in);
             }
         };
@@ -117,7 +118,7 @@ public class SearchActivity extends AppCompatActivity
             public boolean onQueryTextSubmit(String query)
             {
                 Intent se = new Intent(SearchActivity.this, SearchingActivity.class);
-                //se.putExtra("databaseHelper", databaseString);
+
                 startActivity(se);
                 SearchedFood = query;
                 IDList = new ArrayList<String>();
