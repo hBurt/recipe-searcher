@@ -95,4 +95,18 @@
     <string name="next_recipe">Next Recipe</string>
     <string name="random_recipe">Random Recipe</string>
     <string name="searching_for_recipe">Searching for Recipe</string>
+    <string name="meal_plan_generator">Meal Plan Generator</string>
+    <string name="time_frame">Time Frame (Optional)</string>
+    <string name="calorie_target">Calorie Target</string>
+    <string name="calories">Calories</string>
+    <string name="diet">Diet</string>
+    <string name="exclusions">Exclusions</string>
+    <string name="submit">Submit</string>
+    <string name="food_you_want_to_exclude">Food you want to exclude</string>
+    <string name="diet2" translatable="false">Diet</string>
+    <string name="time_frame2">Time Frame</string>
+    <string name="day_or_night">"Day or Night "</string>
+    <string name="meal_plan">Meal Plan</string>
+    <string name="image_of_meal">image of meal</string>
+    <string name="generating_meal_plan">Generating Meal Plan</string>
 </resources>

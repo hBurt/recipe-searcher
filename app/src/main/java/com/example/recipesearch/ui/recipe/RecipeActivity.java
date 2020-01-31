@@ -1,12 +1,8 @@
 package com.example.recipesearch.ui.recipe;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Message;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -28,17 +24,8 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.sql.Time;
-
 public class RecipeActivity extends AppCompatActivity
 {
-    Recipe_Directions_Tab_Fragment RDTF = new Recipe_Directions_Tab_Fragment(); // case 1
-    Recipe_Ingredient_Tab_Fragment RITF = new Recipe_Ingredient_Tab_Fragment(); // case 0
-    Recipe_Similar_Recipes_Tab_Fragment RSRTF = new Recipe_Similar_Recipes_Tab_Fragment(); //case 2
     private TextView tex;
     private ImageView pic;
     private TabLayout tab;
@@ -46,8 +33,6 @@ public class RecipeActivity extends AppCompatActivity
     private static Handler h;
     Drawable image = null;
     ViewPager view;
-    static SharedPreferences mPrefs;
-    SharedPreferences.Editor edit;
     static String ID = null;
     static String RecipeName = "Beef Salpicao"; // example for test purposes
     String defaultName =  "Beef Salpicao";
@@ -62,6 +47,7 @@ public class RecipeActivity extends AppCompatActivity
     DatabaseHelper databaseHelper;
     User user;
 
+    public static boolean ReadTheDamBook = false;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -73,19 +59,35 @@ public class RecipeActivity extends AppCompatActivity
 
 
         mPrefs = getApplicationContext().getSharedPreferences("Recipe_Book", MODE_PRIVATE);
+        if (ReadTheDamBook == true)
+        {
+            useOld();
+            ReadTheDamBook = false;
+        }
         view = findViewById(R.id.viewPager);
         tex = findViewById(R.id.Recipe_Name);
         pic = findViewById(R.id.Image_of_Food);
         tab = findViewById(R.id.Tabs);
         TTM = findViewById(R.id.Time);
+        if (timeToMake != "Unavailable")
         TTM.setText(timeToMake + " minutes");
         wantedImg = imgName;
         if (wantedImg.length() > 3)
-        Picasso.get().load(wantedImg).into(pic);
+        {
+            if (!wantedImg.contains("https://spoonacular.com/recipeImages/"))
+            {
+                String nWantedImg = "https://spoonacular.com/recipeImages/" + wantedImg;
+                Picasso.get().load(nWantedImg).into(pic);
+            }
+            else
+            Picasso.get().load(wantedImg).into(pic);
+        }
         tab.addTab(tab.newTab().setText("Ingredients"));
         tab.addTab(tab.newTab().setText("Directions"));
         tab.addTab(tab.newTab().setText("Next Recipe"));
         tex.setText(RecipeName);
+        RecipeStorage storage = new RecipeStorage(getApplicationContext());
+        storage.setOGName(RecipeName);
         tab.setTabGravity(TabLayout.GRAVITY_FILL);
         final MyTabAdapter adapter = new MyTabAdapter(this,getSupportFragmentManager(), tab.getTabCount());
         view.setAdapter(adapter);
@@ -141,6 +143,23 @@ public class RecipeActivity extends AppCompatActivity
         startActivity(getIntent());
         overridePendingTransition(0, 0);
     }
+    public void refreshAndSave()
+    {
+        if (ID != null)
+        {
+            RecipeStorage storage = new RecipeStorage(getApplicationContext());
+            storage.setDirections();
+            storage.setIngred();
+            storage.setImgURL(imgName);
+            storage.setRecipeID(ID);
+            storage.setRecipeName(RecipeName);
+            storage.setTimeAmount(timeToMake);
+        }
+        finish();
+        overridePendingTransition(0, 0);
+        startActivity(getIntent());
+        overridePendingTransition(0, 0);
+    }
     public static void setPic( String img)
     {
         imgName = img;
@@ -153,18 +172,16 @@ public class RecipeActivity extends AppCompatActivity
     {
         ID = id;
     }
-    public static void useOld(String id)
+    public void useOld()
     {
-        if (mPrefs.contains(id+"Directions"))
-            Recipe_Directions_Tab_Fragment.setDirections( mPrefs.getString(id+"Directions"," "));
-        if (mPrefs.contains(id+"Ingredients"))
-             Recipe_Ingredient_Tab_Fragment.setIngredients( mPrefs.getString(id+"Ingredients"," "));
-        if (mPrefs.contains(id+"Name"))
-            RecipeName = mPrefs.getString(id+"Name", " ");
-        if (mPrefs.contains(id+"Time"))
-            timeToMake = mPrefs.getString(id+"Time"," ");
-        if (mPrefs.contains(id+"img"))
-            imgName = mPrefs.getString(id+"img"," ");
+        RecipeStorage storage = new RecipeStorage(getApplicationContext());
+        imgName = storage.getOldImgURL();
+        RecipeName = storage.getOldName();
+        Recipe_Ingredient_Tab_Fragment.setIngredients(storage.getOldIngred());
+        Recipe_Directions_Tab_Fragment.setDirections(storage.getOldDirections());
+        timeToMake = storage.getOldTime();
+        ID = storage.getOldID();
+
     }
     @Override
     protected void onDestroy()
@@ -173,25 +190,19 @@ public class RecipeActivity extends AppCompatActivity
         // should save as long as i have the id
         if (ID != null)
         {
-        edit = mPrefs.edit();
-        if (mPrefs.contains(0+"id"))
-        edit.putString(0+"id", ID);
-        else {
-            for (int i = 0; i > 10; i++)
+            // should prevent rand and next from overwriting the original
+            RecipeStorage storage = new RecipeStorage(getApplicationContext());
+            if (storage.getOGName().equals(RecipeName))
             {
-                if (mPrefs.contains(i+"id"))
-                {
-                    edit.putString(i + "id", ID);
-                    break;
-                }
+                storage.removePref();
+                storage.removeFirstPref();
+                storage.setDirections();
+                storage.setIngred();
+                storage.setImgURL(imgName);
+                storage.setRecipeID(ID);
+                storage.setRecipeName(RecipeName);
+                storage.setTimeAmount(timeToMake);
             }
-        }
-        edit.putString(ID+"Directions", Recipe_Directions_Tab_Fragment.getDirections());
-        edit.putString(ID+"Ingredients", Recipe_Ingredient_Tab_Fragment.getIngredients());
-        edit.putString(ID+"Name", RecipeName);
-        edit.putString(ID+"Time", timeToMake);
-        edit.putString(ID+"img", imgName);
-        edit.apply();
         }
     }
 
@@ -207,5 +218,9 @@ public class RecipeActivity extends AppCompatActivity
 
         user.getFavorites().add(favoite);
         databaseHelper.getDatabase().getUserDao().updateDetails(user);
+    }
+    public static void setReadTheBook(boolean bool)
+    {
+        ReadTheDamBook = bool;
     }
 }

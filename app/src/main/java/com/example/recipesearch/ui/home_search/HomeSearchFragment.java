@@ -21,6 +21,7 @@ import com.example.recipesearch.MainActivity;
 import com.example.recipesearch.R;
 import com.example.recipesearch.helpers.DatabaseHelper;
 import com.example.recipesearch.helpers.UiHelper;
+import com.example.recipesearch.ui.MealPlanMaker.MealPlanActivity;
 import com.example.recipesearch.ui.meal_planner.Meal_Planner_Activity;
 import com.example.recipesearch.ui.search_result.SearchActivity;
 import com.example.recipesearch.ui.user.login.LoginFragment;
@@ -30,7 +31,7 @@ public class HomeSearchFragment extends Fragment {
     private HomeSearchViewModel homeSearchViewModel;
     private EditText et;
     private ImageView iv;
-    private Button login, signup, planer;
+    private Button login, signup, planer, MPGen;
     private TextView textView_or;
     private boolean canSwitch = true;
 
@@ -59,6 +60,7 @@ public class HomeSearchFragment extends Fragment {
         signup = root.findViewById(R.id.home_button_signup);
         planer = root.findViewById(R.id.Planer);
         textView_or = root.findViewById(R.id.textView_or2);
+        MPGen = root.findViewById(R.id.MPGenerator);
 
         final DatabaseHelper databaseHelper = ((MainActivity) getActivity()).getDatabaseHelper();
 
@@ -135,6 +137,15 @@ public class HomeSearchFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent in = new Intent(getActivity(), Meal_Planner_Activity.class);
+                startActivity(in);
+            }
+        });
+        MPGen.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent in = new Intent(getActivity(), MealPlanActivity.class);
                 startActivity(in);
             }
         });

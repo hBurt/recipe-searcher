@@ -26,6 +26,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.recipesearch.R;
+import com.example.recipesearch.ui.recipe.RecipeStorage;
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 
@@ -46,6 +47,7 @@ public class Meal_Planner_Activity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.meal_planner);
+        RecipeStorage storage = new RecipeStorage(getApplicationContext());
         Mview = findViewById(R.id.viewPager2);
         mPrefs = getApplicationContext().getSharedPreferences("Saved_Plan", MODE_PRIVATE);
         TabLayout tabM = findViewById(R.id.tabLayout);
@@ -57,10 +59,17 @@ public class Meal_Planner_Activity extends AppCompatActivity
         if (mPrefs.contains("Note"))
             Notes = mPrefs.getString("Note", " ");
         if (mPrefs.contains("Day1"))
-            Today = mPrefs.getString("Day1"," ");
+        {
+            String day = mPrefs.getString("Day1"," ");
+            String plan = storage.getPlan();
+            Today = day + plan;
+        }
+        else
+            Today = storage.getPlan();
         if (mPrefs.contains("Day2"))
             Tomorrow = mPrefs.getString("Day2"," ");
         final MP_TabAdapter adapter = new MP_TabAdapter(this,getSupportFragmentManager(), tabM.getTabCount());
+        storage.clearDayPlan();
         Mview.setAdapter(adapter);
         Mview.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabM));
         tabM.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener()
@@ -101,13 +110,13 @@ public class Meal_Planner_Activity extends AppCompatActivity
     {
         return Notes;
     }
-
-
-    @Override
-    public void onBackPressed()
+    public void setTodayNew(String string)
     {
-        super.onBackPressed();
+        edit = mPrefs.edit();
+        edit.putString("Day1", string);
+        edit.apply();
     }
+
     @Override
     protected void onDestroy()
     {

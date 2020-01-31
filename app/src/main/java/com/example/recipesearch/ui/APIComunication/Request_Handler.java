@@ -74,7 +74,12 @@ public class Request_Handler extends AsyncTask<Void, Void, String>
         }
         catch (IOException e)
         {
-            e.printStackTrace();
+            RecipeActivity.setTime("ERROR:02");
+            RecipeActivity.setPic(" ");
+            RecipeActivity.setRecipeName("ERROR: Failed to retrieve recipe");
+            Recipe_Directions_Tab_Fragment.setDirections("ERROR: Failed to retrieve recipe");
+            Recipe_Ingredient_Tab_Fragment.setIngredients("ERROR: Failed to retrieve recipe");
+            return null;
         }
 
         // begins parsing to get the id, will just get the first id
@@ -86,7 +91,12 @@ public class Request_Handler extends AsyncTask<Void, Void, String>
         }
         catch (JSONException e)
         {
-            e.printStackTrace();
+            RecipeActivity.setTime("ERROR:02");
+            RecipeActivity.setPic(" ");
+            RecipeActivity.setRecipeName("ERROR: Failed to retrieve recipe");
+            Recipe_Directions_Tab_Fragment.setDirections("ERROR: Failed to retrieve recipe");
+            Recipe_Ingredient_Tab_Fragment.setIngredients("ERROR: Failed to retrieve recipe");
+            return null;
         }
         try
         {
@@ -94,158 +104,162 @@ public class Request_Handler extends AsyncTask<Void, Void, String>
         }
         catch (JSONException e)
         {
-            e.printStackTrace();
+            RecipeActivity.setTime("ERROR:01");
+            RecipeActivity.setPic(" ");
+            RecipeActivity.setRecipeName("ERROR: Bad or misspelled word");
+            Recipe_Directions_Tab_Fragment.setDirections("ERROR: Bad or misspelled word");
+            Recipe_Ingredient_Tab_Fragment.setIngredients("ERROR: Bad or misspelled word");
+            return null;
         }
                 // Begin getting shit from the arrays
                         for (int i=0; i < jArray.length(); i++)
                         {
-                            try
-                            {
-                            JSONObject oneObject = jArray.getJSONObject(i);
-                             oneObjectsItem = oneObject.getString("id");
-                             oneObjectsItem2 = oneObject.getString("title");
-                             oneObjectsItem3 = oneObject.getString("readyInMinutes");
-                             oneObjectsItem4 = oneObject.getString("image");
+
+                            JSONObject oneObject = null;
+                            try {
+                                oneObject = jArray.getJSONObject(i);
+                                oneObjectsItem = oneObject.getString("id");
+                                oneObjectsItem2 = oneObject.getString("title");
+                                oneObjectsItem3 = oneObject.getString("readyInMinutes");
+                                oneObjectsItem4 = oneObject.getString("image");
                             }
                             catch (JSONException e)
                             {
-                                // this is a test id
-                                id = "324694";
-                                // Crap
+                                RecipeActivity.setTime("ERROR:01");
+                                RecipeActivity.setPic(" ");
+                                RecipeActivity.setRecipeName("ERROR: Bad or misspelled word");
+                                Recipe_Directions_Tab_Fragment.setDirections("ERROR: Bad or misspelled word");
+                                Recipe_Ingredient_Tab_Fragment.setIngredients("ERROR: Bad or misspelled word");
+                                return null;
                             }
+
+
                         }
         // will create a second api call
         // after received must get the item id from what was received
-        if (oneObjectsItem.length() > 0)
+        if (oneObjectsItem != null)
+        {
+        if (oneObjectsItem.length() > 3  )
         {
             id = oneObjectsItem;
         }
-        else
-        {
-        // this is a test id
-         id = "324694";
-        }
-        for (int i = 0; i > 11; i++)
-        if (id == IDList.get(i))
-        {
-            RecipeActivity.useOld(id);
-            return null;
-        }
-        if (oneObjectsItem2 .length() > 0)
+        if (oneObjectsItem2 .length() > 2)
             dishName = oneObjectsItem2;
         // for having them be on different calls
         // wip for getting the instructions
+        }
         String newReturn = " ";
        // id = "521510"; // testing id
-        OkHttpClient client2 = new OkHttpClient();
         Response response2 = null; // needs an id num or will cause an error
         // for use in filtering how detailed the instructions are
-        com.squareup.okhttp.Request request2 = new Request.Builder()
-                .url("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/" + id + "/analyzedInstructions?stepBreakdown=false") // will fail if not given an id
-                .get()
-                .addHeader("x-rapidapi-host", "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com")
-                .addHeader("x-rapidapi-key", "7dba1c8b6dmsh8c3919fbe127d43p122d00jsn89f1b32d2216")
-                .build();
-        try
-        {
-            response2 = client2.newCall(request2).execute();
-            String responseData2 = response2.body().string();
-            newReturn = responseData2;
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
-        // this is for testing without making api calls
-        // this section will get the second response
-        // after the second one is done i will work on how to use the data where it is needed
-        String secondReturn = " ";
-        // this should remove unwanted characters
-        secondReturn = new String(newReturn.trim().replace("&", "")
-                .replace(",", " ")
-                .replace("!", "").replace("=", "").replace("<", "")
-                .replace(">", "").replace("#", "").replace("$", "")
-                .replace("'", "").replace("*", "").replace("-", " ")
-                .replace("/", "").replace("unit", "").replace("number", "")
-                .replace(";", "").replace("?", "").replace("@", "")
-                .replace("[", "").replace("\\", "").replace("]", "")
-                .replace("_", "").replace("`", "").replace("{", "")
-                .replace("|", "").replace("}", "").replace("name", "")
-                .replace("image", "").replace(".jpg", "").replace("  ", "")
-                .replace("\"", " ").replace(".png", "").replace(".", ""));
-        StringTokenizer tokens = new StringTokenizer(secondReturn, ":");
-        String[] result = new String[tokens.countTokens()];
-        int i = 0;
-        String firstDirect = " ";
-        List<String> firstIngred = new ArrayList<String>();
-        String time = " ";
-        while ( tokens.hasMoreTokens() )
-        {
-            result[i++] = tokens.nextToken();
-        }
-        for (int x = 0; x < result.length; x++)
-        {
-            if (result[x].length() > 30 )
-            {
-                firstDirect += result[x];
+        if (id != null) {
+
+            OkHttpClient client2 = new OkHttpClient();
+            com.squareup.okhttp.Request request2 = new Request.Builder()
+                    .url("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/" + id + "/analyzedInstructions?stepBreakdown=false") // will fail if not given an id
+                    .get()
+                    .addHeader("x-rapidapi-host", "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com")
+                    .addHeader("x-rapidapi-key", "7dba1c8b6dmsh8c3919fbe127d43p122d00jsn89f1b32d2216")
+                    .build();
+            try {
+                response2 = client2.newCall(request2).execute();
+                String responseData2 = response2.body().string();
+                newReturn = responseData2;
+            } catch (IOException e) {
+                RecipeActivity.setTime("ERROR:03");
+                RecipeActivity.setPic(" ");
+                RecipeActivity.setRecipeName("ERROR: Failed to retrieve recipe information");
+                Recipe_Directions_Tab_Fragment.setDirections("ERROR: Failed to retrieve recipe information");
+                Recipe_Ingredient_Tab_Fragment.setIngredients("ERROR: Failed to retrieve recipe information");
+                return null;
             }
-            else if (result[x].length() < 3 )
-            {
-                time += result[x];
+            // this is for testing without making api calls
+            // this section will get the second response
+            // after the second one is done i will work on how to use the data where it is needed
+            String secondReturn = " ";
+            // this should remove unwanted characters
+            secondReturn = new String(newReturn.trim().replace("&", "")
+                    .replace(",", " ")
+                    .replace("!", "").replace("=", "").replace("<", "")
+                    .replace(">", "").replace("#", "").replace("$", "")
+                    .replace("'", "").replace("*", "").replace("-", " ")
+                    .replace("/", "").replace("unit", "").replace("number", "")
+                    .replace(";", "").replace("?", "").replace("@", "")
+                    .replace("[", "").replace("\\", "").replace("]", "")
+                    .replace("_", "").replace("`", "").replace("{", "")
+                    .replace("|", "").replace("}", "").replace("name", "")
+                    .replace("image", "").replace(".jpg", "").replace("  ", "")
+                    .replace("\"", " ").replace(".png", "").replace(".", ""));
+            StringTokenizer tokens = new StringTokenizer(secondReturn, ":");
+            String[] result = new String[tokens.countTokens()];
+            int i = 0;
+            String firstDirect = " ";
+            List<String> firstIngred = new ArrayList<String>();
+            String time = " ";
+            while (tokens.hasMoreTokens()) {
+                result[i++] = tokens.nextToken();
             }
-            else {
-                firstIngred.add( result[x]);
+            for (int x = 0; x < result.length; x++) {
+                if (result[x].length() > 30) {
+                    firstDirect += result[x];
+                } else if (result[x].length() < 3) {
+                    time += result[x];
+                } else {
+                    firstIngred.add(result[x]);
+                }
             }
+            HashSet<String> hashSet = new HashSet<String>();
+            hashSet.addAll(firstIngred);
+            firstIngred.clear();
+            firstIngred.addAll(hashSet);
+            String secondIngred = firstIngred.toString();
+            Directions = new String(firstDirect.trim().replace("ingredients", ""));
+            String thirdIngred = new String(secondIngred.trim().replace("null", "").replace("id ", "").replace("steps", "").replace("length", "")
+                    .replace("0", "").replace("1", "").replace("2", "").replace("3", "").replace("4", "")
+                    .replace("5", "").replace("6", "").replace("7", "").replace("8", "").replace("9", "")
+                    .replace("step", "").replace("minutes", "").replace("equipment", "").replace(",", "").replace("[", "")
+                    .replace("]", "").replace("temperature", "").replace("Fahrenheit", "").replace("stove", "").replace("oven", "")
+                    .replace("Celsius", "").replace("  ", " ").replace(" and ", " ").replace("instant", "").replace(" pot ", "")
+                    .replace(" kitchen", "").replace(" timer ", "").replace(" Form ", "").replace(" Cook ", "").replace(" Grill ", "")
+                    .replace(" or ", "").replace(" frying ", "").replace(" pan ", "").replace(" grill ", "").replace(" fry ", "")
+                    .replace(" fresh ", "").replace(" brown ", "").replace(" the ", ""));
+            StringTokenizer tokensb = new StringTokenizer(thirdIngred, " ");
+            String[] resultb = new String[tokensb.countTokens()];
+            List<String> fourthIngred = new ArrayList<String>();
+            int c = 0;
+            while (tokensb.hasMoreTokens()) {
+                resultb[c++] = tokensb.nextToken();
+            }
+            for (int a = 0; a < resultb.length; a++) {
+                fourthIngred.add(resultb[a]);
+            }
+            HashSet<String> hashSetb = new HashSet<String>();
+            hashSetb.addAll(fourthIngred);
+            fourthIngred.clear();
+            fourthIngred.addAll(hashSetb);
+            String fifthIngred = fourthIngred.toString();
+            String sixthIngred = new String(fifthIngred.trim().replace("[", "").replace("]", "").replace(",", " ").replace(".", " ")
+                    .replace(" in ", "").replace(" dutch ", ""));
+            Ingredients = sixthIngred;
+            RecipeActivity.setID(oneObjectsItem);
+            RecipeActivity.setPic(oneObjectsItem4);
+            RecipeActivity.setTime(oneObjectsItem3);
+            RecipeActivity.setRecipeName(oneObjectsItem2);
+            Recipe_Directions_Tab_Fragment.setDirections(Directions);
+            Recipe_Ingredient_Tab_Fragment.setIngredients(Ingredients);
         }
-        HashSet<String> hashSet = new HashSet<String>();
-        hashSet.addAll(firstIngred);
-        firstIngred.clear();
-        firstIngred.addAll(hashSet);
-        String secondIngred = firstIngred.toString();
-        Directions = new String(firstDirect.trim().replace("ingredients", ""));
-        String thirdIngred = new String(secondIngred.trim().replace("null", "").replace("id ", "").replace("steps", "").replace("length", "")
-                .replace("0", "").replace("1", "").replace("2", "").replace("3", "").replace("4", "")
-                .replace("5", "").replace("6", "").replace("7", "").replace("8", "").replace("9", "")
-                .replace("step", "").replace("minutes", "").replace("equipment", "").replace(",", "").replace("[", "")
-                .replace("]", "").replace("temperature", "").replace("Fahrenheit", "").replace("stove", "").replace("oven", "")
-                .replace("Celsius", "").replace("  ", " ").replace(" and ", " ").replace("instant", "").replace(" pot ", "")
-                .replace(" kitchen", "").replace(" timer ", ""));
-        StringTokenizer tokensb = new StringTokenizer(thirdIngred, " ");
-        String[] resultb = new String[tokensb.countTokens()];
-        List<String> fourthIngred = new ArrayList<String>();
-        int c = 0;
-        while ( tokensb.hasMoreTokens() )
-        {
-            resultb[c++] = tokensb.nextToken();
-        }
-        for (int a = 0; a < resultb.length;a++ )
-        {
-            fourthIngred.add(resultb[a]);
-        }
-        HashSet<String> hashSetb = new HashSet<String>();
-        hashSetb.addAll(fourthIngred);
-        fourthIngred.clear();
-        fourthIngred.addAll(hashSetb);
-        String fifthIngred = fourthIngred.toString();
-        String sixthIngred = new String(fifthIngred.trim().replace("[", "").replace("]", "").replace(",", " ").replace(".", " ")
-                .replace(" in ", "") .replace(" dutch ", ""));
-        Ingredients = sixthIngred;
-        RecipeActivity.setID(oneObjectsItem);
-        RecipeActivity.setPic(oneObjectsItem4);
-        RecipeActivity.setTime(oneObjectsItem3);
-        RecipeActivity.setRecipeName(oneObjectsItem2);
-        Recipe_Directions_Tab_Fragment.setDirections(Directions);
-        Recipe_Ingredient_Tab_Fragment.setIngredients(Ingredients);
+        else {
+            RecipeActivity.setTime("ERROR:01");
+            RecipeActivity.setPic(" ");
+            RecipeActivity.setRecipeName("ERROR: Bad or misspelled word");
+            Recipe_Directions_Tab_Fragment.setDirections("ERROR: Bad or misspelled word");
+            Recipe_Ingredient_Tab_Fragment.setIngredients("ERROR: Bad or misspelled word");
+            }
         return null;
     }
     public static String getID()
     {
-        if (id.length() > 0)
         return id;
-        else {
-            id = "324694"; // default test id
-        return id;
-        }
     }
     public static String getDishName()
     {

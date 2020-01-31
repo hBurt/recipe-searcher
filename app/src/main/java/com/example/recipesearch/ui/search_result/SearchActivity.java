@@ -26,6 +26,7 @@ import com.example.recipesearch.database.User;
 import com.example.recipesearch.helpers.DatabaseHelper;
 import com.example.recipesearch.ui.APIComunication.Ingredient_Request;
 import com.example.recipesearch.ui.APIComunication.Request_Handler;
+import com.example.recipesearch.ui.recipe.RecipeStorage;
 import com.example.recipesearch.ui.Settings.settings_activity;
 import com.example.recipesearch.ui.recipe.RecipeActivity;
 import com.google.gson.Gson;
@@ -110,6 +111,8 @@ public class SearchActivity extends AppCompatActivity
                 Intent in = new Intent(SearchActivity.this, RecipeActivity.class);
                 in.putExtra("databaseUserr", user);
                 startActivity(in);
+                SearchingActivity sercAct = new SearchingActivity();
+                sercAct.destroy();
             }
         };
         FsearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener()
@@ -121,27 +124,34 @@ public class SearchActivity extends AppCompatActivity
 
                 startActivity(se);
                 SearchedFood = query;
+                boolean testb = settings_activity.GetSwitchB();
+                boolean testa = settings_activity.GetSwitchA();
+                if (testa == testb)
+                    settings_activity.setSwitchA(true);
                 IDList = new ArrayList<String>();
-                for (int i = 0; i > 11; i++)
+                RecipeStorage storage = new RecipeStorage(getApplicationContext());
+                if (storage.isThisInTheBook())
                 {
-                    if (mPrefs.contains(i+"id"))
-                    IDList.add(mPrefs.getString(i+"id", " "));
+                    RecipeActivity.setReadTheBook(true);
+                    h.sendEmptyMessageDelayed(0, 500);// a delay to allow the search to finish before the recipe page pops up
                 }
-                if (settings_activity.GetSwitchA() == true)
+                else if (settings_activity.GetSwitchA() == true)
                 {
                 Request_Handler req = new Request_Handler();
-                req.execute(); // handles the search query
+                req.execute();// handles the search query
+                h.sendEmptyMessageDelayed(0, 3000);// a delay to allow the search to finish before the recipe page pops up
                 }
                 else if (settings_activity.GetSwitchA() == false)
                 {
                     Ingredient_Request IR = new Ingredient_Request();
                     IR.execute();
+                    h.sendEmptyMessageDelayed(0, 3000);// a delay to allow the search to finish before the recipe page pops up
                 }
                 else {
                     Request_Handler req = new Request_Handler();
                     req.execute(); //default search
+                    h.sendEmptyMessageDelayed(0, 3000);// a delay to allow the search to finish before the recipe page pops up
                     }
-                h.sendEmptyMessageDelayed(0, 2500);// a delay to allow the search to finish before the recipe page pops up
                 return true;
             }
 
