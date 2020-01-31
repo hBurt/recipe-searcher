@@ -12,11 +12,26 @@ public class RecipeStorage extends Activity
 {
     static SharedPreferences mPrefs;
     static SharedPreferences plannedPrefs;
+    static SharedPreferences starting;
     SharedPreferences.Editor edit;
     public RecipeStorage(Context context)
     {
         mPrefs = context.getSharedPreferences("Recipe_Book", MODE_PRIVATE);
         plannedPrefs =  context.getSharedPreferences("Day_Plan", MODE_PRIVATE);
+        starting =  context.getSharedPreferences("OGName", MODE_PRIVATE);
+    }
+    public void setOGName(String s)
+    {
+        edit = starting.edit();
+        edit.putString("OGName",s );
+        edit.apply();
+    }
+    public String getOGName()
+    {
+        if (starting.contains("OGName"))
+            return starting.getString("OGName", " ");
+        else
+            return null;
     }
     public void setDirections ()
     {

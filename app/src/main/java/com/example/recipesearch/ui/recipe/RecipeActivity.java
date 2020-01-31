@@ -63,6 +63,8 @@ public class RecipeActivity extends AppCompatActivity
         tab.addTab(tab.newTab().setText("Directions"));
         tab.addTab(tab.newTab().setText("Next Recipe"));
         tex.setText(RecipeName);
+        RecipeStorage storage = new RecipeStorage(getApplicationContext());
+        storage.setOGName(RecipeName);
         tab.setTabGravity(TabLayout.GRAVITY_FILL);
         final MyTabAdapter adapter = new MyTabAdapter(this,getSupportFragmentManager(), tab.getTabCount());
         view.setAdapter(adapter);
@@ -150,14 +152,17 @@ public class RecipeActivity extends AppCompatActivity
         if (ID != null)
         {
             RecipeStorage storage = new RecipeStorage(getApplicationContext());
-            storage.removePref();
-            storage.removeFirstPref();
-            storage.setDirections();
-            storage.setIngred();
-            storage.setImgURL(imgName);
-            storage.setRecipeID(ID);
-            storage.setRecipeName(RecipeName);
-            storage.setTimeAmount(timeToMake);
+            if (storage.getOGName().equals(RecipeName))
+            {
+                storage.removePref();
+                storage.removeFirstPref();
+                storage.setDirections();
+                storage.setIngred();
+                storage.setImgURL(imgName);
+                storage.setRecipeID(ID);
+                storage.setRecipeName(RecipeName);
+                storage.setTimeAmount(timeToMake);
+            }
         }
     }
     public static void setReadTheBook(boolean bool)
