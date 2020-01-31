@@ -1,4 +1,5 @@
 package com.example.recipesearch.ui.recipe;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 
 import android.os.Bundle;
@@ -58,7 +59,6 @@ public class RecipeActivity extends AppCompatActivity
         btnHome = findViewById(R.id.button_home);
 
 
-        mPrefs = getApplicationContext().getSharedPreferences("Recipe_Book", MODE_PRIVATE);
         if (ReadTheDamBook == true)
         {
             useOld();
