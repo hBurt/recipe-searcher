@@ -111,8 +111,6 @@ public class SearchActivity extends AppCompatActivity
                 Intent in = new Intent(SearchActivity.this, RecipeActivity.class);
                 in.putExtra("databaseUserr", user);
                 startActivity(in);
-                SearchingActivity sercAct = new SearchingActivity();
-                sercAct.destroy();
             }
         };
         FsearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener()

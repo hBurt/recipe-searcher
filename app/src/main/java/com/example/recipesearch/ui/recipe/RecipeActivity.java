@@ -41,7 +41,7 @@ public class RecipeActivity extends AppCompatActivity
     String wantedImg;
     String recipeTitle = null;
     public static int i = 1;
-
+    static boolean doIReset = false;
     Button saveRecipe, btnHome;
 
     DatabaseHelper databaseHelper;
@@ -56,7 +56,11 @@ public class RecipeActivity extends AppCompatActivity
 
         saveRecipe = findViewById(R.id.btn_save_recipe);
         btnHome = findViewById(R.id.button_home);
-
+        if (doIReset == true)
+        {
+            doIReset = false;
+            refresh();
+        }
 
         if (ReadTheDamBook == true)
         {
@@ -204,6 +208,7 @@ public class RecipeActivity extends AppCompatActivity
             }
         }
     }
+    public static void setDoIReset(){ doIReset = true;}
 
     private void saveRecipe(){
 
