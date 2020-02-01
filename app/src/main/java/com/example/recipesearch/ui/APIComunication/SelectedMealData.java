@@ -119,10 +119,6 @@ public class SelectedMealData  extends AsyncTask<Void, Void, String>
         String sixthIngred = new String(fifthIngred.trim().replace("[", "").replace("]", "").replace(",", " ").replace(".", " ")
                 .replace(" in ", "").replace(" dutch ", ""));
         Ingredients = sixthIngred;
-        RecipeActivity.setID(oneObjectsItem);
-        RecipeActivity.setPic(oneObjectsItem4);
-        RecipeActivity.setTime(oneObjectsItem3);
-        RecipeActivity.setRecipeName(oneObjectsItem2);
         Recipe_Directions_Tab_Fragment.setDirections(Directions);
         Recipe_Ingredient_Tab_Fragment.setIngredients(Ingredients);
         return null;
