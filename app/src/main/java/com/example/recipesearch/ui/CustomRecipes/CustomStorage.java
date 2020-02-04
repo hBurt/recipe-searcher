@@ -24,9 +24,9 @@ public class CustomStorage
         edit = Custom.edit();
         for (int i = 0; i < 11; i++)
         {
-            if (Custom.contains(i+"Directions")){}
+            if (Custom.contains(i+"CDirections")){}
             else {
-                edit.putString(i+"Directions", direct);
+                edit.putString(i+"CDirections", direct);
                 break;
             }
         }
@@ -37,9 +37,9 @@ public class CustomStorage
         edit = Custom.edit();
         for (int i = 0; i < 11; i++)
         {
-            if (Custom.contains(i+"Ingredients")){}
+            if (Custom.contains(i+"CIngredients")){}
             else {
-                edit.putString(i+"Ingredients",Ingred);
+                edit.putString(i+"CIngredients",Ingred);
                 break;
             }
         }
@@ -63,9 +63,9 @@ public class CustomStorage
         edit = Custom.edit();
         for (int i = 0; i < 11; i++)
         {
-            if (Custom.contains(i+"Time")){}
+            if (Custom.contains(i+"CTime")){}
             else {
-                edit.putString(i+"Time", string);
+                edit.putString(i+"CTime", string);
                 break;
             }
         }
@@ -86,36 +86,36 @@ public class CustomStorage
     }
     public String getCDirections()
     {
-        if (Custom.contains("Directions"))
-            return Custom.getString("Directions", " ");
+        if (Custom.contains(num+"CDirections"))
+            return Custom.getString(num+"CDirections", " ");
         else
             return null;
     }
     public String getCIngred()
     {
-        if (Custom.contains("Ingredients"))
-            return Custom.getString("Ingredients", " ");
+        if (Custom.contains(num+"CIngredients"))
+            return Custom.getString(num+"CIngredients", " ");
         else
             return null;
     }
     public String getCName()
     {
-        if(Custom.contains("CName"))
-            return Custom.getString("CName", " ");
+        if(Custom.contains(num+"CName"))
+            return Custom.getString(num+"CName", " ");
         else
             return null;
     }
     public String getCTime()
     {
-        if(Custom.contains("Time"))
-            return Custom.getString("Time", " ");
+        if(Custom.contains(num+"CTime"))
+            return Custom.getString(num+"CTime", " ");
         else
             return null;
     }
     public String getCImgURL()
     {
-        if(Custom.contains("img"))
-            return Custom.getString("img", " ");
+        if(Custom.contains(num+"img"))
+            return Custom.getString(num+"img", " ");
         else
             return null;
     }
@@ -130,6 +130,8 @@ public class CustomStorage
        }
         return a;
     }
+    public void setNum(){num++;}
+    public void resetNUM(){num = 0;}
     public void removeFirstCRecipe()
     {
         String followingName0 = " ";

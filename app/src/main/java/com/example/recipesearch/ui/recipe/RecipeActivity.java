@@ -208,6 +208,8 @@ public class RecipeActivity extends AppCompatActivity
                 storage.setTimeAmount(timeToMake);
             }
         }
+        RecipeStorage st = new RecipeStorage(getApplicationContext());
+        st.clearOG();
     }
     public static void setDoIReset(){ doIReset = true;}
 
@@ -234,6 +236,5 @@ public class RecipeActivity extends AppCompatActivity
     {
         super.onBackPressed();
         SearchingActivity.SA.finish();
-
     }
 }

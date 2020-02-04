@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.recipesearch.R;
 
@@ -29,6 +30,7 @@ public class CustomRecipe extends AppCompatActivity
         EditText TimeE = findViewById(R.id.Time);
         EditText IngredientE = findViewById(R.id.IngredientInput);
         EditText DirectionE = findViewById(R.id.Directions);
+        TextView ImageE = findViewById(R.id.ImgSelection);
         Button Sub = findViewById(R.id.CSubmit);
         NameE.addTextChangedListener(new TextWatcher() {
             @Override

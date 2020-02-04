@@ -18,6 +18,8 @@ import com.example.recipesearch.R;
 import com.example.recipesearch.ui.APIComunication.Next_Similar_Activity;
 import com.example.recipesearch.ui.APIComunication.Next_recipe;
 import com.example.recipesearch.ui.APIComunication.Random_Recipe;
+import com.example.recipesearch.ui.CustomRecipes.CustomRecipe;
+import com.example.recipesearch.ui.CustomRecipes.CustomStorage;
 import com.example.recipesearch.ui.search_result.SearchActivity;
 
 
@@ -43,6 +45,8 @@ public class Recipe_Similar_Recipes_Tab_Fragment extends Fragment
         super.onViewCreated(view, savedInstanceState);
         Button next = view.findViewById(R.id.Sim_btn);
         Button Rand = view.findViewById(R.id.Random_Recipe_Btn);
+        Button cRecipe = view.findViewById(R.id.CRecipes);
+        Button clearSaved = view.findViewById(R.id.ClearSaved);
         h = new  Handler()
         {
             @Override
@@ -78,16 +82,39 @@ public class Recipe_Similar_Recipes_Tab_Fragment extends Fragment
             {
                 Random_Recipe nRand = new Random_Recipe();
                 nRand.execute();
-                /* String test = Next_Similar_Activity.getName();
-                if (test.length() > 0) // in theory should be an error check for the name
-                      RecipeActivity.setRecipeName(test);
-                else*/
                 RecipeActivity.setRecipeName("Next Test"); // temp test
-                String direct = " ";
                 Recipe_Directions_Tab_Fragment.setDirections("Next Text");
-                String ingredient = " ";
                 Recipe_Ingredient_Tab_Fragment.setIngredients("Next Text");
                 h.sendEmptyMessageDelayed(0, 1200);
+            }
+        });
+        cRecipe.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                RecipeActivity.setRecipeName("Next Test"); // temp test
+                Recipe_Directions_Tab_Fragment.setDirections("Next Text");
+                Recipe_Ingredient_Tab_Fragment.setIngredients("Next Text");
+                CustomStorage Cs = new CustomStorage(getActivity().getApplicationContext());
+                if (Cs.getCount() > 0)
+                {
+                    RecipeActivity.setRecipeName(Cs.getCName());
+                    RecipeActivity.setTime(Cs.getCTime());
+                    Recipe_Directions_Tab_Fragment.setDirections(Cs.getCDirections());
+                    Recipe_Ingredient_Tab_Fragment.setIngredients(Cs.getCIngred());
+                    Cs.setNum();
+                }
+                h.sendEmptyMessageDelayed(0, 300);
+            }
+        });
+        clearSaved.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                RecipeStorage rS = new RecipeStorage(getActivity().getApplicationContext());
+                rS.clearRecipeBook();
             }
         });
     }

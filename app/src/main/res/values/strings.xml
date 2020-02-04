@@ -113,4 +113,6 @@
     <string name="time">Time</string>
     <string name="enter_ingredients_for_recipe">Enter Ingredients for Recipe</string>
     <string name="click_to_select_an_image">Click to select an image</string>
+    <string name="load_custom_recipes">Load Custom Recipes</string>
+    <string name="clear_saved_recipes">Clear Saved Recipes</string>
 </resources>

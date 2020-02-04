@@ -25,6 +25,8 @@ public class RecipeStorage
     public void setOGName(String s)
     {
         edit = starting.edit();
+        if (starting.contains("OGName")) { }
+        else
         edit.putString("OGName",s );
         edit.apply();
     }
@@ -34,6 +36,10 @@ public class RecipeStorage
             return starting.getString("OGName", " ");
         else
             return null;
+    }
+    public void clearOG()
+    {
+        starting.edit().remove("OGName").apply();
     }
     public void setDirections ()
     {
