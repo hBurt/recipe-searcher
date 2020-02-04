@@ -8,7 +8,9 @@ import com.example.recipesearch.ui.recipe.Recipe_Directions_Tab_Fragment;
 import com.example.recipesearch.ui.recipe.Recipe_Ingredient_Tab_Fragment;
 import com.example.recipesearch.ui.search_result.SearchActivity;
 
-public class RecipeStorage extends Activity
+import static android.content.Context.MODE_PRIVATE;
+
+public class RecipeStorage
 {
     static SharedPreferences mPrefs;
     static SharedPreferences plannedPrefs;

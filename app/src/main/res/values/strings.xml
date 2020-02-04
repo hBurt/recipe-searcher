@@ -109,4 +109,7 @@
     <string name="meal_plan">Meal Plan</string>
     <string name="image_of_meal">image of meal</string>
     <string name="generating_meal_plan">Generating Meal Plan</string>
+    <string name="name_of_recipe">Name of Recipe</string>
+    <string name="time">Time</string>
+    <string name="enter_ingredients_for_recipe">Enter Ingredients for Recipe</string>
 </resources>

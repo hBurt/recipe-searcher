@@ -6,4 +6,64 @@
     android:layout_height="match_parent"
     tools:context=".ui.CustomRecipes.CustomRecipe">
 
+    <EditText
+        android:id="@+id/RecipeName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/name_of_recipe"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:autofillHints="" />
+
+    <EditText
+        android:id="@+id/Time"
+        android:layout_width="102dp"
+        android:layout_height="42dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginRight="1dp"
+        android:ems="10"
+        android:hint="@string/time"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:autofillHints="" />
+
+    <ScrollView
+        android:layout_width="409dp"
+        android:layout_height="684dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <EditText
+                android:id="@+id/IngredientInput"
+                android:layout_width="match_parent"
+                android:layout_height="113dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/enter_ingredients_for_recipe"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/Directions"
+                android:layout_width="match_parent"
+                android:layout_height="115dp"
+                android:ems="10"
+                android:hint="Enter Directions for Recipe"
+                android:inputType="textPersonName" />
+
+            <ImageView
+                android:id="@+id/IMG_For_Custom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                tools:srcCompat="@tools:sample/avatars" />
+        </LinearLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
