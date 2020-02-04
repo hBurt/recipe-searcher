@@ -84,42 +84,42 @@ public class CustomStorage
         }
         edit.apply();
     }
-    public String getOldDirections()
+    public String getCDirections()
     {
         if (Custom.contains("Directions"))
             return Custom.getString("Directions", " ");
         else
             return null;
     }
-    public String getOldIngred()
+    public String getCIngred()
     {
         if (Custom.contains("Ingredients"))
             return Custom.getString("Ingredients", " ");
         else
             return null;
     }
-    public String getOldName()
+    public String getCName()
     {
         if(Custom.contains("CName"))
             return Custom.getString("CName", " ");
         else
             return null;
     }
-    public String getOldTime()
+    public String getCTime()
     {
         if(Custom.contains("Time"))
             return Custom.getString("Time", " ");
         else
             return null;
     }
-    public String getOldImgURL()
+    public String getCImgURL()
     {
         if(Custom.contains("img"))
             return Custom.getString("img", " ");
         else
             return null;
     }
-    public void removeFirstPref()
+    public void removeFirstCrecipe()
     {
         String followingName0 = " ";
         String followingName1 = " ";
