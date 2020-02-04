@@ -19,7 +19,9 @@ import com.example.recipesearch.database.Recipe;
 import com.example.recipesearch.database.User;
 import com.example.recipesearch.helpers.DatabaseHelper;
 import com.example.recipesearch.ui.APIComunication.Request_Handler;
+import com.example.recipesearch.ui.MealPlanMaker.LoadingScreenMP;
 import com.example.recipesearch.ui.search_result.SearchActivity;
+import com.example.recipesearch.ui.search_result.SearchingActivity;
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 import com.google.gson.Gson;
@@ -46,7 +48,6 @@ public class RecipeActivity extends AppCompatActivity
 
     DatabaseHelper databaseHelper;
     User user;
-
     public static boolean ReadTheDamBook = false;
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -226,5 +227,13 @@ public class RecipeActivity extends AppCompatActivity
     public static void setReadTheBook(boolean bool)
     {
         ReadTheDamBook = bool;
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        super.onBackPressed();
+        SearchingActivity.SA.finish();
+
     }
 }

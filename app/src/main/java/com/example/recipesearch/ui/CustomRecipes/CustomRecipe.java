@@ -6,6 +6,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
@@ -27,7 +29,7 @@ public class CustomRecipe extends AppCompatActivity
         EditText TimeE = findViewById(R.id.Time);
         EditText IngredientE = findViewById(R.id.IngredientInput);
         EditText DirectionE = findViewById(R.id.Directions);
-        ImageView ImageE = findViewById(R.id.IMG_For_Custom);
+        Button Sub = findViewById(R.id.CSubmit);
         NameE.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
@@ -60,6 +62,20 @@ public class CustomRecipe extends AppCompatActivity
             @Override
             public void afterTextChanged(Editable s) { CDirect = s.toString();}
         });
+        Sub.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                CustomStorage cStore = new CustomStorage(getApplicationContext());
+                cStore.setCDirections(CDirect);
+                //cStore.setCImgURL(CImage);
+                cStore.setCIngred(CIngred);
+                cStore.setCRecipeName(CName);
+                cStore.setCTimeAmount(CTime);
+            }
+        });
+
     }
 
 }

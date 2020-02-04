@@ -195,4 +195,11 @@ public class GeneratedMealPlan extends AppCompatActivity
     public static void setID1(String s){ id1 = s;}
     public static void setID2(String s){ id2 = s;}
     public static void setID3(String s){ id3 = s;}
+
+    @Override
+    protected void onDestroy()
+    {
+        super.onDestroy();
+        LoadingScreenMP.LSMP.finish();
+    }
 }

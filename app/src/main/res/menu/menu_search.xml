@@ -9,6 +9,11 @@
         app:showAsAction="ifRoom"
         />
     <item
+        android:id="@+id/CustomBTN"
+        android:icon="@android:drawable/sym_contact_card"
+        android:title="@string/settings"
+        app:showAsAction="ifRoom" />
+    <item
         android:id = "@+id/searchFood"
         android:orderInCategory="100"
         android:title="@string/search"

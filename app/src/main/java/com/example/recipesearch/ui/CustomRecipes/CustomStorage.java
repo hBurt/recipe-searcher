@@ -19,7 +19,7 @@ public class CustomStorage
     {
         Custom = context.getSharedPreferences("Custom_Recipe_Book", MODE_PRIVATE);
     }
-    public void setDirections (String direct)
+    public void setCDirections (String direct)
     {
         edit = Custom.edit();
         for (int i = 0; i < 11; i++)
@@ -32,7 +32,7 @@ public class CustomStorage
         }
         edit.apply();
     }
-    public void setIngred(String Ingred)
+    public void setCIngred(String Ingred)
     {
         edit = Custom.edit();
         for (int i = 0; i < 11; i++)
@@ -45,7 +45,7 @@ public class CustomStorage
         }
         edit.apply();
     }
-    public void setRecipeName(String string)
+    public void setCRecipeName(String string)
     {
         edit = Custom.edit();
         for (int i = 0; i < 11; i++)
@@ -58,7 +58,7 @@ public class CustomStorage
         }
         edit.apply();
     }
-    public void setTimeAmount(String string)
+    public void setCTimeAmount(String string)
     {
         edit = Custom.edit();
         for (int i = 0; i < 11; i++)
@@ -71,7 +71,7 @@ public class CustomStorage
         }
         edit.apply();
     }
-    public void setImgURL(String string)
+    public void setCImgURL(String string)
     {
         edit = Custom.edit();
         for (int i = 0; i < 11; i++)
@@ -119,7 +119,18 @@ public class CustomStorage
         else
             return null;
     }
-    public void removeFirstCrecipe()
+    public int getCount()
+    {
+        int a = 0;
+        // just room for error, should never return more then 10
+       for (int i = 0; i < 15; i++)
+       {
+           if (Custom.contains(i+"CName" ))
+               a++;
+       }
+        return a;
+    }
+    public void removeFirstCRecipe()
     {
         String followingName0 = " ";
         String followingName1 = " ";
