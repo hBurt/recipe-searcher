@@ -1,7 +1,7 @@
 package com.example.recipesearch.ui.recipe;
+
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -18,11 +18,7 @@ import com.example.recipesearch.database.Favorite;
 import com.example.recipesearch.database.Recipe;
 import com.example.recipesearch.database.User;
 import com.example.recipesearch.helpers.DatabaseHelper;
-import com.example.recipesearch.ui.APIComunication.Request_Handler;
-import com.example.recipesearch.ui.search_result.SearchActivity;
-import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
-import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
 public class RecipeActivity extends AppCompatActivity
@@ -213,7 +209,10 @@ public class RecipeActivity extends AppCompatActivity
         databaseHelper = new DatabaseHelper(this);
         databaseHelper.rebuildDatabase();
 
-        Recipe recipe = new Recipe(0, "Title" + recipeTitle, 20, imgName);
+        int id = Integer.parseInt(ID);
+        int time = Integer.parseInt(timeToMake);
+
+        Recipe recipe = new Recipe(id, RecipeName, time, "https://spoonacular.com/recipeImages/" + imgName);
         Favorite favoite = new Favorite(0 ,recipe);
 
         user.getFavorites().add(favoite);
