@@ -215,6 +215,8 @@ public class Ingredient_Request extends AsyncTask<Void, Void, String>
         RecipeActivity.setPic(oneObjectsItem4);
         RecipeActivity.setTime("Unavailable");
         RecipeActivity.setRecipeName(oneObjectsItem2);
+        RecipeActivity.setDirections(getDirections());
+        RecipeActivity.setIngredients(getIngredients());
         Recipe_Directions_Tab_Fragment.setDirections(Directions);
         Recipe_Ingredient_Tab_Fragment.setIngredients(Ingredients);
         return null;

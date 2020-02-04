@@ -34,9 +34,12 @@ public class RecipeActivity extends AppCompatActivity
     static String RecipeName = "Beef Salpicao"; // example for test purposes
     static String imgName = " ";
     static String timeToMake = "XX";
+    private static String baseURI = null;
     String wantedImg;
-    String recipeTitle = null;
+    private static String directions;
+    private static String ingredients;
     public static int i = 1;
+
 
     Button saveRecipe, btnHome;
 
@@ -44,6 +47,23 @@ public class RecipeActivity extends AppCompatActivity
     User user;
 
     public static boolean ReadTheDamBook = false;
+
+    public static String getBaseURI() {
+        return baseURI;
+    }
+
+    public static void setBaseURI(String baseURI) {
+        RecipeActivity.baseURI = baseURI;
+    }
+
+    public static void setDirections(String directions) {
+        RecipeActivity.directions = directions;
+    }
+
+    public static void setIngredients(String ingredients) {
+        RecipeActivity.ingredients = ingredients;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -69,13 +89,8 @@ public class RecipeActivity extends AppCompatActivity
         wantedImg = imgName;
         if (wantedImg.length() > 3)
         {
-            if (!wantedImg.contains("https://spoonacular.com/recipeImages/"))
-            {
-                String nWantedImg = "https://spoonacular.com/recipeImages/" + wantedImg;
-                Picasso.get().load(nWantedImg).into(pic);
-            }
-            else
-            Picasso.get().load(wantedImg).into(pic);
+            String nWantedImg = getBaseURI() + wantedImg;
+            Picasso.get().load(nWantedImg).into(pic);
         }
         tab.addTab(tab.newTab().setText("Ingredients"));
         tab.addTab(tab.newTab().setText("Directions"));
@@ -211,7 +226,9 @@ public class RecipeActivity extends AppCompatActivity
         int id = Integer.parseInt(ID);
         int time = Integer.parseInt(timeToMake);
 
-        Recipe recipe = new Recipe(id, RecipeName, time, "https://spoonacular.com/recipeImages/" + imgName);
+        Recipe recipe = new Recipe(id, RecipeName, time, getBaseURI() + imgName);
+        recipe.setDirections(directions);
+        recipe.setIngredients(ingredients);
         Favorite favoite = new Favorite(0 ,recipe);
 
         user.getFavorites().add(favoite);
