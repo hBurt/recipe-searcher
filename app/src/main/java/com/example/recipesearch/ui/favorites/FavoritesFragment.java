@@ -133,15 +133,19 @@ public class FavoritesFragment extends Fragment {
                 favoriteButtonDelete.setLayoutParams(param);
                 favoriteButtonDelete.setVisibility(View.VISIBLE);
 
+                ((CustomAdapter) getAdapterView().getAdapter()).refreshItems();
+
                 favoriteButtonDelete.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+
 
                         int index = getAdapterView().getFirstVisiblePosition();
                         View v = getAdapterView().getChildAt(0);
                         int top = (v == null) ? 0 : (v.getTop() - getAdapterView().getPaddingTop());
 
                         ((CustomAdapter) getAdapterView().getAdapter()).removeItemAtIndex(i);
+                        ((CustomAdapter) getAdapterView().getAdapter()).refreshItems();
                         ((CustomAdapter) getAdapterView().getAdapter()).refreshItems();
                         //((CustomAdapter) getAdapterView().getAdapter()).notifyDataSetChanged();
 
