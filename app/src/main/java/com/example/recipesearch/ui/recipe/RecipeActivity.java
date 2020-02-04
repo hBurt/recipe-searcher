@@ -32,7 +32,6 @@ public class RecipeActivity extends AppCompatActivity
     ViewPager view;
     static String ID = null;
     static String RecipeName = "Beef Salpicao"; // example for test purposes
-    String defaultName =  "Beef Salpicao";
     static String imgName = " ";
     static String timeToMake = "XX";
     String wantedImg;

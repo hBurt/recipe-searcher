@@ -60,10 +60,10 @@ public class SearchActivity extends AppCompatActivity
 
         //user.getFavorites().add(new Favorite(new Recipe(0, "Random title2", 25, "https://thumbs.dreamstime.com/b/indian-bengali-thali-meal-x-consisting-different-curry-flat-bread-rice-papad-77486943.jpg")));
 
-        databaseHelper = new DatabaseHelper(this);
+       /* databaseHelper = new DatabaseHelper(this);
         databaseHelper.rebuildDatabase();
 
-        databaseHelper.getDatabase().getUserDao().updateDetails(user);
+        databaseHelper.getDatabase().getUserDao().updateDetails(user);*/
 
         mPrefs = getApplicationContext().getSharedPreferences("Recipe_Book", MODE_PRIVATE);
         tool = findViewById(R.id.tb);
