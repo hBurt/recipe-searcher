@@ -46,7 +46,6 @@ public class Recipe_Similar_Recipes_Tab_Fragment extends Fragment
         Button next = view.findViewById(R.id.Sim_btn);
         Button Rand = view.findViewById(R.id.Random_Recipe_Btn);
         Button cRecipe = view.findViewById(R.id.CRecipes);
-        Button clearSaved = view.findViewById(R.id.ClearSaved);
         h = new  Handler()
         {
             @Override
@@ -106,15 +105,6 @@ public class Recipe_Similar_Recipes_Tab_Fragment extends Fragment
                     Cs.setNum();
                 }
                 h.sendEmptyMessageDelayed(0, 300);
-            }
-        });
-        clearSaved.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                RecipeStorage rS = new RecipeStorage(getActivity().getApplicationContext());
-                rS.clearRecipeBook();
             }
         });
     }

@@ -191,4 +191,5 @@ public class CustomStorage
         }
 
     }
+    public void Clear(){ Custom.edit().clear().apply();}
 }

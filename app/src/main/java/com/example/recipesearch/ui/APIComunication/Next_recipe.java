@@ -231,7 +231,13 @@ public class Next_recipe extends AsyncTask<Void, Void, String>
                 .replace(" in ", "") .replace(" dutch ", ""));
         Ingredients = sixthIngred;
         RecipeActivity.setID(oneObjectsItem);
-        RecipeActivity.setPic(oneObjectsItem4);
+        if (oneObjectsItem4.length() > 3) {
+            if (!oneObjectsItem4.contains("https://spoonacular.com/recipeImages/")) {
+                String wantedImg = "https://spoonacular.com/recipeImages/" + oneObjectsItem4;
+                RecipeActivity.setPic(wantedImg);
+            } else
+                RecipeActivity.setPic(oneObjectsItem4);
+        }
         RecipeActivity.setTime(oneObjectsItem3);
         RecipeActivity.setRecipeName(oneObjectsItem2);
         Recipe_Directions_Tab_Fragment.setDirections(Directions);

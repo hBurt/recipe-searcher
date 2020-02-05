@@ -75,17 +75,7 @@ public class RecipeActivity extends AppCompatActivity
         TTM = findViewById(R.id.Time);
         if (timeToMake != "Unavailable")
         TTM.setText(timeToMake + " minutes");
-        wantedImg = imgName;
-        if (wantedImg.length() > 3)
-        {
-            if (!wantedImg.contains("https://spoonacular.com/recipeImages/"))
-            {
-                String nWantedImg = "https://spoonacular.com/recipeImages/" + wantedImg;
-                Picasso.get().load(nWantedImg).into(pic);
-            }
-            else
-            Picasso.get().load(wantedImg).into(pic);
-        }
+        Picasso.get().load(imgName).into(pic);
         tab.addTab(tab.newTab().setText("Ingredients"));
         tab.addTab(tab.newTab().setText("Directions"));
         tab.addTab(tab.newTab().setText("Next Recipe"));
@@ -191,12 +181,12 @@ public class RecipeActivity extends AppCompatActivity
     protected void onDestroy()
     {
         super.onDestroy();
+        RecipeStorage storage = new RecipeStorage(getApplicationContext());
         // should save as long as i have the id
         if (ID != null)
         {
             // should prevent rand and next from overwriting the original
-            RecipeStorage storage = new RecipeStorage(getApplicationContext());
-            if (storage.getOGName().equals(RecipeName))
+            if (RecipeName.toLowerCase().contains(SearchActivity.getSearchedFood()))
             {
                 storage.removePref();
                 storage.removeFirstPref();
@@ -208,8 +198,6 @@ public class RecipeActivity extends AppCompatActivity
                 storage.setTimeAmount(timeToMake);
             }
         }
-        RecipeStorage st = new RecipeStorage(getApplicationContext());
-        st.clearOG();
     }
     public static void setDoIReset(){ doIReset = true;}
 
