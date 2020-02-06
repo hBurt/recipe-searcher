@@ -14,8 +14,10 @@ import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
 
+import com.example.recipesearch.FavoriteRecipeView;
 import com.example.recipesearch.R;
 import com.example.recipesearch.database.Favorite;
+import com.example.recipesearch.helpers.UiHelper;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -24,11 +26,13 @@ class CustomAdapter extends BaseAdapter implements ListAdapter {
     ArrayList<Favorite> arrayList;
     Context context;
     ListView listView;
+    UiHelper uiHelper;
 
-    public CustomAdapter(Context context, ArrayList<Favorite> arrayList, ListView listView) {
+    public CustomAdapter(Context context, ArrayList<Favorite> arrayList, ListView listView, UiHelper uiHelper) {
         this.arrayList = arrayList;
         this.context = context;
         this.listView = listView;
+        this.uiHelper = uiHelper;
     }
 
     @Override
@@ -62,6 +66,8 @@ class CustomAdapter extends BaseAdapter implements ListAdapter {
         return position;
     }
 
+    public Favorite getFavoriteAtIndex(int index){ return arrayList.get(index); }
+
     @Override
     public long getItemId(int position) {
         return position;
@@ -78,14 +84,16 @@ class CustomAdapter extends BaseAdapter implements ListAdapter {
 
     @Override
     public View getView(final int position, View convertView, final ViewGroup parent) {
-        Favorite favorite = arrayList.get(position);
+        final Favorite favorite = arrayList.get(position);
         if (convertView == null) {
             LayoutInflater layoutInflater = LayoutInflater.from(context);
             convertView = layoutInflater.inflate(R.layout.list_row, parent, false);
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //
+                    System.out.println("clicked index: " + position);
+                    System.out.println("fav title: " + favorite.getRecipe().getTitle() + " fav img: " + favorite.getRecipe().getImageURL() + " direct: " + favorite.getRecipe().getDirections() + " ingred: " + favorite.getRecipe().getIngredients());
+                    uiHelper.switchScreen(new FavoriteRecipeView(favorite));
                 }
             });
 

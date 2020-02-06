@@ -227,8 +227,9 @@ public class RecipeActivity extends AppCompatActivity
         int time = Integer.parseInt(timeToMake);
 
         Recipe recipe = new Recipe(id, RecipeName, time, getBaseURI() + imgName);
-        recipe.setDirections(directions);
-        recipe.setIngredients(ingredients);
+        recipe.setDirections(Recipe_Directions_Tab_Fragment.getDirections());
+        recipe.setIngredients(Recipe_Ingredient_Tab_Fragment.getIngredients());
+
         Favorite favoite = new Favorite(0 ,recipe);
 
         user.getFavorites().add(favoite);
