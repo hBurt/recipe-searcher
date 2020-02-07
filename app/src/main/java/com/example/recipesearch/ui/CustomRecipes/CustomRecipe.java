@@ -147,11 +147,7 @@ public class CustomRecipe extends AppCompatActivity
                     picTaken = false;
                 }*/
                 CustomStorage cStore = new CustomStorage(getApplicationContext());
-                cStore.setCDirections(CDirect);
-                cStore.setCImgURL(CImage);
-                cStore.setCIngred(CIngred);
-                cStore.setCRecipeName(CName);
-                cStore.setCTimeAmount(CTime);
+                cStore.createRecipe(CName, CDirect, CIngred, CTime, CImage);
                 Toast.makeText(getApplicationContext(), "Recipe Saved",Toast.LENGTH_SHORT).show();
             }
         });

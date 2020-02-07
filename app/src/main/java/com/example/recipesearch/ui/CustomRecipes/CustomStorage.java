@@ -19,69 +19,36 @@ public class CustomStorage
     {
         Custom = context.getSharedPreferences("Custom_Recipe_Book", MODE_PRIVATE);
     }
-    public void setCDirections (String direct)
+    public void setCDirections (String stringA,String stringB)
     {
         edit = Custom.edit();
-        for (int i = 0; i < 11; i++)
-        {
-            if (Custom.contains(i+"CDirections")){}
-            else {
-                edit.putString(i+"CDirections", direct);
-                break;
-            }
-        }
+
+                edit.putString(stringB+"CDirections", stringA);
+
         edit.apply();
     }
-    public void setCIngred(String Ingred)
+    public void setCIngred(String stringA,String stringB)
     {
         edit = Custom.edit();
-        for (int i = 0; i < 11; i++)
-        {
-            if (Custom.contains(i+"CIngredients")){}
-            else {
-                edit.putString(i+"CIngredients",Ingred);
-                break;
-            }
-        }
+                edit.putString(stringB+"CIngredients",stringA);
         edit.apply();
     }
-    public void setCRecipeName(String string)
+    public void setCRecipeName(String stringA,String stringB)
     {
         edit = Custom.edit();
-        for (int i = 0; i < 11; i++)
-        {
-            if (Custom.contains(i+"CName")){}
-            else {
-                edit.putString(i + "CName", string);
-                break;
-            }
-        }
+                edit.putString(stringB + "CName", stringA);
         edit.apply();
     }
-    public void setCTimeAmount(String string)
+    public void setCTimeAmount(String stringA,String stringB)
     {
         edit = Custom.edit();
-        for (int i = 0; i < 11; i++)
-        {
-            if (Custom.contains(i+"CTime")){}
-            else {
-                edit.putString(i+"CTime", string);
-                break;
-            }
-        }
+                edit.putString(stringB+"CTime", stringA);
         edit.apply();
     }
-    public void setCImgURL(String string)
+    public void setCImgURL(String stringA,String stringB )
     {
         edit = Custom.edit();
-        for (int i = 0; i < 11; i++)
-        {
-            if (Custom.contains(i+"img")){}
-            else {
-                edit.putString(i+"img", string);
-                break;
-            }
-        }
+                edit.putString(stringB+" img", stringA);
         edit.apply();
     }
     public String getCDirections()
@@ -130,6 +97,21 @@ public class CustomStorage
        }
         return a;
     }
+    public void createRecipe(String name, String directions, String ingredients, String time, String  imgLink)
+    {
+        if (getCount() > 9){removeFirstCRecipe();}
+        setCTimeAmount(time, name);
+        setCRecipeName(name, name);
+        setCIngred(ingredients, name);
+        setCDirections(directions, name);
+        setCImgURL(imgLink, name);
+        for (int i = 0; i < 10; i++)
+        {
+            if (Custom.contains(i+"CName" ))
+            {}
+            else {Custom.edit().putString(i + " CName", name);}
+        }
+    }
     public void setNum(){num++;}
     public void resetNUM(){num = 0;}
     public void removeFirstCRecipe()
@@ -150,12 +132,13 @@ public class CustomStorage
             {
                 if (a > 9)// because i want this to happen if there are 10 or more saved sets
                 {
-                    Custom.edit().remove(0+"CName").apply();
-                    Custom.edit().remove(0+"id").apply();
-                    Custom.edit().remove(0+"img").apply();
-                    Custom.edit().remove(0+"Ingredients").apply();
-                    Custom.edit().remove(0+"Directions").apply();
-                    Custom.edit().remove(0+"Time").apply();
+                    String toBeRemoved = Custom.getString(0+"CName", "");
+                    Custom.edit().remove(toBeRemoved+"CName").apply();
+                    Custom.edit().remove(toBeRemoved+"id").apply();
+                    Custom.edit().remove(toBeRemoved+"img").apply();
+                    Custom.edit().remove(toBeRemoved+"Ingredients").apply();
+                    Custom.edit().remove(toBeRemoved+"Directions").apply();
+                    Custom.edit().remove(toBeRemoved+"Time").apply();
                     followingName0= Custom.getString(1+"CName", " ");
                     followingName1= Custom.getString(2+"CName", " ");
                     followingName2= Custom.getString(3+"CName", " ");
