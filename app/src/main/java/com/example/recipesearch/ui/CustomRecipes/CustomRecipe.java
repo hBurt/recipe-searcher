@@ -3,16 +3,21 @@ package com.example.recipesearch.ui.CustomRecipes;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -27,10 +32,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.recipesearch.MainActivity;
 import com.example.recipesearch.R;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -46,7 +53,11 @@ public class CustomRecipe extends AppCompatActivity
     private static String CDirect = null;
     private static String CTime = null;
     private static String CImage = null;
+    Bitmap bitGallery;
+    OutputStream output;
+    private boolean picTaken = false;
     ImageView preview;
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -103,16 +114,64 @@ public class CustomRecipe extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
+                /*if (picTaken == true) {
+                    Bitmap bit =((BitmapDrawable)preview.getDrawable()).getBitmap();
+                    try {
+                        output = openFileOutput("pic", 0);
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    File filePath = Environment.getExternalStorageDirectory();
+                    File dir = new File(filePath.getAbsolutePath() + "/RecipeSearch");
+                    dir.mkdir();
+                    File file = new File(System.currentTimeMillis() + ".jpg");
+                    try {
+                        output = new FileOutputStream(file);
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    bit.compress(Bitmap.CompressFormat.JPEG, 80, output);
+                    try {
+                        output.flush();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    try {
+                        output.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    Intent pic = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+                    pic.setData(Uri.fromFile(file));
+                    CImage = dir.getPath();
+                    picTaken = false;
+                }*/
                 CustomStorage cStore = new CustomStorage(getApplicationContext());
-                CImage = preview.toString();
                 cStore.setCDirections(CDirect);
                 cStore.setCImgURL(CImage);
                 cStore.setCIngred(CIngred);
                 cStore.setCRecipeName(CName);
                 cStore.setCTimeAmount(CTime);
+                Toast.makeText(getApplicationContext(), "Recipe Saved",Toast.LENGTH_SHORT).show();
             }
         });
 
+    }
+    public static String getPath( Context context, Uri uri ) {
+        String result = null;
+        String[] proj = { MediaStore.Images.Media.DATA };
+        Cursor cursor = context.getContentResolver( ).query( uri, proj, null, null, null );
+        if(cursor != null){
+            if ( cursor.moveToFirst( ) ) {
+                int column_index = cursor.getColumnIndexOrThrow( proj[0] );
+                result = cursor.getString( column_index );
+            }
+            cursor.close( );
+        }
+        if(result == null) {
+            result = "Not found";
+        }
+        return result;
     }
     private void SettingImg() {
         final CharSequence[] options = { "Snap a Pic", "Choose from Gallery","Cancel" };
@@ -124,14 +183,8 @@ public class CustomRecipe extends AppCompatActivity
             public void onClick(DialogInterface dialog, int item) {
                 if (options[item].equals("Snap a Pic"))
                 {
-                    if (checkSelfPermission(Manifest.permission.CAMERA)
-                            != PackageManager.PERMISSION_GRANTED) {
-
-                        requestPermissions(new String[]{Manifest.permission.CAMERA},
-                                1);
-                    }
                     Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                            startActivityForResult(takePictureIntent, 1);
+                    startActivityForResult(takePictureIntent, 1);
                 }
                 else if (options[item].equals("Choose from Gallery"))
                 {
@@ -153,15 +206,46 @@ public class CustomRecipe extends AppCompatActivity
         if (resultCode == RESULT_OK) {
             if (requestCode == 1)
             {
-                Bitmap imageBitmap = (Bitmap) data.getExtras().get("data");
-                preview.setImageBitmap(imageBitmap);
+                Bitmap bit = (Bitmap) data.getExtras().get("data");
+                preview.setImageBitmap(bit);
+                picTaken = true;
+                try {
+                    output = openFileOutput("pic", 0);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+                File filePath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+                File dir = new File(filePath.getAbsolutePath() + "/RecipeSearch");
+                dir.mkdir();
+                File file = new File(System.currentTimeMillis() + ".jpg");
+                try {
+                    output = new FileOutputStream(file);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+                bit.compress(Bitmap.CompressFormat.JPEG, 80, output);
+                try {
+                    output.flush();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    output.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                Intent pic = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+                pic.setData(Uri.fromFile(file));
+                CImage = dir.getPath();
             } else if (requestCode == 2)
             {
                 Uri uri = data.getData();
                 try {
-                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
-                    ImageView imageView = findViewById(R.id.Preview);
-                    imageView.setImageBitmap(bitmap);
+                    Bitmap bitGallery = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+                    preview.setImageBitmap(bitGallery);
+                    Uri selectedImageUri = data.getData( );
+                    CImage = getPath(getApplicationContext(), selectedImageUri );
+                    Log.d("Created image path", CImage);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

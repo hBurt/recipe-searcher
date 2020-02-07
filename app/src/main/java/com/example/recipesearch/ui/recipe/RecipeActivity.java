@@ -1,7 +1,9 @@
 package com.example.recipesearch.ui.recipe;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -33,6 +35,7 @@ public class RecipeActivity extends AppCompatActivity
     private ImageView pic;
     private TabLayout tab;
     private TextView TTM;
+    private static Uri myUri = null;
     private static Handler h;
     Drawable image = null;
     ViewPager view;
@@ -49,6 +52,13 @@ public class RecipeActivity extends AppCompatActivity
     DatabaseHelper databaseHelper;
     User user;
     public static boolean ReadTheDamBook = false;
+
+    public static void setPicUri(String cImgURL)
+    {
+         myUri = Uri.parse(cImgURL);
+
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -75,7 +85,10 @@ public class RecipeActivity extends AppCompatActivity
         TTM = findViewById(R.id.Time);
         if (timeToMake != "Unavailable")
         TTM.setText(timeToMake + " minutes");
+        if (myUri == null)
         Picasso.get().load(imgName).into(pic);
+        else
+            pic.setImageURI(myUri);
         tab.addTab(tab.newTab().setText("Ingredients"));
         tab.addTab(tab.newTab().setText("Directions"));
         tab.addTab(tab.newTab().setText("Next Recipe"));

@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.recipesearch">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" tools:node="replace"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-feature android:name="android.hardware.camera"
         android:required="true" />
@@ -16,11 +17,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.CustomRecipes.CustomRecipe"></activity>
-        <activity android:name=".ui.MealPlanMaker.LoadingScreenMP" />
-        <activity android:name=".ui.MealPlanMaker.GeneratedMealPlan" />
-        <activity android:name=".ui.MealPlanMaker.MealPlanActivity" />
-        <activity android:name=".ui.search_result.SearchingActivity" />
+        <activity android:name=".ui.CustomRecipes.CustomRecipe"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.MealPlanMaker.LoadingScreenMP"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.MealPlanMaker.GeneratedMealPlan"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.MealPlanMaker.MealPlanActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.search_result.SearchingActivity"
+            android:screenOrientation="portrait"/>
 
         <meta-data
             android:name="com.google.android.actions"
@@ -39,7 +45,8 @@
         <activity
             android:name=".ui.search_result.SearchActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
             </intent-filter>
@@ -47,7 +54,8 @@
         <activity
             android:name=".ui.Settings.settings_activity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
             </intent-filter>
@@ -55,7 +63,8 @@
         <activity
             android:name=".ui.recipe.RecipeActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
             </intent-filter>
@@ -63,7 +72,8 @@
         <activity
             android:name=".ui.meal_planner.Meal_Planner_Activity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
             </intent-filter>

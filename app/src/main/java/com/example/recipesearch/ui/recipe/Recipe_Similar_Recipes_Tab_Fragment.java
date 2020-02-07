@@ -26,8 +26,8 @@ import com.example.recipesearch.ui.search_result.SearchActivity;
 public class Recipe_Similar_Recipes_Tab_Fragment extends Fragment
 {
     private static String id = null;
-    static Handler h;
-    static int offSet = 1;
+    private static Handler h;
+    private static int offSet = 1;
     public Recipe_Similar_Recipes_Tab_Fragment()
     {
         // Required empty public constructor
@@ -62,7 +62,6 @@ public class Recipe_Similar_Recipes_Tab_Fragment extends Fragment
             public void onClick(View v)
             {
                 // when the button is pressed should get the info for the next dish
-                // will eventually add a check to see if the next is a repeat
                 Next_recipe nextS = new Next_recipe();
                 nextS.execute(); // calls the func to get something similar
                 RecipeActivity.setRecipeName("Next Test"); // temp test
@@ -96,15 +95,19 @@ public class Recipe_Similar_Recipes_Tab_Fragment extends Fragment
                 Recipe_Directions_Tab_Fragment.setDirections("Next Text");
                 Recipe_Ingredient_Tab_Fragment.setIngredients("Next Text");
                 CustomStorage Cs = new CustomStorage(getActivity().getApplicationContext());
-                if (Cs.getCount() > 0)
-                {
+                if (Cs.getCount() > 0) {
+                    if (Cs.atCap())
+                    {
                     RecipeActivity.setRecipeName(Cs.getCName());
                     RecipeActivity.setTime(Cs.getCTime());
+                    RecipeActivity.setPicUri(Cs.getCImgURL());
                     Recipe_Directions_Tab_Fragment.setDirections(Cs.getCDirections());
                     Recipe_Ingredient_Tab_Fragment.setIngredients(Cs.getCIngred());
                     Cs.setNum();
+                    h.sendEmptyMessageDelayed(0, 300);
                 }
-                h.sendEmptyMessageDelayed(0, 300);
+                }
+
             }
         });
     }
