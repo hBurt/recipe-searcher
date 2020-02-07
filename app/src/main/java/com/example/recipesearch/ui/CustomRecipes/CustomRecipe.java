@@ -200,45 +200,54 @@ public class CustomRecipe extends AppCompatActivity
         });
         builder.show();
     }
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
             if (requestCode == 1)
             {
-                Bitmap bit = (Bitmap) data.getExtras().get("data");
-                preview.setImageBitmap(bit);
-                picTaken = true;
-                try {
-                    output = openFileOutput("pic", 0);
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
+                if (checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)
+                {
+                    Bitmap bit = (Bitmap) data.getExtras().get("data");
+                    preview.setImageBitmap(bit);
+                    picTaken = true;
+                    try {
+                        output = openFileOutput("pic", 0);
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    File filePath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+                    File dir = new File(filePath.getAbsolutePath() + "/RecipeSearch");
+                    dir.mkdir();
+                    File file = new File(System.currentTimeMillis() + ".jpg");
+                    try {
+                        output = new FileOutputStream(file);
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    bit.compress(Bitmap.CompressFormat.JPEG, 80, output);
+                    try {
+                        output.flush();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    try {
+                        output.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    Intent pic = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+                    pic.setData(Uri.fromFile(file));
+                    CImage = dir.getPath();
                 }
-                File filePath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
-                File dir = new File(filePath.getAbsolutePath() + "/RecipeSearch");
-                dir.mkdir();
-                File file = new File(System.currentTimeMillis() + ".jpg");
-                try {
-                    output = new FileOutputStream(file);
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
+                else {
+                    Toast.makeText(getApplicationContext(), "Enable Camera Permission, or Storage Permissions to use",Toast.LENGTH_SHORT).show();
                 }
-                bit.compress(Bitmap.CompressFormat.JPEG, 80, output);
-                try {
-                    output.flush();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    output.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                Intent pic = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-                pic.setData(Uri.fromFile(file));
-                CImage = dir.getPath();
             } else if (requestCode == 2)
             {
+                if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)
+                {
                 Uri uri = data.getData();
                 try {
                     Bitmap bitGallery = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
@@ -248,6 +257,10 @@ public class CustomRecipe extends AppCompatActivity
                     Log.d("Created image path", CImage);
                 } catch (IOException e) {
                     e.printStackTrace();
+                }
+                }
+                else {
+                    Toast.makeText(getApplicationContext(), "Storage Permissions to use",Toast.LENGTH_SHORT).show();
                 }
             }
         }
