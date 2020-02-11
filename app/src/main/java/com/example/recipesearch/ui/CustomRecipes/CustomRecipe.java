@@ -193,7 +193,6 @@ public class CustomRecipe extends AppCompatActivity
                 Uri imgUri = FileProvider.getUriForFile(this , "com.example.android.fileprovider",imgFile);
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imgUri);
                 startActivityForResult(takePictureIntent, 1);
-                CImage = imgUri.toString();
                 CBool = true;
             }
         }
@@ -208,6 +207,9 @@ public class CustomRecipe extends AppCompatActivity
             {
                 if (checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)
                 {
+                    String title = System.currentTimeMillis()+"_pic";
+                    String yourDescription = " ";
+                    CImage = MediaStore.Images.Media.insertImage(getContentResolver(),BitmapFactory.decodeFile(currImgPath) , title , yourDescription);
                     Bitmap bit = BitmapFactory.decodeFile(currImgPath);
                     preview.setImageBitmap(bit);
                 }

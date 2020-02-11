@@ -103,7 +103,7 @@ public class Recipe_Similar_Recipes_Tab_Fragment extends Fragment
                     RecipeActivity.setTime(Cs.getCTime());
                     test = Cs.getCImgURL();
                     if (Cs.getBool() == true)
-                    RecipeActivity.setBitmap(Cs.getCImgURL());
+                    RecipeActivity.setTakenPio(Cs.getCImgURL());
                     else
                     RecipeActivity.setPicUri(Cs.getCImgURL());
                     test = Cs.getCDirections();

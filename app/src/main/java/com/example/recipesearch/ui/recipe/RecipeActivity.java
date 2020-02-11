@@ -44,12 +44,12 @@ public class RecipeActivity extends AppCompatActivity
     static String RecipeName = "Beef Salpicao"; // example for test purposes
     static String imgName = " ";
     static String timeToMake = "XX";
-    private static Bitmap bit = null;
+    private static String takenPic = null;
     String wantedImg;
     String recipeTitle = null;
     public static int i = 1;
     static boolean doIReset = false;
-    private static boolean useBitmap = false;
+    private static boolean usePic = false;
     Button saveRecipe, btnHome;
 
     DatabaseHelper databaseHelper;
@@ -88,10 +88,14 @@ public class RecipeActivity extends AppCompatActivity
         TTM = findViewById(R.id.Time);
         if (timeToMake != "Unavailable")
         TTM.setText(timeToMake + " minutes");
-        if (useBitmap == true)
+        if (usePic == true)
         {
-            pic.setImageBitmap(bit);
-            useBitmap = false;
+            if (takenPic != null)
+            {
+                Uri savedImageURI = Uri.parse(takenPic);
+                pic.setImageURI(savedImageURI);
+            }
+            usePic = false;
         }
         else {
             if (myUri == null)
@@ -248,9 +252,9 @@ public class RecipeActivity extends AppCompatActivity
         super.onBackPressed();
         SearchingActivity.SA.finish();
     }
-    public static void setBitmap(String s)
+    public static void setTakenPio(String s)
     {
-        bit =  BitmapFactory.decodeFile(s);
-        useBitmap = true;
+        takenPic = s;
+        usePic = true;
     }
 }
