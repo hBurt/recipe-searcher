@@ -1,5 +1,6 @@
 package com.example.recipesearch.ui.recipe;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -39,6 +40,7 @@ public class Recipe_Similar_Recipes_Tab_Fragment extends Fragment
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_recipe__similar__recipes__tab_, container, false);
     }
+    @SuppressLint("HandlerLeak")
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState)
     {
