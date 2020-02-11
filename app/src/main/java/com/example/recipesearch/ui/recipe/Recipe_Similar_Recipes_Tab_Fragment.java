@@ -97,7 +97,7 @@ public class Recipe_Similar_Recipes_Tab_Fragment extends Fragment
                 CustomStorage Cs = new CustomStorage(getActivity().getApplicationContext());
                 if (Cs.getCount() > 0)
                 {
-                    if (Cs.getCName() != null) 
+                    if (Cs.getCName() != null)
                     {
                         RecipeActivity.setRecipeName(Cs.getCName());
                         RecipeActivity.setTime(Cs.getCTime());
