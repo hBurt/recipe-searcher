@@ -23,6 +23,7 @@ import com.example.recipesearch.database.Recipe;
 import com.example.recipesearch.database.User;
 import com.example.recipesearch.helpers.DatabaseHelper;
 import com.example.recipesearch.ui.APIComunication.Request_Handler;
+import com.example.recipesearch.ui.CustomRecipes.CustomStorage;
 import com.example.recipesearch.ui.MealPlanMaker.LoadingScreenMP;
 import com.example.recipesearch.ui.search_result.SearchActivity;
 import com.example.recipesearch.ui.search_result.SearchingActivity;
@@ -225,6 +226,8 @@ public class RecipeActivity extends AppCompatActivity
                 storage.setTimeAmount(timeToMake);
             }
         }
+        CustomStorage cs = new CustomStorage(getApplicationContext());
+        cs.resetNUM();
     }
     public static void setDoIReset(){ doIReset = true;}
 
