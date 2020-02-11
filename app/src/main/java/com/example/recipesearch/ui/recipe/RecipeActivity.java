@@ -143,7 +143,10 @@ public class RecipeActivity extends AppCompatActivity
 
         btnHome.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view)
+            {
+                CustomStorage cs = new CustomStorage(getApplicationContext());
+                cs.resetNUM();
                 Intent in = new Intent(RecipeActivity.this, MainActivity.class);
                 startActivity(in);
             }
