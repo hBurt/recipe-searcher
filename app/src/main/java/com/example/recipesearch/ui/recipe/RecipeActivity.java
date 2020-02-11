@@ -226,8 +226,6 @@ public class RecipeActivity extends AppCompatActivity
                 storage.setTimeAmount(timeToMake);
             }
         }
-        CustomStorage cs = new CustomStorage(getApplicationContext());
-        cs.resetNUM();
     }
     public static void setDoIReset(){ doIReset = true;}
 
@@ -253,6 +251,8 @@ public class RecipeActivity extends AppCompatActivity
     public void onBackPressed()
     {
         super.onBackPressed();
+        CustomStorage cs = new CustomStorage(getApplicationContext());
+        cs.resetNUM();
         SearchingActivity.SA.finish();
     }
     public static void setTakenPio(String s)
