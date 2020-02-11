@@ -26,6 +26,8 @@ import com.example.recipesearch.database.User;
 import com.example.recipesearch.helpers.DatabaseHelper;
 import com.example.recipesearch.ui.APIComunication.Ingredient_Request;
 import com.example.recipesearch.ui.APIComunication.Request_Handler;
+import com.example.recipesearch.ui.CustomRecipes.CustomRecipe;
+import com.example.recipesearch.ui.CustomRecipes.CustomStorage;
 import com.example.recipesearch.ui.recipe.RecipeStorage;
 import com.example.recipesearch.ui.Settings.settings_activity;
 import com.example.recipesearch.ui.recipe.RecipeActivity;
@@ -94,6 +96,10 @@ public class SearchActivity extends AppCompatActivity
                         Intent in = new Intent(SearchActivity.this, settings_activity.class);
                         startActivity(in);
                        break;
+                    case R.id.CustomBTN:
+                        Intent CU = new Intent(SearchActivity.this, CustomRecipe.class);
+                        startActivity(CU);
+                        break;
                        default:
                            return false;
 
@@ -111,8 +117,6 @@ public class SearchActivity extends AppCompatActivity
                 Intent in = new Intent(SearchActivity.this, RecipeActivity.class);
                 in.putExtra("databaseUserr", user);
                 startActivity(in);
-                SearchingActivity sercAct = new SearchingActivity();
-                sercAct.destroy();
             }
         };
         FsearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener()

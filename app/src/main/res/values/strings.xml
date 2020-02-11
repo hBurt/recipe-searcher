@@ -109,4 +109,10 @@
     <string name="meal_plan">Meal Plan</string>
     <string name="image_of_meal">image of meal</string>
     <string name="generating_meal_plan">Generating Meal Plan</string>
+    <string name="name_of_recipe">Name of Recipe</string>
+    <string name="time">Time</string>
+    <string name="enter_ingredients_for_recipe">Enter Ingredients for Recipe</string>
+    <string name="click_to_select_an_image">Click to select an image</string>
+    <string name="load_custom_recipes">Load Custom Recipes</string>
+    <string name="clear_saved_recipes">Clear Saved Recipes</string>
 </resources>

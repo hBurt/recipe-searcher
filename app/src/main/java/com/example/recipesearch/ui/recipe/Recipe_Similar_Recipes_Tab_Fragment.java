@@ -18,14 +18,16 @@ import com.example.recipesearch.R;
 import com.example.recipesearch.ui.APIComunication.Next_Similar_Activity;
 import com.example.recipesearch.ui.APIComunication.Next_recipe;
 import com.example.recipesearch.ui.APIComunication.Random_Recipe;
+import com.example.recipesearch.ui.CustomRecipes.CustomRecipe;
+import com.example.recipesearch.ui.CustomRecipes.CustomStorage;
 import com.example.recipesearch.ui.search_result.SearchActivity;
 
 
 public class Recipe_Similar_Recipes_Tab_Fragment extends Fragment
 {
     private static String id = null;
-    static Handler h;
-    static int offSet = 1;
+    private static Handler h;
+    private static int offSet = 1;
     public Recipe_Similar_Recipes_Tab_Fragment()
     {
         // Required empty public constructor
@@ -43,6 +45,7 @@ public class Recipe_Similar_Recipes_Tab_Fragment extends Fragment
         super.onViewCreated(view, savedInstanceState);
         Button next = view.findViewById(R.id.Sim_btn);
         Button Rand = view.findViewById(R.id.Random_Recipe_Btn);
+        Button cRecipe = view.findViewById(R.id.CRecipes);
         h = new  Handler()
         {
             @Override
@@ -59,7 +62,6 @@ public class Recipe_Similar_Recipes_Tab_Fragment extends Fragment
             public void onClick(View v)
             {
                 // when the button is pressed should get the info for the next dish
-                // will eventually add a check to see if the next is a repeat
                 Next_recipe nextS = new Next_recipe();
                 nextS.execute(); // calls the func to get something similar
                 RecipeActivity.setRecipeName("Next Test"); // temp test
@@ -78,16 +80,40 @@ public class Recipe_Similar_Recipes_Tab_Fragment extends Fragment
             {
                 Random_Recipe nRand = new Random_Recipe();
                 nRand.execute();
-                /* String test = Next_Similar_Activity.getName();
-                if (test.length() > 0) // in theory should be an error check for the name
-                      RecipeActivity.setRecipeName(test);
-                else*/
                 RecipeActivity.setRecipeName("Next Test"); // temp test
-                String direct = " ";
                 Recipe_Directions_Tab_Fragment.setDirections("Next Text");
-                String ingredient = " ";
                 Recipe_Ingredient_Tab_Fragment.setIngredients("Next Text");
                 h.sendEmptyMessageDelayed(0, 1200);
+            }
+        });
+        cRecipe.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                RecipeActivity.setRecipeName("Next Test"); // temp test
+                Recipe_Directions_Tab_Fragment.setDirections("Next Text");
+                Recipe_Ingredient_Tab_Fragment.setIngredients("Next Text");
+                CustomStorage Cs = new CustomStorage(getActivity().getApplicationContext());
+                if (Cs.getCount() > 0) {
+                    String test = null;
+                    test = Cs.getCName();
+                    RecipeActivity.setRecipeName(Cs.getCName());
+                    test = Cs.getCTime();
+                    RecipeActivity.setTime(Cs.getCTime());
+                    test = Cs.getCImgURL();
+                    if (Cs.getBool() == true)
+                    RecipeActivity.setTakenPio(Cs.getCImgURL());
+                    else
+                    RecipeActivity.setPicUri(Cs.getCImgURL());
+                    test = Cs.getCDirections();
+                    Recipe_Directions_Tab_Fragment.setDirections(Cs.getCDirections());
+                    test = Cs.getCIngred();
+                    Recipe_Ingredient_Tab_Fragment.setIngredients(Cs.getCIngred());
+                    Cs.setNum();
+                    h.sendEmptyMessageDelayed(0, 300);
+                }
+
             }
         });
     }

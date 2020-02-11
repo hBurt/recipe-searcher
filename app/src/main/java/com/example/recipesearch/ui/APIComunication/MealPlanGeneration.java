@@ -179,6 +179,9 @@ public class MealPlanGeneration extends AsyncTask<Void, Void, String>
         GeneratedMealPlan.setMealImg1(image1);
         GeneratedMealPlan.setMealImg2(image2);
         GeneratedMealPlan.setMealImg3(image3);
+        GeneratedMealPlan.setID1(id1);
+        GeneratedMealPlan.setID2(id2);
+        GeneratedMealPlan.setID3(id3);
         return null;
     }
 
