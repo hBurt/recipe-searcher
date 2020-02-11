@@ -30,12 +30,10 @@ public class RecipeActivity extends AppCompatActivity
     private static Handler h;
     Drawable image = null;
     ViewPager view;
-    static String ID = null;
     static String RecipeName = "Beef Salpicao"; // example for test purposes
     static String imgName = " ";
     static String timeToMake = "XX";
     private static String baseURI = null;
-    String wantedImg;
     private static String directions;
     private static String ingredients;
     public static int i = 1;
@@ -45,6 +43,8 @@ public class RecipeActivity extends AppCompatActivity
 
     DatabaseHelper databaseHelper;
     User user;
+
+    Recipe recipe;
 
     public static boolean ReadTheDamBook = false;
 
@@ -73,33 +73,34 @@ public class RecipeActivity extends AppCompatActivity
         saveRecipe = findViewById(R.id.btn_save_recipe);
         btnHome = findViewById(R.id.button_home);
 
+        recipe = (Recipe) getIntent().getSerializableExtra("recipe");
 
-        if (ReadTheDamBook == true)
+        /*if (ReadTheDamBook == true)
         {
-            useOld();
+            //useOld();
             ReadTheDamBook = false;
-        }
+        }*/
         view = findViewById(R.id.viewPager);
         tex = findViewById(R.id.Recipe_Name);
         pic = findViewById(R.id.Image_of_Food);
         tab = findViewById(R.id.Tabs);
         TTM = findViewById(R.id.Time);
-        if (timeToMake != "Unavailable")
-        TTM.setText(timeToMake + " minutes");
-        wantedImg = imgName;
-        if (wantedImg.length() > 3)
-        {
-            String nWantedImg = getBaseURI() + wantedImg;
-            Picasso.get().load(nWantedImg).into(pic);
-        }
-        tab.addTab(tab.newTab().setText("Ingredients"));
+
+        TTM.setText(recipe.getReadyInMiniutes());
+        tex.setText(recipe.getTitle());
+        Picasso.get().load(recipe.getImageURL()).into(pic);
+
+        tab.addTab(tab.newTab().setText("Ingredient"));
         tab.addTab(tab.newTab().setText("Directions"));
         tab.addTab(tab.newTab().setText("Next Recipe"));
-        tex.setText(RecipeName);
-        RecipeStorage storage = new RecipeStorage(getApplicationContext());
-        storage.setOGName(RecipeName);
         tab.setTabGravity(TabLayout.GRAVITY_FILL);
-        final MyTabAdapter adapter = new MyTabAdapter(this,getSupportFragmentManager(), tab.getTabCount());
+
+
+        RecipeStorage storage = new RecipeStorage(getApplicationContext());
+        storage.setOGName(recipe.getTitle());
+
+        final MyTabAdapter adapter = new MyTabAdapter(this,getSupportFragmentManager(), tab.getTabCount(), recipe);
+
         view.setAdapter(adapter);
         view.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tab));
         tab.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener()
@@ -117,7 +118,7 @@ public class RecipeActivity extends AppCompatActivity
             @Override
             public void onTabReselected(TabLayout.Tab tab)
             {
-                refresh();
+                //refresh();
             }
         });
 
@@ -146,16 +147,16 @@ public class RecipeActivity extends AppCompatActivity
     {
         return RecipeName;
     }
-    public void refresh()
+    /*public void refresh()
     {
         finish();
         overridePendingTransition(0, 0);
         startActivity(getIntent());
         overridePendingTransition(0, 0);
-    }
+    }*/
     public void refreshAndSave()
     {
-        if (ID != null)
+        /*if (ID != null)
         {
             RecipeStorage storage = new RecipeStorage(getApplicationContext());
             storage.setDirections();
@@ -164,7 +165,7 @@ public class RecipeActivity extends AppCompatActivity
             storage.setRecipeID(ID);
             storage.setRecipeName(RecipeName);
             storage.setTimeAmount(timeToMake);
-        }
+        }*/
         finish();
         overridePendingTransition(0, 0);
         startActivity(getIntent());
@@ -178,11 +179,7 @@ public class RecipeActivity extends AppCompatActivity
     {
         timeToMake = time;
     }
-    public static void setID(String id)
-    {
-        ID = id;
-    }
-    public void useOld()
+    /*public void useOld()
     {
         RecipeStorage storage = new RecipeStorage(getApplicationContext());
         imgName = storage.getOldImgURL();
@@ -192,12 +189,12 @@ public class RecipeActivity extends AppCompatActivity
         timeToMake = storage.getOldTime();
         ID = storage.getOldID();
 
-    }
+    }*/
     @Override
     protected void onDestroy()
     {
         super.onDestroy();
-        // should save as long as i have the id
+        /*// should save as long as i have the id
         if (ID != null)
         {
             // should prevent rand and next from overwriting the original
@@ -213,7 +210,7 @@ public class RecipeActivity extends AppCompatActivity
                 storage.setRecipeName(RecipeName);
                 storage.setTimeAmount(timeToMake);
             }
-        }
+        }*/
     }
 
     private void saveRecipe(){
@@ -223,12 +220,12 @@ public class RecipeActivity extends AppCompatActivity
         databaseHelper = new DatabaseHelper(this);
         databaseHelper.rebuildDatabase();
 
-        int id = Integer.parseInt(ID);
-        int time = Integer.parseInt(timeToMake);
+        //int id = recipe.getId();//Integer.parseInt(ID);
+        int time = recipe.getReadyInMiniutes();
 
-        Recipe recipe = new Recipe(id, RecipeName, time, getBaseURI() + imgName);
-        recipe.setDirections(Recipe_Directions_Tab_Fragment.getDirections());
-        recipe.setIngredients(Recipe_Ingredient_Tab_Fragment.getIngredients());
+        Recipe recipe = new Recipe(0, RecipeName, time, getBaseURI() + imgName);
+        //recipe.setDirections(Recipe_Directions_Tab_Fragment.getDirections());
+        //recipe.setIngredients(Recipe_Ingredient_Tab_Fragment.getIngredients());
 
         Favorite favoite = new Favorite(0 ,recipe);
 

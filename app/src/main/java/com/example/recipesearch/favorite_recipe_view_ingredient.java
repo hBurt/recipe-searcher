@@ -8,10 +8,10 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
-
 public class favorite_recipe_view_ingredient extends Fragment {
 
     private TextView ingredientsView;
+
     private String ingredients;
 
     public favorite_recipe_view_ingredient(String ingredients){
@@ -25,6 +25,8 @@ public class favorite_recipe_view_ingredient extends Fragment {
 
         ingredientsView = root.findViewById(R.id.favorite_recipe_view_ingredients);
 
+
+        //todo
         ingredientsView.setText(ingredients);
 
         return root;

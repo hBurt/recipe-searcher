@@ -1,24 +1,22 @@
-package com.example.recipesearch;
+package com.example.recipesearch.ui.recipe;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import com.example.recipesearch.database.Recipe;
-import com.example.recipesearch.ui.recipe.RecipeIngredient;
-import com.example.recipesearch.ui.recipe.RecipeInstruction;
+import com.example.recipesearch.favorite_recipe_view_ingredient;
 
-public class TabHandler extends FragmentStatePagerAdapter {
+public class TabHandler2 extends FragmentStatePagerAdapter {
 
     //integer to count number of tabs
     int tabCount;
 
     //Ingredient ingredients;
-    String directions;
     Recipe recipe;
 
     //Constructor to the class
-    public TabHandler(FragmentManager fm, int tabCount, Recipe recipe) {
+    public TabHandler2(FragmentManager fm, int tabCount, Recipe recipe) {
         super(fm);
         //Initializing tab count
         this.tabCount= tabCount;
@@ -36,6 +34,9 @@ public class TabHandler extends FragmentStatePagerAdapter {
             case 1:
                 RecipeInstruction instruction = new RecipeInstruction(recipe);
                 return instruction;
+            case 2:
+                favorite_recipe_view_ingredient direction2 = new favorite_recipe_view_ingredient(" Ingredients here"); //directions
+                return direction2;
             default:
                 return null;
         }

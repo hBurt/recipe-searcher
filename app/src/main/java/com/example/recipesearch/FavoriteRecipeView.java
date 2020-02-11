@@ -44,9 +44,9 @@ public class FavoriteRecipeView extends Fragment implements TabLayout.OnTabSelec
 
         recipeTitle.setText(favorite.getRecipe().getTitle());
 
-        Picasso.get().load(favorite.getRecipe().getImageURL()).into(recipeImage);
+        Picasso.get().load(favorite.getRecipe().getFullURL()).into(recipeImage);
 
-        tabLayout.addTab(tabLayout.newTab().setText("Ingredients"));
+        tabLayout.addTab(tabLayout.newTab().setText("Ingredient"));
         tabLayout.addTab(tabLayout.newTab().setText("Directions"));
 
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
@@ -56,7 +56,7 @@ public class FavoriteRecipeView extends Fragment implements TabLayout.OnTabSelec
         System.out.println("ingredients: " + favorite.getRecipe().getIngredients());
         System.out.println(" directions: " + favorite.getRecipe().getDirections());
 
-        TabHandler adapter = new TabHandler(getActivity().getSupportFragmentManager(), tabLayout.getTabCount(), favorite.getRecipe().getIngredients(), favorite.getRecipe().getDirections());
+        TabHandler adapter = new TabHandler(getActivity().getSupportFragmentManager(), tabLayout.getTabCount(), favorite.getRecipe());
 
         viewPager.setAdapter(adapter);
 

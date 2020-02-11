@@ -154,7 +154,7 @@ class CustomAdapter extends BaseAdapter implements ListAdapter {
 
     private void loadImageIntoView(View view, Favorite favorite){
         ImageView profileImageView = view.findViewById(R.id.profile_image);
-        Picasso.get().load(Uri.parse(favorite.getRecipe().getImageURL())).placeholder(R.drawable.image_placeholder_blue).into(profileImageView);
+        Picasso.get().load(Uri.parse(favorite.getRecipe().getFullURL())).placeholder(R.drawable.image_placeholder_blue).into(profileImageView);
     }
 
     public void refreshItems()

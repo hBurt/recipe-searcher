@@ -1,20 +1,29 @@
 package com.example.recipesearch.database;
 
+import com.example.recipesearch.database.contents.Ingredient;
+import com.example.recipesearch.database.contents.Step;
+
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Recipe implements Serializable {
 
     private int id;
-    private String title, imageURL, baseImageURI, ingredients, directions;
+    private String title, imageURL, baseImageURI, directions;
     private int readyInMinutes;
+    private ArrayList<Ingredient> ingredients;
+    private ArrayList<Step> steps;
 
-    public Recipe(){
+    private boolean loaded = false;
+
+    public Recipe() {
         setId(0);
         setTitle("");
         setReadyInMiniutes(0);
         setImageURL("");
-        setIngredients("");
         setDirections("");
+        ingredients = new ArrayList<>();
+        steps = new ArrayList<>();
     }
 
     public Recipe(int id, String title, int readyInMinutes, String imageURL) {
@@ -22,6 +31,8 @@ public class Recipe implements Serializable {
         setTitle(title);
         setReadyInMiniutes(readyInMinutes);
         setImageURL(imageURL);
+        ingredients = new ArrayList<>();
+        steps = new ArrayList<>();
     }
 
     public int getId() {
@@ -53,15 +64,28 @@ public class Recipe implements Serializable {
     }
 
     public void setImageURL(String imageURL) {
-        this.imageURL = imageURL;
+        if(imageURL.contains("https://spoonacular.com/recipeImages/")){
+            setBaseImageURI("https://spoonacular.com/recipeImages/");
+            this.imageURL = imageURL.replace("https://spoonacular.com/recipeImages/", "");
+            System.out.println("[Recipe [SetImageUrl]]" + imageURL);
+        } else if(imageURL.contains("https://spoonacular.com/cdn/")){
+            setBaseImageURI("https://spoonacular.com/cdn/");
+            this.imageURL = imageURL.replace("https://spoonacular.com/cdn/", "");
+        } else {
+            this.imageURL = imageURL;
+        }
     }
 
-    public String getIngredients() {
+    public ArrayList<Ingredient> getIngredients() {
         return ingredients;
     }
 
-    public void setIngredients(String ingredients) {
+    public void setIngredients(ArrayList<Ingredient> ingredients) {
         this.ingredients = ingredients;
+    }
+
+    public void addIngredients(Ingredient ingredient){
+        getIngredients().add(ingredient);
     }
 
     public String getDirections() {
@@ -78,5 +102,52 @@ public class Recipe implements Serializable {
 
     public void setBaseImageURI(String baseImageURI) {
         this.baseImageURI = baseImageURI;
+    }
+
+    public String getFullURL() {
+        return getBaseImageURI() + getImageURL();
+    }
+
+    public String display() {
+
+        StringBuilder bui = new StringBuilder();
+
+        for(int i = 0; i < ingredients.size(); i++){
+            bui.append("\n");
+            bui.append(ingredients.get(i).display());
+        }
+
+        StringBuilder buiS = new StringBuilder();
+
+        for(int i = 0; i < steps.size(); i++){
+            buiS.append("\n");
+            buiS.append(steps.get(i).display());
+        }
+
+        return
+                "ID: " + getId()
+                        + " TITLE: " + getTitle()
+                        + " READY IN MINUTES:" + getReadyInMiniutes()
+                        + " BASE URI: " + getBaseImageURI()
+                        + " IMAGE URL: " + getImageURL()
+                        + " FULL URL: " + getFullURL()
+                        + " INGREDIENTS: " + bui.toString()
+                        + " \nSTEPS: " + buiS.toString();
+    }
+
+    public ArrayList<Step> getSteps() {
+        return steps;
+    }
+
+    public void setSteps(ArrayList<Step> steps) {
+        this.steps = steps;
+    }
+
+    public boolean isLoaded() {
+        return loaded;
+    }
+
+    public void setLoaded(boolean loaded) {
+        this.loaded = loaded;
     }
 }
