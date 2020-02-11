@@ -19,6 +19,14 @@ public class CustomStorage
     {
         Custom = context.getSharedPreferences("Custom_Recipe_Book", MODE_PRIVATE);
     }
+    public void setbool(boolean stringA,String stringB)
+    {
+        edit = Custom.edit();
+
+        edit.putBoolean(stringB+"Cbool", stringA);
+
+        edit.apply();
+    }
     public void setCDirections (String stringA,String stringB)
     {
         edit = Custom.edit();
@@ -48,43 +56,67 @@ public class CustomStorage
     public void setCImgURL(String stringA,String stringB )
     {
         edit = Custom.edit();
-                edit.putString(stringB+" img", stringA);
+                edit.putString(stringB+"img", stringA);
         edit.apply();
     }
     public String getCDirections()
     {
-        if (Custom.contains(num+"CDirections"))
-            return Custom.getString(num+"CDirections", " ");
+        if (Custom.contains(Custom.getString(num+ "CName", "")+"CDirections"))
+        {
+            String test = Custom.getString(Custom.getString(num + "CName", "") + "CDirections", " ");
+            return test;
+        }
         else
             return null;
     }
     public String getCIngred()
     {
-        if (Custom.contains(num+"CIngredients"))
-            return Custom.getString(num+"CIngredients", " ");
+        if (Custom.contains(Custom.getString(num+ "CName", "")+"CIngredients"))
+        {
+            String test = Custom.getString(Custom.getString(num + "CName", "") + "CIngredients", " ");
+            return test;
+        }
         else
             return null;
     }
     public String getCName()
     {
-        if(Custom.contains(num+"CName"))
-            return Custom.getString(num+"CName", " ");
+        if(Custom.contains(Custom.getString(num+ "CName", "")+"CName"))
+        {
+            String test = Custom.getString(Custom.getString(num + "CName", "") + "CName", " ");
+            return test;
+        }
         else
             return null;
     }
     public String getCTime()
     {
-        if(Custom.contains(num+"CTime"))
-            return Custom.getString(num+"CTime", " ");
+        if(Custom.contains(Custom.getString(num+ "CName", "")+"CTime"))
+        {
+            String test = Custom.getString(Custom.getString(num + "CName", "") + "CTime", " ");
+            return test;
+        }
         else
             return null;
     }
     public String getCImgURL()
     {
-        if(Custom.contains(num+"img"))
-            return Custom.getString(num+"img", " ");
+        if(Custom.contains(Custom.getString(num+ "CName", "")+"img"))
+        {
+            String test =  Custom.getString(Custom.getString(num + "CName", "") + "img", " ");
+            return test;
+        }
         else
             return null;
+    }
+    public boolean getBool()
+    {
+        boolean test = false;
+        if(Custom.contains(Custom.getString(num+ "CName", "")+"Cbool"))
+        {
+            test = Custom.getBoolean(Custom.getString(num+ "CName", "")+"Cbool", false);
+        }
+        return test;
     }
     public int getCount()
     {
@@ -97,25 +129,30 @@ public class CustomStorage
        }
         return a;
     }
-    public void createRecipe(String name, String directions, String ingredients, String time, String  imgLink)
+    public void createRecipe(String name, String directions, String ingredients, String time, String  imgLink, boolean bool)
     {
-        if (getCount() > 9){removeFirstCRecipe();}
+        removeFirstCRecipe();
         setCTimeAmount(time, name);
         setCRecipeName(name, name);
         setCIngred(ingredients, name);
         setCDirections(directions, name);
         setCImgURL(imgLink, name);
+        setbool(bool, name );
         for (int i = 0; i < 10; i++)
         {
             if (Custom.contains(i+"CName" ))
             {}
-            else {Custom.edit().putString(i + " CName", name);}
+            else {
+                Custom.edit().putString(i + "CName", name).apply();
+                break;
+            }
         }
     }
     public void setNum(){num++;}
     public void resetNUM(){num = 0;}
     public void removeFirstCRecipe()
     {
+        String toBeRemoved = Custom.getString(0+"CName", "");
         String followingName0 = " ";
         String followingName1 = " ";
         String followingName2 = " ";
@@ -125,14 +162,13 @@ public class CustomStorage
         String followingName6 = " ";
         String followingName7 = " ";
         String followingName8 = " ";
-        for (int a = 0; a < 11; a++)
-        {
 
-            if (Custom.contains(a+"CName" ))
+
+
+            if (Custom.contains(toBeRemoved+"CName" ))
             {
-                if (a > 9)// because i want this to happen if there are 10 or more saved sets
+                if (getCount() > 9)// because i want this to happen if there are 10 or more saved sets
                 {
-                    String toBeRemoved = Custom.getString(0+"CName", "");
                     Custom.edit().remove(toBeRemoved+"CName").apply();
                     Custom.edit().remove(toBeRemoved+"id").apply();
                     Custom.edit().remove(toBeRemoved+"img").apply();
@@ -173,7 +209,7 @@ public class CustomStorage
             }
         }
 
-    }
+
     public boolean atCap()
     {
         if (num < getCount())

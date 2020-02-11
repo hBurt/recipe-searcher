@@ -1,6 +1,8 @@
 package com.example.recipesearch.ui.recipe;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 
 import android.net.Uri;
@@ -37,16 +39,17 @@ public class RecipeActivity extends AppCompatActivity
     private TextView TTM;
     private static Uri myUri = null;
     private static Handler h;
-    Drawable image = null;
     ViewPager view;
     static String ID = null;
     static String RecipeName = "Beef Salpicao"; // example for test purposes
     static String imgName = " ";
     static String timeToMake = "XX";
+    private static Bitmap bit = null;
     String wantedImg;
     String recipeTitle = null;
     public static int i = 1;
     static boolean doIReset = false;
+    private static boolean useBitmap = false;
     Button saveRecipe, btnHome;
 
     DatabaseHelper databaseHelper;
@@ -85,10 +88,17 @@ public class RecipeActivity extends AppCompatActivity
         TTM = findViewById(R.id.Time);
         if (timeToMake != "Unavailable")
         TTM.setText(timeToMake + " minutes");
-        if (myUri == null)
-        Picasso.get().load(imgName).into(pic);
-        else
-            pic.setImageURI(myUri);
+        if (useBitmap == true)
+        {
+            pic.setImageBitmap(bit);
+            useBitmap = false;
+        }
+        else {
+            if (myUri == null)
+                Picasso.get().load(imgName).into(pic);
+            else
+                pic.setImageURI(myUri);
+        }
         tab.addTab(tab.newTab().setText("Ingredients"));
         tab.addTab(tab.newTab().setText("Directions"));
         tab.addTab(tab.newTab().setText("Next Recipe"));
@@ -237,5 +247,10 @@ public class RecipeActivity extends AppCompatActivity
     {
         super.onBackPressed();
         SearchingActivity.SA.finish();
+    }
+    public static void setBitmap(String s)
+    {
+        bit =  BitmapFactory.decodeFile(s);
+        useBitmap = true;
     }
 }

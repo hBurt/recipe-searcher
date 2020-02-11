@@ -9,6 +9,9 @@ import androidx.core.content.FileProvider;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.content.ContentResolver;
+import android.content.ContentUris;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -16,6 +19,7 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -43,6 +47,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.net.URI;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -53,6 +58,9 @@ public class CustomRecipe extends AppCompatActivity
     private static String CDirect = null;
     private static String CTime = null;
     private static String CImage = null;
+    private static boolean CBool = false;
+    String currImgPath = null;
+    private Uri mImageUri;
     Bitmap bitGallery;
     OutputStream output;
     private boolean picTaken = false;
@@ -114,40 +122,8 @@ public class CustomRecipe extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                /*if (picTaken == true) {
-                    Bitmap bit =((BitmapDrawable)preview.getDrawable()).getBitmap();
-                    try {
-                        output = openFileOutput("pic", 0);
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    }
-                    File filePath = Environment.getExternalStorageDirectory();
-                    File dir = new File(filePath.getAbsolutePath() + "/RecipeSearch");
-                    dir.mkdir();
-                    File file = new File(System.currentTimeMillis() + ".jpg");
-                    try {
-                        output = new FileOutputStream(file);
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    }
-                    bit.compress(Bitmap.CompressFormat.JPEG, 80, output);
-                    try {
-                        output.flush();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    try {
-                        output.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    Intent pic = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-                    pic.setData(Uri.fromFile(file));
-                    CImage = dir.getPath();
-                    picTaken = false;
-                }*/
                 CustomStorage cStore = new CustomStorage(getApplicationContext());
-                cStore.createRecipe(CName, CDirect, CIngred, CTime, CImage);
+                cStore.createRecipe(CName, CDirect, CIngred, CTime, CImage, CBool);
                 Toast.makeText(getApplicationContext(), "Recipe Saved",Toast.LENGTH_SHORT).show();
             }
         });
@@ -179,8 +155,13 @@ public class CustomRecipe extends AppCompatActivity
             public void onClick(DialogInterface dialog, int item) {
                 if (options[item].equals("Snap a Pic"))
                 {
-                    Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    startActivityForResult(takePictureIntent, 1);
+                    if (checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)
+                    {
+                        takePic();
+                    }
+                    else {
+                        Toast.makeText(getApplicationContext(), "Enable Camera Permission, and/or Storage Permissions to use",Toast.LENGTH_SHORT).show();
+                    }
                 }
                 else if (options[item].equals("Choose from Gallery"))
                 {
@@ -196,6 +177,28 @@ public class CustomRecipe extends AppCompatActivity
         });
         builder.show();
     }
+    private void takePic()
+    {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null)
+        {
+            File imgFile = null;
+            try {
+                imgFile = getImageFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            if (imgFile != null)
+            {
+                Uri imgUri = FileProvider.getUriForFile(this , "com.example.android.fileprovider",imgFile);
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imgUri);
+                startActivityForResult(takePictureIntent, 1);
+                CImage = imgUri.toString();
+                CBool = true;
+            }
+        }
+        startActivityForResult(takePictureIntent, 1);
+    }
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -205,40 +208,11 @@ public class CustomRecipe extends AppCompatActivity
             {
                 if (checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)
                 {
-                    Bitmap bit = (Bitmap) data.getExtras().get("data");
+                    Bitmap bit = BitmapFactory.decodeFile(currImgPath);
                     preview.setImageBitmap(bit);
-                    picTaken = true;
-                    try {
-                        output = openFileOutput("pic", 0);
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    }
-                    File filePath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
-                    File dir = new File(filePath.getAbsolutePath() + "/RecipeSearch");
-                    dir.mkdir();
-                    File file = new File(System.currentTimeMillis() + ".jpg");
-                    try {
-                        output = new FileOutputStream(file);
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    }
-                    bit.compress(Bitmap.CompressFormat.JPEG, 80, output);
-                    try {
-                        output.flush();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    try {
-                        output.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    Intent pic = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-                    pic.setData(Uri.fromFile(file));
-                    CImage = dir.getPath();
                 }
                 else {
-                    Toast.makeText(getApplicationContext(), "Enable Camera Permission, or Storage Permissions to use",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Enable Camera Permission, and/or Storage Permissions to use",Toast.LENGTH_SHORT).show();
                 }
             } else if (requestCode == 2)
             {
@@ -250,6 +224,7 @@ public class CustomRecipe extends AppCompatActivity
                     preview.setImageBitmap(bitGallery);
                     Uri selectedImageUri = data.getData( );
                     CImage = getPath(getApplicationContext(), selectedImageUri );
+                    CBool = false;
                     Log.d("Created image path", CImage);
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -261,15 +236,13 @@ public class CustomRecipe extends AppCompatActivity
             }
         }
     }
-
-    public void onRequestPermissionResult(int requestCode, String[] permissions, int[] grantResults) {
-        if (requestCode == 1) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
-            }
-            else {
-
-            }
-        }
+    private File getImageFile() throws IOException
+    {
+        String time = String.valueOf(System.currentTimeMillis());
+        String imgName = "pic_"+ time+"_";
+        File storeDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File imgFile = File.createTempFile(imgName, ".jpg", storeDir);
+        currImgPath = imgFile.getAbsolutePath();
+        return imgFile;
     }
 }
