@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupWithNavController(navView, navController);
 
-        autoLogin("test3@test.com", "1234");
+        //autoLogin("test3@test.com", "1234");
 
 
         // keep layout when keyboard is shown
