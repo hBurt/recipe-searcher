@@ -1,10 +1,10 @@
 package com.example.recipesearch.ui.recipe;
+
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
-
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -29,7 +29,6 @@ import com.example.recipesearch.ui.search_result.SearchActivity;
 import com.example.recipesearch.ui.search_result.SearchingActivity;
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
-import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
 public class RecipeActivity extends AppCompatActivity
@@ -41,26 +40,48 @@ public class RecipeActivity extends AppCompatActivity
     private static Uri myUri = null;
     private static Handler h;
     ViewPager view;
-    static String ID = null;
     static String RecipeName = "Beef Salpicao"; // example for test purposes
     static String imgName = " ";
     static String timeToMake = "XX";
+    private static String baseURI = null;
+    private static String directions;
+    private static String ingredients;
     private static String takenPic = null;
     String wantedImg;
     String recipeTitle = null;
     public static int i = 1;
     static boolean doIReset = false;
     private static boolean usePic = false;
+
     Button saveRecipe, btnHome;
 
     DatabaseHelper databaseHelper;
     User user;
     public static boolean ReadTheDamBook = false;
 
+    Recipe recipe;
+
     public static void setPicUri(String cImgURL)
     {
          myUri = Uri.parse(cImgURL);
 
+    }
+
+
+    public static String getBaseURI() {
+        return baseURI;
+    }
+
+    public static void setBaseURI(String baseURI) {
+        RecipeActivity.baseURI = baseURI;
+    }
+
+    public static void setDirections(String directions) {
+        RecipeActivity.directions = directions;
+    }
+
+    public static void setIngredients(String ingredients) {
+        RecipeActivity.ingredients = ingredients;
     }
 
     @Override
@@ -77,9 +98,11 @@ public class RecipeActivity extends AppCompatActivity
             refresh();
         }
 
+        recipe = (Recipe) getIntent().getSerializableExtra("recipe");
+
         if (ReadTheDamBook == true)
         {
-            useOld();
+            //useOld();
             ReadTheDamBook = false;
         }
         view = findViewById(R.id.viewPager);
@@ -87,8 +110,11 @@ public class RecipeActivity extends AppCompatActivity
         pic = findViewById(R.id.Image_of_Food);
         tab = findViewById(R.id.Tabs);
         TTM = findViewById(R.id.Time);
-        if (timeToMake != "Unavailable")
-        TTM.setText(timeToMake + " minutes");
+        }
+
+        /*TTM.setText(recipe.getReadyInMiniutes());
+        tex.setText(recipe.getTitle());
+        Picasso.get().load(recipe.getImageURL()).into(pic);
         if (usePic == true)
         {
             if (takenPic != null)
@@ -103,16 +129,19 @@ public class RecipeActivity extends AppCompatActivity
                 Picasso.get().load(imgName).into(pic);
             else
                 pic.setImageURI(myUri);
-        }
-        tab.addTab(tab.newTab().setText("Ingredients"));
+        }*/
+        /*tab.addTab(tab.newTab().setText("Ingredients"));
         tab.addTab(tab.newTab().setText("Directions"));
         tab.addTab(tab.newTab().setText("Next Recipe"));
-        tex.setText(RecipeName);
+        tab.setTabGravity(TabLayout.GRAVITY_FILL);*/
+
+
         RecipeStorage storage = new RecipeStorage(getApplicationContext());
-        storage.setOGName(RecipeName);
-        tab.setTabGravity(TabLayout.GRAVITY_FILL);
-        final MyTabAdapter adapter = new MyTabAdapter(this,getSupportFragmentManager(), tab.getTabCount());
-        view.setAdapter(adapter);
+        //storage.setOGName(recipe.getTitle());
+
+        final MyTabAdapter adapter = new MyTabAdapter(this,getSupportFragmentManager(), tab.getTabCount(), recipe);
+
+        /*view.setAdapter(adapter);
         view.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tab));
         tab.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener()
         {
@@ -129,11 +158,11 @@ public class RecipeActivity extends AppCompatActivity
             @Override
             public void onTabReselected(TabLayout.Tab tab)
             {
-                refresh();
+                //refresh();
             }
-        });
+        });*/
 
-        saveRecipe.setOnClickListener(new View.OnClickListener() {
+       /* saveRecipe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 saveRecipe();
@@ -150,9 +179,9 @@ public class RecipeActivity extends AppCompatActivity
                 Intent in = new Intent(RecipeActivity.this, MainActivity.class);
                 startActivity(in);
             }
-        });
+        });*/
 
-    }
+
     public static void setRecipeName(String someName)
     {
         RecipeName = someName;
@@ -170,7 +199,7 @@ public class RecipeActivity extends AppCompatActivity
     }
     public void refreshAndSave()
     {
-        if (ID != null)
+        /*if (ID != null)
         {
             RecipeStorage storage = new RecipeStorage(getApplicationContext());
             storage.setDirections();
@@ -179,7 +208,7 @@ public class RecipeActivity extends AppCompatActivity
             storage.setRecipeID(ID);
             storage.setRecipeName(RecipeName);
             storage.setTimeAmount(timeToMake);
-        }
+        }*/
         finish();
         overridePendingTransition(0, 0);
         startActivity(getIntent());
@@ -193,10 +222,6 @@ public class RecipeActivity extends AppCompatActivity
     {
         timeToMake = time;
     }
-    public static void setID(String id)
-    {
-        ID = id;
-    }
     public void useOld()
     {
         RecipeStorage storage = new RecipeStorage(getApplicationContext());
@@ -205,7 +230,7 @@ public class RecipeActivity extends AppCompatActivity
         Recipe_Ingredient_Tab_Fragment.setIngredients(storage.getOldIngred());
         Recipe_Directions_Tab_Fragment.setDirections(storage.getOldDirections());
         timeToMake = storage.getOldTime();
-        ID = storage.getOldID();
+        //ID = storage.getOldID();
 
     }
     @Override
@@ -214,7 +239,7 @@ public class RecipeActivity extends AppCompatActivity
         super.onDestroy();
         RecipeStorage storage = new RecipeStorage(getApplicationContext());
         // should save as long as i have the id
-        if (ID != null)
+       /* if (ID != null)
         {
             // should prevent rand and next from overwriting the original
             if (RecipeName.toLowerCase().contains(SearchActivity.getSearchedFood()))
@@ -228,7 +253,7 @@ public class RecipeActivity extends AppCompatActivity
                 storage.setRecipeName(RecipeName);
                 storage.setTimeAmount(timeToMake);
             }
-        }
+        }*/
     }
     public static void setDoIReset(){ doIReset = true;}
 
@@ -239,7 +264,13 @@ public class RecipeActivity extends AppCompatActivity
         databaseHelper = new DatabaseHelper(this);
         databaseHelper.rebuildDatabase();
 
-        Recipe recipe = new Recipe(0, "Title" + recipeTitle, 20, imgName);
+        //int id = recipe.getId();//Integer.parseInt(ID);
+        int time = recipe.getReadyInMiniutes();
+
+        Recipe recipe = new Recipe(0, RecipeName, time, getBaseURI() + imgName);
+        //recipe.setDirections(Recipe_Directions_Tab_Fragment.getDirections());
+        //recipe.setIngredients(Recipe_Ingredient_Tab_Fragment.getIngredients());
+
         Favorite favoite = new Favorite(0 ,recipe);
 
         user.getFavorites().add(favoite);

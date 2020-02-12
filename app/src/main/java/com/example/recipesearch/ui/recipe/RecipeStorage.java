@@ -50,7 +50,7 @@ public class RecipeStorage
     public void setIngred()
     {
         edit = mPrefs.edit();
-        edit.putString(SearchActivity.getSearchedFood()+"Ingredients", Recipe_Ingredient_Tab_Fragment.getIngredients());
+        edit.putString(SearchActivity.getSearchedFood()+"Ingredient", Recipe_Ingredient_Tab_Fragment.getIngredients());
         edit.apply();
     }
     public void setRecipeName(String string)
@@ -94,8 +94,8 @@ public class RecipeStorage
     }
     public String getOldIngred()
     {
-        if (mPrefs.contains(SearchActivity.getSearchedFood()+"Ingredients"))
-        return mPrefs.getString(SearchActivity.getSearchedFood()+"Ingredients", " ");
+        if (mPrefs.contains(SearchActivity.getSearchedFood()+"Ingredient"))
+        return mPrefs.getString(SearchActivity.getSearchedFood()+"Ingredient", " ");
         else
             return null;
     }
@@ -143,7 +143,7 @@ public class RecipeStorage
             mPrefs.edit().remove(SearchActivity.getSearchedFood()+"Name").apply();
             mPrefs.edit().remove(SearchActivity.getSearchedFood()+"id").apply();
             mPrefs.edit().remove(SearchActivity.getSearchedFood()+"img").apply();
-            mPrefs.edit().remove(SearchActivity.getSearchedFood()+"Ingredients").apply();
+            mPrefs.edit().remove(SearchActivity.getSearchedFood()+"Ingredient").apply();
             mPrefs.edit().remove(SearchActivity.getSearchedFood()+"Directions").apply();
             mPrefs.edit().remove(SearchActivity.getSearchedFood()+"Time").apply();
         }
@@ -222,7 +222,7 @@ public class RecipeStorage
                     mPrefs.edit().remove(nameToRemove+"Name").apply();
                     mPrefs.edit().remove(nameToRemove+"id").apply();
                     mPrefs.edit().remove(nameToRemove+"img").apply();
-                    mPrefs.edit().remove(nameToRemove+"Ingredients").apply();
+                    mPrefs.edit().remove(nameToRemove+"Ingredient").apply();
                     mPrefs.edit().remove(nameToRemove+"Directions").apply();
                     mPrefs.edit().remove(nameToRemove+"Time").apply();
                 }

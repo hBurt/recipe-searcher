@@ -28,21 +28,21 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 
-public class Request_Handler extends AsyncTask<Void, Void, String>
-{
+public class Request_Handler extends AsyncTask<Void, Void, String> {
     private static String id = null;
     private static String dishName = null;
     private static String oneObjectsItem = null;
     private static String oneObjectsItem2 = null;
     private static String oneObjectsItem3 = null;
     private static String oneObjectsItem4 = null;
+    private static String baseURI = null;
     private String responseData;
     private static String Directions;
     private static String Ingredients;
     List<String> IDList;
+
     @Override
-    protected String doInBackground(Void... voids)
-    {
+    protected String doInBackground(Void... voids) {
         String RetreivedFood = SearchActivity.getSearchedFood();
         IDList = SearchActivity.getIDList();
         String Food = new String(RetreivedFood.trim().replace(" ", "%20").replace("&", "%26")
@@ -58,22 +58,20 @@ public class Request_Handler extends AsyncTask<Void, Void, String>
         // Do some validation here
         OkHttpClient client = new OkHttpClient();
         com.squareup.okhttp.Request request = new Request.Builder()
-                .url("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/search?number=1&offset=0&instructionsRequired=true&query="+ Food) // will use only the first result
+                .url("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/search?number=1&offset=0&instructionsRequired=true&query=" + Food) // will use only the first result
                 .get()
                 .addHeader("x-rapidapi-host", "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com")
                 .addHeader("x-rapidapi-key", "7dba1c8b6dmsh8c3919fbe127d43p122d00jsn89f1b32d2216")
                 .build();
 
         Response response = null; // needs an id num or will cause an error
-        try
-        {
+        try {
             response = client.newCall(request).execute(); // provides a val for the first search and preforms it
             responseData = response.body().string();
+            System.out.println(responseData);
             String test = responseData;
 
-        }
-        catch (IOException e)
-        {
+        } catch (IOException e) {
             RecipeActivity.setTime("ERROR:02");
             RecipeActivity.setPic(" ");
             RecipeActivity.setRecipeName("ERROR: Failed to retrieve recipe");
@@ -85,12 +83,10 @@ public class Request_Handler extends AsyncTask<Void, Void, String>
         // begins parsing to get the id, will just get the first id
         JSONObject jObject = null;
         JSONArray jArray = null;
-        try
-        {
-            jObject = new JSONObject(String.valueOf(responseData));
-        }
-        catch (JSONException e)
-        {
+        JSONArray jArrayURI = null;
+        try {
+            jObject = new JSONObject(responseData);
+        } catch (JSONException e) {
             RecipeActivity.setTime("ERROR:02");
             RecipeActivity.setPic(" ");
             RecipeActivity.setRecipeName("ERROR: Failed to retrieve recipe");
@@ -98,12 +94,10 @@ public class Request_Handler extends AsyncTask<Void, Void, String>
             Recipe_Ingredient_Tab_Fragment.setIngredients("ERROR: Failed to retrieve recipe");
             return null;
         }
-        try
-        {
+        try {
             jArray = jObject.getJSONArray("results");
-        }
-        catch (JSONException e)
-        {
+
+        } catch (JSONException e) {
             RecipeActivity.setTime("ERROR:01");
             RecipeActivity.setPic(" ");
             RecipeActivity.setRecipeName("ERROR: Bad or misspelled word");
@@ -111,45 +105,46 @@ public class Request_Handler extends AsyncTask<Void, Void, String>
             Recipe_Ingredient_Tab_Fragment.setIngredients("ERROR: Bad or misspelled word");
             return null;
         }
-                // Begin getting shit from the arrays
-                        for (int i=0; i < jArray.length(); i++)
-                        {
+        // Begin getting shit from the arrays
+        for (int i = 0; i < jArray.length(); i++) {
 
-                            JSONObject oneObject = null;
-                            try {
-                                oneObject = jArray.getJSONObject(i);
-                                oneObjectsItem = oneObject.getString("id");
-                                oneObjectsItem2 = oneObject.getString("title");
-                                oneObjectsItem3 = oneObject.getString("readyInMinutes");
-                                oneObjectsItem4 = oneObject.getString("image");
-                            }
-                            catch (JSONException e)
-                            {
-                                RecipeActivity.setTime("ERROR:01");
-                                RecipeActivity.setPic(" ");
-                                RecipeActivity.setRecipeName("ERROR: Bad or misspelled word");
-                                Recipe_Directions_Tab_Fragment.setDirections("ERROR: Bad or misspelled word");
-                                Recipe_Ingredient_Tab_Fragment.setIngredients("ERROR: Bad or misspelled word");
-                                return null;
-                            }
+            JSONObject oneObject = null;
+            try {
+                oneObject = jArray.getJSONObject(i);
+                System.out.println(oneObject);
+                oneObjectsItem = oneObject.getString("id");
+                oneObjectsItem2 = oneObject.getString("title");
+                oneObjectsItem3 = oneObject.getString("readyInMinutes");
+                oneObjectsItem4 = oneObject.getString("image");
+                //baseURI = oneObject.getString("");
+            } catch (JSONException e) {
+                RecipeActivity.setTime("ERROR:01");
+                RecipeActivity.setPic(" ");
+                RecipeActivity.setRecipeName("ERROR: Bad or misspelled word");
+                Recipe_Directions_Tab_Fragment.setDirections("ERROR: Bad or misspelled word");
+                Recipe_Ingredient_Tab_Fragment.setIngredients("ERROR: Bad or misspelled word");
+                return null;
+            }
 
-
-                        }
+            try {
+                baseURI = jObject.getString("baseUri");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
         // will create a second api call
         // after received must get the item id from what was received
-        if (oneObjectsItem != null)
-        {
-        if (oneObjectsItem.length() > 3  )
-        {
-            id = oneObjectsItem;
-        }
-        if (oneObjectsItem2 .length() > 2)
-            dishName = oneObjectsItem2;
-        // for having them be on different calls
-        // wip for getting the instructions
+        if (oneObjectsItem != null) {
+            if (oneObjectsItem.length() > 3) {
+                id = oneObjectsItem;
+            }
+            if (oneObjectsItem2.length() > 2)
+                dishName = oneObjectsItem2;
+            // for having them be on different calls
+            // wip for getting the instructions
         }
         String newReturn = " ";
-       // id = "521510"; // testing id
+        // id = "521510"; // testing id
         Response response2 = null; // needs an id num or will cause an error
         // for use in filtering how detailed the instructions are
         if (id != null) {
@@ -241,7 +236,7 @@ public class Request_Handler extends AsyncTask<Void, Void, String>
             String sixthIngred = new String(fifthIngred.trim().replace("[", "").replace("]", "").replace(",", " ").replace(".", " ")
                     .replace(" in ", "").replace(" dutch ", ""));
             Ingredients = sixthIngred;
-            RecipeActivity.setID(oneObjectsItem);
+            //RecipeActivity.setID(oneObjectsItem);
             if (oneObjectsItem4.length() > 3) {
                 if (!oneObjectsItem4.contains("https://spoonacular.com/recipeImages/")) {
                     String wantedImg = "https://spoonacular.com/recipeImages/" + oneObjectsItem4;
@@ -251,32 +246,32 @@ public class Request_Handler extends AsyncTask<Void, Void, String>
             }
             RecipeActivity.setTime(oneObjectsItem3);
             RecipeActivity.setRecipeName(oneObjectsItem2);
+            RecipeActivity.setBaseURI(baseURI);
             Recipe_Directions_Tab_Fragment.setDirections(Directions);
             Recipe_Ingredient_Tab_Fragment.setIngredients(Ingredients);
-        }
-        else {
+        } else {
             RecipeActivity.setTime("ERROR:01");
             RecipeActivity.setPic(" ");
             RecipeActivity.setRecipeName("ERROR: Bad or misspelled word");
             Recipe_Directions_Tab_Fragment.setDirections("ERROR: Bad or misspelled word");
             Recipe_Ingredient_Tab_Fragment.setIngredients("ERROR: Bad or misspelled word");
-            }
+        }
         return null;
     }
-    public static String getID()
-    {
+
+    public static String getID() {
         return id;
     }
-    public static String getDishName()
-    {
+
+    public static String getDishName() {
         return dishName;
     }
-    public static String getDirections()
-    {
+
+    public static String getDirections() {
         return Directions;
     }
-    public static String getIngredients()
-    {
+
+    public static String getIngredients() {
         return Ingredients;
     }
 }

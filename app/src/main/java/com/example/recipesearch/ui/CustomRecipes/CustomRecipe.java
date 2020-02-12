@@ -40,6 +40,7 @@ import android.widget.Toast;
 
 import com.example.recipesearch.MainActivity;
 import com.example.recipesearch.R;
+import com.example.recipesearch.ui.APIComunication.CreateRecipeCard;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -58,6 +59,7 @@ public class CustomRecipe extends AppCompatActivity
     private static String CDirect = null;
     private static String CTime = null;
     private static String CImage = null;
+    private static String CServing = null;
     private static boolean CBool = false;
     String currImgPath = null;
     private Uri mImageUri;
@@ -125,6 +127,7 @@ public class CustomRecipe extends AppCompatActivity
                 CustomStorage cStore = new CustomStorage(getApplicationContext());
                 cStore.createRecipe(CName, CDirect, CIngred, CTime, CImage, CBool);
                 Toast.makeText(getApplicationContext(), "Recipe Saved",Toast.LENGTH_SHORT).show();
+                askToMakeCard();
             }
         });
 
@@ -171,6 +174,27 @@ public class CustomRecipe extends AppCompatActivity
                     startActivityForResult(Intent.createChooser(intent, "Select Picture"), 2);
                 }
                 else if (options[item].equals("Cancel")) {
+                    dialog.dismiss();
+                }
+            }
+        });
+        builder.show();
+    }
+    private void askToMakeCard() {
+        final CharSequence[] options = { "Yes", "NO" };
+        AlertDialog.Builder builder = new AlertDialog.Builder(CustomRecipe.this);
+        builder.setTitle("Would you like to make a custom Recipe Card?");
+        builder.setItems(options, new DialogInterface.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.M)
+            @Override
+            public void onClick(DialogInterface dialog, int item) {
+                if (options[item].equals("Yes"))
+                {
+                    CreateRecipeCard CRC = new CreateRecipeCard();
+                    CRC.execute();
+                    Toast.makeText(getApplicationContext(), "Recipe Card Made",Toast.LENGTH_SHORT).show();
+                }
+                else if (options[item].equals("No")) {
                     dialog.dismiss();
                 }
             }
@@ -246,5 +270,17 @@ public class CustomRecipe extends AppCompatActivity
         File imgFile = File.createTempFile(imgName, ".jpg", storeDir);
         currImgPath = imgFile.getAbsolutePath();
         return imgFile;
+    }
+    public static String getCName(){return CName;}
+    public static String getCIngred(){return CIngred;}
+    public static String getCDirect(){return CDirect; }
+    public static String getCTime(){return CTime;}
+    public static String getCImage(){return CImage;}
+    public static String getCServing()
+    {
+        if (CServing != null)
+            return CServing;
+        else
+            return "4";
     }
 }

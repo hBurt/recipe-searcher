@@ -6,15 +6,20 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
+import com.example.recipesearch.database.Recipe;
+
 class MyTabAdapter extends FragmentPagerAdapter
 {
     Context context;
     int totalTabs;
-    public MyTabAdapter(Context c, FragmentManager fm, int totalTabs)
+
+    Recipe recipe;
+    public MyTabAdapter(Context c, FragmentManager fm, int totalTabs, Recipe recipe)
     {
         super(fm);
         context = c;
         this.totalTabs = totalTabs;
+        this.recipe = recipe;
     }
     @Override
     public Fragment getItem(int position)
@@ -22,8 +27,8 @@ class MyTabAdapter extends FragmentPagerAdapter
         switch (position)
         {
             case 0:
-                Recipe_Ingredient_Tab_Fragment Ingredient = new Recipe_Ingredient_Tab_Fragment();
-                return Ingredient;
+                RecipeIngredient ingredient = new RecipeIngredient(recipe);
+                return ingredient;
             case 1:
                 Recipe_Directions_Tab_Fragment Directions = new Recipe_Directions_Tab_Fragment();
                 return Directions;

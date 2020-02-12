@@ -10,10 +10,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -35,6 +37,9 @@ public class HomeSearchFragment extends Fragment {
     private TextView textView_or;
     private boolean canSwitch = true;
 
+    private DatabaseHelper databaseHelper;
+    private ConstraintLayout constraintLayout;
+
     @Override
     public void onResume() {
         super.onResume();
@@ -44,6 +49,8 @@ public class HomeSearchFragment extends Fragment {
         // This stops auto switching back to search result fragment
         et.getText().clear();
         canSwitch = true;
+
+        setBottomVisibilityAndMargin();
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -62,7 +69,10 @@ public class HomeSearchFragment extends Fragment {
         textView_or = root.findViewById(R.id.textView_or2);
         MPGen = root.findViewById(R.id.MPGenerator);
 
-        final DatabaseHelper databaseHelper = ((MainActivity) getActivity()).getDatabaseHelper();
+        constraintLayout = root.findViewById(R.id.serch_frag);
+
+
+        databaseHelper = ((MainActivity) getActivity()).getDatabaseHelper();
 
 
         /*if(databaseHelper.isLoginStateSaved()){
@@ -149,6 +159,8 @@ public class HomeSearchFragment extends Fragment {
                 startActivity(in);
             }
         });
+
+        setBottomVisibilityAndMargin();
         return root;
     }
 
@@ -164,5 +176,21 @@ public class HomeSearchFragment extends Fragment {
         login.setVisibility(loginCheck() ? View.INVISIBLE : View.VISIBLE);
         signup.setVisibility(loginCheck() ? View.INVISIBLE : View.VISIBLE);
         textView_or.setVisibility(loginCheck() ? View.INVISIBLE : View.VISIBLE);
+    }
+
+    private void setBottomVisibilityAndMargin(){
+        if(databaseHelper.loginCheck()){
+            ((MainActivity) getActivity()).setBottomNavigationVisibility(View.VISIBLE);
+            setBottomMargin(60);
+        } else {
+            ((MainActivity) getActivity()).setBottomNavigationVisibility(View.INVISIBLE);
+            setBottomMargin(0);
+        }
+    }
+
+    private void setBottomMargin(int bottomMargin){
+        FrameLayout.LayoutParams newLayoutParams = (FrameLayout.LayoutParams) constraintLayout.getLayoutParams();
+        newLayoutParams.bottomMargin = bottomMargin;
+        constraintLayout.setLayoutParams(newLayoutParams);
     }
 }

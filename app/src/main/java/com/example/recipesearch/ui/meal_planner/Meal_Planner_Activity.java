@@ -116,6 +116,12 @@ public class Meal_Planner_Activity extends AppCompatActivity
         edit.putString("Day1", string);
         edit.apply();
     }
+    public void setNotesNew(String string)
+    {
+        edit = mPrefs.edit();
+        edit.putString("Note", string);
+        edit.apply();
+    }
 
     @Override
     protected void onDestroy()

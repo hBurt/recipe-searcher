@@ -230,7 +230,7 @@ public class Next_recipe extends AsyncTask<Void, Void, String>
         String sixthIngred = new String(fifthIngred.trim().replace("[", "").replace("]", "").replace(",", " ").replace(".", " ")
                 .replace(" in ", "") .replace(" dutch ", ""));
         Ingredients = sixthIngred;
-        RecipeActivity.setID(oneObjectsItem);
+        //RecipeActivity.setID(oneObjectsItem);
         if (oneObjectsItem4.length() > 3) {
             if (!oneObjectsItem4.contains("https://spoonacular.com/recipeImages/")) {
                 String wantedImg = "https://spoonacular.com/recipeImages/" + oneObjectsItem4;

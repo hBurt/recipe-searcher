@@ -7,8 +7,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 
+import androidx.annotation.Dimension;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.solver.widgets.ConstraintAnchor;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
@@ -21,11 +25,12 @@ public class MainActivity extends AppCompatActivity {
     private CharSequence message;
     private DatabaseHelper databaseHelper;
     private BottomNavigationView navView;
+    private ConstraintLayout constraintLayout;
+    ConstraintLayout.LayoutParams newLayoutParams;
 
     @Override
     protected void onResume() {
         super.onResume();
-        setBottomNavigationVisibility();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -46,10 +51,9 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupWithNavController(navView, navController);
 
-        autoLogin("test2@test.com", "1234");
+        //autoLogin("test3@test.com", "1234");
 
-        setBottomNavigationVisibility();
-        
+
         // keep layout when keyboard is shown
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
 
@@ -65,10 +69,6 @@ public class MainActivity extends AppCompatActivity {
 
     public DatabaseHelper getDatabaseHelper() {
         return databaseHelper;
-    }
-
-    private void setBottomNavigationVisibility(){
-        navView.setVisibility(databaseHelper.loginCheck() ? View.VISIBLE : View.INVISIBLE);
     }
 
     public void setBottomNavigationVisibility(int viewID){

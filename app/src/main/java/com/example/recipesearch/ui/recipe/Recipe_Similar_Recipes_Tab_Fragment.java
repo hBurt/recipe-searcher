@@ -53,7 +53,7 @@ public class Recipe_Similar_Recipes_Tab_Fragment extends Fragment
             @Override
             public void handleMessage(Message msg)
             {
-                ((RecipeActivity)getActivity()).refresh();
+                //((RecipeActivity)getActivity()).refresh();
                 offSet = offSet + 1;
             }
         };

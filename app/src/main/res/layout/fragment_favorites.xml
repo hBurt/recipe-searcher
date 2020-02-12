@@ -69,6 +69,8 @@
             android:divider="#000"
             android:dividerHeight="1dp"
             android:footerDividersEnabled="false"
-            android:headerDividersEnabled="false" />
+            android:headerDividersEnabled="false"
+            android:clickable="true"
+            android:focusable="false" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
