@@ -30,7 +30,9 @@
                 android:id="@+id/Meal1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="24sp" />
+                android:clickable="true"
+                android:textSize="24sp"
+                android:focusable="true" />
 
             <ImageView
                 android:id="@+id/Meal1Img"
@@ -43,7 +45,9 @@
                 android:id="@+id/Meal2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="24sp" />
+                android:clickable="true"
+                android:textSize="24sp"
+                android:focusable="true" />
 
             <ImageView
                 android:id="@+id/Meal2Img"
@@ -56,7 +60,9 @@
                 android:id="@+id/Meal3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="24sp" />
+                android:clickable="true"
+                android:textSize="24sp"
+                android:focusable="true" />
 
             <ImageView
                 android:id="@+id/Meal3Img"

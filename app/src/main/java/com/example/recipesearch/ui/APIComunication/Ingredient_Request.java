@@ -66,9 +66,9 @@ public class Ingredient_Request extends AsyncTask<Void, Void, String>
         }
         catch (IOException e)
         {
-            RecipeActivity.setTime("ERROR:04");
-            RecipeActivity.setRecipeName("ERROR: Failed to retrieve recipe");
-            RecipeActivity.setPic(" ");
+            //RecipeActivity.setTime("ERROR:04");
+            //RecipeActivity.setRecipeName("ERROR: Failed to retrieve recipe");
+            //RecipeActivity.setPic(" ");
             Recipe_Directions_Tab_Fragment.setDirections("ERROR: Failed to retrieve recipe, Bad or misspelled ingredient(s)");
             Recipe_Ingredient_Tab_Fragment.setIngredients("ERROR: Failed to retrieve recipe, Bad or misspelled ingredient(s)");
             return null;
@@ -104,9 +104,9 @@ public class Ingredient_Request extends AsyncTask<Void, Void, String>
         }
         if (oneObjectsItem == null)
         {
-            RecipeActivity.setTime("ERROR:04");
-            RecipeActivity.setRecipeName("ERROR: Failed to retrieve recipe");
-            RecipeActivity.setPic(" ");
+            //RecipeActivity.setTime("ERROR:04");
+            //RecipeActivity.setRecipeName("ERROR: Failed to retrieve recipe");
+            //RecipeActivity.setPic(" ");
             Recipe_Directions_Tab_Fragment.setDirections("ERROR: Failed to retrieve recipe, Bad or misspelled ingredient(s)");
             Recipe_Ingredient_Tab_Fragment.setIngredients("ERROR: Failed to retrieve recipe, Bad or misspelled ingredient(s)");
             return null;

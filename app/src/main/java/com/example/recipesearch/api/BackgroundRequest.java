@@ -41,6 +41,16 @@ public class BackgroundRequest extends AsyncTask<Void, Void, String> {
         client.setConnectTimeout(10, TimeUnit.SECONDS);
     }
 
+    public BackgroundRequest(int id, SearchType type, Context context){
+        this.id = id;
+        this.type = type;
+        this.context = context;
+        requestType = RequestType.REQUEST_BASE_RECIPE_ID;
+        client = new OkHttpClient();
+        client.setReadTimeout(15, TimeUnit.SECONDS);
+        client.setConnectTimeout(10, TimeUnit.SECONDS);
+    }
+
     public BackgroundRequest(int id, RequestType requestType) {
         this.id = id;
         this.requestType = requestType;
@@ -62,6 +72,11 @@ public class BackgroundRequest extends AsyncTask<Void, Void, String> {
             case REQUEST_BASE_RECIPE:
                 request = new Request.Builder()
                         .url(urlHandler.buildUrl())
+                        .build();
+                break;
+            case REQUEST_BASE_RECIPE_ID:
+                request = new Request.Builder()
+                        .url(urlHandler.buildUrlForSimilar(id))
                         .build();
                 break;
             case REQUEST_INGREDIENTS:
@@ -94,10 +109,6 @@ public class BackgroundRequest extends AsyncTask<Void, Void, String> {
         delegate.processFinish(toReturn);
     }
 
-
-    //base for ingredients -> https://spoonacular.com/cdn/ingredients_100x100/
-    //base for equipment   -> https://spoonacular.com/cdn/equipment_100x100/
-
     private void printLong(String string) {
         int maxLogSize = 1000;
         for (int i = 0; i <= string.length() / maxLogSize; i++) {
@@ -115,6 +126,7 @@ public class BackgroundRequest extends AsyncTask<Void, Void, String> {
 
     public enum RequestType {
         REQUEST_BASE_RECIPE,
+        REQUEST_BASE_RECIPE_ID,
         REQUEST_INGREDIENTS,
         REQUEST_INSTRUCTIONS
     }

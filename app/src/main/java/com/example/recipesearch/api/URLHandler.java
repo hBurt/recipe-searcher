@@ -92,6 +92,14 @@ public class URLHandler {
         return out;
     }
 
+    public String buildUrlForSimilar(int id){
+
+        return baseSearch +
+                id + "/" +
+                "similar" +
+                apiKeyBase + apiKey2;
+    }
+
     private String[] splitStringByComma() {
 
         return getQuery().split(",");

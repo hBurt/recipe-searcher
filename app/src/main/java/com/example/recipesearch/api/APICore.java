@@ -2,11 +2,12 @@ package com.example.recipesearch.api;
 
 import android.content.Context;
 import android.util.Log;
+import android.os.Handler;
 
+import com.example.recipesearch.database.Recipe;
 import com.example.recipesearch.database.contents.Amount;
 import com.example.recipesearch.database.contents.Equipment;
 import com.example.recipesearch.database.contents.Ingredient;
-import com.example.recipesearch.database.Recipe;
 import com.example.recipesearch.database.contents.Step;
 
 import org.json.JSONArray;
@@ -14,6 +15,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+
 
 public class APICore implements AsyncResponse {
 
@@ -25,13 +27,15 @@ public class APICore implements AsyncResponse {
 
     BackgroundRequest.RequestType requestType;
 
+    private Handler handler;
+
     public APICore(){
         recipe = new Recipe();
     }
 
-    public void startRequest(String request, BackgroundRequest.SearchType searchType, Context context){
-
+    public void startRequest(String request, BackgroundRequest.SearchType searchType, Context context, Handler handler){
         this.searchType = searchType;
+        this.handler = handler;
         requestType = BackgroundRequest.RequestType.REQUEST_BASE_RECIPE;
         bgRequest = new BackgroundRequest(request, searchType, context);
         bgRequest.delegate = this;
@@ -54,6 +58,9 @@ public class APICore implements AsyncResponse {
                     Log.v(TAG, "[processFinish][base_recipe] : ");
                     buildRecipe(output, searchType);
                     break;
+                case REQUEST_BASE_RECIPE_ID:
+                    buildRecipe(output, searchType);
+                    break;
                 case REQUEST_INGREDIENTS:
                     Log.v(TAG, "[processFinish][request_ingredients] : ");
                     buildIngredients(output);
@@ -69,7 +76,6 @@ public class APICore implements AsyncResponse {
     }
 
     private void buildRecipe(String apiResponse, BackgroundRequest.SearchType searchType) throws JSONException {
-
 
         if(searchType == BackgroundRequest.SearchType.RECIPE) {
 
@@ -214,10 +220,14 @@ public class APICore implements AsyncResponse {
 
         getRecipe().setSteps(steps);
 
-        getRecipe().setLoaded(true);
+        collapseHandler();
 
         Log.v(TAG, recipe.display());
 
+    }
+
+    private void collapseHandler(){
+        handler.sendEmptyMessageDelayed(0, 0);
     }
 
     public Recipe getRecipe(){

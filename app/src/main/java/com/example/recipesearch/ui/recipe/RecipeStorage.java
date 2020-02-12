@@ -8,7 +8,9 @@ import com.example.recipesearch.ui.recipe.Recipe_Directions_Tab_Fragment;
 import com.example.recipesearch.ui.recipe.Recipe_Ingredient_Tab_Fragment;
 import com.example.recipesearch.ui.search_result.SearchActivity;
 
-public class RecipeStorage extends Activity
+import static android.content.Context.MODE_PRIVATE;
+
+public class RecipeStorage
 {
     static SharedPreferences mPrefs;
     static SharedPreferences plannedPrefs;
@@ -23,6 +25,8 @@ public class RecipeStorage extends Activity
     public void setOGName(String s)
     {
         edit = starting.edit();
+        if (starting.contains("OGName")) { }
+        else
         edit.putString("OGName",s );
         edit.apply();
     }
@@ -32,6 +36,10 @@ public class RecipeStorage extends Activity
             return starting.getString("OGName", " ");
         else
             return null;
+    }
+    public void clearOG()
+    {
+        starting.edit().remove("OGName").apply();
     }
     public void setDirections ()
     {
