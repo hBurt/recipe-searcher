@@ -95,23 +95,21 @@ public class Recipe_Similar_Recipes_Tab_Fragment extends Fragment
                 Recipe_Directions_Tab_Fragment.setDirections("Next Text");
                 Recipe_Ingredient_Tab_Fragment.setIngredients("Next Text");
                 CustomStorage Cs = new CustomStorage(getActivity().getApplicationContext());
-                if (Cs.getCount() > 0) {
-                    String test = null;
-                    test = Cs.getCName();
-                    RecipeActivity.setRecipeName(Cs.getCName());
-                    test = Cs.getCTime();
-                    RecipeActivity.setTime(Cs.getCTime());
-                    test = Cs.getCImgURL();
-                    if (Cs.getBool() == true)
-                    RecipeActivity.setTakenPio(Cs.getCImgURL());
-                    else
-                    RecipeActivity.setPicUri(Cs.getCImgURL());
-                    test = Cs.getCDirections();
-                    Recipe_Directions_Tab_Fragment.setDirections(Cs.getCDirections());
-                    test = Cs.getCIngred();
-                    Recipe_Ingredient_Tab_Fragment.setIngredients(Cs.getCIngred());
-                    Cs.setNum();
-                    h.sendEmptyMessageDelayed(0, 300);
+                if (Cs.getCount() > 0)
+                {
+                    if (Cs.getCName() != null)
+                    {
+                        RecipeActivity.setRecipeName(Cs.getCName());
+                        RecipeActivity.setTime(Cs.getCTime());
+                        if (Cs.getBool() == true)
+                            RecipeActivity.setTakenPio(Cs.getCImgURL());
+                        else
+                            RecipeActivity.setPicUri(Cs.getCImgURL());
+                        Recipe_Directions_Tab_Fragment.setDirections(Cs.getCDirections());
+                        Recipe_Ingredient_Tab_Fragment.setIngredients(Cs.getCIngred());
+                        Cs.setNum();
+                        h.sendEmptyMessageDelayed(0, 300);
+                    }
                 }
 
             }
