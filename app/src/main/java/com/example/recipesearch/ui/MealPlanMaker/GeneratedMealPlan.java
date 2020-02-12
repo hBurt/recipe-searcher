@@ -121,7 +121,7 @@ public class GeneratedMealPlan extends AppCompatActivity
             {
                 Intent in = new Intent(GeneratedMealPlan.this, SearchingActivity.class);
                 startActivity(in);
-                RecipeActivity.setID(id1);
+                //RecipeActivity.setID(id1);
                 RecipeActivity.setTime(readyInMin1);
                 RecipeActivity.setRecipeName(Meal1Name);
                 RecipeActivity.setPic(mealImg1);
@@ -138,7 +138,7 @@ public class GeneratedMealPlan extends AppCompatActivity
             {
                 Intent in = new Intent(GeneratedMealPlan.this, SearchingActivity.class);
                 startActivity(in);
-                RecipeActivity.setID(id2);
+                //RecipeActivity.setID(id2);
                 RecipeActivity.setTime(readyInMin2);
                 RecipeActivity.setRecipeName(Meal2Name);
                 RecipeActivity.setPic(mealImg2);
@@ -155,7 +155,7 @@ public class GeneratedMealPlan extends AppCompatActivity
             {
                 Intent in = new Intent(GeneratedMealPlan.this, SearchingActivity.class);
                 startActivity(in);
-                RecipeActivity.setID(id3);
+                //RecipeActivity.setID(id3);
                 RecipeActivity.setTime(readyInMin3);
                 RecipeActivity.setRecipeName(Meal3Name);
                 RecipeActivity.setPic(mealImg3);

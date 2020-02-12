@@ -15,27 +15,22 @@ import android.widget.SearchView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.room.Room;
 
-import com.example.recipesearch.MainActivity;
 import com.example.recipesearch.R;
-import com.example.recipesearch.database.Favorite;
-import com.example.recipesearch.database.LocalLoginDatabase;
+import com.example.recipesearch.api.APICore;
+import com.example.recipesearch.api.AsyncResponse;
+import com.example.recipesearch.api.BackgroundRequest;
 import com.example.recipesearch.database.Recipe;
 import com.example.recipesearch.database.User;
 import com.example.recipesearch.helpers.DatabaseHelper;
-import com.example.recipesearch.ui.APIComunication.Ingredient_Request;
-import com.example.recipesearch.ui.APIComunication.Request_Handler;
 import com.example.recipesearch.ui.CustomRecipes.CustomRecipe;
-import com.example.recipesearch.ui.CustomRecipes.CustomStorage;
-import com.example.recipesearch.ui.recipe.RecipeStorage;
 import com.example.recipesearch.ui.Settings.settings_activity;
-import com.example.recipesearch.ui.recipe.RecipeActivity;
-import com.google.gson.Gson;
+import com.example.recipesearch.ui.recipe.RecipeActivityV2;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
 
 
 public class SearchActivity extends AppCompatActivity
@@ -51,7 +46,12 @@ public class SearchActivity extends AppCompatActivity
     static List<String> IDList;
 
     User user;
-    DatabaseHelper databaseHelper;
+
+    private Recipe recipe;
+
+    //This latch will be used to wait on
+    private static CountDownLatch _latch;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -60,12 +60,9 @@ public class SearchActivity extends AppCompatActivity
 
         user = (User) getIntent().getSerializableExtra("databaseUser");
 
-        //user.getFavorites().add(new Favorite(new Recipe(0, "Random title2", 25, "https://thumbs.dreamstime.com/b/indian-bengali-thali-meal-x-consisting-different-curry-flat-bread-rice-papad-77486943.jpg")));
+        _latch = new CountDownLatch(1);
 
-       /* databaseHelper = new DatabaseHelper(this);
-        databaseHelper.rebuildDatabase();
 
-        databaseHelper.getDatabase().getUserDao().updateDetails(user);*/
 
         mPrefs = getApplicationContext().getSharedPreferences("Recipe_Book", MODE_PRIVATE);
         tool = findViewById(R.id.tb);
@@ -114,9 +111,13 @@ public class SearchActivity extends AppCompatActivity
             public void handleMessage(Message msg)
             {
 
-                Intent in = new Intent(SearchActivity.this, RecipeActivity.class);
+                Intent in = new Intent(SearchActivity.this, RecipeActivityV2.class);
                 in.putExtra("databaseUserr", user);
+                in.putExtra("recipe", recipe);
                 startActivity(in);
+                SearchingActivity sercAct = new SearchingActivity();
+                sercAct.destroy();
+
             }
         };
         FsearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener()
@@ -124,10 +125,17 @@ public class SearchActivity extends AppCompatActivity
             @Override
             public boolean onQueryTextSubmit(String query)
             {
-                Intent se = new Intent(SearchActivity.this, SearchingActivity.class);
+                APICore api = new APICore();
+                api.startRequest(query, BackgroundRequest.SearchType.RECIPE, getBaseContext(), h);
 
+                h.sendEmptyMessageDelayed(0, 10000);
+
+                recipe = api.getRecipe();
+
+                Intent se = new Intent(SearchActivity.this, SearchingActivity.class);
                 startActivity(se);
-                SearchedFood = query;
+
+                /*SearchedFood = query;
                 boolean testb = settings_activity.GetSwitchB();
                 boolean testa = settings_activity.GetSwitchA();
                 if (testa == testb)
@@ -155,7 +163,7 @@ public class SearchActivity extends AppCompatActivity
                     Request_Handler req = new Request_Handler();
                     req.execute(); //default search
                     h.sendEmptyMessageDelayed(0, 3000);// a delay to allow the search to finish before the recipe page pops up
-                    }
+                    }*/
                 return true;
             }
 
@@ -183,5 +191,4 @@ public class SearchActivity extends AppCompatActivity
         getMenuInflater().inflate(R.menu.menu_search, menu);
         return super.onCreateOptionsMenu(menu);
     }
-
 }

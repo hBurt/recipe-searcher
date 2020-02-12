@@ -1,5 +1,6 @@
 package com.example.recipesearch.ui.favorites;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -17,10 +18,12 @@ import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.example.recipesearch.FavoriteRecipeView;
 import com.example.recipesearch.MainActivity;
 import com.example.recipesearch.R;
 import com.example.recipesearch.database.Favorite;
 import com.example.recipesearch.helpers.DatabaseHelper;
+import com.example.recipesearch.helpers.UiHelper;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -45,6 +48,8 @@ public class FavoritesFragment extends Fragment {
     private boolean isAlphabetical = false;
     private boolean isRating = false;
 
+    UiHelper uiHelper;
+
     @Override
     public void onResume() {
         super.onResume();
@@ -56,6 +61,8 @@ public class FavoritesFragment extends Fragment {
         favoritesViewModel =
                 ViewModelProviders.of(this).get(FavoritesViewModel.class);
         View root = inflater.inflate(R.layout.fragment_favorites, container, false);
+
+        uiHelper = new UiHelper(getFragmentManager());
 
         searchText = root.findViewById(R.id.favorites_search_text);
         databaseHelper = ((MainActivity) getActivity()).getDatabaseHelper();
@@ -116,6 +123,8 @@ public class FavoritesFragment extends Fragment {
             }
         });
 
+
+
         list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, final int i, long l) {
@@ -160,6 +169,19 @@ public class FavoritesFragment extends Fragment {
         });
 
 
+       /* list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Favorite currentfavorite = ((CustomAdapter) getAdapterView().getAdapter()).getFavoriteAtIndex(i);
+
+                System.out.println("clicked index: " + i);
+                System.out.println("fav title: " + currentfavorite.getRecipe().getTitle() + " fav img: " + currentfavorite.getRecipe().getImageURL());
+                /ui.switchScreen(new FavoriteRecipeView(currentfavorite));
+
+            }
+        });*/
+
+
         return root;
 
 
@@ -172,7 +194,7 @@ public class FavoritesFragment extends Fragment {
         favoritesListSecondary = new ArrayList<>(favoritesList);
 
         if(favoritesList.size() > 0){
-            customAdapter = new CustomAdapter(getContext(), favoritesList, list);
+            customAdapter = new CustomAdapter(getContext(), favoritesList, list, uiHelper);
             list.setAdapter(customAdapter);
         }
     }
@@ -204,7 +226,7 @@ public class FavoritesFragment extends Fragment {
 
     private void setAdapter(ArrayList<Favorite> newList){
         if(newList.size() > 0) {
-            CustomAdapter customAdapter = new CustomAdapter(getContext(), newList, list);
+            CustomAdapter customAdapter = new CustomAdapter(getContext(), newList, list, uiHelper);
             list.setAdapter(customAdapter);
         }
     }
