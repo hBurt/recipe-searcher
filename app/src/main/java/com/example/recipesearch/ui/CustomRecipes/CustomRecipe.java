@@ -191,7 +191,7 @@ public class CustomRecipe extends AppCompatActivity
                 if (options[item].equals("Yes"))
                 {
                     CreateRecipeCard CRC = new CreateRecipeCard();
-                    CRC.execute();
+                    //CRC.execute();
                     Toast.makeText(getApplicationContext(), "Recipe Card Made",Toast.LENGTH_SHORT).show();
                 }
                 else if (options[item].equals("No")) {

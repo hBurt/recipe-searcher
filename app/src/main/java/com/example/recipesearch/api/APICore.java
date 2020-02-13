@@ -97,7 +97,8 @@ public class APICore implements AsyncResponse {
 
             Log.v(TAG, "End base build; ID search recipe ingredients: " + getRecipe().getId());
             startRequest(getRecipe().getId(), BackgroundRequest.RequestType.REQUEST_INGREDIENTS);
-        } else if(searchType == BackgroundRequest.SearchType.INGREDIENT){
+        }
+        else if(searchType == BackgroundRequest.SearchType.INGREDIENT){
 
             System.out.println(apiResponse);
 

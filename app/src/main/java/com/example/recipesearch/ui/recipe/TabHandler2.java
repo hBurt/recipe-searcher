@@ -35,8 +35,10 @@ public class TabHandler2 extends FragmentStatePagerAdapter {
                 RecipeInstruction instruction = new RecipeInstruction(recipe);
                 return instruction;
             case 2:
-                favorite_recipe_view_ingredient direction2 = new favorite_recipe_view_ingredient(" Ingredients here"); //directions
-                return direction2;
+               /* favorite_recipe_view_ingredient direction2 = new favorite_recipe_view_ingredient(" Ingredients here"); //directions
+                return direction2;*/
+                Recipe_Similar_Recipes_Tab_Fragment Similar_Recipes = new Recipe_Similar_Recipes_Tab_Fragment();
+                return Similar_Recipes;
             default:
                 return null;
         }

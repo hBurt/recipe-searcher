@@ -19,6 +19,8 @@ import com.example.recipesearch.database.User;
 import com.example.recipesearch.database.contents.Ingredient;
 import com.example.recipesearch.database.contents.Step;
 import com.example.recipesearch.helpers.DatabaseHelper;
+import com.example.recipesearch.ui.CustomRecipes.CustomStorage;
+import com.example.recipesearch.ui.search_result.SearchingActivity;
 import com.google.android.material.tabs.TabLayout;
 import com.squareup.picasso.Picasso;
 
@@ -90,7 +92,6 @@ public class RecipeActivityV2 extends AppCompatActivity implements TabLayout.OnT
             @Override
             public void onTabReselected(TabLayout.Tab tab)
             {
-                //refresh();
             }
         });
 
@@ -125,6 +126,14 @@ public class RecipeActivityV2 extends AppCompatActivity implements TabLayout.OnT
     @Override
     public void onTabReselected(TabLayout.Tab tab) {
 
+    }
+    @Override
+    public void onBackPressed()
+    {
+        super.onBackPressed();
+        CustomStorage cs = new CustomStorage(getApplicationContext());
+        cs.resetNUM();
+        SearchingActivity.SA.finish();
     }
 
     private void saveRecipe(){

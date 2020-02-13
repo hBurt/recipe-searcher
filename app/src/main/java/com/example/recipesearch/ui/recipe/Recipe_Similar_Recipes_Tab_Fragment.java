@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.recipesearch.R;
+import com.example.recipesearch.database.Recipe;
 import com.example.recipesearch.ui.APIComunication.Next_Similar_Activity;
 import com.example.recipesearch.ui.APIComunication.Next_recipe;
 import com.example.recipesearch.ui.APIComunication.Random_Recipe;
@@ -29,6 +30,7 @@ public class Recipe_Similar_Recipes_Tab_Fragment extends Fragment
     private static String id = null;
     private static Handler h;
     private static int offSet = 1;
+    private Recipe recipe;
     public Recipe_Similar_Recipes_Tab_Fragment()
     {
         // Required empty public constructor
@@ -53,7 +55,6 @@ public class Recipe_Similar_Recipes_Tab_Fragment extends Fragment
             @Override
             public void handleMessage(Message msg)
             {
-                //((RecipeActivity)getActivity()).refresh();
                 offSet = offSet + 1;
             }
         };

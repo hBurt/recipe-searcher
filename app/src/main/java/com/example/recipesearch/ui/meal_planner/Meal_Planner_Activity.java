@@ -26,6 +26,8 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.recipesearch.R;
+import com.example.recipesearch.ui.APIComunication.CreateRecipeCard;
+import com.example.recipesearch.ui.CustomRecipes.CustomRecipe;
 import com.example.recipesearch.ui.recipe.RecipeStorage;
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;

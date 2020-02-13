@@ -115,8 +115,6 @@ public class SearchActivity extends AppCompatActivity
                 in.putExtra("databaseUserr", user);
                 in.putExtra("recipe", recipe);
                 startActivity(in);
-                SearchingActivity sercAct = new SearchingActivity();
-                sercAct.destroy();
 
             }
         };
