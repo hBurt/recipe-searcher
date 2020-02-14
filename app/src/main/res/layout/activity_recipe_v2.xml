@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/paletteDarkGreen"
+    android:background="@color/secondary_whiteDark"
     tools:context=".FavoriteRecipeView">
 
     <LinearLayout
@@ -17,14 +17,14 @@
         <Button
             android:id="@+id/button_home_v2"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="@string/title_home" />
 
         <Button
             android:id="@+id/button_save_recipe_v2"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="@string/save_recipe" />
     </LinearLayout>
@@ -65,11 +65,15 @@
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/recipe_tablayout_v2"
         android:layout_width="match_parent"
-        android:layout_height="60dp" />
+        android:layout_height="60dp"
+        app:tabBackground="@color/secondary_whiteDark"
+        />
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/pager_v2"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:background="@color/paletteDarkGreen"
+        />
 
 </LinearLayout>

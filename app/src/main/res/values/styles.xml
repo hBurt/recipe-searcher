@@ -10,4 +10,9 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="Theme_Dialog" parent="android:Theme.Holo.Light.Dialog">
+        <item name="android:windowMinWidthMajor">100%</item>
+        <item name="android:windowMinWidthMinor">100%</item>
+    </style>
+
 </resources>

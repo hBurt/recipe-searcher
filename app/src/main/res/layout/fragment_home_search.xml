@@ -30,13 +30,14 @@
         android:layout_height="wrap_content"
         android:contentDescription="TODO"
         android:scaleType="centerCrop"
+        android:background="@color/secondary_whiteLight"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/bg_1" />
+        app:srcCompat="@drawable/bg_1"/>
 
     <LinearLayout
         android:id="@+id/linearLayout3"
@@ -55,15 +56,15 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:autofillHints=""
-            android:background="@color/navLight"
+            android:background="@color/secondary_whiteDark"
             android:hint="@string/search_default_text"
             android:textColorHint="@color/black"
             android:inputType="textCapWords"
 
             android:paddingLeft="10dp"
             android:drawablePadding="10dp"
-            android:drawableLeft="@drawable/ic_search_black_24dp"
-            android:drawableStart="@drawable/ic_search_black_24dp"/>
+            android:drawableLeft="@drawable/ic_searchdraw"
+            android:drawableStart="@drawable/ic_searchdraw"/>
 
     </LinearLayout>
 

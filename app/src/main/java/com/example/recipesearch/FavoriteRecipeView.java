@@ -1,10 +1,17 @@
 package com.example.recipesearch;
 
+import android.app.Dialog;
+import android.content.Context;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,6 +19,7 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.recipesearch.database.Favorite;
+import com.example.recipesearch.ui.CustomDialog;
 import com.google.android.material.tabs.TabLayout;
 import com.squareup.picasso.Picasso;
 
@@ -24,6 +32,8 @@ public class FavoriteRecipeView extends Fragment implements TabLayout.OnTabSelec
     private TabLayout tabLayout;
 
     private ViewPager viewPager;
+
+    private Button buttonSetRating;
 
     public FavoriteRecipeView(){
         // Required empty public constructor
@@ -41,6 +51,7 @@ public class FavoriteRecipeView extends Fragment implements TabLayout.OnTabSelec
         recipeTitle = root.findViewById(R.id.favorite_recipe_title);
         recipeImage = root.findViewById(R.id.favorite_recipe_image);
         tabLayout = root.findViewById(R.id.favorite_recipe_tablayout);
+        buttonSetRating = root.findViewById(R.id.favorite_button_set_rating);
 
         recipeTitle.setText(favorite.getRecipe().getTitle());
 
@@ -52,9 +63,6 @@ public class FavoriteRecipeView extends Fragment implements TabLayout.OnTabSelec
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         viewPager = root.findViewById(R.id.pager);
-
-        System.out.println("ingredients: " + favorite.getRecipe().getIngredients());
-        System.out.println(" directions: " + favorite.getRecipe().getDirections());
 
         TabHandler adapter = new TabHandler(getActivity().getSupportFragmentManager(), tabLayout.getTabCount(), favorite.getRecipe());
 
@@ -79,6 +87,14 @@ public class FavoriteRecipeView extends Fragment implements TabLayout.OnTabSelec
             public void onTabReselected(TabLayout.Tab tab)
             {
                 //refresh();
+            }
+        });
+
+        buttonSetRating.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CustomDialog cdd=new CustomDialog(getActivity(), R.style.Theme_Dialog, favorite);
+                cdd.show();
             }
         });
 

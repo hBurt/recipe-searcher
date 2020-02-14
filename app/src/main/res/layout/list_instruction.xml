@@ -34,34 +34,28 @@
 
         </androidx.cardview.widget.CardView>
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/list_instruction_step_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="20dp" />
+
+        <!--LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/list_instruction_card_type"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                app:cardCornerRadius="50dp"
-                app:cardElevation="0dp">
+            <TextView
+                android:id="@+id/list_instruction_step_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="63dp"
+                android:layout_marginLeft="63dp" />
 
-                <ImageView
-                    android:id="@+id/list_instructions_first_item"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp" />
-
-            </androidx.cardview.widget.CardView>
-
-        </LinearLayout>
+        </LinearLayout>-->
 
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/list_instruction_step_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="63dp"
-        android:layout_marginStart="63dp" />
 
 </LinearLayout>

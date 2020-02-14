@@ -40,6 +40,7 @@ import android.widget.Toast;
 
 import com.example.recipesearch.MainActivity;
 import com.example.recipesearch.R;
+import com.example.recipesearch.database.Recipe;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;

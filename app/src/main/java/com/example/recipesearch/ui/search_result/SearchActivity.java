@@ -15,14 +15,13 @@ import android.widget.SearchView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.MenuItemCompat;
 
 import com.example.recipesearch.R;
 import com.example.recipesearch.api.APICore;
-import com.example.recipesearch.api.AsyncResponse;
 import com.example.recipesearch.api.BackgroundRequest;
 import com.example.recipesearch.database.Recipe;
 import com.example.recipesearch.database.User;
-import com.example.recipesearch.helpers.DatabaseHelper;
 import com.example.recipesearch.ui.CustomRecipes.CustomRecipe;
 import com.example.recipesearch.ui.Settings.settings_activity;
 import com.example.recipesearch.ui.recipe.RecipeActivityV2;
@@ -30,7 +29,6 @@ import com.example.recipesearch.ui.recipe.RecipeActivityV2;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.CountDownLatch;
 
 
 public class SearchActivity extends AppCompatActivity
@@ -50,7 +48,6 @@ public class SearchActivity extends AppCompatActivity
     private Recipe recipe;
 
     //This latch will be used to wait on
-    private static CountDownLatch _latch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -59,9 +56,6 @@ public class SearchActivity extends AppCompatActivity
         setContentView(R.layout.fragmnt_search_results);
 
         user = (User) getIntent().getSerializableExtra("databaseUser");
-
-        _latch = new CountDownLatch(1);
-
 
 
         mPrefs = getApplicationContext().getSharedPreferences("Recipe_Book", MODE_PRIVATE);
@@ -120,6 +114,7 @@ public class SearchActivity extends AppCompatActivity
 
             }
         };
+        FsearchView.onActionViewExpanded();
         FsearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener()
         {
             @Override
@@ -175,6 +170,7 @@ public class SearchActivity extends AppCompatActivity
             }
         });
     }
+
     public static String getSearchedFood()
     {
      return SearchedFood;

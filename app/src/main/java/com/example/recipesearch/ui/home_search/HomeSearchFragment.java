@@ -165,7 +165,7 @@ public class HomeSearchFragment extends Fragment {
     }
 
     private void imgColorOverlay(){
-        iv.setColorFilter(getResources().getColor(R.color.paletteLightGreenAplha), PorterDuff.Mode.SRC_ATOP);
+        iv.setColorFilter(getResources().getColor(R.color.secondary_whiteLightAlpha), PorterDuff.Mode.SRC_ATOP);
     }
 
     private boolean loginCheck(){

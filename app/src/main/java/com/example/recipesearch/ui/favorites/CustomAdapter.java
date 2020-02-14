@@ -122,7 +122,7 @@ class CustomAdapter extends BaseAdapter implements ListAdapter {
     }
 
     private void setRatingStarColor(ImageView imageView){
-        imageView.setColorFilter(ContextCompat.getColor(context, R.color.yellow), android.graphics.PorterDuff.Mode.SRC_IN);
+        imageView.setColorFilter(ContextCompat.getColor(context, R.color.secondary_yellow), android.graphics.PorterDuff.Mode.SRC_IN);
     }
 
     private void concatTitle(View view, String itemTitle){
