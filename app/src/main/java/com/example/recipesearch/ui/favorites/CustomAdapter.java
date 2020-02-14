@@ -17,6 +17,7 @@ import androidx.core.content.ContextCompat;
 import com.example.recipesearch.FavoriteRecipeView;
 import com.example.recipesearch.R;
 import com.example.recipesearch.database.Favorite;
+import com.example.recipesearch.database.User;
 import com.example.recipesearch.helpers.UiHelper;
 import com.squareup.picasso.Picasso;
 
@@ -27,12 +28,14 @@ class CustomAdapter extends BaseAdapter implements ListAdapter {
     Context context;
     ListView listView;
     UiHelper uiHelper;
+    User user;
 
-    public CustomAdapter(Context context, ArrayList<Favorite> arrayList, ListView listView, UiHelper uiHelper) {
+    public CustomAdapter(Context context, ArrayList<Favorite> arrayList, ListView listView, UiHelper uiHelper, User user) {
         this.arrayList = arrayList;
         this.context = context;
         this.listView = listView;
         this.uiHelper = uiHelper;
+        this.user = user;
     }
 
     @Override
@@ -93,7 +96,7 @@ class CustomAdapter extends BaseAdapter implements ListAdapter {
                 public void onClick(View v) {
                     System.out.println("clicked index: " + position);
                     System.out.println("fav title: " + favorite.getRecipe().getTitle() + " fav img: " + favorite.getRecipe().getImageURL() + " direct: " + favorite.getRecipe().getDirections() + " ingred: " + favorite.getRecipe().getIngredients());
-                    uiHelper.switchScreen(new FavoriteRecipeView(favorite));
+                    uiHelper.switchScreen(new FavoriteRecipeView(favorite, user));
                 }
             });
 

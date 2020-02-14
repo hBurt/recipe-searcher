@@ -19,6 +19,7 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.recipesearch.database.Favorite;
+import com.example.recipesearch.database.User;
 import com.example.recipesearch.ui.CustomDialog;
 import com.google.android.material.tabs.TabLayout;
 import com.squareup.picasso.Picasso;
@@ -35,12 +36,15 @@ public class FavoriteRecipeView extends Fragment implements TabLayout.OnTabSelec
 
     private Button buttonSetRating;
 
+    private User user;
+
     public FavoriteRecipeView(){
         // Required empty public constructor
     }
 
-    public FavoriteRecipeView(Favorite favorite) {
+    public FavoriteRecipeView(Favorite favorite, User user) {
         this.favorite = favorite;
+        this.user = user;
     }
 
 
@@ -93,7 +97,7 @@ public class FavoriteRecipeView extends Fragment implements TabLayout.OnTabSelec
         buttonSetRating.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CustomDialog cdd=new CustomDialog(getActivity(), R.style.Theme_Dialog, favorite);
+                CustomDialog cdd=new CustomDialog(getActivity(), R.style.Theme_Dialog, favorite, user);
                 cdd.show();
             }
         });

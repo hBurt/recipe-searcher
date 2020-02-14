@@ -5,6 +5,7 @@ import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -117,6 +118,7 @@ public class HomeSearchFragment extends Fragment {
             @Override
             public void afterTextChanged(Editable s) {
                 //Switch to the search result activity
+
                 if(canSwitch) {
                     MainActivity m = (MainActivity) getActivity();
                     if (m != null) {
@@ -125,6 +127,7 @@ public class HomeSearchFragment extends Fragment {
                     canSwitch = false;
                     Intent in = new Intent(getActivity(), SearchActivity.class);
                     in.putExtra("databaseUser", databaseHelper.getCurrentUser());
+                    in.putExtra("stringTransfer", s.toString());
                     startActivity(in);
                 }
             }

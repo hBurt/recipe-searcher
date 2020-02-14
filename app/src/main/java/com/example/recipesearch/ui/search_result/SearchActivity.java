@@ -47,6 +47,8 @@ public class SearchActivity extends AppCompatActivity
 
     private Recipe recipe;
 
+    private String transferedString;
+
     //This latch will be used to wait on
 
     @Override
@@ -57,6 +59,7 @@ public class SearchActivity extends AppCompatActivity
 
         user = (User) getIntent().getSerializableExtra("databaseUser");
 
+        transferedString = (String) getIntent().getSerializableExtra("stringTransfer");
 
         mPrefs = getApplicationContext().getSharedPreferences("Recipe_Book", MODE_PRIVATE);
         tool = findViewById(R.id.tb);
@@ -115,6 +118,7 @@ public class SearchActivity extends AppCompatActivity
             }
         };
         FsearchView.onActionViewExpanded();
+        FsearchView.setQuery(transferedString, false);
         FsearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener()
         {
             @Override
@@ -122,8 +126,6 @@ public class SearchActivity extends AppCompatActivity
             {
                 APICore api = new APICore();
                 api.startRequest(query, BackgroundRequest.SearchType.RECIPE, getBaseContext(), h);
-
-                h.sendEmptyMessageDelayed(0, 10000);
 
                 recipe = api.getRecipe();
 

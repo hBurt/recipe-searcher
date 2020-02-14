@@ -228,6 +228,7 @@ public class APICore implements AsyncResponse {
 
     private void collapseHandler(){
         handler.sendEmptyMessageDelayed(0, 0);
+        Log.v(TAG, "Collapse");
     }
 
     public Recipe getRecipe(){

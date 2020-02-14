@@ -194,7 +194,7 @@ public class FavoritesFragment extends Fragment {
         favoritesListSecondary = new ArrayList<>(favoritesList);
 
         if(favoritesList.size() > 0){
-            customAdapter = new CustomAdapter(getContext(), favoritesList, list, uiHelper);
+            customAdapter = new CustomAdapter(getActivity(), favoritesList, list, uiHelper, databaseHelper.getCurrentUser());
             list.setAdapter(customAdapter);
         }
     }
@@ -226,7 +226,7 @@ public class FavoritesFragment extends Fragment {
 
     private void setAdapter(ArrayList<Favorite> newList){
         if(newList.size() > 0) {
-            CustomAdapter customAdapter = new CustomAdapter(getContext(), newList, list, uiHelper);
+            CustomAdapter customAdapter = new CustomAdapter(getContext(), newList, list, uiHelper, databaseHelper.getCurrentUser());
             list.setAdapter(customAdapter);
         }
     }

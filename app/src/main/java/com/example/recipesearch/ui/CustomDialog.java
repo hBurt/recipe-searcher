@@ -4,28 +4,25 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 
 import com.example.recipesearch.R;
 import com.example.recipesearch.database.Favorite;
+import com.example.recipesearch.database.User;
+import com.example.recipesearch.helpers.DatabaseHelper;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-
-import okhttp3.internal.platform.Platform;
 
 public class CustomDialog extends Dialog implements android.view.View.OnClickListener {
 
-    //public Activity c;
-    //public Dialog d;
-    Context c;
+    public Activity activity;
     public ImageView star_1, star_2, star_3, star_4, star_5;
     public Button cancel;
 
@@ -35,9 +32,14 @@ public class CustomDialog extends Dialog implements android.view.View.OnClickLis
 
     String TAG = "CustomDialog";
 
-    public CustomDialog(Context context, int themeResId, Favorite favorite) {
-        super(context, themeResId);
+    User user;
+    DatabaseHelper databaseHelper;
+
+    public CustomDialog(Activity activity, int themeResId, Favorite favorite, User user) {
+        super(activity, themeResId);
         this.favorite = favorite;
+        this.user = user;
+        this.activity = activity;
         stars = new ArrayList<>();
     }
 
@@ -93,6 +95,7 @@ public class CustomDialog extends Dialog implements android.view.View.OnClickLis
             default:
                 break;
         }
+        save();
         dismiss();
     }
 
@@ -104,6 +107,14 @@ public class CustomDialog extends Dialog implements android.view.View.OnClickLis
                 stars.get(i).setColorFilter(ContextCompat.getColor(getContext(), R.color.black), android.graphics.PorterDuff.Mode.SRC_IN);
             }
         }
+    }
+
+    private void save(){
+
+        databaseHelper = new DatabaseHelper(activity);
+        databaseHelper.rebuildDatabase();
+
+        databaseHelper.getDatabase().getUserDao().updateDetails(user);
     }
 
 }
