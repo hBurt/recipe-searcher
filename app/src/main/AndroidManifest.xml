@@ -18,16 +18,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.recipe.RecipeActivityV2" />
-        <activity android:name=".ui.CustomRecipes.CustomRecipe"
+        <activity android:name="com.recipe.recipesearch.ui.recipe.RecipeActivityV2" />
+        <activity android:name="com.recipe.recipesearch.ui.CustomRecipes.CustomRecipe"
             android:screenOrientation="portrait"/>
-        <activity android:name=".ui.MealPlanMaker.LoadingScreenMP"
+        <activity android:name="com.recipe.recipesearch.ui.MealPlanMaker.LoadingScreenMP"
             android:screenOrientation="portrait"/>
-        <activity android:name=".ui.MealPlanMaker.GeneratedMealPlan"
+        <activity android:name="com.recipe.recipesearch.ui.MealPlanMaker.GeneratedMealPlan"
             android:screenOrientation="portrait"/>
-        <activity android:name=".ui.MealPlanMaker.MealPlanActivity"
+        <activity android:name="com.recipe.recipesearch.ui.MealPlanMaker.MealPlanActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".ui.search_result.SearchingActivity"
+        <activity android:name="com.recipe.recipesearch.ui.search_result.SearchingActivity"
             android:screenOrientation="portrait"/>
 
         <meta-data
@@ -35,7 +35,7 @@
             android:resource="@xml/searchable" />
 
         <activity
-            android:name=".MainActivity"
+            android:name="com.recipe.recipesearch.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -45,7 +45,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.search_result.SearchActivity"
+            android:name="com.recipe.recipesearch.ui.search_result.SearchActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme"
             android:screenOrientation="portrait">
@@ -54,7 +54,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.Settings.settings_activity"
+            android:name="com.recipe.recipesearch.ui.Settings.settings_activity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme"
             android:screenOrientation="portrait">
@@ -63,7 +63,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.recipe.RecipeActivity"
+            android:name="com.recipe.recipesearch.ui.recipe.RecipeActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme"
             android:screenOrientation="portrait">
@@ -72,7 +72,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.meal_planner.Meal_Planner_Activity"
+            android:name="com.recipe.recipesearch.ui.meal_planner.Meal_Planner_Activity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme"
             android:screenOrientation="portrait">

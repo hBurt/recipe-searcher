@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.recipe.Recipe_Similar_Recipes_Tab_Fragment">
+    tools:context="com.recipe.recipesearch.ui.recipe.Recipe_Similar_Recipes_Tab_Fragment">
 
     <!-- TODO: Update blank fragment layout -->
 

@@ -8,7 +8,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.search_result.SearchActivity">
+    tools:context="com.recipe.recipesearch.ui.search_result.SearchActivity">
 
 
 <!--    <androidx.appcompat.widget.Toolbar

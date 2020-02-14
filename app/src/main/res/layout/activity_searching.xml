@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/secondary_whiteDark"
-    tools:context=".ui.search_result.SearchingActivity">
+    tools:context="com.recipe.recipesearch.ui.search_result.SearchingActivity">
 
     <TextView
         android:id="@+id/Searching"

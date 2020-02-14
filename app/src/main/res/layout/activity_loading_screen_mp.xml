@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#1E8504"
-    tools:context=".ui.MealPlanMaker.LoadingScreenMP">
+    tools:context="com.recipe.recipesearch.ui.MealPlanMaker.LoadingScreenMP">
 
     <TextView
         android:id="@+id/textView3"

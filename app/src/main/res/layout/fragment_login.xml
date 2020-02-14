@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/navigationGreen"
-    tools:context=".ui.user.login.LoginFragment">
+    tools:context="com.recipe.recipesearch.ui.user.login.LoginFragment">
 
     <LinearLayout
         android:id="@+id/linearLayout_login_user"
