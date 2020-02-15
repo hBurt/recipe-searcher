@@ -14,12 +14,11 @@ class MyTabAdapter extends FragmentPagerAdapter
     int totalTabs;
 
     Recipe recipe;
-    public MyTabAdapter(Context c, FragmentManager fm, int totalTabs, Recipe recipe)
+    public MyTabAdapter(Context c, FragmentManager fm, int totalTabs)
     {
         super(fm);
         context = c;
         this.totalTabs = totalTabs;
-        this.recipe = recipe;
     }
     @Override
     public Fragment getItem(int position)
@@ -27,7 +26,7 @@ class MyTabAdapter extends FragmentPagerAdapter
         switch (position)
         {
             case 0:
-                RecipeIngredient ingredient = new RecipeIngredient(recipe);
+                Recipe_Ingredient_Tab_Fragment ingredient = new Recipe_Ingredient_Tab_Fragment();
                 return ingredient;
             case 1:
                 Recipe_Directions_Tab_Fragment Directions = new Recipe_Directions_Tab_Fragment();

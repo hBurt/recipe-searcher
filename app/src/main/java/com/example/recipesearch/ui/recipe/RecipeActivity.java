@@ -33,55 +33,35 @@ import com.squareup.picasso.Picasso;
 
 public class RecipeActivity extends AppCompatActivity
 {
+    public static RecipeActivity recipeActivity;
     private TextView tex;
     private ImageView pic;
     private TabLayout tab;
     private TextView TTM;
     private static Uri myUri = null;
+    private static boolean isOpen = false;
     private static Handler h;
     ViewPager view;
+    static String ID = null;
     static String RecipeName = "Beef Salpicao"; // example for test purposes
     static String imgName = " ";
     static String timeToMake = "XX";
-    private static String baseURI = null;
-    private static String directions;
-    private static String ingredients;
     private static String takenPic = null;
     String wantedImg;
     String recipeTitle = null;
     public static int i = 1;
     static boolean doIReset = false;
     private static boolean usePic = false;
-
     Button saveRecipe, btnHome;
 
     DatabaseHelper databaseHelper;
     User user;
     public static boolean ReadTheDamBook = false;
 
-    Recipe recipe;
-
     public static void setPicUri(String cImgURL)
     {
-         myUri = Uri.parse(cImgURL);
+        myUri = Uri.parse(cImgURL);
 
-    }
-
-
-    public static String getBaseURI() {
-        return baseURI;
-    }
-
-    public static void setBaseURI(String baseURI) {
-        RecipeActivity.baseURI = baseURI;
-    }
-
-    public static void setDirections(String directions) {
-        RecipeActivity.directions = directions;
-    }
-
-    public static void setIngredients(String ingredients) {
-        RecipeActivity.ingredients = ingredients;
     }
 
     @Override
@@ -89,32 +69,16 @@ public class RecipeActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recipe_page);
-
+        isOpen = true;
         saveRecipe = findViewById(R.id.btn_save_recipe);
         btnHome = findViewById(R.id.button_home);
-        if (doIReset == true)
-        {
-            doIReset = false;
-            refresh();
-        }
-
-        recipe = (Recipe) getIntent().getSerializableExtra("recipe");
-
-        if (ReadTheDamBook == true)
-        {
-            //useOld();
-            ReadTheDamBook = false;
-        }
         view = findViewById(R.id.viewPager);
         tex = findViewById(R.id.Recipe_Name);
         pic = findViewById(R.id.Image_of_Food);
         tab = findViewById(R.id.Tabs);
         TTM = findViewById(R.id.Time);
-        }
-
-        /*TTM.setText(recipe.getReadyInMiniutes());
-        tex.setText(recipe.getTitle());
-        Picasso.get().load(recipe.getImageURL()).into(pic);
+        if (timeToMake != "Unavailable")
+            TTM.setText(timeToMake + " minutes");
         if (usePic == true)
         {
             if (takenPic != null)
@@ -129,19 +93,16 @@ public class RecipeActivity extends AppCompatActivity
                 Picasso.get().load(imgName).into(pic);
             else
                 pic.setImageURI(myUri);
-        }*/
-        /*tab.addTab(tab.newTab().setText("Ingredients"));
+        }
+        tab.addTab(tab.newTab().setText("Ingredients"));
         tab.addTab(tab.newTab().setText("Directions"));
         tab.addTab(tab.newTab().setText("Next Recipe"));
-        tab.setTabGravity(TabLayout.GRAVITY_FILL);*/
-
-
+        tex.setText(RecipeName);
         RecipeStorage storage = new RecipeStorage(getApplicationContext());
-        //storage.setOGName(recipe.getTitle());
-
-        final MyTabAdapter adapter = new MyTabAdapter(this,getSupportFragmentManager(), tab.getTabCount(), recipe);
-
-        /*view.setAdapter(adapter);
+        storage.setOGName(RecipeName);
+        tab.setTabGravity(TabLayout.GRAVITY_FILL);
+        final MyTabAdapter adapter = new MyTabAdapter(this,getSupportFragmentManager(), tab.getTabCount());
+        view.setAdapter(adapter);
         view.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tab));
         tab.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener()
         {
@@ -158,11 +119,10 @@ public class RecipeActivity extends AppCompatActivity
             @Override
             public void onTabReselected(TabLayout.Tab tab)
             {
-                //refresh();
             }
-        });*/
+        });
 
-       /* saveRecipe.setOnClickListener(new View.OnClickListener() {
+        saveRecipe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 saveRecipe();
@@ -179,9 +139,9 @@ public class RecipeActivity extends AppCompatActivity
                 Intent in = new Intent(RecipeActivity.this, MainActivity.class);
                 startActivity(in);
             }
-        });*/
+        });
 
-
+    }
     public static void setRecipeName(String someName)
     {
         RecipeName = someName;
@@ -199,7 +159,7 @@ public class RecipeActivity extends AppCompatActivity
     }
     public void refreshAndSave()
     {
-        /*if (ID != null)
+        if (ID != null)
         {
             RecipeStorage storage = new RecipeStorage(getApplicationContext());
             storage.setDirections();
@@ -208,7 +168,7 @@ public class RecipeActivity extends AppCompatActivity
             storage.setRecipeID(ID);
             storage.setRecipeName(RecipeName);
             storage.setTimeAmount(timeToMake);
-        }*/
+        }
         finish();
         overridePendingTransition(0, 0);
         startActivity(getIntent());
@@ -222,6 +182,10 @@ public class RecipeActivity extends AppCompatActivity
     {
         timeToMake = time;
     }
+    public static void setID(String id)
+    {
+        ID = id;
+    }
     public void useOld()
     {
         RecipeStorage storage = new RecipeStorage(getApplicationContext());
@@ -230,16 +194,17 @@ public class RecipeActivity extends AppCompatActivity
         Recipe_Ingredient_Tab_Fragment.setIngredients(storage.getOldIngred());
         Recipe_Directions_Tab_Fragment.setDirections(storage.getOldDirections());
         timeToMake = storage.getOldTime();
-        //ID = storage.getOldID();
+        ID = storage.getOldID();
 
     }
     @Override
     protected void onDestroy()
     {
         super.onDestroy();
+        //isOpen = false;
         RecipeStorage storage = new RecipeStorage(getApplicationContext());
         // should save as long as i have the id
-       /* if (ID != null)
+        if (ID != null)
         {
             // should prevent rand and next from overwriting the original
             if (RecipeName.toLowerCase().contains(SearchActivity.getSearchedFood()))
@@ -253,7 +218,7 @@ public class RecipeActivity extends AppCompatActivity
                 storage.setRecipeName(RecipeName);
                 storage.setTimeAmount(timeToMake);
             }
-        }*/
+        }
     }
     public static void setDoIReset(){ doIReset = true;}
 
@@ -264,13 +229,7 @@ public class RecipeActivity extends AppCompatActivity
         databaseHelper = new DatabaseHelper(this);
         databaseHelper.rebuildDatabase();
 
-        //int id = recipe.getId();//Integer.parseInt(ID);
-        int time = recipe.getReadyInMiniutes();
-
-        Recipe recipe = new Recipe(0, RecipeName, time, getBaseURI() + imgName);
-        //recipe.setDirections(Recipe_Directions_Tab_Fragment.getDirections());
-        //recipe.setIngredients(Recipe_Ingredient_Tab_Fragment.getIngredients());
-
+        Recipe recipe = new Recipe(0, "Title" + recipeTitle, 20, imgName);
         Favorite favoite = new Favorite(0 ,recipe);
 
         user.getFavorites().add(favoite);
@@ -285,6 +244,7 @@ public class RecipeActivity extends AppCompatActivity
     public void onBackPressed()
     {
         super.onBackPressed();
+        isOpen = false;
         CustomStorage cs = new CustomStorage(getApplicationContext());
         cs.resetNUM();
         SearchingActivity.SA.finish();
@@ -294,4 +254,10 @@ public class RecipeActivity extends AppCompatActivity
         takenPic = s;
         usePic = true;
     }
+    public void destroy()
+    {
+        isOpen = false;
+        finish();
+    }
+    public static boolean getIsOpen(){return isOpen;}
 }

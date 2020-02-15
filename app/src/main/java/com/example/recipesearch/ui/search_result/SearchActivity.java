@@ -25,7 +25,9 @@ import com.example.recipesearch.database.User;
 import com.example.recipesearch.helpers.DatabaseHelper;
 import com.example.recipesearch.ui.CustomRecipes.CustomRecipe;
 import com.example.recipesearch.ui.Settings.settings_activity;
+import com.example.recipesearch.ui.recipe.RecipeActivity;
 import com.example.recipesearch.ui.recipe.RecipeActivityV2;
+import com.example.recipesearch.ui.recipe.RecipeStorage;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -110,12 +112,13 @@ public class SearchActivity extends AppCompatActivity
             @Override
             public void handleMessage(Message msg)
             {
-
+                if(RecipeActivityV2.getIsOpen() != true)
+                {
                 Intent in = new Intent(SearchActivity.this, RecipeActivityV2.class);
                 in.putExtra("databaseUserr", user);
                 in.putExtra("recipe", recipe);
                 startActivity(in);
-
+                }
             }
         };
         FsearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener()
@@ -124,44 +127,45 @@ public class SearchActivity extends AppCompatActivity
             public boolean onQueryTextSubmit(String query)
             {
                 APICore api = new APICore();
-                api.startRequest(query, BackgroundRequest.SearchType.RECIPE, getBaseContext(), h);
 
-                h.sendEmptyMessageDelayed(0, 10000);
 
-                recipe = api.getRecipe();
 
-                Intent se = new Intent(SearchActivity.this, SearchingActivity.class);
-                startActivity(se);
 
-                /*SearchedFood = query;
+
+                SearchedFood = query;
                 boolean testb = settings_activity.GetSwitchB();
                 boolean testa = settings_activity.GetSwitchA();
                 if (testa == testb)
                     settings_activity.setSwitchA(true);
                 IDList = new ArrayList<String>();
                 RecipeStorage storage = new RecipeStorage(getApplicationContext());
+                if (query.contains("random"))
+                    api.startRequest(query, BackgroundRequest.SearchType.RANDOM, getBaseContext(), h);
+                else
                 if (storage.isThisInTheBook())
                 {
-                    RecipeActivity.setReadTheBook(true);
-                    h.sendEmptyMessageDelayed(0, 500);// a delay to allow the search to finish before the recipe page pops up
+                    api.startRequest(query, BackgroundRequest.SearchType.RECIPE, getBaseContext(), h);
                 }
                 else if (settings_activity.GetSwitchA() == true)
                 {
-                Request_Handler req = new Request_Handler();
-                req.execute();// handles the search query
-                h.sendEmptyMessageDelayed(0, 3000);// a delay to allow the search to finish before the recipe page pops up
+
+                    api.startRequest(query, BackgroundRequest.SearchType.RECIPE, getBaseContext(), h);
                 }
                 else if (settings_activity.GetSwitchA() == false)
                 {
-                    Ingredient_Request IR = new Ingredient_Request();
-                    IR.execute();
-                    h.sendEmptyMessageDelayed(0, 3000);// a delay to allow the search to finish before the recipe page pops up
+
+                    api.startRequest(query, BackgroundRequest.SearchType.INGREDIENT, getBaseContext(), h);
                 }
                 else {
-                    Request_Handler req = new Request_Handler();
-                    req.execute(); //default search
-                    h.sendEmptyMessageDelayed(0, 3000);// a delay to allow the search to finish before the recipe page pops up
-                    }*/
+
+                    api.startRequest(query, BackgroundRequest.SearchType.RECIPE, getBaseContext(), h);
+                    }
+                h.sendEmptyMessageDelayed(0, 10000);
+
+                recipe = api.getRecipe();
+
+                Intent se = new Intent(SearchActivity.this, SearchingActivity.class);
+                startActivity(se);
                 return true;
             }
 

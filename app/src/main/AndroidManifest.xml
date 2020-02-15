@@ -17,7 +17,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.recipe.RecipeActivityV2" />
+        <activity android:name=".ui.recipe.RecipeActivityV2"
+            android:screenOrientation="portrait"/>
         <activity android:name=".ui.CustomRecipes.CustomRecipe"
             android:screenOrientation="portrait"/>
         <activity android:name=".ui.MealPlanMaker.LoadingScreenMP"

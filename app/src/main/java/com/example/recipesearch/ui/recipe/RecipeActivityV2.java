@@ -31,6 +31,7 @@ public class RecipeActivityV2 extends AppCompatActivity implements TabLayout.OnT
     private TextView title;
     private TextView time;
     private ImageView image;
+    private static boolean isOpen = false;
 
     private Recipe recipe;
 
@@ -46,7 +47,7 @@ public class RecipeActivityV2 extends AppCompatActivity implements TabLayout.OnT
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_v2);
-
+        isOpen = true;
         recipe = (Recipe) getIntent().getSerializableExtra("recipe");
 
         Log.v("RecipeActivityV2", recipe.display());
@@ -92,6 +93,7 @@ public class RecipeActivityV2 extends AppCompatActivity implements TabLayout.OnT
             @Override
             public void onTabReselected(TabLayout.Tab tab)
             {
+                refresh();
             }
         });
 
@@ -131,6 +133,7 @@ public class RecipeActivityV2 extends AppCompatActivity implements TabLayout.OnT
     public void onBackPressed()
     {
         super.onBackPressed();
+        isOpen = false;
         CustomStorage cs = new CustomStorage(getApplicationContext());
         cs.resetNUM();
         SearchingActivity.SA.finish();
@@ -143,12 +146,24 @@ public class RecipeActivityV2 extends AppCompatActivity implements TabLayout.OnT
         databaseHelper = new DatabaseHelper(this);
         databaseHelper.rebuildDatabase();
 
-        //recipe.setDirections(Recipe_Directions_Tab_Fragment.getDirections());
-        //recipe.setIngredients(Recipe_Ingredient_Tab_Fragment.getIngredients());
-
         Favorite favoite = new Favorite(0, recipe);
 
         user.getFavorites().add(favoite);
         databaseHelper.getDatabase().getUserDao().updateDetails(user);
+    }
+    public static boolean getIsOpen(){return isOpen;}
+
+    @Override
+    protected void onDestroy()
+    {
+        super.onDestroy();
+        isOpen = false;
+    }
+    public void refresh()
+    {
+        finish();
+        overridePendingTransition(0, 0);
+        startActivity(getIntent());
+        overridePendingTransition(0, 0);
     }
 }

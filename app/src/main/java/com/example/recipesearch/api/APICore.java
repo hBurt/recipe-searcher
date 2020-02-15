@@ -9,12 +9,16 @@ import com.example.recipesearch.database.contents.Amount;
 import com.example.recipesearch.database.contents.Equipment;
 import com.example.recipesearch.database.contents.Ingredient;
 import com.example.recipesearch.database.contents.Step;
+import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.StringTokenizer;
 
 
 public class APICore implements AsyncResponse {
@@ -42,7 +46,7 @@ public class APICore implements AsyncResponse {
         bgRequest.execute();
     }
 
-    private void startRequest(int id, BackgroundRequest.RequestType requestType){
+    public void startRequest(int id, BackgroundRequest.RequestType requestType){
         this.requestType = requestType;
         bgRequest = new BackgroundRequest(id, requestType);
         bgRequest.delegate = this;
@@ -94,6 +98,27 @@ public class APICore implements AsyncResponse {
             }
 
             getRecipe().setBaseImageURI(jsonObjectBase.getString("baseUri"));
+
+            Log.v(TAG, "End base build; ID search recipe ingredients: " + getRecipe().getId());
+            startRequest(getRecipe().getId(), BackgroundRequest.RequestType.REQUEST_INGREDIENTS);
+        }
+        if(searchType == BackgroundRequest.SearchType.RANDOM)
+        {
+
+            Log.v(TAG, "Start random recipe build");
+
+            JSONObject jsonObjectBase = new JSONObject(apiResponse);
+            JSONArray jsonArray = jsonObjectBase.getJSONArray("recipes");
+            JSONObject jsonObject;
+            ArrayList<Ingredient> ingredList;
+            for (int i = 0; i < jsonArray.length(); i++)
+            {
+                jsonObject = jsonArray.getJSONObject(i);
+                getRecipe().setId(jsonObject.optInt("id"));
+                getRecipe().setTitle(jsonObject.optString("title"));
+                getRecipe().setReadyInMiniutes(jsonObject.optInt("readyInMinutes"));
+                getRecipe().setImageURL(jsonObject.optString("image"));
+            }
 
             Log.v(TAG, "End base build; ID search recipe ingredients: " + getRecipe().getId());
             startRequest(getRecipe().getId(), BackgroundRequest.RequestType.REQUEST_INGREDIENTS);

@@ -10,12 +10,15 @@ import androidx.fragment.app.Fragment;
 
 import android.os.Handler;
 import android.os.Message;
+import android.os.Trace;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.recipesearch.R;
+import com.example.recipesearch.api.APICore;
+import com.example.recipesearch.api.BackgroundRequest;
 import com.example.recipesearch.database.Recipe;
 import com.example.recipesearch.ui.APIComunication.Next_Similar_Activity;
 import com.example.recipesearch.ui.APIComunication.Next_recipe;
@@ -24,11 +27,13 @@ import com.example.recipesearch.ui.CustomRecipes.CustomRecipe;
 import com.example.recipesearch.ui.CustomRecipes.CustomStorage;
 import com.example.recipesearch.ui.search_result.SearchActivity;
 
+import static com.example.recipesearch.ui.recipe.RecipeActivity.recipeActivity;
+
 
 public class Recipe_Similar_Recipes_Tab_Fragment extends Fragment
 {
     private static String id = null;
-    private static Handler h;
+    private static Handler h, hk;
     private static int offSet = 1;
     private Recipe recipe;
     public Recipe_Similar_Recipes_Tab_Fragment()
@@ -48,52 +53,63 @@ public class Recipe_Similar_Recipes_Tab_Fragment extends Fragment
     {
         super.onViewCreated(view, savedInstanceState);
         Button next = view.findViewById(R.id.Sim_btn);
-        Button Rand = view.findViewById(R.id.Random_Recipe_Btn);
+       // Button Rand = view.findViewById(R.id.Random_Recipe_Btn);
         Button cRecipe = view.findViewById(R.id.CRecipes);
         h = new  Handler()
+    {
+        @Override
+        public void handleMessage(Message msg)
+        {
+            ((RecipeActivity)getActivity()).refresh();
+            offSet = offSet + 1;
+        }
+    };
+        hk = new  Handler()
         {
             @Override
             public void handleMessage(Message msg)
             {
+                ((RecipeActivityV2)getActivity()).refresh();
                 offSet = offSet + 1;
             }
         };
-        //wip
         next.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-                // when the button is pressed should get the info for the next dish
-                Next_recipe nextS = new Next_recipe();
-                nextS.execute(); // calls the func to get something similar
-                RecipeActivity.setRecipeName("Next Test"); // temp test
-                String direct = " ";
-                Recipe_Directions_Tab_Fragment.setDirections("Next Text");
-                String ingredient = " ";
-                Recipe_Ingredient_Tab_Fragment.setIngredients("Next Text");
-                h.sendEmptyMessageDelayed(0, 1200);
+                if (RecipeActivity.getIsOpen() == true)
+                {
+                    recipeActivity.destroy();
+                }
+                APICore api = new APICore();
+                api.startRequest("", BackgroundRequest.SearchType.NEXT, getActivity().getApplicationContext(), hk);
             }
         });
         // the rand recipe is a wip
-        Rand.setOnClickListener(new View.OnClickListener()
+        /*Rand.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-                Random_Recipe nRand = new Random_Recipe();
-                nRand.execute();
-                RecipeActivity.setRecipeName("Next Test"); // temp test
-                Recipe_Directions_Tab_Fragment.setDirections("Next Text");
-                Recipe_Ingredient_Tab_Fragment.setIngredients("Next Text");
-                h.sendEmptyMessageDelayed(0, 1200);
+                if (RecipeActivity.getIsOpen() == true)
+                {
+                    recipeActivity.destroy();
+                }
+                APICore api = new APICore();
+                api.startRequest("", BackgroundRequest.SearchType.RANDOM, getActivity().getApplicationContext(), hk);
             }
-        });
+        });*/
         cRecipe.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
+                if (RecipeActivity.getIsOpen() == false)
+                {
+                    Intent in = new Intent(getActivity().getApplicationContext(), RecipeActivity.class);
+                    startActivity(in);
+                }
                 RecipeActivity.setRecipeName("Next Test"); // temp test
                 Recipe_Directions_Tab_Fragment.setDirections("Next Text");
                 Recipe_Ingredient_Tab_Fragment.setIngredients("Next Text");
@@ -109,9 +125,19 @@ public class Recipe_Similar_Recipes_Tab_Fragment extends Fragment
                         else
                             RecipeActivity.setPicUri(Cs.getCImgURL());
                         Recipe_Directions_Tab_Fragment.setDirections(Cs.getCDirections());
-                        Recipe_Ingredient_Tab_Fragment.setIngredients(Cs.getCIngred());
+                        String ingred = Cs.getCIngred().trim() .replace(",", " \n ");
+                        Recipe_Ingredient_Tab_Fragment.setIngredients(ingred);
                         Cs.setNum();
-                        h.sendEmptyMessageDelayed(0, 300);
+                        if (RecipeActivity.getIsOpen() == true)
+                        {
+                            h.sendEmptyMessageDelayed(0, 300);
+                        }
+
+                    }
+                    else
+                    {
+                        RecipeActivity.setRecipeName("End of List");
+                        ((RecipeActivity)getActivity()).refresh();
                     }
                 }
 

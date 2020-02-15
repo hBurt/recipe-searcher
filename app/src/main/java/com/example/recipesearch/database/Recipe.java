@@ -35,7 +35,9 @@ public class Recipe implements Serializable {
         steps = new ArrayList<>();
     }
 
-    public int getId() {
+    public int getId()
+    {
+        int test = id;
         return id;
     }
 

@@ -19,15 +19,6 @@
             android:orientation="vertical">
 
             <Button
-                android:id="@+id/Random_Recipe_Btn"
-                android:layout_width="150dp"
-                android:layout_height="83dp"
-                android:layout_marginStart="136dp"
-                android:layout_marginLeft="136dp"
-                android:background="#1DDF16"
-                android:text="@string/random_recipe" />
-
-            <Button
                 android:id="@+id/Sim_btn"
                 android:layout_width="150dp"
                 android:layout_height="82dp"

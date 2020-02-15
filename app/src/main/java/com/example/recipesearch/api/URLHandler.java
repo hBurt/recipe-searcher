@@ -14,8 +14,9 @@ public class URLHandler {
     String apiKeyBase = "&apiKey=";
     String apiKey = "829c5610db454ca091cbd571f9cbbf61";
     String apiKey2 = "165a81b84213461a8702d3ec687eacb6";
+    String apiKey3 = "46953957ae604aeba07e605696eef0cc";
     String returned = "";
-
+    String randomSearch = "random?number=1";
     String analyze = "analyzedInstructions?stepBreakdown=true";
 
     String ingredientWidget = "ingredientWidget.json?";
@@ -36,10 +37,17 @@ public class URLHandler {
                     byRecipe +
                     getQuery() +
                     amount +
-                    apiKeyBase + apiKey2;
+                    apiKeyBase + apiKey3;
 
 
-        } else if (getSearchType() == BackgroundRequest.SearchType.INGREDIENT) {
+        }
+        else if(getSearchType() == BackgroundRequest.SearchType.RANDOM)
+        {
+            returned = baseSearch +
+                    randomSearch +
+                    apiKeyBase + apiKey3;
+        }
+        else if (getSearchType() == BackgroundRequest.SearchType.INGREDIENT) {
 
             StringBuilder recreated = new StringBuilder();
 

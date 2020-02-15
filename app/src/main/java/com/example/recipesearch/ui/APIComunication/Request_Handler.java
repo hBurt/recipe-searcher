@@ -246,7 +246,7 @@ public class Request_Handler extends AsyncTask<Void, Void, String> {
             }
             RecipeActivity.setTime(oneObjectsItem3);
             RecipeActivity.setRecipeName(oneObjectsItem2);
-            RecipeActivity.setBaseURI(baseURI);
+            //RecipeActivity.setBaseURI(baseURI);
             Recipe_Directions_Tab_Fragment.setDirections(Directions);
             Recipe_Ingredient_Tab_Fragment.setIngredients(Ingredients);
         } else {
