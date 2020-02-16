@@ -193,6 +193,7 @@ public class CustomStorage
                     Custom.edit().remove(6+"CName").apply();
                     Custom.edit().remove(7+"CName").apply();
                     Custom.edit().remove(8+"CName").apply();
+                    Custom.edit().remove(9+"CName").apply();
                     edit = Custom.edit();
                     edit.putString(0+"CName", followingName0);
                     edit.putString(1+"CName", followingName1);

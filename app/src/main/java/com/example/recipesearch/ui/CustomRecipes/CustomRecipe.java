@@ -191,8 +191,8 @@ public class CustomRecipe extends AppCompatActivity
                 if (options[item].equals("Yes"))
                 {
                     CreateRecipeCard CRC = new CreateRecipeCard();
-                    //CRC.execute();
-                    Toast.makeText(getApplicationContext(), "Recipe Card Made",Toast.LENGTH_SHORT).show();
+                    CRC.execute();
+                    Toast.makeText(getApplicationContext(), "Link available in the Notes section",Toast.LENGTH_SHORT).show();
                 }
                 else if (options[item].equals("No")) {
                     dialog.dismiss();
