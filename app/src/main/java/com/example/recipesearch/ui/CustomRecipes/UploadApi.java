@@ -12,6 +12,7 @@ public interface UploadApi
 {
     @Multipart
     @POST("/upload")
-    Call<ResponseBody> uploadImage(@Part MultipartBody.Part file, @Part("name") RequestBody requestBody);
+    Call<ResponseBody> uploadImage(@Part MultipartBody.Part Bk,@Part MultipartBody.Part file,@Part MultipartBody.Part ingredients,@Part MultipartBody.Part directions
+    ,@Part MultipartBody.Part mask,@Part MultipartBody.Part Rim,@Part MultipartBody.Part serving,@Part MultipartBody.Part title);
 
 }

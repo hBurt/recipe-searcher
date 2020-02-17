@@ -34,7 +34,7 @@ public class NetClient {
         }
         return retrofit;
     }
-    private void uploadToServer(String filePath) {
+    public void uploadToServer(String filePath) {
         Retrofit retrofit = NetClient.getRetrofitClient(this);
         UploadApi uploadAPIs = retrofit.create(UploadApi.class);
         //Create a file object using file path
@@ -48,16 +48,18 @@ public class NetClient {
         MultipartBody.Part ingred = MultipartBody.Part.createFormData("ingredients", CustomRecipe.getCIngred());
         MultipartBody.Part direction = MultipartBody.Part.createFormData("instructions", CustomRecipe.getCDirect());
         MultipartBody.Part mask = MultipartBody.Part.createFormData("mask", "ellipseMask");
+        MultipartBody.Part RIM = MultipartBody.Part.createFormData("readyInMinutes", CustomRecipe.getCTime());
         MultipartBody.Part searving = MultipartBody.Part.createFormData("servings", CustomRecipe.getCServing());
         MultipartBody.Part title = MultipartBody.Part.createFormData("title", CustomRecipe.getCName());
         //Create request body with text description and text media type
         RequestBody description = RequestBody.create(MediaType.parse("text/plain"), "image-type");
         //
-        Call call = uploadAPIs.uploadImage(image, description);
+        Call call = uploadAPIs.uploadImage(Bk,image,ingred,direction,mask,RIM,searving,title);
         call.enqueue(new Callback() {
             @Override
             public void onResponse(Call call, Response response)
             {
+                String toSave =  response.toString();
                 Log.d("Success", "File uploaded");
             }
             @Override

@@ -7,6 +7,7 @@ import android.provider.Settings;
 
 import com.example.recipesearch.database.User;
 import com.example.recipesearch.ui.CustomRecipes.CustomRecipe;
+import com.example.recipesearch.ui.CustomRecipes.NetClient;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
@@ -37,7 +38,8 @@ public class CreateRecipeCard extends AsyncTask<Void, Void, String>
         byte[] data=bo.toByteArray();
         OkHttpClient client = new OkHttpClient();
         // gathers the data and creates what will be sent in the post
-
+        NetClient net = new NetClient();
+        net.uploadToServer(CustomRecipe.getCImage());
         return null;
     }
     public static void setRecipeLink(String s){ recipeLink = s;}
