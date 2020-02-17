@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="b6346af5-eec9-4a08-9548-d18cce96b1e6" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../Spoonacular SDK-KotlinVer/.openapi-generator-ignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Spoonacular SDK-KotlinVer/.openapi-generator/VERSION" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Spoonacular SDK-KotlinVer/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Spoonacular SDK-KotlinVer/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Spoonacular SDK-KotlinVer/docs/DefaultApi.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Spoonacular SDK-KotlinVer/docs/InlineObject.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Spoonacular SDK-KotlinVer/docs/InlineObject1.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Spoonacular SDK-KotlinVer/docs/InlineObject2.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Spoonacular SDK-KotlinVer/docs/InlineObject3.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Spoonacular SDK-KotlinVer/docs/InlineObject4.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Spoonacular SDK-KotlinVer/docs/InlineObject5.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Spoonacular SDK-KotlinVer/docs/InlineObject6.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Spoonacular SDK-KotlinVer/docs/InlineObject7.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Spoonacular SDK-KotlinVer/docs/InlineObject8.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Spoonacular SDK-KotlinVer/docs/InlineObject9.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Spoonacular SDK-KotlinVer/settings.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Spoonacular SDK-KotlinVer/src/main/kotlin/com/spoonacular/DefaultApi.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Spoonacular SDK-KotlinVer/src/main/kotlin/com/spoonacular/client/model/InlineObject.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Spoonacular SDK-KotlinVer/src/main/kotlin/com/spoonacular/client/model/InlineObject1.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Spoonacular SDK-KotlinVer/src/main/kotlin/com/spoonacular/client/model/InlineObject2.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Spoonacular SDK-KotlinVer/src/main/kotlin/com/spoonacular/client/model/InlineObject3.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Spoonacular SDK-KotlinVer/src/main/kotlin/com/spoonacular/client/model/InlineObject4.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Spoonacular SDK-KotlinVer/src/main/kotlin/com/spoonacular/client/model/InlineObject5.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Spoonacular SDK-KotlinVer/src/main/kotlin/com/spoonacular/client/model/InlineObject6.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Spoonacular SDK-KotlinVer/src/main/kotlin/com/spoonacular/client/model/InlineObject7.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Spoonacular SDK-KotlinVer/src/main/kotlin/com/spoonacular/client/model/InlineObject8.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Spoonacular SDK-KotlinVer/src/main/kotlin/com/spoonacular/client/model/InlineObject9.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Spoonacular SDK-KotlinVer/src/main/kotlin/spoonacular/infrastructure/ApiAbstractions.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Spoonacular SDK-KotlinVer/src/main/kotlin/spoonacular/infrastructure/ApiClient.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Spoonacular SDK-KotlinVer/src/main/kotlin/spoonacular/infrastructure/ApiInfrastructureResponse.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Spoonacular SDK-KotlinVer/src/main/kotlin/spoonacular/infrastructure/ApplicationDelegates.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Spoonacular SDK-KotlinVer/src/main/kotlin/spoonacular/infrastructure/ByteArrayAdapter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Spoonacular SDK-KotlinVer/src/main/kotlin/spoonacular/infrastructure/Errors.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Spoonacular SDK-KotlinVer/src/main/kotlin/spoonacular/infrastructure/RequestConfig.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Spoonacular SDK-KotlinVer/src/main/kotlin/spoonacular/infrastructure/RequestMethod.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Spoonacular SDK-KotlinVer/src/main/kotlin/spoonacular/infrastructure/ResponseExtensions.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Spoonacular SDK-KotlinVer/src/main/kotlin/spoonacular/infrastructure/Serializer.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/example/recipesearch/ui/APIComunication/CreateRecipeCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/example/recipesearch/ui/APIComunication/CreateRecipeCard.java" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DefaultGradleProjectSettings">
+    <option name="isMigrated" value="true" />
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view />
+      </state>
+    </system>
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/spoonacular/DefaultApi.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="238">
+              <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+              <folding>
+                <element signature="e#0#509120#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/build.gradle">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="755">
+              <caret line="108" selection-start-line="108" selection-end-line="108" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectConfigurationFiles">
+    <option name="files">
+      <list>
+        <option value="$PROJECT_DIR$/.idea/vcs.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Gradle__commons_lang3_3_8_1.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Gradle__gson_2_8_5.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Gradle__gson_fire_1_8_3.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Gradle__hamcrest_core_1_3.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Gradle__junit_4_12.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Gradle__logging_interceptor_3_13_1.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Gradle__okhttp_3_13_1.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Gradle__okio_1_17_2.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Gradle__swagger_annotations_1_5_21.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="148" />
+    <option name="y" value="13" />
+    <option name="width" value="1400" />
+    <option name="height" value="1000" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="AndroidView">
+        <subPane>
+          <expand>
+            <path>
+              <item name="java-client" type="1abcf292:AndroidViewProjectNode" />
+              <item name="java-client" type="e9137016:NonAndroidModuleNode" />
+            </path>
+            <path>
+              <item name="java-client" type="1abcf292:AndroidViewProjectNode" />
+              <item name="java-client" type="e9137016:NonAndroidModuleNode" />
+              <item name="java" type="f7eae187:NonAndroidSourceTypeNode" />
+            </path>
+            <path>
+              <item name="java-client" type="1abcf292:AndroidViewProjectNode" />
+              <item name="java-client" type="e9137016:NonAndroidModuleNode" />
+              <item name="java" type="f7eae187:NonAndroidSourceTypeNode" />
+              <item name="spoonacular" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="java-client" type="1abcf292:AndroidViewProjectNode" />
+              <item name="java-client" type="e9137016:NonAndroidModuleNode" />
+              <item name="java" type="f7eae187:NonAndroidSourceTypeNode" />
+              <item name="spoonacular" type="462c0819:PsiDirectoryNode" />
+              <item name="client" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="java-client" type="1abcf292:AndroidViewProjectNode" />
+              <item name="java-client" type="e9137016:NonAndroidModuleNode" />
+              <item name="tests" type="f7eae187:NonAndroidSourceTypeNode" />
+            </path>
+            <path>
+              <item name="java-client" type="1abcf292:AndroidViewProjectNode" />
+              <item name="java-client" type="e9137016:NonAndroidModuleNode" />
+              <item name="tests" type="f7eae187:NonAndroidSourceTypeNode" />
+              <item name="spoonacular" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
+      <pane id="ProjectPane" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="not.eligible.for.single.variant.sync" value="true" />
+    <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="AndroidJUnit" factoryName="Android JUnit">
+      <option name="TEST_OBJECT" value="class" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b6346af5-eec9-4a08-9548-d18cce96b1e6" name="Default Changelist" comment="" />
+      <created>1581965946777</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1581965946777</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <layout>
+      <window_info id="Captures" order="0" weight="0.25" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.17537314" />
+      <window_info id="Structure" order="2" side_tool="true" />
+      <window_info id="Build Variants" order="3" side_tool="true" />
+      <window_info id="Image Layers" order="4" />
+      <window_info id="Designer" order="5" />
+      <window_info id="Capture Tool" order="6" />
+      <window_info id="Resources Explorer" order="7" />
+      <window_info id="Favorites" order="8" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="0" />
+      <window_info anchor="bottom" id="TODO" order="1" />
+      <window_info anchor="bottom" id="Terminal" order="2" />
+      <window_info anchor="bottom" id="Event Log" order="3" side_tool="true" />
+      <window_info anchor="bottom" id="Build" order="4" visible="true" weight="0.32936078" />
+      <window_info anchor="right" id="Capture Analysis" order="0" />
+      <window_info anchor="right" id="Gradle" order="1" />
+      <window_info anchor="right" id="Theme Preview" order="2" />
+      <window_info anchor="right" id="Palette&#9;" order="3" />
+    </layout>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/.openapi-generator/VERSION">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/spoonacular/DefaultApiTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="838">
+          <caret line="89" column="6" lean-forward="true" selection-start-line="89" selection-start-column="6" selection-end-line="89" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="755">
+          <caret line="108" selection-start-line="108" selection-end-line="108" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/spoonacular/DefaultApi.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+          <folding>
+            <element signature="e#0#509120#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

@@ -1,19 +1,20 @@
 package com.example.recipesearch.ui.APIComunication;
 
+import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 
 import com.example.recipesearch.ui.CustomRecipes.CustomRecipe;
+import com.spoonacular.DefaultApi;
+import com.spoonacular.client.ApiException;
 import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.Response;
 
-//import com.spoonacular.client.ApiException;
-//import com.spoonacular.DefaultApi;
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
+import java.io.File;
+import java.math.BigDecimal;
 
+@SuppressLint("NewApi")
 public class CreateRecipeCard extends AsyncTask<Void, Void, String>
 {
     public static CreateRecipeCard CRC;
@@ -28,19 +29,29 @@ public class CreateRecipeCard extends AsyncTask<Void, Void, String>
         OkHttpClient client = new OkHttpClient();
         // gathers the data and creates what will be sent in the post
         String sendTest = "https://api.spoonacular.com/recipes/visualizeRecipe?title=recipe&image="+bit+"&ingredients=Test\\n%20test\\%20testing&instructions=1%20\\n%202%20\\n%203%20\\n%204&readyInMinutes=5&servings=2&mask=ellipseMask&backgroundImage=none&author=John%20Doe&apiKey=46953957ae604aeba07e605696eef0cc";
-        com.squareup.okhttp.Request request = new Request.Builder()
-                .url(sendTest) // will use only the first result
-                .build();
-
-        Response response = null; // needs an id num or will cause an error
-        String responseData = null;
+        DefaultApi apiInstance = new DefaultApi();
+        String title = "title_example"; // String | The title of the recipe.
+        File image = new File(CustomRecipe.getCImage()); // File | The binary image of the recipe as jpg.
+        String ingredients = CustomRecipe.getCIngred(); // String | The ingredient list of the recipe, one ingredient per line (separate lines with \\\\n).
+        String instructions = CustomRecipe.getCDirect(); // String | The instructions to make the recipe. One step per line (separate lines with \\\\n).
+        BigDecimal readyInMinutes = new BigDecimal(CustomRecipe.getCTime()); // BigDecimal | The number of minutes it takes to get the recipe on the table.
+        BigDecimal servings = new BigDecimal(CustomRecipe.getCServing()); // BigDecimal | The number of servings that you can make from the ingredients.
+        String mask = "ellipseMask"; // String | The mask to put over the recipe image (\\\"ellipseMask\\\", \\\"diamondMask\\\", \\\"diamondMask\\\", \\\"starMask\\\", \\\"heartMask\\\", \\\"potMask\\\", \\\"fishMask\\\").
+        String backgroundImage = "none"; // String | The background image (\\\"none\\\",\\\"background1\\\", or \\\"background2\\\").
+        String author = "author_example"; // String | The author of the recipe.
+        String backgroundColor = "#ffffff"; // String | The background color on the recipe card as a hex-string.
+        String fontColor = "#333333"; // String | The font color on the recipe card as a hex-string.
+        String source = "source_example"; // String | The source of the recipe.
         try {
-            response = client.newCall(request).execute(); // provides a val for the first search and preforms it
-            responseData = response.body().string();
-            String test = responseData;
-
-        } catch (IOException e) {
+            Object result = apiInstance.createRecipeCard(title, image, ingredients, instructions, readyInMinutes, servings, mask, backgroundImage, author, backgroundColor, fontColor, source);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling DefaultApi#createRecipeCard");
+            e.printStackTrace();
         }
+
+
+
         return null;
     }
     public static void setRecipeLink(String s){ recipeLink = s;}
