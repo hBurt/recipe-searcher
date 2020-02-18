@@ -32,7 +32,7 @@ public class Recipe_Similar_Recipes_Tab_Fragment extends Fragment
 {
     private static String id = null;
     private static String baseID = null;
-    private static Handler h, hk;
+    private static Handler h, hk, check;
     private static int offSet = 1;
     private int clicks = 0;
     private Recipe recipe;
@@ -74,6 +74,14 @@ public class Recipe_Similar_Recipes_Tab_Fragment extends Fragment
                 offSet = offSet + 1;
             }
         };
+        check = new  Handler()
+        {
+            @Override
+            public void handleMessage(Message msg)
+            {
+                clicks = 0;
+            }
+        };
         next.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -93,14 +101,15 @@ public class Recipe_Similar_Recipes_Tab_Fragment extends Fragment
             {
                 if (clicks == 0)
                 {
-                    Toast.makeText(getActivity().getApplicationContext(), "Please press button again to delete all recipes",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity().getApplicationContext(), "Press button again to delete all recipes",Toast.LENGTH_LONG).show();
                     clicks = 1;
+                    check.sendEmptyMessageDelayed(0, 2000);
                 }
                 else
                 {
                     CustomStorage Cs = new CustomStorage(getActivity().getApplicationContext());
                     Cs.Clear();
-                    Toast.makeText(getActivity().getApplicationContext(), "Saved custom recipes have been deleted",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity().getApplicationContext(), "Saved custom recipes have been deleted",Toast.LENGTH_LONG).show();
                     clicks = 0;
                 }
             }
