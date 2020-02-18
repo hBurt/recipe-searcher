@@ -1,8 +1,5 @@
 package com.example.recipesearch.ui.recipe;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager.widget.ViewPager;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,20 +8,19 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
+
 import com.example.recipesearch.MainActivity;
 import com.example.recipesearch.R;
 import com.example.recipesearch.database.Favorite;
 import com.example.recipesearch.database.Recipe;
 import com.example.recipesearch.database.User;
-import com.example.recipesearch.database.contents.Ingredient;
-import com.example.recipesearch.database.contents.Step;
 import com.example.recipesearch.helpers.DatabaseHelper;
 import com.example.recipesearch.ui.CustomRecipes.CustomStorage;
 import com.example.recipesearch.ui.search_result.SearchingActivity;
 import com.google.android.material.tabs.TabLayout;
 import com.squareup.picasso.Picasso;
-
-import java.util.ArrayList;
 
 public class RecipeActivityV2 extends AppCompatActivity implements TabLayout.OnTabSelectedListener {
 

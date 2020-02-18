@@ -1,30 +1,26 @@
 package com.example.recipesearch.api;
 
 import android.content.Context;
-import android.util.Log;
 import android.os.Handler;
+import android.util.Log;
 
 import com.example.recipesearch.database.Recipe;
 import com.example.recipesearch.database.contents.Amount;
 import com.example.recipesearch.database.contents.Equipment;
 import com.example.recipesearch.database.contents.Ingredient;
 import com.example.recipesearch.database.contents.Step;
-import com.google.gson.JsonObject;
+import com.example.recipesearch.ui.recipe.Recipe_Similar_Recipes_Tab_Fragment;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.StringTokenizer;
 
 
 public class APICore implements AsyncResponse {
 
     private static final String TAG = "APICore";
-
     private BackgroundRequest bgRequest;
     private Recipe recipe;
     private BackgroundRequest.SearchType searchType;
@@ -92,6 +88,7 @@ public class APICore implements AsyncResponse {
             for (int i = 0; i < jsonArray.length(); i++) {
                 jsonObject = jsonArray.getJSONObject(i);
                 getRecipe().setId(jsonObject.optInt("id"));
+                Recipe_Similar_Recipes_Tab_Fragment.setBaseID(String.valueOf(jsonObject.optInt("id")));
                 getRecipe().setTitle(jsonObject.optString("title"));
                 getRecipe().setReadyInMiniutes(jsonObject.optInt("readyInMinutes"));
                 getRecipe().setImageURL(jsonObject.optString("image"));
@@ -102,7 +99,7 @@ public class APICore implements AsyncResponse {
             Log.v(TAG, "End base build; ID search recipe ingredients: " + getRecipe().getId());
             startRequest(getRecipe().getId(), BackgroundRequest.RequestType.REQUEST_INGREDIENTS);
         }
-        if(searchType == BackgroundRequest.SearchType.RANDOM)
+        else if(searchType == BackgroundRequest.SearchType.RANDOM)
         {
 
             Log.v(TAG, "Start random recipe build");
@@ -117,8 +114,29 @@ public class APICore implements AsyncResponse {
                 getRecipe().setId(jsonObject.optInt("id"));
                 getRecipe().setTitle(jsonObject.optString("title"));
                 getRecipe().setReadyInMiniutes(jsonObject.optInt("readyInMinutes"));
+                String test = jsonObject.optString("image");
+                        if (test.contains("https://spoonacular.com/recipeImages/"))
+                getRecipe().setImageURL(test);
+            }
+            Log.v(TAG, "End base build; ID search recipe ingredients: " + getRecipe().getId());
+            startRequest(getRecipe().getId(), BackgroundRequest.RequestType.REQUEST_INGREDIENTS);
+        } else if(searchType == BackgroundRequest.SearchType.NEXT) {
+
+            Log.v(TAG, "Start base recipe build");
+
+            JSONObject jsonObjectBase = new JSONObject(apiResponse);
+            JSONArray jsonArray = jsonObjectBase.getJSONArray("results");
+            JSONObject jsonObject;
+
+            for (int i = 0; i < jsonArray.length(); i++) {
+                jsonObject = jsonArray.getJSONObject(i);
+                getRecipe().setId(jsonObject.optInt("id"));
+                getRecipe().setTitle(jsonObject.optString("title"));
+                getRecipe().setReadyInMiniutes(jsonObject.optInt("readyInMinutes"));
                 getRecipe().setImageURL(jsonObject.optString("image"));
             }
+
+            //getRecipe().setBaseImageURI(jsonObjectBase.getString("baseUri"));
 
             Log.v(TAG, "End base build; ID search recipe ingredients: " + getRecipe().getId());
             startRequest(getRecipe().getId(), BackgroundRequest.RequestType.REQUEST_INGREDIENTS);

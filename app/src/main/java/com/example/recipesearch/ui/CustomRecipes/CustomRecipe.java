@@ -76,7 +76,18 @@ public class CustomRecipe extends AppCompatActivity
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) { }
             @Override
-            public void afterTextChanged(Editable s) {CTime = s.toString(); }
+            public void afterTextChanged(Editable s)
+            {
+                String regexStr = "^[0-9]*$";
+                if(TimeE.getText().toString().trim().matches(regexStr))
+                {
+                    CTime = s.toString();
+                }
+                else
+                    {
+                        Toast.makeText(getApplicationContext(), "Please enter a Number for Time",Toast.LENGTH_SHORT).show();
+                    }
+            }
         });
         IngredientE.addTextChangedListener(new TextWatcher() {
             @Override
@@ -107,6 +118,10 @@ public class CustomRecipe extends AppCompatActivity
             public void onClick(View v)
             {
                 CustomStorage cStore = new CustomStorage(getApplicationContext());
+                if (CTime == null)
+                {
+                    CTime = "30";
+                }
                 cStore.createRecipe(CName, CDirect, CIngred, CTime, CImage, CBool);
                 Toast.makeText(getApplicationContext(), "Recipe: "+ cStore.getCount()+" Saved of 25",Toast.LENGTH_LONG).show();
                 //askToMakeCard(); // scrapped as it just keeps not working, so the personal storage will be more then 10 to compensate

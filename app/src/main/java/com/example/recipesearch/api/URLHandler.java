@@ -2,6 +2,9 @@ package com.example.recipesearch.api;
 
 import android.util.Log;
 
+import com.example.recipesearch.database.Recipe;
+import com.example.recipesearch.ui.recipe.Recipe_Similar_Recipes_Tab_Fragment;
+
 public class URLHandler {
 
     private static final String TAG = "URLHandler";
@@ -47,6 +50,10 @@ public class URLHandler {
                     randomSearch +
                     apiKeyBase + apiKey3;
         }
+        else if(getSearchType() == BackgroundRequest.SearchType.NEXT)
+        {
+            returned = buildUrlForSimilar(Recipe.getID());
+        }
         else if (getSearchType() == BackgroundRequest.SearchType.INGREDIENT) {
 
             StringBuilder recreated = new StringBuilder();
@@ -67,7 +74,6 @@ public class URLHandler {
                     amount +
                     apiKeyBase + apiKey3;
         }
-
         Log.v(TAG, returned);
 
         return returned;
@@ -103,7 +109,7 @@ public class URLHandler {
     public String buildUrlForSimilar(int id){
 
         return baseSearch +
-                id + "/" +
+                Recipe_Similar_Recipes_Tab_Fragment.getBaseID() + "/" +
                 "similar" +
                 apiKeyBase + apiKey3;
     }

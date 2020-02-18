@@ -1,10 +1,6 @@
 package com.example.recipesearch.ui.recipe;
 
 import android.content.Intent;
-import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -22,12 +18,9 @@ import com.example.recipesearch.database.Favorite;
 import com.example.recipesearch.database.Recipe;
 import com.example.recipesearch.database.User;
 import com.example.recipesearch.helpers.DatabaseHelper;
-import com.example.recipesearch.ui.APIComunication.Request_Handler;
 import com.example.recipesearch.ui.CustomRecipes.CustomStorage;
-import com.example.recipesearch.ui.MealPlanMaker.LoadingScreenMP;
 import com.example.recipesearch.ui.search_result.SearchActivity;
 import com.example.recipesearch.ui.search_result.SearchingActivity;
-import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 import com.squareup.picasso.Picasso;
 
@@ -99,7 +92,6 @@ public class RecipeActivity extends AppCompatActivity
         tab.addTab(tab.newTab().setText("Next Recipe"));
         tex.setText(RecipeName);
         RecipeStorage storage = new RecipeStorage(getApplicationContext());
-        storage.setOGName(RecipeName);
         tab.setTabGravity(TabLayout.GRAVITY_FILL);
         final MyTabAdapter adapter = new MyTabAdapter(this,getSupportFragmentManager(), tab.getTabCount());
         view.setAdapter(adapter);

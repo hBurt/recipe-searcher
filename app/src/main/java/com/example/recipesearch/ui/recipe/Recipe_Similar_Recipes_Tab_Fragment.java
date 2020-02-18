@@ -31,6 +31,7 @@ import static com.example.recipesearch.ui.recipe.RecipeActivity.recipeActivity;
 public class Recipe_Similar_Recipes_Tab_Fragment extends Fragment
 {
     private static String id = null;
+    private static String baseID = null;
     private static Handler h, hk;
     private static int offSet = 1;
     private int clicks = 0;
@@ -79,7 +80,9 @@ public class Recipe_Similar_Recipes_Tab_Fragment extends Fragment
             public void onClick(View v)
             {
                 APICore api = new APICore();
-                api.startRequest("", BackgroundRequest.SearchType.NEXT, getActivity().getApplicationContext(), hk);
+                api.startRequest(Recipe.getID(), BackgroundRequest.RequestType.REQUEST_BASE_RECIPE_ID);
+                hk.sendEmptyMessageDelayed(0, 1000);
+
             }
         });
         // the rand recipe is a wip
@@ -190,4 +193,6 @@ public class Recipe_Similar_Recipes_Tab_Fragment extends Fragment
         super.onDestroy();
         clicks = 0;
     }
+    public static String getBaseID(){return baseID;}
+    public static void setBaseID(String id){ baseID = id;}
 }

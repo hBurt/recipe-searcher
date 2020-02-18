@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class Recipe implements Serializable {
 
-    private int id;
+    private static int id;
     private String title, imageURL, baseImageURI, directions;
     private int readyInMinutes;
     private ArrayList<Ingredient> ingredients;
@@ -152,4 +152,5 @@ public class Recipe implements Serializable {
     public void setLoaded(boolean loaded) {
         this.loaded = loaded;
     }
+    public static int getID(){return id;}
 }

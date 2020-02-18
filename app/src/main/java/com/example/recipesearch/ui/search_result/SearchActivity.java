@@ -131,7 +131,7 @@ public class SearchActivity extends AppCompatActivity
                     settings_activity.setSwitchA(true);
                 IDList = new ArrayList<String>();
                 RecipeStorage storage = new RecipeStorage(getApplicationContext());
-                if (query.contains("random"))
+                if (query.contains("random") || query.contains("Random"))
                     api.startRequest(query, BackgroundRequest.SearchType.RANDOM, getBaseContext(), h);
                 else
                 if (storage.isThisInTheBook())
