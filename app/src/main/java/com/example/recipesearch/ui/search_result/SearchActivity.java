@@ -18,14 +18,11 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.example.recipesearch.R;
 import com.example.recipesearch.api.APICore;
-import com.example.recipesearch.api.AsyncResponse;
 import com.example.recipesearch.api.BackgroundRequest;
 import com.example.recipesearch.database.Recipe;
 import com.example.recipesearch.database.User;
-import com.example.recipesearch.helpers.DatabaseHelper;
 import com.example.recipesearch.ui.CustomRecipes.CustomRecipe;
 import com.example.recipesearch.ui.Settings.settings_activity;
-import com.example.recipesearch.ui.recipe.RecipeActivity;
 import com.example.recipesearch.ui.recipe.RecipeActivityV2;
 import com.example.recipesearch.ui.recipe.RecipeStorage;
 
@@ -127,11 +124,6 @@ public class SearchActivity extends AppCompatActivity
             public boolean onQueryTextSubmit(String query)
             {
                 APICore api = new APICore();
-
-
-
-
-
                 SearchedFood = query;
                 boolean testb = settings_activity.GetSwitchB();
                 boolean testa = settings_activity.GetSwitchA();

@@ -1,31 +1,29 @@
 package com.example.recipesearch.ui.recipe;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.os.Handler;
 import android.os.Message;
-import android.os.Trace;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.fragment.app.Fragment;
 
 import com.example.recipesearch.R;
 import com.example.recipesearch.api.APICore;
 import com.example.recipesearch.api.BackgroundRequest;
 import com.example.recipesearch.database.Recipe;
-import com.example.recipesearch.ui.APIComunication.Next_Similar_Activity;
-import com.example.recipesearch.ui.APIComunication.Next_recipe;
-import com.example.recipesearch.ui.APIComunication.Random_Recipe;
-import com.example.recipesearch.ui.CustomRecipes.CustomRecipe;
 import com.example.recipesearch.ui.CustomRecipes.CustomStorage;
-import com.example.recipesearch.ui.search_result.SearchActivity;
 
 import static com.example.recipesearch.ui.recipe.RecipeActivity.recipeActivity;
 
@@ -53,7 +51,7 @@ public class Recipe_Similar_Recipes_Tab_Fragment extends Fragment
     {
         super.onViewCreated(view, savedInstanceState);
         Button next = view.findViewById(R.id.Sim_btn);
-       // Button Rand = view.findViewById(R.id.Random_Recipe_Btn);
+        Button Rand = view.findViewById(R.id.ClearBTN);
         Button cRecipe = view.findViewById(R.id.CRecipes);
         h = new  Handler()
     {
@@ -78,33 +76,29 @@ public class Recipe_Similar_Recipes_Tab_Fragment extends Fragment
             @Override
             public void onClick(View v)
             {
-                if (RecipeActivity.getIsOpen() == true)
-                {
-                    recipeActivity.destroy();
-                }
                 APICore api = new APICore();
                 api.startRequest("", BackgroundRequest.SearchType.NEXT, getActivity().getApplicationContext(), hk);
             }
         });
         // the rand recipe is a wip
-        /*Rand.setOnClickListener(new View.OnClickListener()
+        Rand.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-                if (RecipeActivity.getIsOpen() == true)
-                {
-                    recipeActivity.destroy();
-                }
-                APICore api = new APICore();
-                api.startRequest("", BackgroundRequest.SearchType.RANDOM, getActivity().getApplicationContext(), hk);
+                CustomStorage Cs = new CustomStorage(getActivity().getApplicationContext());
+                Cs.Clear();
+                Toast.makeText(getActivity().getApplicationContext(), "Saved custom recipes have been deleted",Toast.LENGTH_SHORT).show();
             }
-        });*/
+        });
         cRecipe.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
+                CustomStorage Cs = new CustomStorage(getActivity().getApplicationContext());
+                if (Cs.getCount() > 0)
+                {
                 if (RecipeActivity.getIsOpen() == false)
                 {
                     Intent in = new Intent(getActivity().getApplicationContext(), RecipeActivity.class);
@@ -113,9 +107,6 @@ public class Recipe_Similar_Recipes_Tab_Fragment extends Fragment
                 RecipeActivity.setRecipeName("Next Test"); // temp test
                 Recipe_Directions_Tab_Fragment.setDirections("Next Text");
                 Recipe_Ingredient_Tab_Fragment.setIngredients("Next Text");
-                CustomStorage Cs = new CustomStorage(getActivity().getApplicationContext());
-                if (Cs.getCount() > 0)
-                {
                     if (Cs.getCName() != null)
                     {
                         RecipeActivity.setRecipeName(Cs.getCName());
@@ -132,12 +123,15 @@ public class Recipe_Similar_Recipes_Tab_Fragment extends Fragment
                         {
                             h.sendEmptyMessageDelayed(0, 300);
                         }
-
+                        Toast.makeText(getActivity().getApplicationContext(), "Recipe: " +Cs.getNum()+" of: "+Cs.getCount(),Toast.LENGTH_SHORT).show();
                     }
                     else
                     {
-                        RecipeActivity.setRecipeName("End of List");
-                        ((RecipeActivity)getActivity()).refresh();
+                        if (RecipeActivity.getIsOpen())
+                        {
+                            RecipeActivity.setRecipeName("End of List");
+                            ((RecipeActivity) getActivity()).refresh();
+                        }
                     }
                 }
 
@@ -153,4 +147,29 @@ public class Recipe_Similar_Recipes_Tab_Fragment extends Fragment
         id = newID;
     }
     public static int getOffset(){return offSet;}
+    private void askToDeleteAll() {
+        final CharSequence[] options = { "Yes", "NO" };
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity().getApplicationContext());
+        builder.setTitle("This will delete all saved custom recipes, are you sure about this?");
+        builder.setItems(options, new DialogInterface.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.M)
+            @Override
+            public void onClick(DialogInterface dialog, int item) {
+                if (options[item].equals("Yes"))
+                {
+                    if (RecipeActivity.getIsOpen() == true)
+                    {
+                        recipeActivity.destroy();
+                    }
+                    CustomStorage Cs = new CustomStorage(getActivity().getApplicationContext());
+                    Cs.Clear();
+                    Toast.makeText(getActivity().getApplicationContext(), "Saved custom recipes have been deleted",Toast.LENGTH_SHORT).show();
+                }
+                else if (options[item].equals("No")) {
+                    dialog.dismiss();
+                }
+            }
+        });
+        builder.show();
+    }
 }

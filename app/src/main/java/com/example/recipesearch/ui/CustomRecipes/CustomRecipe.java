@@ -1,17 +1,7 @@
 package com.example.recipesearch.ui.CustomRecipes;
 
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.core.content.FileProvider;
-
 import android.Manifest;
 import android.app.AlertDialog;
-import android.content.ContentResolver;
-import android.content.ContentUris;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -19,9 +9,6 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -30,27 +17,22 @@ import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.recipesearch.MainActivity;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
+
 import com.example.recipesearch.R;
 import com.example.recipesearch.ui.APIComunication.CreateRecipeCard;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.net.URI;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class CustomRecipe extends AppCompatActivity
 {
@@ -126,8 +108,8 @@ public class CustomRecipe extends AppCompatActivity
             {
                 CustomStorage cStore = new CustomStorage(getApplicationContext());
                 cStore.createRecipe(CName, CDirect, CIngred, CTime, CImage, CBool);
-                Toast.makeText(getApplicationContext(), "Recipe Saved",Toast.LENGTH_SHORT).show();
-                askToMakeCard();
+                Toast.makeText(getApplicationContext(), "Recipe: "+ cStore.getCount()+" Saved of 25",Toast.LENGTH_LONG).show();
+                //askToMakeCard(); // scrapped as it just keeps not working, so the personal storage will be more then 10 to compensate
             }
         });
 

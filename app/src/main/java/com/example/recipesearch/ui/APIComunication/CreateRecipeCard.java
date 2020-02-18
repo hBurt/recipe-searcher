@@ -8,6 +8,7 @@ import android.os.AsyncTask;
 import com.example.recipesearch.ui.CustomRecipes.CustomRecipe;
 import com.spoonacular.DefaultApi;
 import com.spoonacular.client.ApiException;
+import com.spoonacular.client.auth.ApiKeyAuth;
 import com.squareup.okhttp.OkHttpClient;
 
 import java.io.ByteArrayOutputStream;
@@ -28,9 +29,11 @@ public class CreateRecipeCard extends AsyncTask<Void, Void, String>
         byte[] data=bo.toByteArray();
         OkHttpClient client = new OkHttpClient();
         // gathers the data and creates what will be sent in the post
-        String sendTest = "https://api.spoonacular.com/recipes/visualizeRecipe?title=recipe&image="+bit+"&ingredients=Test\\n%20test\\%20testing&instructions=1%20\\n%202%20\\n%203%20\\n%204&readyInMinutes=5&servings=2&mask=ellipseMask&backgroundImage=none&author=John%20Doe&apiKey=46953957ae604aeba07e605696eef0cc";
+       // String sendTest = "https://api.spoonacular.com/recipes/visualizeRecipe?title=recipe&image="+bit+"&ingredients=Test\\n%20test\\%20testing&instructions=1%20\\n%202%20\\n%203%20\\n%204&readyInMinutes=5&servings=2&mask=ellipseMask&backgroundImage=none&author=John%20Doe&apiKey=46953957ae604aeba07e605696eef0cc";
         DefaultApi apiInstance = new DefaultApi();
-        String title = "title_example"; // String | The title of the recipe.
+        ApiKeyAuth keyStuff = new ApiKeyAuth("creation","apiKey");
+        keyStuff.setApiKey("46953957ae604aeba07e605696eef0cc");
+        String title = CustomRecipe.getCName(); // String | The title of the recipe.
         File image = new File(CustomRecipe.getCImage()); // File | The binary image of the recipe as jpg.
         String ingredients = CustomRecipe.getCIngred(); // String | The ingredient list of the recipe, one ingredient per line (separate lines with \\\\n).
         String instructions = CustomRecipe.getCDirect(); // String | The instructions to make the recipe. One step per line (separate lines with \\\\n).
@@ -42,9 +45,12 @@ public class CreateRecipeCard extends AsyncTask<Void, Void, String>
         String backgroundColor = "#ffffff"; // String | The background color on the recipe card as a hex-string.
         String fontColor = "#333333"; // String | The font color on the recipe card as a hex-string.
         String source = "source_example"; // String | The source of the recipe.
+        Object result = null;
+        String test = null;
         try {
-            Object result = apiInstance.createRecipeCard(title, image, ingredients, instructions, readyInMinutes, servings, mask, backgroundImage, author, backgroundColor, fontColor, source);
-            System.out.println(result);
+            result = apiInstance.createRecipeCard(title, image, ingredients, instructions, readyInMinutes, servings, mask, backgroundImage, author, backgroundColor, fontColor, source);
+            Object testing = result;
+            test = result.toString();
         } catch (ApiException e) {
             System.err.println("Exception when calling DefaultApi#createRecipeCard");
             e.printStackTrace();
