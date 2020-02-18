@@ -94,6 +94,7 @@ public class BackgroundRequest extends AsyncTask<Void, Void, String> {
         try {
             responseBody = client.newCall(request).execute();
             toReturn = responseBody.body().string();
+            Log.v(TAG, toReturn);
 
         } catch (IOException e) {
             e.printStackTrace();

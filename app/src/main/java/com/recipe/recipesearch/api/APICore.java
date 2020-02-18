@@ -42,7 +42,7 @@ public class APICore implements AsyncResponse {
         bgRequest.execute();
     }
 
-    private void startRequest(int id, BackgroundRequest.RequestType requestType){
+    public void startRequest(int id, BackgroundRequest.RequestType requestType){
         this.requestType = requestType;
         bgRequest = new BackgroundRequest(id, requestType);
         bgRequest.delegate = this;
@@ -52,7 +52,6 @@ public class APICore implements AsyncResponse {
     @Override
     public void processFinish(String output) {
         try {
-            //Log.v(TAG, "processFinish : " + output);
             switch (requestType){
                 case REQUEST_BASE_RECIPE:
                     Log.v(TAG, "[processFinish][base_recipe] : ");
@@ -100,6 +99,7 @@ public class APICore implements AsyncResponse {
         } else if(searchType == BackgroundRequest.SearchType.INGREDIENT){
 
             System.out.println(apiResponse);
+            //TODO
 
         }
     }
