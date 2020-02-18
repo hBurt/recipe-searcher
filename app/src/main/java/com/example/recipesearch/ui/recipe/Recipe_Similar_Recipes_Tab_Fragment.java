@@ -33,6 +33,7 @@ public class Recipe_Similar_Recipes_Tab_Fragment extends Fragment
     private static String id = null;
     private static Handler h, hk;
     private static int offSet = 1;
+    private int clicks = 0;
     private Recipe recipe;
     public Recipe_Similar_Recipes_Tab_Fragment()
     {
@@ -49,9 +50,10 @@ public class Recipe_Similar_Recipes_Tab_Fragment extends Fragment
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState)
     {
+        clicks = 0;
         super.onViewCreated(view, savedInstanceState);
         Button next = view.findViewById(R.id.Sim_btn);
-        Button Rand = view.findViewById(R.id.ClearBTN);
+        Button Clear = view.findViewById(R.id.ClearBTN);
         Button cRecipe = view.findViewById(R.id.CRecipes);
         h = new  Handler()
     {
@@ -81,14 +83,23 @@ public class Recipe_Similar_Recipes_Tab_Fragment extends Fragment
             }
         });
         // the rand recipe is a wip
-        Rand.setOnClickListener(new View.OnClickListener()
+        Clear.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-                CustomStorage Cs = new CustomStorage(getActivity().getApplicationContext());
-                Cs.Clear();
-                Toast.makeText(getActivity().getApplicationContext(), "Saved custom recipes have been deleted",Toast.LENGTH_SHORT).show();
+                if (clicks == 0)
+                {
+                    Toast.makeText(getActivity().getApplicationContext(), "Please press button again to delete all recipes",Toast.LENGTH_SHORT).show();
+                    clicks = 1;
+                }
+                else
+                {
+                    CustomStorage Cs = new CustomStorage(getActivity().getApplicationContext());
+                    Cs.Clear();
+                    Toast.makeText(getActivity().getApplicationContext(), "Saved custom recipes have been deleted",Toast.LENGTH_SHORT).show();
+                    clicks = 0;
+                }
             }
         });
         cRecipe.setOnClickListener(new View.OnClickListener()
@@ -171,5 +182,12 @@ public class Recipe_Similar_Recipes_Tab_Fragment extends Fragment
             }
         });
         builder.show();
+    }
+
+    @Override
+    public void onDestroy()
+    {
+        super.onDestroy();
+        clicks = 0;
     }
 }
