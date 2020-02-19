@@ -49,6 +49,7 @@
     <!-- *************** End **************** -->
     <string-array name="food_stuff">
         <item>Random</item>
+        <item>Custom</item>
         <item>Lamb Burger</item>
         <item>Cheese Pizza</item>
         <item>Baked Cod</item>
@@ -70,7 +71,6 @@
         <item>Salmon</item>
         <item>cheese</item>
         <item>lamb</item>
-        <item>tomato</item>
         <item>chicken broth</item>
         <item>vanilla exact</item>
         <item>Cod</item>

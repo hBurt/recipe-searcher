@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -22,9 +23,13 @@ import com.example.recipesearch.api.BackgroundRequest;
 import com.example.recipesearch.database.Recipe;
 import com.example.recipesearch.database.User;
 import com.example.recipesearch.ui.CustomRecipes.CustomRecipe;
+import com.example.recipesearch.ui.CustomRecipes.CustomStorage;
 import com.example.recipesearch.ui.Settings.settings_activity;
+import com.example.recipesearch.ui.recipe.RecipeActivity;
 import com.example.recipesearch.ui.recipe.RecipeActivityV2;
 import com.example.recipesearch.ui.recipe.RecipeStorage;
+import com.example.recipesearch.ui.recipe.Recipe_Directions_Tab_Fragment;
+import com.example.recipesearch.ui.recipe.Recipe_Ingredient_Tab_Fragment;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -132,32 +137,47 @@ public class SearchActivity extends AppCompatActivity
                 IDList = new ArrayList<String>();
                 RecipeStorage storage = new RecipeStorage(getApplicationContext());
                 if (query.contains("random") || query.contains("Random"))
+                {
                     api.startRequest(query, BackgroundRequest.SearchType.RANDOM, getBaseContext(), h);
-                else
-                if (storage.isThisInTheBook())
+                    Intent se = new Intent(SearchActivity.this, SearchingActivity.class);
+                    startActivity(se);
+                }
+                else if (query.contains("Custom") || query.contains("custom"))
+                {
+                    startCustom();
+                }
+                else if (storage.isThisInTheBook())
                 {
                     api.startRequest(query, BackgroundRequest.SearchType.RECIPE, getBaseContext(), h);
+                    h.sendEmptyMessageDelayed(0, 10000);
+                    Intent se = new Intent(SearchActivity.this, SearchingActivity.class);
+                    startActivity(se);
                 }
                 else if (settings_activity.GetSwitchA() == true)
                 {
-
                     api.startRequest(query, BackgroundRequest.SearchType.RECIPE, getBaseContext(), h);
+                    h.sendEmptyMessageDelayed(0, 10000);
+                    Intent se = new Intent(SearchActivity.this, SearchingActivity.class);
+                    startActivity(se);
+
                 }
                 else if (settings_activity.GetSwitchA() == false)
                 {
-
                     api.startRequest(query, BackgroundRequest.SearchType.INGREDIENT, getBaseContext(), h);
+                    h.sendEmptyMessageDelayed(0, 10000);
+                    Intent se = new Intent(SearchActivity.this, SearchingActivity.class);
+                    startActivity(se);
                 }
                 else {
 
                     api.startRequest(query, BackgroundRequest.SearchType.RECIPE, getBaseContext(), h);
-                    }
-                h.sendEmptyMessageDelayed(0, 10000);
+                    h.sendEmptyMessageDelayed(0, 10000);
+                    Intent se = new Intent(SearchActivity.this, SearchingActivity.class);
+                    startActivity(se);
+                }
 
                 recipe = api.getRecipe();
 
-                Intent se = new Intent(SearchActivity.this, SearchingActivity.class);
-                startActivity(se);
                 return true;
             }
 
@@ -185,4 +205,39 @@ public class SearchActivity extends AppCompatActivity
         getMenuInflater().inflate(R.menu.menu_search, menu);
         return super.onCreateOptionsMenu(menu);
     }
+    private void startCustom()
+    {
+        CustomStorage Cs = new CustomStorage(getApplicationContext());
+        if (Cs.getCount() > 0)
+        {
+            if (RecipeActivity.getIsOpen() == false)
+            {
+                Intent in = new Intent(getApplicationContext(), RecipeActivity.class);
+                startActivity(in);
+            }
+            RecipeActivity.setRecipeName("Next Test"); // temp test
+            Recipe_Directions_Tab_Fragment.setDirections("Next Text");
+            Recipe_Ingredient_Tab_Fragment.setIngredients("Next Text");
+            if (Cs.getCName() != null)
+            {
+                RecipeActivity.setRecipeName(Cs.getCName());
+                RecipeActivity.setTime(Cs.getCTime());
+                if (Cs.getBool() == true)
+                    RecipeActivity.setTakenPio(Cs.getCImgURL());
+                else
+                    RecipeActivity.setPicUri(Cs.getCImgURL());
+                Recipe_Directions_Tab_Fragment.setDirections(Cs.getCDirections());
+                String ingred = Cs.getCIngred().trim() .replace(",", " \n ");
+                Recipe_Ingredient_Tab_Fragment.setIngredients(ingred);
+                Cs.setNum();
+                if (RecipeActivity.getIsOpen() == true)
+                {
+                    h.sendEmptyMessageDelayed(0, 300);
+                }
+                Toast.makeText(getApplicationContext(), "Recipe: " +Cs.getNum()+" of: "+Cs.getCount(),Toast.LENGTH_SHORT).show();
+            }
+        }
+
+    }
+
 }

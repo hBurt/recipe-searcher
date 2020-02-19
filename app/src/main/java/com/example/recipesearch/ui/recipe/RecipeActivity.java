@@ -239,6 +239,7 @@ public class RecipeActivity extends AppCompatActivity
         isOpen = false;
         CustomStorage cs = new CustomStorage(getApplicationContext());
         cs.resetNUM();
+        if (SearchingActivity.getIsOpen())
         SearchingActivity.SA.finish();
     }
     public static void setTakenPio(String s)
