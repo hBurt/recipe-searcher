@@ -22,7 +22,7 @@
                 android:layout_width="150dp"
                 android:layout_height="82dp"
                 android:layout_marginStart="130dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:background="#1DDF16"
                 android:text="@string/next_similar_recipe" />
 
@@ -31,7 +31,7 @@
                 android:layout_width="150dp"
                 android:layout_height="88dp"
                 android:layout_marginStart="130dp"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="5dp"
                 android:background="#1DDF16"
                 android:text="@string/load_custom_recipes" />
 
@@ -40,7 +40,7 @@
                 android:layout_width="150dp"
                 android:layout_height="88dp"
                 android:layout_marginStart="130dp"
-                android:layout_marginTop="42dp"
+                android:layout_marginTop="5dp"
                 android:background="#1DDF16"
                 android:text="@string/clear_saved_recipes" />
         </LinearLayout>
