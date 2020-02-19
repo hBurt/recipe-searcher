@@ -110,7 +110,7 @@ public class URLHandler {
 
         return baseSearch +
                 Recipe_Similar_Recipes_Tab_Fragment.getBaseID() + "/" +
-                "similar" +
+                "similar" + "?number=1"+
                 apiKeyBase + apiKey3;
     }
 

@@ -154,6 +154,7 @@ public class RecipeActivityV2 extends AppCompatActivity implements TabLayout.OnT
     {
         super.onDestroy();
         isOpen = false;
+        SearchingActivity.SA.finish();
     }
     public void refresh()
     {
@@ -161,5 +162,9 @@ public class RecipeActivityV2 extends AppCompatActivity implements TabLayout.OnT
         overridePendingTransition(0, 0);
         startActivity(getIntent());
         overridePendingTransition(0, 0);
+    }
+    public void END()
+    {
+        finish();
     }
 }

@@ -112,6 +112,7 @@ public class APICore implements AsyncResponse {
             {
                 jsonObject = jsonArray.getJSONObject(i);
                 getRecipe().setId(jsonObject.optInt("id"));
+                Recipe_Similar_Recipes_Tab_Fragment.setBaseID(String.valueOf(jsonObject.optInt("id")));
                 getRecipe().setTitle(jsonObject.optString("title"));
                 getRecipe().setReadyInMiniutes(jsonObject.optInt("readyInMinutes"));
                 String test = jsonObject.optString("image");
@@ -123,21 +124,14 @@ public class APICore implements AsyncResponse {
         } else if(searchType == BackgroundRequest.SearchType.NEXT) {
 
             Log.v(TAG, "Start base recipe build");
-
-            JSONObject jsonObjectBase = new JSONObject(apiResponse);
-            JSONArray jsonArray = jsonObjectBase.getJSONArray("results");
-            JSONObject jsonObject;
-
-            for (int i = 0; i < jsonArray.length(); i++) {
-                jsonObject = jsonArray.getJSONObject(i);
-                getRecipe().setId(jsonObject.optInt("id"));
-                getRecipe().setTitle(jsonObject.optString("title"));
-                getRecipe().setReadyInMiniutes(jsonObject.optInt("readyInMinutes"));
-                getRecipe().setImageURL(jsonObject.optString("image"));
-            }
-
-            //getRecipe().setBaseImageURI(jsonObjectBase.getString("baseUri"));
-
+            String that = apiResponse.trim().replace("[","").replace("]","");
+            JSONObject jsonObjectBase = null;
+            jsonObjectBase = new JSONObject(that);
+                getRecipe().setId(jsonObjectBase.optInt("id"));
+            Recipe_Similar_Recipes_Tab_Fragment.setBaseID(String.valueOf(jsonObjectBase.optInt("id")));
+                getRecipe().setTitle(jsonObjectBase.optString("title"));
+                getRecipe().setReadyInMiniutes(jsonObjectBase.optInt("readyInMinutes"));
+                getRecipe().setImageURL(jsonObjectBase.optString("image"));
             Log.v(TAG, "End base build; ID search recipe ingredients: " + getRecipe().getId());
             startRequest(getRecipe().getId(), BackgroundRequest.RequestType.REQUEST_INGREDIENTS);
         }

@@ -24,6 +24,7 @@ import com.example.recipesearch.api.APICore;
 import com.example.recipesearch.api.BackgroundRequest;
 import com.example.recipesearch.database.Recipe;
 import com.example.recipesearch.ui.CustomRecipes.CustomStorage;
+import com.example.recipesearch.ui.search_result.SearchingActivity;
 
 import static com.example.recipesearch.ui.recipe.RecipeActivity.recipeActivity;
 
@@ -32,7 +33,7 @@ public class Recipe_Similar_Recipes_Tab_Fragment extends Fragment
 {
     private static String id = null;
     private static String baseID = null;
-    private static Handler h, hk, check;
+    private static Handler h, hk, check, R2;
     private static int offSet = 1;
     private int clicks = 0;
     private Recipe recipe;
@@ -62,7 +63,6 @@ public class Recipe_Similar_Recipes_Tab_Fragment extends Fragment
         public void handleMessage(Message msg)
         {
             ((RecipeActivity)getActivity()).refresh();
-            offSet = offSet + 1;
         }
     };
         hk = new  Handler()
@@ -70,8 +70,16 @@ public class Recipe_Similar_Recipes_Tab_Fragment extends Fragment
             @Override
             public void handleMessage(Message msg)
             {
+                Intent se = new Intent(getActivity().getApplicationContext(), SearchingActivity.class);
+                startActivity(se);
+            }
+        };
+        R2 = new  Handler()
+        {
+            @Override
+            public void handleMessage(Message msg)
+            {
                 ((RecipeActivityV2)getActivity()).refresh();
-                offSet = offSet + 1;
             }
         };
         check = new  Handler()
@@ -88,9 +96,7 @@ public class Recipe_Similar_Recipes_Tab_Fragment extends Fragment
             public void onClick(View v)
             {
                 APICore api = new APICore();
-                api.startRequest(Recipe.getID(), BackgroundRequest.RequestType.REQUEST_BASE_RECIPE_ID);
-                hk.sendEmptyMessageDelayed(0, 1000);
-
+                api.startRequest(String.valueOf(Recipe.getID()), BackgroundRequest.SearchType.NEXT,getActivity().getApplicationContext(), R2);
             }
         });
         // the rand recipe is a wip

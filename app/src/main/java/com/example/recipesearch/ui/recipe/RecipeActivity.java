@@ -14,8 +14,6 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.recipesearch.MainActivity;
 import com.example.recipesearch.R;
-import com.example.recipesearch.database.Favorite;
-import com.example.recipesearch.database.Recipe;
 import com.example.recipesearch.database.User;
 import com.example.recipesearch.helpers.DatabaseHelper;
 import com.example.recipesearch.ui.CustomRecipes.CustomStorage;
@@ -214,19 +212,7 @@ public class RecipeActivity extends AppCompatActivity
     }
     public static void setDoIReset(){ doIReset = true;}
 
-    private void saveRecipe(){
-
-        user = (User) getIntent().getSerializableExtra("databaseUserr");
-
-        databaseHelper = new DatabaseHelper(this);
-        databaseHelper.rebuildDatabase();
-
-        Recipe recipe = new Recipe(0, "Title" + recipeTitle, 20, imgName);
-        Favorite favoite = new Favorite(0 ,recipe);
-
-        user.getFavorites().add(favoite);
-        databaseHelper.getDatabase().getUserDao().updateDetails(user);
-    }
+    private void saveRecipe(){ }
     public static void setReadTheBook(boolean bool)
     {
         ReadTheDamBook = bool;
