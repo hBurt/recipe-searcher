@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0FE446"
+    android:background="#FFFFFF"
     tools:context=".ui.MealPlanMaker.GeneratedMealPlan">
 
     <ScrollView
@@ -31,8 +31,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:clickable="true"
-                android:textSize="24sp"
-                android:focusable="true" />
+                android:focusable="true"
+                android:textSize="24sp" />
 
             <ImageView
                 android:id="@+id/Meal1Img"
@@ -46,8 +46,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:clickable="true"
-                android:textSize="24sp"
-                android:focusable="true" />
+                android:focusable="true"
+                android:textSize="24sp" />
 
             <ImageView
                 android:id="@+id/Meal2Img"
@@ -61,8 +61,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:clickable="true"
-                android:textSize="24sp"
-                android:focusable="true" />
+                android:focusable="true"
+                android:textSize="24sp" />
 
             <ImageView
                 android:id="@+id/Meal3Img"

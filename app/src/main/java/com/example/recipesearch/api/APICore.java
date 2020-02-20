@@ -10,6 +10,7 @@ import com.example.recipesearch.database.contents.Equipment;
 import com.example.recipesearch.database.contents.Ingredient;
 import com.example.recipesearch.database.contents.Step;
 import com.example.recipesearch.ui.recipe.Recipe_Similar_Recipes_Tab_Fragment;
+import com.example.recipesearch.ui.search_result.SearchActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -89,6 +90,7 @@ public class APICore implements AsyncResponse {
                 jsonObject = jsonArray.getJSONObject(i);
                 getRecipe().setId(jsonObject.optInt("id"));
                 Recipe_Similar_Recipes_Tab_Fragment.setBaseID(String.valueOf(jsonObject.optInt("id")));
+                SearchActivity.setPreviousID(String.valueOf(jsonObject.optInt("id")));
                 getRecipe().setTitle(jsonObject.optString("title"));
                 getRecipe().setReadyInMiniutes(jsonObject.optInt("readyInMinutes"));
                 getRecipe().setImageURL(jsonObject.optString("image"));
@@ -113,6 +115,7 @@ public class APICore implements AsyncResponse {
                 jsonObject = jsonArray.getJSONObject(i);
                 getRecipe().setId(jsonObject.optInt("id"));
                 Recipe_Similar_Recipes_Tab_Fragment.setBaseID(String.valueOf(jsonObject.optInt("id")));
+                SearchActivity.setPreviousID(String.valueOf(jsonObject.optInt("id")));
                 getRecipe().setTitle(jsonObject.optString("title"));
                 getRecipe().setReadyInMiniutes(jsonObject.optInt("readyInMinutes"));
                 String test = jsonObject.optString("image");
@@ -129,6 +132,7 @@ public class APICore implements AsyncResponse {
             jsonObjectBase = new JSONObject(that);
                 getRecipe().setId(jsonObjectBase.optInt("id"));
             Recipe_Similar_Recipes_Tab_Fragment.setBaseID(String.valueOf(jsonObjectBase.optInt("id")));
+            SearchActivity.setPreviousID(String.valueOf(jsonObjectBase.optInt("id")));
                 getRecipe().setTitle(jsonObjectBase.optString("title"));
                 getRecipe().setReadyInMiniutes(jsonObjectBase.optInt("readyInMinutes"));
                 getRecipe().setImageURL(jsonObjectBase.optString("image"));

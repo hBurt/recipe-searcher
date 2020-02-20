@@ -48,6 +48,7 @@
 
     <!-- *************** End **************** -->
     <string-array name="food_stuff">
+        <item>Similar to Previous Search</item>
         <item>Random</item>
         <item>Custom</item>
         <item>Lamb Burger</item>
@@ -65,7 +66,6 @@
         <item>butter</item>
         <item>Chicken</item>
         <item>Beef</item>
-        <item>chocolate</item>
         <item>milk</item>
         <item>Pasta</item>
         <item>Salmon</item>

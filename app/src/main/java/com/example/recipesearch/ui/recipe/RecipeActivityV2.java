@@ -38,13 +38,16 @@ public class RecipeActivityV2 extends AppCompatActivity implements TabLayout.OnT
     private ViewPager viewPager;
 
     private Button saveRecipe, btnHome;
-
+    Intent intent ;
+    Bundle bundle ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_v2);
         isOpen = true;
-        recipe = (Recipe) getIntent().getSerializableExtra("recipe");
+        intent = getIntent();
+        bundle = intent.getExtras();
+        recipe = (Recipe) bundle.getSerializable("recipe");
 
         Log.v("RecipeActivityV2", recipe.display());
 

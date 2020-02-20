@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.example.recipesearch.database.Recipe;
 import com.example.recipesearch.ui.recipe.Recipe_Similar_Recipes_Tab_Fragment;
+import com.example.recipesearch.ui.search_result.SearchActivity;
 
 public class URLHandler {
 
@@ -18,6 +19,8 @@ public class URLHandler {
     String apiKey = "829c5610db454ca091cbd571f9cbbf61";
     String apiKey2 = "165a81b84213461a8702d3ec687eacb6";
     String apiKey3 = "46953957ae604aeba07e605696eef0cc";
+    String apiKey4 = "db8b4af6c4224c28a2f47fa262d8cf13";
+    String apiKey5 = "14676380de0c4536ac53764af2e2cde0";
     String returned = "";
     String randomSearch = "random?number=1";
     String analyze = "analyzedInstructions?stepBreakdown=true";
@@ -40,7 +43,7 @@ public class URLHandler {
                     byRecipe +
                     getQuery() +
                     amount +
-                    apiKeyBase + apiKey3;
+                    apiKeyBase + apiKey5;
 
 
         }
@@ -48,7 +51,7 @@ public class URLHandler {
         {
             returned = baseSearch +
                     randomSearch +
-                    apiKeyBase + apiKey3;
+                    apiKeyBase + apiKey5;
         }
         else if(getSearchType() == BackgroundRequest.SearchType.NEXT)
         {
@@ -72,7 +75,7 @@ public class URLHandler {
                     byIngredients +
                     recreated +
                     amount +
-                    apiKeyBase + apiKey3;
+                    apiKeyBase + apiKey5;
         }
         Log.v(TAG, returned);
 
@@ -86,7 +89,7 @@ public class URLHandler {
         String out = baseSearch +
                 id + "/" +
                 ingredientWidget +
-                "apiKey=" + apiKey3;
+                "apiKey=" + apiKey5;
 
         Log.v(TAG, "[buildUrlForIngredients]" + out);
         return out;
@@ -100,18 +103,22 @@ public class URLHandler {
         String out = baseSearch +
                 id + "/" +
                 analyze +
-                apiKeyBase + apiKey3;
+                apiKeyBase + apiKey5;
 
         Log.v(TAG, "[buildUrlForInstructions]" + out);
         return out;
     }
 
     public String buildUrlForSimilar(int id){
-
+        String prevID = null;
+        if( Recipe_Similar_Recipes_Tab_Fragment.getBaseID() != null)
+        prevID = Recipe_Similar_Recipes_Tab_Fragment.getBaseID();
+        else
+        prevID = SearchActivity.getPreviousID();
         return baseSearch +
-                Recipe_Similar_Recipes_Tab_Fragment.getBaseID() + "/" +
+                prevID + "/" +
                 "similar" + "?number=1"+
-                apiKeyBase + apiKey3;
+                apiKeyBase + apiKey5;
     }
 
     private String[] splitStringByComma() {

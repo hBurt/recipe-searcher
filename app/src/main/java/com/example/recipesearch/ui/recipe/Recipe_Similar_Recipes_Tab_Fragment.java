@@ -35,7 +35,7 @@ public class Recipe_Similar_Recipes_Tab_Fragment extends Fragment
     private static String baseID = null;
     private static Handler h, hk, check, R2;
     private static int offSet = 1;
-    private int clicks = 0;
+    private boolean clicks = false;
     private Recipe recipe;
     public Recipe_Similar_Recipes_Tab_Fragment()
     {
@@ -52,7 +52,7 @@ public class Recipe_Similar_Recipes_Tab_Fragment extends Fragment
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState)
     {
-        clicks = 0;
+        clicks = false;
         super.onViewCreated(view, savedInstanceState);
         Button next = view.findViewById(R.id.Sim_btn);
         Button Clear = view.findViewById(R.id.ClearBTN);
@@ -80,6 +80,7 @@ public class Recipe_Similar_Recipes_Tab_Fragment extends Fragment
             public void handleMessage(Message msg)
             {
                 ((RecipeActivityV2)getActivity()).refresh();
+                Toast.makeText(getActivity().getApplicationContext(), "Next Similar Recipe has been loaded",Toast.LENGTH_SHORT).show();
             }
         };
         check = new  Handler()
@@ -87,7 +88,7 @@ public class Recipe_Similar_Recipes_Tab_Fragment extends Fragment
             @Override
             public void handleMessage(Message msg)
             {
-                clicks = 0;
+                clicks = false;
             }
         };
         next.setOnClickListener(new View.OnClickListener()
@@ -95,8 +96,15 @@ public class Recipe_Similar_Recipes_Tab_Fragment extends Fragment
             @Override
             public void onClick(View v)
             {
-                APICore api = new APICore();
-                api.startRequest(String.valueOf(Recipe.getID()), BackgroundRequest.SearchType.NEXT,getActivity().getApplicationContext(), R2);
+                if (!RecipeActivity.getIsOpen())
+                {
+                    APICore api = new APICore();
+                    api.startRequest(String.valueOf(Recipe.getID()), BackgroundRequest.SearchType.NEXT, getActivity().getApplicationContext(), R2);
+                }
+                if (RecipeActivity.getIsOpen())
+                {
+                    Toast.makeText(getActivity().getApplicationContext(), "This function is not available while viewing Custom Recipes",Toast.LENGTH_LONG).show();
+                }
             }
         });
         // the rand recipe is a wip
@@ -105,18 +113,18 @@ public class Recipe_Similar_Recipes_Tab_Fragment extends Fragment
             @Override
             public void onClick(View v)
             {
-                if (clicks == 0)
+                if (!clicks)
                 {
                     Toast.makeText(getActivity().getApplicationContext(), "Press button again to delete all recipes",Toast.LENGTH_LONG).show();
-                    clicks = 1;
-                    check.sendEmptyMessageDelayed(0, 2000);
+                    clicks = true;
+                    check.sendEmptyMessageDelayed(0, 4000);
                 }
                 else
                 {
                     CustomStorage Cs = new CustomStorage(getActivity().getApplicationContext());
                     Cs.Clear();
                     Toast.makeText(getActivity().getApplicationContext(), "Saved custom recipes have been deleted",Toast.LENGTH_LONG).show();
-                    clicks = 0;
+                    clicks = false;
                 }
             }
         });
@@ -206,7 +214,7 @@ public class Recipe_Similar_Recipes_Tab_Fragment extends Fragment
     public void onDestroy()
     {
         super.onDestroy();
-        clicks = 0;
+        clicks = false;
     }
     public static String getBaseID(){return baseID;}
     public static void setBaseID(String id){ baseID = id;}

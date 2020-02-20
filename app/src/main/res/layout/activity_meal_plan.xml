@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#20C929"
+    android:background="#FFFFFF"
     tools:context=".ui.MealPlanMaker.MealPlanActivity">
 
     <TextView
@@ -48,9 +48,9 @@
         android:layout_marginEnd="65dp"
         android:layout_marginRight="65dp"
         android:ems="10"
+        android:hint="@string/day_or_night"
         android:importantForAutofill="no"
         android:inputType="textPersonName"
-        android:hint="@string/day_or_night"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/timeFrame" />
@@ -81,8 +81,8 @@
         android:layout_marginRight="86dp"
         android:autofillHints=""
         android:ems="10"
-        android:inputType="textPersonName"
         android:hint="@string/calories"
+        android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cal"
@@ -114,8 +114,8 @@
         android:layout_marginEnd="99dp"
         android:layout_marginRight="99dp"
         android:ems="10"
-        android:inputType="textPersonName"
         android:hint="@string/diet"
+        android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Diet" />
@@ -145,9 +145,9 @@
         android:layout_marginEnd="99dp"
         android:layout_marginRight="99dp"
         android:ems="10"
+        android:hint="@string/food_you_want_to_exclude"
         android:importantForAutofill="no"
         android:inputType="textPersonName"
-        android:hint="@string/food_you_want_to_exclude"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Exclusions" />

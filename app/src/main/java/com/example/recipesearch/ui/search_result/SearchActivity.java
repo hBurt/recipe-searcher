@@ -42,15 +42,14 @@ public class SearchActivity extends AppCompatActivity
     private SearchView FsearchView;
     private ArrayAdapter silAd;
     private ListView list;
+    private static String previousID = null;
     Toolbar tool;
     private static Handler h;
     public static String SearchedFood = null; // static to share the query
     static SharedPreferences mPrefs;
     SharedPreferences.Editor edit;
     static List<String> IDList;
-
     User user;
-
     private Recipe recipe;
 
     //This latch will be used to wait on
@@ -61,14 +60,13 @@ public class SearchActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragmnt_search_results);
-
+        mPrefs = getSharedPreferences("LastSearch", MODE_PRIVATE);
         user = (User) getIntent().getSerializableExtra("databaseUser");
-
+        if (mPrefs.contains("LastSearch"))
+        {
+            previousID = mPrefs.getString("LastSearch", " ");
+        }
         _latch = new CountDownLatch(1);
-
-
-
-        mPrefs = getApplicationContext().getSharedPreferences("Recipe_Book", MODE_PRIVATE);
         tool = findViewById(R.id.tb);
         tool.inflateMenu(R.menu.menu_search);
         list = findViewById(R.id.suggestList);// list view use and creation of the adapter for iz
@@ -145,6 +143,14 @@ public class SearchActivity extends AppCompatActivity
                 else if (query.contains("Custom") || query.contains("custom"))
                 {
                     startCustom();
+                }
+                else if (query.contains("Similar to Previous Search") ||query.contains("similar to Previous Search")
+                        ||query.contains("similar to previous Search") || query.contains("similar to previous search")
+                        || query.contains("Similar")|| query.contains("similar"))
+                {
+                    api.startRequest(String.valueOf(Recipe.getID()), BackgroundRequest.SearchType.NEXT, getApplicationContext(), h);
+                    Intent se = new Intent(SearchActivity.this, SearchingActivity.class);
+                    startActivity(se);
                 }
                 else if (storage.isThisInTheBook())
                 {
@@ -239,5 +245,22 @@ public class SearchActivity extends AppCompatActivity
         }
 
     }
+    public void refresh()
+    {
+        finish();
+        overridePendingTransition(0, 0);
+        startActivity(getIntent());
+        overridePendingTransition(0, 0);
+    }
+    public static String getPreviousID(){return previousID;}
+    public static void setPreviousID(String id){ previousID = id;}
 
+    @Override
+    protected void onDestroy()
+    {
+        super.onDestroy();
+        edit = mPrefs.edit();
+        edit.putString("LastSearch", previousID);
+        edit.apply();
+    }
 }

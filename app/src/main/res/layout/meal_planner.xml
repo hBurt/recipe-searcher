@@ -5,7 +5,7 @@
     android:id="@+id/Planer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#2EAD29"
+    android:background="#FFFFFF"
     android:orientation="vertical">
 
     <TextView
@@ -13,9 +13,8 @@
         android:layout_width="317dp"
         android:layout_height="45dp"
         android:layout_marginStart="50dp"
-        android:layout_marginLeft="50dp"
         android:text="@string/Planner"
-        android:textColor="#11FF00"
+        android:textColor="#000000"
         android:textSize="36sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
