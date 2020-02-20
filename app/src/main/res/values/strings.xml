@@ -48,6 +48,9 @@
     <string name="saved_user">savedUser</string>
     <string name="saved_pass">savedPass</string>
 
+    <string name="connection_error_logged_into_local">Connection error: logged into local</string>
+    <string name="login_sucess">Login success: </string>
+
     <!-- *************** End **************** -->
     <string-array name="food_stuff">
         <item>Beef Burger</item>

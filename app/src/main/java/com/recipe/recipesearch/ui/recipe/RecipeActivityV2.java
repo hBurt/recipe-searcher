@@ -136,6 +136,10 @@ public class RecipeActivityV2 extends AppCompatActivity implements TabLayout.OnT
         Favorite favoite = new Favorite(0, recipe);
 
         user.getFavorites().add(favoite);
-        databaseHelper.getDatabase().getUserDao().updateDetails(user);
+
+        Log.d("RecipeActivityV2", "TO save: " + favoite.getRecipe().display());
+
+        //databaseHelper.getDatabase().getUserDao().updateDetails(user);
+        databaseHelper.updateCurrentUser(false, favoite);
     }
 }

@@ -8,6 +8,11 @@ public class Favorite implements Serializable {
 
     private Recipe recipe;
 
+    public Favorite(){
+        setRating(0);
+        setRecipe(new Recipe());
+    }
+
     public Favorite(Recipe recipe) {
         setRating(0);
         setRecipe(recipe);

@@ -14,6 +14,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.recipe.recipesearch.MainActivity;
 import com.example.recipesearch.R;
 import com.recipe.recipesearch.database.Favorite;
@@ -34,6 +36,8 @@ public class SignUpFragment extends Fragment {
     private TextView error_email, error_password;
 
     DatabaseHelper databaseHelper;
+
+    private FirebaseAuth mAuth;
 
     private enum errorMessage { EMAIL, PASSWORD }
 
@@ -60,6 +64,7 @@ public class SignUpFragment extends Fragment {
         error_password.setVisibility(View.INVISIBLE);
 
         databaseHelper = ((MainActivity) getActivity()).getDatabaseHelper();
+        mAuth = FirebaseAuth.getInstance();
 
         //Listeners
         login.setOnClickListener(new View.OnClickListener() {
@@ -74,15 +79,32 @@ public class SignUpFragment extends Fragment {
             public void onClick(View view) {
                 if(isSignupValid(isEmailValid(), isPasswordValid())){
                     addUserToDatabase();
-                    if(databaseHelper.login(email.getText().toString(), password.getText().toString())){
-                        ((MainActivity) getActivity()).setBottomNavigationVisibility(View.VISIBLE);
+                    databaseHelper.addCurrentUserToFirestore();
 
-                        User user = databaseHelper.getCurrentUser();
-                        populateListWithHardcodedItems(user.getFavorites());
+                    User user = databaseHelper.getCurrentUser();
+                    populateListWithHardcodedItems(user.getFavorites());
+
+                    databaseHelper.updateCurrentUser(true);
+                    //databaseHelper.addCurrentUserToFirestore();
+
+                    ((MainActivity) getActivity()).setBottomNavigationVisibility(View.VISIBLE);
+
+                    databaseHelper.loginUserInFirestore(email.getText().toString(), password.getText().toString(), ui);
+
+
+                    /*if(databaseHelper.login(email.getText().toString(), password.getText().toString())){
+
+                        //User user = databaseHelper.getCurrentUser();
                         databaseHelper.updateUser(user);
+                        databaseHelper.setCurrentUser(user);
+                        databaseHelper.addCurrentUserToFirestore();
+                        //databaseHelper.signUpUserWithFirestore(email.getText().toString(), password.getText().toString());
+                        //databaseHelper.createUserWithFirestore(email.getText().toString(), password.getText().toString());
+
+                        //databaseHelper.addCurrentUserToFirestore();
                         
                         ui.switchScreen(new HomeSearchFragment());
-                    }
+                    }*/
                 }
             }
         });
@@ -172,6 +194,8 @@ public class SignUpFragment extends Fragment {
         user.setEmail(email.getText().toString());
         user.setPassword(encrypt.DoEncrption(password.getText().toString().toCharArray()));
         ((MainActivity) getActivity()).getDatabaseHelper().addUser(user);
+
+        databaseHelper.setCurrentUser(user);
     }
 
     private void showErrorMessage(errorMessage errorMessageType){

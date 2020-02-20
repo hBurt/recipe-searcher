@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
         //    databaseHelper.login(databaseHelper.getSharedPrefEmail(), databaseHelper.getSharedPrefPass());
         //} else {
         //    System.out.println("input login");
-            databaseHelper.login(email, pass);
+            //databaseHelper.login(email, pass);
         //}
     }
 

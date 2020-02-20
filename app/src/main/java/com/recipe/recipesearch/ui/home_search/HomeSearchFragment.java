@@ -5,6 +5,7 @@ import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,12 +14,14 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.recipe.recipesearch.MainActivity;
 import com.example.recipesearch.R;
 import com.recipe.recipesearch.helpers.DatabaseHelper;
@@ -40,6 +43,10 @@ public class HomeSearchFragment extends Fragment {
     private DatabaseHelper databaseHelper;
     private ConstraintLayout constraintLayout;
 
+    private boolean showLoginMessage, loginSucess;
+
+    public HomeSearchFragment(){
+    }
     @Override
     public void onResume() {
         super.onResume();
@@ -163,6 +170,29 @@ public class HomeSearchFragment extends Fragment {
         });
 
         setBottomVisibilityAndMargin();
+
+
+        if(showLoginMessage){
+
+            Toast toast = Toast.makeText(getContext(), "Login success: " + databaseHelper.getCurrentUser().getEmail(), Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 50);
+            toast.show();
+
+            /*Snackbar.make(root.findViewById(R.id.serch_frag), R.string.login_sucess + databaseHelper.getCurrentUser().getEmail(),
+                    Snackbar.LENGTH_SHORT)
+                    .show();*/
+            /*if(loginSucess){
+                Snackbar.make(root.findViewById(R.id.serch_frag), R.string.login_sucess + databaseHelper.getCurrentUser().getEmail(),
+                        Snackbar.LENGTH_SHORT)
+                        .show();
+
+            } else {
+                Snackbar.make(root.findViewById(R.id.serch_frag), R.string.connection_error_logged_into_local + databaseHelper.getCurrentUser().getEmail(),
+                        Snackbar.LENGTH_SHORT)
+                        .show();
+
+            }*/
+        }
         return root;
     }
 
@@ -194,5 +224,9 @@ public class HomeSearchFragment extends Fragment {
         FrameLayout.LayoutParams newLayoutParams = (FrameLayout.LayoutParams) constraintLayout.getLayoutParams();
         newLayoutParams.bottomMargin = bottomMargin;
         constraintLayout.setLayoutParams(newLayoutParams);
+    }
+
+    public void setShowLoginMessage(boolean showLoginMessage) {
+        this.showLoginMessage = showLoginMessage;
     }
 }
