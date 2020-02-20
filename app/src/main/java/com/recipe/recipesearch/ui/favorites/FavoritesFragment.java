@@ -51,6 +51,7 @@ public class FavoritesFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        initFavoritesList(super.getView());
 
     }
 
@@ -188,7 +189,8 @@ public class FavoritesFragment extends Fragment {
     private void initFavoritesList(View root){
         list = root.findViewById(R.id.list);
 
-        favoritesList = databaseHelper.getCurrentUser().getFavorites();
+        //favoritesList = databaseHelper.getCurrentUser().getFavorites();
+        favoritesList = databaseHelper.updateUserFromFirestore().getFavorites();
         favoritesListSecondary = new ArrayList<>(favoritesList);
 
         if(favoritesList.size() > 0){

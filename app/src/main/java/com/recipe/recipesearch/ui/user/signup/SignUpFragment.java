@@ -81,30 +81,9 @@ public class SignUpFragment extends Fragment {
                     addUserToDatabase();
                     databaseHelper.addCurrentUserToFirestore();
 
-                    User user = databaseHelper.getCurrentUser();
-                    populateListWithHardcodedItems(user.getFavorites());
-
-                    databaseHelper.updateCurrentUser(true);
-                    //databaseHelper.addCurrentUserToFirestore();
-
                     ((MainActivity) getActivity()).setBottomNavigationVisibility(View.VISIBLE);
 
                     databaseHelper.loginUserInFirestore(email.getText().toString(), password.getText().toString(), ui);
-
-
-                    /*if(databaseHelper.login(email.getText().toString(), password.getText().toString())){
-
-                        //User user = databaseHelper.getCurrentUser();
-                        databaseHelper.updateUser(user);
-                        databaseHelper.setCurrentUser(user);
-                        databaseHelper.addCurrentUserToFirestore();
-                        //databaseHelper.signUpUserWithFirestore(email.getText().toString(), password.getText().toString());
-                        //databaseHelper.createUserWithFirestore(email.getText().toString(), password.getText().toString());
-
-                        //databaseHelper.addCurrentUserToFirestore();
-                        
-                        ui.switchScreen(new HomeSearchFragment());
-                    }*/
                 }
             }
         });

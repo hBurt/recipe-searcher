@@ -112,9 +112,7 @@ public class CustomDialog extends Dialog implements android.view.View.OnClickLis
         databaseHelper = new DatabaseHelper(activity);
         databaseHelper.rebuildDatabase();
 
-        databaseHelper.getDatabase().getUserDao().updateDetails(user);
-
-        databaseHelper.updateCurrentUser(false, favorite);
+        databaseHelper.updateRating(user);
     }
 
 }

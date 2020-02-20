@@ -130,16 +130,11 @@ public class RecipeActivityV2 extends AppCompatActivity implements TabLayout.OnT
         databaseHelper = new DatabaseHelper(this);
         databaseHelper.rebuildDatabase();
 
-        //recipe.setDirections(Recipe_Directions_Tab_Fragment.getDirections());
-        //recipe.setIngredients(Recipe_Ingredient_Tab_Fragment.getIngredients());
-
         Favorite favoite = new Favorite(0, recipe);
-
-        user.getFavorites().add(favoite);
 
         Log.d("RecipeActivityV2", "TO save: " + favoite.getRecipe().display());
 
-        //databaseHelper.getDatabase().getUserDao().updateDetails(user);
-        databaseHelper.updateCurrentUser(false, favoite);
+        databaseHelper.addRecipeToFavoriteAndUpdateUser(favoite);
+        //databaseHelper.updateCurrentUser(false, false,  favoite);
     }
 }
