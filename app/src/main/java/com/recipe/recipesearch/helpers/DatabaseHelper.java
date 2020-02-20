@@ -177,11 +177,12 @@ public class DatabaseHelper {
                 .document(getCurrentUser().getUid())
                 .get()
                 .addOnCompleteListener(task -> {
-                    if(task.isSuccessful()) {
+                    if (task.isSuccessful()) {
                         DocumentSnapshot document = task.getResult();
                         setCurrentUser(document.toObject(User.class));
                     }
-
+                }).addOnFailureListener(task -> {
+                    setCurrentUser(getCurrentUser());
         });
 
         return getCurrentUser();
