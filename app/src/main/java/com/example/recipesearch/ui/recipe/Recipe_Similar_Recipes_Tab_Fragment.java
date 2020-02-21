@@ -23,6 +23,7 @@ import com.example.recipesearch.R;
 import com.example.recipesearch.api.APICore;
 import com.example.recipesearch.api.BackgroundRequest;
 import com.example.recipesearch.database.Recipe;
+import com.example.recipesearch.database.User;
 import com.example.recipesearch.ui.CustomRecipes.CustomStorage;
 import com.example.recipesearch.ui.search_result.SearchingActivity;
 
@@ -37,6 +38,7 @@ public class Recipe_Similar_Recipes_Tab_Fragment extends Fragment
     private static int offSet = 1;
     private boolean clicks = false;
     private Recipe recipe;
+    User user;
     public Recipe_Similar_Recipes_Tab_Fragment()
     {
         // Required empty public constructor
@@ -100,6 +102,8 @@ public class Recipe_Similar_Recipes_Tab_Fragment extends Fragment
                 {
                     APICore api = new APICore();
                     api.startRequest(String.valueOf(Recipe.getID()), BackgroundRequest.SearchType.NEXT, getActivity().getApplicationContext(), R2);
+                    Intent se = new Intent(getActivity(), SearchingActivity.class);
+                    startActivity(se);
                 }
                 if (RecipeActivity.getIsOpen())
                 {
