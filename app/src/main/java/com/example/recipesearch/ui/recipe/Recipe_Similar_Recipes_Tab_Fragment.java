@@ -27,6 +27,10 @@ import com.example.recipesearch.database.User;
 import com.example.recipesearch.ui.CustomRecipes.CustomStorage;
 import com.example.recipesearch.ui.search_result.SearchingActivity;
 
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Objects;
+
 import static com.example.recipesearch.ui.recipe.RecipeActivity.recipeActivity;
 
 
@@ -37,11 +41,13 @@ public class Recipe_Similar_Recipes_Tab_Fragment extends Fragment
     private static Handler h, hk, check, R2;
     private static int offSet = 1;
     private boolean clicks = false;
-    private Recipe recipe;
+    private static Recipe recipe;
+    private RecipeActivityV2 REA2;
     User user;
-    public Recipe_Similar_Recipes_Tab_Fragment()
+    public Recipe_Similar_Recipes_Tab_Fragment( RecipeActivityV2 RA2)
     {
         // Required empty public constructor
+        REA2 = RA2;
     }
 
     @Override
@@ -72,23 +78,25 @@ public class Recipe_Similar_Recipes_Tab_Fragment extends Fragment
             @Override
             public void handleMessage(Message msg)
             {
-                Intent se = new Intent(getActivity().getApplicationContext(), SearchingActivity.class);
+                Intent se = new Intent(Objects.requireNonNull(getActivity()).getApplicationContext(), SearchingActivity.class);
                 startActivity(se);
             }
         };
         R2 = new  Handler()
         {
             @Override
-            public void handleMessage(Message msg)
+            public void handleMessage(@NotNull Message msg)
             {
-                ((RecipeActivityV2)getActivity()).refresh();
+                REA2.setRecipe(recipe);
+                RecipeActivityV2.setUseSimilar();
+                ((RecipeActivityV2) Objects.requireNonNull(getActivity())).refresh();
                 Toast.makeText(getActivity().getApplicationContext(), "Next Similar Recipe has been loaded",Toast.LENGTH_SHORT).show();
             }
         };
         check = new  Handler()
         {
             @Override
-            public void handleMessage(Message msg)
+            public void handleMessage(@NotNull Message msg)
             {
                 clicks = false;
             }
@@ -222,4 +230,5 @@ public class Recipe_Similar_Recipes_Tab_Fragment extends Fragment
     }
     public static String getBaseID(){return baseID;}
     public static void setBaseID(String id){ baseID = id;}
+    public static void setRecipe(Recipe nRecipe){recipe = nRecipe; }
 }

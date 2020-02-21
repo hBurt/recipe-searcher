@@ -49,6 +49,7 @@ public class SearchActivity extends AppCompatActivity
     static SharedPreferences mPrefs;
     SharedPreferences.Editor edit;
     static List<String> IDList;
+    private static Recipe simRecipe;
     User user;
     private Recipe recipe;
 
@@ -62,6 +63,7 @@ public class SearchActivity extends AppCompatActivity
         setContentView(R.layout.fragmnt_search_results);
         mPrefs = getSharedPreferences("LastSearch", MODE_PRIVATE);
         user = (User) getIntent().getSerializableExtra("databaseUser");
+        simRecipe = null;
         if (mPrefs.contains("LastSearch"))
         {
             previousID = mPrefs.getString("LastSearch", " ");
@@ -263,4 +265,6 @@ public class SearchActivity extends AppCompatActivity
         edit.putString("LastSearch", previousID);
         edit.apply();
     }
+    public static void setSimRecipe(Recipe recipe){simRecipe = recipe;}
+    public static Recipe getSimRecipe(){return simRecipe;}
 }

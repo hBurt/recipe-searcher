@@ -18,6 +18,7 @@ import com.example.recipesearch.database.Recipe;
 import com.example.recipesearch.database.User;
 import com.example.recipesearch.helpers.DatabaseHelper;
 import com.example.recipesearch.ui.CustomRecipes.CustomStorage;
+import com.example.recipesearch.ui.search_result.SearchActivity;
 import com.example.recipesearch.ui.search_result.SearchingActivity;
 import com.google.android.material.tabs.TabLayout;
 import com.squareup.picasso.Picasso;
@@ -28,7 +29,7 @@ public class RecipeActivityV2 extends AppCompatActivity implements TabLayout.OnT
     private TextView time;
     private ImageView image;
     private static boolean isOpen = false;
-
+    private static boolean useSimilar = false;
     private Recipe recipe;
 
     private User user;
@@ -45,8 +46,12 @@ public class RecipeActivityV2 extends AppCompatActivity implements TabLayout.OnT
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_v2);
         isOpen = true;
+        if (!useSimilar)
         recipe = (Recipe) getIntent().getSerializableExtra("recipe");
-
+        else {
+            recipe = SearchActivity.getSimRecipe();
+            useSimilar = false;
+        }
         Log.v("RecipeActivityV2", recipe.display());
 
         btnHome = findViewById(R.id.button_home_v2);
@@ -69,7 +74,7 @@ public class RecipeActivityV2 extends AppCompatActivity implements TabLayout.OnT
         tabLayout.addTab(tabLayout.newTab().setText("Next Recipe"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
-        TabHandler2 adapter = new TabHandler2(getSupportFragmentManager(), tabLayout.getTabCount(), recipe);
+        TabHandler2 adapter = new TabHandler2(getSupportFragmentManager(), tabLayout.getTabCount(), recipe, this);
 
         viewPager.setAdapter(adapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(
@@ -168,4 +173,6 @@ public class RecipeActivityV2 extends AppCompatActivity implements TabLayout.OnT
     {
         finish();
     }
+    public void setRecipe(Recipe rec){ recipe = rec; }
+    public static void setUseSimilar(){ useSimilar = true;}
 }

@@ -265,7 +265,8 @@ public class APICore implements AsyncResponse {
         collapseHandler();
 
         Log.v(TAG, recipe.display());
-
+        Recipe_Similar_Recipes_Tab_Fragment.setRecipe(recipe);
+        SearchActivity.setSimRecipe(recipe);
     }
 
     private void collapseHandler(){

@@ -5,7 +5,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import com.example.recipesearch.database.Recipe;
-import com.example.recipesearch.favorite_recipe_view_ingredient;
 
 public class TabHandler2 extends FragmentStatePagerAdapter {
 
@@ -14,13 +13,15 @@ public class TabHandler2 extends FragmentStatePagerAdapter {
 
     //Ingredient ingredients;
     Recipe recipe;
+    private RecipeActivityV2 recipeActivityV2s;
 
     //Constructor to the class
-    public TabHandler2(FragmentManager fm, int tabCount, Recipe recipe) {
+    public TabHandler2(FragmentManager fm, int tabCount, Recipe recipe, RecipeActivityV2 recipeActivityV2) {
         super(fm);
         //Initializing tab count
         this.tabCount= tabCount;
         this.recipe = recipe;
+        this.recipeActivityV2s = recipeActivityV2;
     }
 
     //Overriding method getItem
@@ -37,7 +38,7 @@ public class TabHandler2 extends FragmentStatePagerAdapter {
             case 2:
                /* favorite_recipe_view_ingredient direction2 = new favorite_recipe_view_ingredient(" Ingredients here"); //directions
                 return direction2;*/
-                Recipe_Similar_Recipes_Tab_Fragment Similar_Recipes = new Recipe_Similar_Recipes_Tab_Fragment();
+                Recipe_Similar_Recipes_Tab_Fragment Similar_Recipes = new Recipe_Similar_Recipes_Tab_Fragment(recipeActivityV2s);
                 return Similar_Recipes;
             default:
                 return null;

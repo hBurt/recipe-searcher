@@ -12,6 +12,7 @@ class MyTabAdapter extends FragmentPagerAdapter
 {
     Context context;
     int totalTabs;
+    private RecipeActivityV2 rec;
 
     Recipe recipe;
     public MyTabAdapter(Context c, FragmentManager fm, int totalTabs)
@@ -19,6 +20,7 @@ class MyTabAdapter extends FragmentPagerAdapter
         super(fm);
         context = c;
         this.totalTabs = totalTabs;
+        rec = new RecipeActivityV2();
     }
     @Override
     public Fragment getItem(int position)
@@ -32,7 +34,7 @@ class MyTabAdapter extends FragmentPagerAdapter
                 Recipe_Directions_Tab_Fragment Directions = new Recipe_Directions_Tab_Fragment();
                 return Directions;
             case 2:
-                Recipe_Similar_Recipes_Tab_Fragment Similar_Recipes = new Recipe_Similar_Recipes_Tab_Fragment();
+                Recipe_Similar_Recipes_Tab_Fragment Similar_Recipes = new Recipe_Similar_Recipes_Tab_Fragment( rec);
                 return Similar_Recipes;
             default:
                 return null;
