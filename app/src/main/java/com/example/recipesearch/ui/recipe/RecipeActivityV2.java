@@ -45,8 +45,6 @@ public class RecipeActivityV2 extends AppCompatActivity implements TabLayout.OnT
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_v2);
         isOpen = true;
-        intent = getIntent();
-        bundle = intent.getExtras();
         recipe = (Recipe) getIntent().getSerializableExtra("recipe");
 
         Log.v("RecipeActivityV2", recipe.display());
