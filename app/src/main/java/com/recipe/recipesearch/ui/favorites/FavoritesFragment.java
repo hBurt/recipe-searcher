@@ -3,6 +3,7 @@ package com.recipe.recipesearch.ui.favorites;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,16 +13,19 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.recipe.recipesearch.MainActivity;
 import com.example.recipesearch.R;
 import com.recipe.recipesearch.database.Favorite;
 import com.recipe.recipesearch.helpers.DatabaseHelper;
 import com.recipe.recipesearch.helpers.UiHelper;
+import com.recipe.recipesearch.ui.home_search.HomeSearchFragment;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -167,23 +171,17 @@ public class FavoritesFragment extends Fragment {
             }
         });
 
-
-       /* list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        // This callback will only be called when MyFragment is at least Started.
+        OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Favorite currentfavorite = ((CustomAdapter) getAdapterView().getAdapter()).getFavoriteAtIndex(i);
-
-                System.out.println("clicked index: " + i);
-                System.out.println("fav title: " + currentfavorite.getRecipe().getTitle() + " fav img: " + currentfavorite.getRecipe().getImageURL());
-                /ui.switchScreen(new FavoriteRecipeView(currentfavorite));
-
+            public void handleOnBackPressed() {
+                uiHelper.switchScreen(new HomeSearchFragment());
+                ((MainActivity) getActivity()).getNavView().getMenu().getItem(0).setChecked(true);
             }
-        });*/
-
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(callback);
 
         return root;
-
-
     }
 
     private void initFavoritesList(View root){
@@ -238,4 +236,6 @@ public class FavoritesFragment extends Fragment {
     public void setAdapterView(AdapterView<?> adapterView) {
         this.adapterView = adapterView;
     }
+
+
 }

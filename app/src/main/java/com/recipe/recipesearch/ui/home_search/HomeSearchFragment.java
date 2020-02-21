@@ -5,6 +5,7 @@ import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,6 +40,7 @@ public class HomeSearchFragment extends Fragment {
     private Button login, signup, planer, MPGen;
     private TextView textView_or;
     private boolean canSwitch = true;
+    private boolean canWatch = false;
 
     private DatabaseHelper databaseHelper;
     private ConstraintLayout constraintLayout;
@@ -53,10 +55,9 @@ public class HomeSearchFragment extends Fragment {
 
         setButtonVisibilty();
 
-        // This stops auto switching back to search result fragment
+        canWatch = false;
         et.getText().clear();
-        canSwitch = true;
-
+        canWatch = true;
         setBottomVisibilityAndMargin();
     }
 
@@ -77,7 +78,6 @@ public class HomeSearchFragment extends Fragment {
         MPGen = root.findViewById(R.id.MPGenerator);
 
         constraintLayout = root.findViewById(R.id.serch_frag);
-
 
         databaseHelper = ((MainActivity) getActivity()).getDatabaseHelper();
 
@@ -113,29 +113,28 @@ public class HomeSearchFragment extends Fragment {
         et.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
+                if(canWatch) {
+                    canSwitch = true;
+                }
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+                if(canSwitch && canWatch) {
+                    canSwitch = false;
+                    String temp = s.toString();
+                    Log.v("HomeSearchFrag", "Temp string(on change): " + temp);
+                    Intent in = new Intent(getActivity(), SearchActivity.class);
+                    in.putExtra("databaseUser", databaseHelper.getCurrentUser());
+                    in.putExtra("stringTransfer", temp);
+                    canWatch = false;
+                    startActivity(in);
+                }
             }
 
             @Override
             public void afterTextChanged(Editable s) {
                 //Switch to the search result activity
-
-                if(canSwitch) {
-                    MainActivity m = (MainActivity) getActivity();
-                    if (m != null) {
-                        m.setMessage(s);
-                    }
-                    canSwitch = false;
-                    Intent in = new Intent(getActivity(), SearchActivity.class);
-                    in.putExtra("databaseUser", databaseHelper.getCurrentUser());
-                    in.putExtra("stringTransfer", s.toString());
-                    startActivity(in);
-                }
             }
         });
 

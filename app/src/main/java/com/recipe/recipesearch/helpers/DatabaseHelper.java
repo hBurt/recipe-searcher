@@ -173,17 +173,19 @@ public class DatabaseHelper {
     }
 
     public User updateUserFromFirestore(){
-        firestoreDB.collection("users")
-                .document(getCurrentUser().getUid())
-                .get()
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        DocumentSnapshot document = task.getResult();
-                        setCurrentUser(document.toObject(User.class));
-                    }
-                }).addOnFailureListener(task -> {
-                    setCurrentUser(getCurrentUser());
-        });
+        if(getCurrentUser().getUid() != null) {
+            firestoreDB.collection("users")
+                    .document(getCurrentUser().getUid())
+                    .get()
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            setCurrentUser(document.toObject(User.class));
+                        }
+                    }).addOnFailureListener(task -> {
+                setCurrentUser(getCurrentUser());
+            });
+        }
 
         return getCurrentUser();
 

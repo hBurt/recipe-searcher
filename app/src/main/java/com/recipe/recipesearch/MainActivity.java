@@ -19,7 +19,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private CharSequence message;
     private DatabaseHelper databaseHelper;
     private BottomNavigationView navView;
     private ConstraintLayout constraintLayout;
@@ -48,20 +47,12 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupWithNavController(navView, navController);
 
-        autoLogin("test3@test.com", "1234");
+        autoLogin("test1@test.com", "1234");
 
 
         // keep layout when keyboard is shown
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
 
-    }
-
-    public void setMessage(CharSequence s){
-        message = s;
-    }
-
-    public CharSequence getMessage(){
-        return message;
     }
 
     public DatabaseHelper getDatabaseHelper() {
@@ -79,8 +70,12 @@ public class MainActivity extends AppCompatActivity {
         //    databaseHelper.login(databaseHelper.getSharedPrefEmail(), databaseHelper.getSharedPrefPass());
         //} else {
         //    System.out.println("input login");
-            //databaseHelper.login(email, pass);
+            databaseHelper.login(email, pass);
         //}
+    }
+
+    public BottomNavigationView getNavView(){
+        return navView;
     }
 
 }
