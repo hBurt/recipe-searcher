@@ -33,7 +33,7 @@ public class Recipe_Directions_Tab_Fragment extends Fragment
         super.onViewCreated(view, savedInstanceState);
         TextView directions = view.findViewById(R.id.Directions);
         // test and example text
-            directions.setText(newText.trim().replace(".","\n"));
+            directions.setText(newText.trim().replace(".",".\n"));
     }
     public static void setDirections(String string)
     {
