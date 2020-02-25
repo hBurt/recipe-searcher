@@ -81,6 +81,10 @@ public class HomeSearchFragment extends Fragment {
 
         databaseHelper = ((MainActivity) getActivity()).getDatabaseHelper();
 
+        if(databaseHelper.getCurrentUser() == null) {
+            databaseHelper.loginUserInFirestore("test1@test.com", "1234", ui);
+        }
+
 
         /*if(databaseHelper.isLoginStateSaved()){
             System.out.println("Login state is saved");
@@ -173,9 +177,7 @@ public class HomeSearchFragment extends Fragment {
 
         if(showLoginMessage){
 
-            Toast toast = Toast.makeText(getContext(), "Login success: " + databaseHelper.getCurrentUser().getEmail(), Toast.LENGTH_LONG);
-            toast.setGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 50);
-            toast.show();
+            showLoginMessage();
 
             /*Snackbar.make(root.findViewById(R.id.serch_frag), R.string.login_sucess + databaseHelper.getCurrentUser().getEmail(),
                     Snackbar.LENGTH_SHORT)
@@ -227,5 +229,11 @@ public class HomeSearchFragment extends Fragment {
 
     public void setShowLoginMessage(boolean showLoginMessage) {
         this.showLoginMessage = showLoginMessage;
+    }
+
+    public void showLoginMessage(){
+        Toast toast = Toast.makeText(getContext(), "Login success: " + databaseHelper.getCurrentUser().getEmail(), Toast.LENGTH_LONG);
+        toast.setGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 50);
+        toast.show();
     }
 }

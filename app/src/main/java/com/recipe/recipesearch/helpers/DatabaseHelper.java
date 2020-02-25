@@ -191,6 +191,43 @@ public class DatabaseHelper {
 
     }
 
+    public void loginUserInFirestore(String email, String password){
+        firestoreDB.collection("users")
+                .whereEqualTo("email", email)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            String passwordFromDB = (String) document.get("password");
+                            Log.d(TAG, "password: " + password);
+
+                            try {
+                                if(encrypt.DoDecryption(password, passwordFromDB)){
+
+                                    User user = document.toObject(User.class);
+                                    setCurrentUser(user);
+
+                                    Log.d(TAG, "ID: " + user.getId() + " EMAIL: " + user.getEmail());
+
+                                }
+                            } catch (NoSuchAlgorithmException e) {
+                                e.printStackTrace();
+                            } catch (InvalidKeySpecException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    } else {
+                        Log.d(TAG, "Error getting documents: ", task.getException());
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        login(email, password);
+                    }
+                });
+    }
+
     public void loginUserInFirestore(String email, String password, UiHelper ui){
 
         firestoreDB.collection("users")
@@ -252,7 +289,7 @@ public class DatabaseHelper {
 
 
     private void baseUserUpdate(){
-        firestoreDB.collection("users").document(getCurrentUser().getUid()).set(getCurrentUser(), SetOptions.merge())
+        firestoreDB.collection("users").document(getCurrentUser().getUid()).set(getCurrentUser())
                 .addOnSuccessListener(documentReference -> Log.d(TAG, "DocumentSnapshot added with ID: " + getCurrentUser().getUid()))
                 .addOnFailureListener(e -> Log.w(TAG, "Error adding document", e));
     }
