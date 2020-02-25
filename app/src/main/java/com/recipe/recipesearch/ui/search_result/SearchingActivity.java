@@ -20,4 +20,11 @@ public class SearchingActivity extends AppCompatActivity
         SA = this;
     }
     public static boolean getIsOpen(){return isOpen;}
+    public void refresh()
+    {
+        finish();
+        overridePendingTransition(0, 0);
+        startActivity(getIntent());
+        overridePendingTransition(0, 0);
+    }
 }

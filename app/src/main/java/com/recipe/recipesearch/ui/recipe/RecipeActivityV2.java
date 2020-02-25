@@ -161,6 +161,7 @@ public class RecipeActivityV2 extends AppCompatActivity implements TabLayout.OnT
     {
         super.onDestroy();
         isOpen = false;
+        if(SearchingActivity.getIsOpen())
         SearchingActivity.SA.finish();
     }
     public void refresh()

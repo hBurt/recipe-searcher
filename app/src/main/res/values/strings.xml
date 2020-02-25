@@ -53,7 +53,6 @@
         <item>Custom</item>
         <item>Lamb Burger</item>
         <item>Cheese Pizza</item>
-        <item>Baked Cod</item>
         <item>Fried Shrimp</item>
         <item>Pasta</item>
         <item>fettuccine alfredo</item>
@@ -75,6 +74,8 @@
         <item>vanilla exact</item>
         <item>Cod</item>
         <item>lettuce</item>
+        <item>Milk Shakes</item>
+        <item>Steak</item>
         <item>You might not look down here</item>
     </string-array>
 

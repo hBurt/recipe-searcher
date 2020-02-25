@@ -98,8 +98,6 @@ public class Recipe_Similar_Recipes_Tab_Fragment extends Fragment
                 {
                     APICore api = new APICore();
                     api.startRequest(String.valueOf(Recipe.getID()), BackgroundRequest.SearchType.NEXT, getActivity().getApplicationContext(), R2);
-                    Intent se = new Intent(getActivity(), SearchingActivity.class);
-                    startActivity(se);
                 }
                 if (RecipeActivity.getIsOpen())
                 {
@@ -216,6 +214,7 @@ public class Recipe_Similar_Recipes_Tab_Fragment extends Fragment
     {
         super.onDestroy();
         clicks = false;
+        if (SearchingActivity.getIsOpen())
         SearchingActivity.SA.finish();
     }
     public static String getBaseID(){return baseID;}
