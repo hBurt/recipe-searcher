@@ -18,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.recipe.recipesearch.MainActivity;
@@ -33,6 +34,8 @@ import java.util.Collections;
 public class FavoritesFragment extends Fragment {
 
     private FavoritesViewModel favoritesViewModel;
+
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     private ArrayList<Favorite> favoritesList;
     private ArrayList<Favorite> favoritesListSecondary;
@@ -74,6 +77,8 @@ public class FavoritesFragment extends Fragment {
         buttonFilterRating = root.findViewById(R.id.favorites_filter_rating);
 
         favoriteButtonDelete = root.findViewById(R.id.favorite_button_delete);
+
+        swipeRefreshLayout = root.findViewById(R.id.pullToRefresh);
 
         initFavoritesList(root);
 
@@ -169,6 +174,11 @@ public class FavoritesFragment extends Fragment {
                 });
                 return false;
             }
+        });
+
+        swipeRefreshLayout.setOnRefreshListener(() -> {
+            initFavoritesList(root);
+            swipeRefreshLayout.setRefreshing(false);
         });
 
         // This callback will only be called when MyFragment is at least Started.
