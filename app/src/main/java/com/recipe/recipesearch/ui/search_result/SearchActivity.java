@@ -245,6 +245,10 @@ public class SearchActivity extends AppCompatActivity
                 Toast.makeText(getApplicationContext(), "Recipe: " +Cs.getNum()+" of: "+Cs.getCount(),Toast.LENGTH_SHORT).show();
             }
         }
+        else
+        {
+            Toast.makeText(getApplicationContext(),"No Custom Recipes stored on this device, Go make Some.",Toast.LENGTH_SHORT).show();
+        }
 
     }
     public void refresh()

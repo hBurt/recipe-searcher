@@ -170,6 +170,10 @@ public class Recipe_Similar_Recipes_Tab_Fragment extends Fragment
                         }
                     }
                 }
+                else
+                    {
+                        Toast.makeText(getActivity().getApplicationContext(),"No Custom Recipes stored on this device, Go make Some.",Toast.LENGTH_SHORT).show();
+                    }
 
             }
         });
