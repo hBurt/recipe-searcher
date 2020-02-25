@@ -11,7 +11,7 @@ public class Ingredient extends BaseObject implements Serializable {
 
     public Ingredient(){
         super();
-        setAmount(new ArrayList<Amount>());
+        setAmount(new ArrayList<>());
         setBaseimage("https://spoonacular.com/cdn/ingredients_100x100/");
     }
 
@@ -34,7 +34,6 @@ public class Ingredient extends BaseObject implements Serializable {
     }
 
     public String getFullImageURL(){
-        Log.v("Ingredient", getBaseimage() + getImage());
         return getBaseimage() + getImage();
     }
 
