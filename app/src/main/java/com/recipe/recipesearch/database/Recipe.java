@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class Recipe implements Serializable {
 
     private int id;
-    private String title, imageURL, baseImageURI, directions;
+    private String title, imageURL, baseImageURI, fullURL, directions;
     private int readyInMinutes;
     private ArrayList<Ingredient> ingredients;
     private ArrayList<Step> steps;
@@ -105,7 +105,12 @@ public class Recipe implements Serializable {
     }
 
     public String getFullURL() {
-        return getBaseImageURI() + getImageURL();
+        setFullURL(getBaseImageURI() + getImageURL());
+        return fullURL;
+    }
+
+    public void setFullURL(String string){
+        this.fullURL = string;
     }
 
     public String display() {

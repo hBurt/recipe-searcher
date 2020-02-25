@@ -1,13 +1,13 @@
 package com.recipe.recipesearch.database.contents;
 
-import android.util.Log;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Ingredient extends BaseObject implements Serializable {
 
     private ArrayList<Amount> amounts;
+
+    private String fullImageURL;
 
     public Ingredient(){
         super();
@@ -31,10 +31,11 @@ public class Ingredient extends BaseObject implements Serializable {
     @Override
     public void setImage(String image) {
             super.setImage(image);
+            setFullImageURL(getBaseimage() + getImage());
     }
 
     public String getFullImageURL(){
-        return getBaseimage() + getImage();
+        return fullImageURL;
     }
 
     public ArrayList<Amount> getAmount() {
@@ -63,5 +64,9 @@ public class Ingredient extends BaseObject implements Serializable {
             }
         }
         return builder.toString();
+    }
+
+    public void setFullImageURL(String fullImageURL) {
+        this.fullImageURL = fullImageURL;
     }
 }

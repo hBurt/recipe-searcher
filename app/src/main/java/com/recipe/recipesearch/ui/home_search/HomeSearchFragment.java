@@ -41,7 +41,7 @@ public class HomeSearchFragment extends Fragment {
     private TextView textView_or;
     private boolean canSwitch = true;
     private boolean canWatch = false;
-
+    private boolean performedOnce = false;
     private DatabaseHelper databaseHelper;
     private ConstraintLayout constraintLayout;
 
@@ -81,24 +81,12 @@ public class HomeSearchFragment extends Fragment {
 
         databaseHelper = ((MainActivity) getActivity()).getDatabaseHelper();
 
-        if(databaseHelper.getCurrentUser() == null) {
-            databaseHelper.loginUserInFirestore("test1@test.com", "1234", ui);
-        }
-
-
-        /*if(databaseHelper.isLoginStateSaved()){
-            System.out.println("Login state is saved");
-
+        if(!performedOnce) {
+            performedOnce = true;
             String email = databaseHelper.getSharedPrefEmail();
             String pass = databaseHelper.getSharedPrefPass();
-
-            //System.out.println("Email: " + email + "\n" + "Password: " + pass);
-
-            databaseHelper.login(email, pass);
-
-        } else {
-            System.out.println("Login state is NOT saved");
-        }*/
+            databaseHelper.loginUserInFirestore(email, pass, ui, true);
+        }
 
         //Do img color overlay
         imgColorOverlay();

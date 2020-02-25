@@ -83,7 +83,7 @@ public class SignUpFragment extends Fragment {
 
                     ((MainActivity) getActivity()).setBottomNavigationVisibility(View.VISIBLE);
 
-                    databaseHelper.loginUserInFirestore(email.getText().toString(), password.getText().toString(), ui);
+                    databaseHelper.loginUserInFirestore(email.getText().toString(), password.getText().toString(), ui, false);
                 }
             }
         });

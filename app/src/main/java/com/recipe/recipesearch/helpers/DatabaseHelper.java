@@ -16,7 +16,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.SetOptions;
 import com.recipe.recipesearch.database.Favorite;
 import com.recipe.recipesearch.database.LocalLoginDatabase;
 import com.recipe.recipesearch.database.User;
@@ -26,7 +25,6 @@ import com.recipe.recipesearch.ui.home_search.HomeSearchFragment;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicReference;
 
 import static com.android.volley.VolleyLog.TAG;
 
@@ -228,7 +226,9 @@ public class DatabaseHelper {
                 });
     }
 
-    public void loginUserInFirestore(String email, String password, UiHelper ui){
+    private boolean performedOnce = false;
+
+    public void loginUserInFirestore(String email, String password, UiHelper ui, boolean fromSharedPref){
 
         firestoreDB.collection("users")
                 .whereEqualTo("email", email)
@@ -237,26 +237,45 @@ public class DatabaseHelper {
                     if (task.isSuccessful()) {
                         for (QueryDocumentSnapshot document : task.getResult()) {
                             String passwordFromDB = (String) document.get("password");
-                            Log.d(TAG, "password: " + password);
 
-                            try {
-                                if(encrypt.DoDecryption(password, passwordFromDB)){
+                            if(!fromSharedPref) {
+                                try {
+                                    if (encrypt.DoDecryption(password, passwordFromDB)) {
 
-                                    User user = document.toObject(User.class);
+                                        User user = document.toObject(User.class);
+                                        setCurrentUser(user);
+
+                                        Log.d(TAG, "ID: " + user.getId() + " EMAIL: " + user.getEmail());
+
+                                        HomeSearchFragment home = new HomeSearchFragment();
+                                        home.setShowLoginMessage(true);
+                                        ui.switchScreen(home);
+
+                                    }
+                                } catch (NoSuchAlgorithmException e) {
+                                    e.printStackTrace();
+                                } catch (InvalidKeySpecException e) {
+                                    e.printStackTrace();
+                                }
+                            } else {
+                                User user = document.toObject(User.class);
+                                setCurrentUser(user);
+                                Log.v(TAG, "Is trying login");
+                                if(!performedOnce && password.matches(passwordFromDB)){
+                                    User user2 = document.toObject(User.class);
                                     setCurrentUser(user);
 
-                                    Log.d(TAG, "ID: " + user.getId() + " EMAIL: " + user.getEmail());
+                                    Log.d(TAG, "ID: " + user2.getId() + " EMAIL: " + user2.getEmail());
 
                                     HomeSearchFragment home = new HomeSearchFragment();
                                     home.setShowLoginMessage(true);
                                     ui.switchScreen(home);
+                                    performedOnce = true;
 
                                 }
-                            } catch (NoSuchAlgorithmException e) {
-                                e.printStackTrace();
-                            } catch (InvalidKeySpecException e) {
-                                e.printStackTrace();
                             }
+
+                            saveLoginState();
                         }
                     } else {
                         Log.d(TAG, "Error getting documents: ", task.getException());

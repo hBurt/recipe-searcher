@@ -66,7 +66,7 @@ public class LoginFragment extends Fragment {
 
     private void login(){
        // if(databaseHelper.login(et_user.getText().toString(), et_pass.getText().toString()))
-        databaseHelper.loginUserInFirestore(et_user.getText().toString(), et_pass.getText().toString(), ui);
+        databaseHelper.loginUserInFirestore(et_user.getText().toString(), et_pass.getText().toString(), ui, false);
 
         if(databaseHelper.checkLoginState()) {
             ((MainActivity) getActivity()).setBottomNavigationVisibility(View.VISIBLE);
