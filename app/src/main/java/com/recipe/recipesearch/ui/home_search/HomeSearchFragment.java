@@ -37,7 +37,7 @@ public class HomeSearchFragment extends Fragment {
     private HomeSearchViewModel homeSearchViewModel;
     private EditText et;
     private ImageView iv;
-    private Button login, signup, planer, MPGen;
+    private Button login, logout, signup, planer, MPGen;
     private TextView textView_or;
     private boolean canSwitch = true;
     private boolean canWatch = false;
@@ -72,6 +72,7 @@ public class HomeSearchFragment extends Fragment {
         iv = root.findViewById(R.id.imageView);
         et = root.findViewById(R.id.search_bar_edit_text);
         login = root.findViewById(R.id.home_button_login);
+        logout = root.findViewById(R.id.button_logout);
         signup = root.findViewById(R.id.home_button_signup);
         planer = root.findViewById(R.id.Planer);
         textView_or = root.findViewById(R.id.textView_or2);
@@ -91,6 +92,16 @@ public class HomeSearchFragment extends Fragment {
         //Do img color overlay
         imgColorOverlay();
         setButtonVisibilty();
+
+        if(databaseHelper.getCurrentUser() == null){
+            logout.setVisibility(View.INVISIBLE);
+        } else{
+            logout.setVisibility(View.VISIBLE);
+        }
+
+        logout.setOnClickListener(view -> {
+            databaseHelper.logout(ui);
+        });
 
         et.setOnClickListener(new View.OnClickListener()
         {
@@ -166,21 +177,6 @@ public class HomeSearchFragment extends Fragment {
         if(showLoginMessage){
 
             showLoginMessage();
-
-            /*Snackbar.make(root.findViewById(R.id.serch_frag), R.string.login_sucess + databaseHelper.getCurrentUser().getEmail(),
-                    Snackbar.LENGTH_SHORT)
-                    .show();*/
-            /*if(loginSucess){
-                Snackbar.make(root.findViewById(R.id.serch_frag), R.string.login_sucess + databaseHelper.getCurrentUser().getEmail(),
-                        Snackbar.LENGTH_SHORT)
-                        .show();
-
-            } else {
-                Snackbar.make(root.findViewById(R.id.serch_frag), R.string.connection_error_logged_into_local + databaseHelper.getCurrentUser().getEmail(),
-                        Snackbar.LENGTH_SHORT)
-                        .show();
-
-            }*/
         }
         return root;
     }

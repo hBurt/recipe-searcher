@@ -189,6 +189,23 @@ public class DatabaseHelper {
 
     }
 
+    public void logout(UiHelper uihelper){
+        SharedPreferences sharedPref = activity.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+
+        //Erase saved e-mail
+        editor.putString(activity.getResources().getString(R.string.saved_user),"");
+
+        //Erase saved password
+        editor.putString(activity.getResources().getString(R.string.saved_pass), "");
+
+        //Write data in background
+        editor.apply();
+
+        setCurrentUser(null);
+        uihelper.switchScreen(new HomeSearchFragment());
+    }
+
     public void loginUserInFirestore(String email, String password){
         firestoreDB.collection("users")
                 .whereEqualTo("email", email)
@@ -271,7 +288,6 @@ public class DatabaseHelper {
                                     home.setShowLoginMessage(true);
                                     ui.switchScreen(home);
                                     performedOnce = true;
-
                                 }
                             }
 
