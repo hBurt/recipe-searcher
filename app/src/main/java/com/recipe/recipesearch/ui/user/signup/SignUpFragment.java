@@ -84,7 +84,7 @@ public class SignUpFragment extends Fragment {
 
                     ((MainActivity) getActivity()).setBottomNavigationVisibility(View.VISIBLE);
 
-                    databaseHelper.loginUserInFirestore(email.getText().toString(), password.getText().toString(), ui, false);
+                    databaseHelper.loginUserInFirestore(email.getText().toString().toLowerCase(), password.getText().toString(), ui, false);
                 }
             }
         });
@@ -180,7 +180,7 @@ public class SignUpFragment extends Fragment {
         final FactoryPBKDF2 encrypt = new FactoryPBKDF2();
 
         User user = new User();
-        user.setEmail(email.getText().toString());
+        user.setEmail(email.getText().toString().toLowerCase());
         user.setPassword(encrypt.DoEncrption(password.getText().toString().toCharArray()));
         ((MainActivity) getActivity()).getDatabaseHelper().addUser(user);
 
