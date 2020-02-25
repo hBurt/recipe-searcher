@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
@@ -120,6 +121,15 @@ public class SignUpFragment extends Fragment {
                 showErrorMessage(errorMessage.PASSWORD);
             }
         });
+
+        // This callback will only be called when MyFragment is at least Started.
+        OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
+            @Override
+            public void handleOnBackPressed() {
+                ui.switchScreen(new HomeSearchFragment());
+            }
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(callback);
         return root;
     }
 
