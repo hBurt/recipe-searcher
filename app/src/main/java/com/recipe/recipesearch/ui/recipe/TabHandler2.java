@@ -5,6 +5,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import com.recipe.recipesearch.database.Recipe;
+import com.recipe.recipesearch.database.Recipe;
+import com.recipe.recipesearch.favorite_recipe_view_ingredient;
 
 public class TabHandler2 extends FragmentStatePagerAdapter {
 

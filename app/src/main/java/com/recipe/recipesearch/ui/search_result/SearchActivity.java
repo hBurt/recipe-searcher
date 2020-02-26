@@ -96,13 +96,13 @@ public class SearchActivity extends AppCompatActivity
                     case R.id.Settings_BTN:
                         Intent in = new Intent(SearchActivity.this, settings_activity.class);
                         startActivity(in);
-                       break;
+                        break;
                     case R.id.CustomBTN:
                         Intent CU = new Intent(SearchActivity.this, CustomRecipe.class);
                         startActivity(CU);
                         break;
-                       default:
-                           return false;
+                    default:
+                        return false;
 
                 }
                 return true;
@@ -116,10 +116,10 @@ public class SearchActivity extends AppCompatActivity
             {
                 if(RecipeActivityV2.getIsOpen() != true)
                 {
-                Intent in = new Intent(SearchActivity.this, RecipeActivityV2.class);
-                in.putExtra("databaseUserr", user);
-                in.putExtra("recipe", recipe);
-                startActivity(in);
+                    Intent in = new Intent(SearchActivity.this, RecipeActivityV2.class);
+                    in.putExtra("databaseUserr", user);
+                    in.putExtra("recipe", recipe);
+                    startActivity(in);
                 }
             }
         };
@@ -199,7 +199,7 @@ public class SearchActivity extends AppCompatActivity
     }
     public static String getSearchedFood()
     {
-     return SearchedFood;
+        return SearchedFood;
     }
     public static void setSearchedFood(String dish){ SearchedFood = dish;}
     public static  List<String> getIDList()

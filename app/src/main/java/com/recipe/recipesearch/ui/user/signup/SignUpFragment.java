@@ -11,9 +11,21 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.recipe.recipesearch.MainActivity;
+import com.recipe.recipesearch.R;
+import com.recipe.recipesearch.database.Favorite;
+import com.recipe.recipesearch.database.Recipe;
+import com.recipe.recipesearch.database.User;
+import com.recipe.recipesearch.database.encryption.FactoryPBKDF2;
+import com.recipe.recipesearch.helpers.DatabaseHelper;
+import com.recipe.recipesearch.helpers.UiHelper;
+import com.recipe.recipesearch.ui.home_search.HomeSearchFragment;
+import com.recipe.recipesearch.ui.user.login.LoginFragment;
+import com.google.firebase.auth.FirebaseAuth;
 import com.recipe.recipesearch.MainActivity;
 import com.recipe.recipesearch.R;
 import com.recipe.recipesearch.database.Favorite;
@@ -34,6 +46,8 @@ public class SignUpFragment extends Fragment {
     private TextView error_email, error_password;
 
     DatabaseHelper databaseHelper;
+
+    private FirebaseAuth mAuth;
 
     private enum errorMessage { EMAIL, PASSWORD }
 
@@ -60,6 +74,7 @@ public class SignUpFragment extends Fragment {
         error_password.setVisibility(View.INVISIBLE);
 
         databaseHelper = ((MainActivity) getActivity()).getDatabaseHelper();
+        mAuth = FirebaseAuth.getInstance();
 
         //Listeners
         login.setOnClickListener(new View.OnClickListener() {
@@ -74,15 +89,11 @@ public class SignUpFragment extends Fragment {
             public void onClick(View view) {
                 if(isSignupValid(isEmailValid(), isPasswordValid())){
                     addUserToDatabase();
-                    if(databaseHelper.login(email.getText().toString(), password.getText().toString())){
-                        ((MainActivity) getActivity()).setBottomNavigationVisibility(View.VISIBLE);
+                    databaseHelper.addCurrentUserToFirestore();
 
-                        User user = databaseHelper.getCurrentUser();
-                        populateListWithHardcodedItems(user.getFavorites());
-                        databaseHelper.updateUser(user);
-                        
-                        ui.switchScreen(new HomeSearchFragment());
-                    }
+                    ((MainActivity) getActivity()).setBottomNavigationVisibility(View.VISIBLE);
+
+                    databaseHelper.loginUserInFirestore(email.getText().toString().toLowerCase(), password.getText().toString(), ui, false);
                 }
             }
         });
@@ -119,6 +130,15 @@ public class SignUpFragment extends Fragment {
                 showErrorMessage(errorMessage.PASSWORD);
             }
         });
+
+        // This callback will only be called when MyFragment is at least Started.
+        OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
+            @Override
+            public void handleOnBackPressed() {
+                ui.switchScreen(new HomeSearchFragment());
+            }
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(callback);
         return root;
     }
 
@@ -169,9 +189,11 @@ public class SignUpFragment extends Fragment {
         final FactoryPBKDF2 encrypt = new FactoryPBKDF2();
 
         User user = new User();
-        user.setEmail(email.getText().toString());
+        user.setEmail(email.getText().toString().toLowerCase());
         user.setPassword(encrypt.DoEncrption(password.getText().toString().toCharArray()));
         ((MainActivity) getActivity()).getDatabaseHelper().addUser(user);
+
+        databaseHelper.setCurrentUser(user);
     }
 
     private void showErrorMessage(errorMessage errorMessageType){

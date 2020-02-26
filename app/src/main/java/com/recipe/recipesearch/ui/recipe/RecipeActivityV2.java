@@ -20,6 +20,12 @@ import com.recipe.recipesearch.helpers.DatabaseHelper;
 import com.recipe.recipesearch.ui.CustomRecipes.CustomStorage;
 import com.recipe.recipesearch.ui.search_result.SearchActivity;
 import com.recipe.recipesearch.ui.search_result.SearchingActivity;
+import com.recipe.recipesearch.MainActivity;
+import com.recipe.recipesearch.R;
+import com.recipe.recipesearch.database.Favorite;
+import com.recipe.recipesearch.database.Recipe;
+import com.recipe.recipesearch.database.User;
+import com.recipe.recipesearch.helpers.DatabaseHelper;
 import com.google.android.material.tabs.TabLayout;
 import com.squareup.picasso.Picasso;
 
@@ -109,9 +115,11 @@ public class RecipeActivityV2 extends AppCompatActivity implements TabLayout.OnT
         btnHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                isOpen = false;
+                isOpen = false; // can be removed latter
+                Log.v("RecipeActivityV2", "Navigating home");
                 Intent in = new Intent(RecipeActivityV2.this, MainActivity.class);
                 finish();
+                //in.putExtra("loginMessage", false);
                 startActivity(in);
             }
         });
@@ -151,8 +159,10 @@ public class RecipeActivityV2 extends AppCompatActivity implements TabLayout.OnT
 
         Favorite favoite = new Favorite(0, recipe);
 
-        user.getFavorites().add(favoite);
-        databaseHelper.getDatabase().getUserDao().updateDetails(user);
+        Log.d("RecipeActivityV2", "TO save: " + favoite.getRecipe().display());
+
+        databaseHelper.addRecipeToFavoriteAndUpdateUser(favoite);
+        //databaseHelper.updateCurrentUser(false, false,  favoite);
     }
     public static boolean getIsOpen(){return isOpen;}
 

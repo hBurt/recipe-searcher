@@ -15,6 +15,13 @@ import com.recipe.recipesearch.database.User;
 import com.recipe.recipesearch.helpers.DatabaseHelper;
 import com.recipe.recipesearch.ui.recipe.RecipeActivityV2;
 import com.recipe.recipesearch.ui.recipe.RecipeStorage;
+import com.recipe.recipesearch.R;
+import com.recipe.recipesearch.database.User;
+import com.recipe.recipesearch.helpers.DatabaseHelper;
+import com.recipe.recipesearch.ui.APIComunication.SelectedMealData;
+import com.recipe.recipesearch.ui.recipe.RecipeActivity;
+import com.recipe.recipesearch.ui.recipe.RecipeStorage;
+import com.recipe.recipesearch.ui.search_result.SearchingActivity;
 import com.squareup.picasso.Picasso;
 
 public class GeneratedMealPlan extends AppCompatActivity

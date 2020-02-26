@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/navigationGreen"
-    tools:context=".ui.user.signup.SignUpFragment">
+    tools:context="com.recipe.recipesearch.ui.user.signup.SignUpFragment">
 
     <Button
         android:id="@+id/signup_button_login"

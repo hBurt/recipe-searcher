@@ -1,5 +1,9 @@
 package com.recipe.recipesearch.ui.CustomRecipes;
 
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
+
 import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -26,6 +30,7 @@ import android.widget.Toast;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
+import com.recipe.recipesearch.R;
 
 import com.recipe.recipesearch.R;
 import com.recipe.recipesearch.ui.APIComunication.CreateRecipeCard;

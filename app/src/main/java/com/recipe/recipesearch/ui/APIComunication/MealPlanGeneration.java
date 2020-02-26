@@ -45,7 +45,7 @@ public class MealPlanGeneration extends AsyncTask<Void, Void, String>
         String responseData = "";
         Response response = null;
         if (MealPlanActivity.getTimePeriod() != null)
-        TF = new String(MealPlanActivity.getTimePeriod().trim().replace(" ", "%20").replace("&", "%26")
+        TF = MealPlanActivity.getTimePeriod().trim().replace(" ", "%20").replace("&", "%26")
                 .replace(",", "%2c").replace("(", "%28").replace(")", "%29")
                 .replace("!", "%21").replace("=", "%3D").replace("<", "%3C")
                 .replace(">", "%3E").replace("#", "%23").replace("$", "%24")
@@ -54,9 +54,9 @@ public class MealPlanGeneration extends AsyncTask<Void, Void, String>
                 .replace(";", "%3B").replace("?", "%3F").replace("@", "%40")
                 .replace("[", "%5B").replace("\\", "%5C").replace("]", "%5D")
                 .replace("_", "%5F").replace("`", "%60").replace("{", "%7B")
-                .replace("|", "%7C").replace("}", "%7D"));
+                .replace("|", "%7C").replace("}", "%7D");
         if (MealPlanActivity.getCaloricNum() != null)
-        Cal = new String(MealPlanActivity.getCaloricNum().trim().replace(" ", "%20").replace("&", "%26")
+        Cal = MealPlanActivity.getCaloricNum().trim().replace(" ", "%20").replace("&", "%26")
                 .replace(",", "%2c").replace("(", "%28").replace(")", "%29")
                 .replace("!", "%21").replace("=", "%3D").replace("<", "%3C")
                 .replace(">", "%3E").replace("#", "%23").replace("$", "%24")
@@ -65,9 +65,9 @@ public class MealPlanGeneration extends AsyncTask<Void, Void, String>
                 .replace(";", "%3B").replace("?", "%3F").replace("@", "%40")
                 .replace("[", "%5B").replace("\\", "%5C").replace("]", "%5D")
                 .replace("_", "%5F").replace("`", "%60").replace("{", "%7B")
-                .replace("|", "%7C").replace("}", "%7D"));
+                .replace("|", "%7C").replace("}", "%7D");
         if (MealPlanActivity.getDietaryPrefrence() != null)
-        Diet = new String(MealPlanActivity.getDietaryPrefrence().trim().replace(" ", "%20").replace("&", "%26")
+        Diet = MealPlanActivity.getDietaryPrefrence().trim().replace(" ", "%20").replace("&", "%26")
                 .replace(",", "%2c").replace("(", "%28").replace(")", "%29")
                 .replace("!", "%21").replace("=", "%3D").replace("<", "%3C")
                 .replace(">", "%3E").replace("#", "%23").replace("$", "%24")
@@ -76,9 +76,9 @@ public class MealPlanGeneration extends AsyncTask<Void, Void, String>
                 .replace(";", "%3B").replace("?", "%3F").replace("@", "%40")
                 .replace("[", "%5B").replace("\\", "%5C").replace("]", "%5D")
                 .replace("_", "%5F").replace("`", "%60").replace("{", "%7B")
-                .replace("|", "%7C").replace("}", "%7D"));
+                .replace("|", "%7C").replace("}", "%7D");
         if (MealPlanActivity.getExclusions() != null)
-        Exclu = new String(MealPlanActivity.getExclusions().trim().replace(" ", "%20").replace("&", "%26")
+        Exclu = MealPlanActivity.getExclusions().trim().replace(" ", "%20").replace("&", "%26")
                 .replace(",", "%2c").replace("(", "%28").replace(")", "%29")
                 .replace("!", "%21").replace("=", "%3D").replace("<", "%3C")
                 .replace(">", "%3E").replace("#", "%23").replace("$", "%24")
@@ -87,7 +87,7 @@ public class MealPlanGeneration extends AsyncTask<Void, Void, String>
                 .replace(";", "%3B").replace("?", "%3F").replace("@", "%40")
                 .replace("[", "%5B").replace("\\", "%5C").replace("]", "%5D")
                 .replace("_", "%5F").replace("`", "%60").replace("{", "%7B")
-                .replace("|", "%7C").replace("}", "%7D"));
+                .replace("|", "%7C").replace("}", "%7D");
         if(TF != null && Cal != null && Exclu != null && Diet != null)
         URL = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/mealplans/generate?timeFrame="+TF+"&targetCalories="+Cal+"&diet="+Diet+"&exclude="+Exclu;
         else if (TF != null && Cal != null && Diet != null)
@@ -125,7 +125,7 @@ public class MealPlanGeneration extends AsyncTask<Void, Void, String>
         {
             //this response data is for testing only
             //responseData = "{\"meals\":[{\"id\":1158522,\"title\":\"Rum Raisin Scones\",\"readyInMinutes\":508,\"servings\":8,\"image\":\"rum-raisin-scones-1158522.jpg.jpg.jpg.jpg\",\"imageUrls\":[\"rum-raisin-scones-1158522.jpg.jpg.jpg.jpg\",\"rum-raisin-scones-1158522.jpg.jpg.jpg\",\"rum-raisin-scones-1158522.jpg.jpg\",\"rum-raisin-scones-1158522.jpg\"]},{\"id\":655269,\"title\":\"Peanut Butter Chocolate Cream Pie\",\"readyInMinutes\":45,\"servings\":6,\"image\":\"Peanut-Butter-Chocolate-Cream-Pie-655269.jpg\",\"imageUrls\":[\"Peanut-Butter-Chocolate-Cream-Pie-655269.jpg\"]},{\"id\":716429,\"title\":\"Pasta with Garlic, Scallions, Cauliflower & Breadcrumbs\",\"readyInMinutes\":45,\"servings\":2,\"image\":\"pasta-with-garlic-scallions-cauliflower-bread-crumbs-716429.jpg\",\"imageUrls\":[\"pasta-with-garlic-scallions-cauliflower-bread-crumbs-716429.jpg\"]}],\"nutrients\":{\"calories\":1754.4,\"protein\":44.09,\"fat\":70.38,\"carbohydrates\":233.06}}";
-            jObject = new JSONObject(String.valueOf(responseData));
+            jObject = new JSONObject(responseData);
         }
         catch (JSONException e)
         {

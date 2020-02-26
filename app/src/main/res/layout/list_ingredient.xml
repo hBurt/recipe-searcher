@@ -21,9 +21,10 @@
         <androidx.cardview.widget.CardView
             android:layout_width="60dp"
             android:layout_height="60dp"
-            app:cardBackgroundColor="@color/paletteDarkGreen"
+            app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="50dp"
             app:cardElevation="0dp">
+
 
             <ImageView
                 android:id="@+id/profile_image_ingredient"

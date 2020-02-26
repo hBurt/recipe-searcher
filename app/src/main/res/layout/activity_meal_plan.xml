@@ -4,8 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
-    tools:context=".ui.MealPlanMaker.MealPlanActivity">
+   
+   
+    tools:context="com.recipe.recipesearch.ui.MealPlanMaker.MealPlanActivity">
 
     <TextView
         android:id="@+id/textView2"
@@ -51,6 +52,7 @@
         android:hint="@string/day_or_night"
         android:importantForAutofill="no"
         android:inputType="textPersonName"
+        
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/timeFrame" />
@@ -83,6 +85,7 @@
         android:ems="10"
         android:hint="@string/calories"
         android:inputType="textPersonName"
+      
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cal"
@@ -116,6 +119,7 @@
         android:ems="10"
         android:hint="@string/diet"
         android:inputType="textPersonName"
+        
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Diet" />
@@ -148,6 +152,7 @@
         android:hint="@string/food_you_want_to_exclude"
         android:importantForAutofill="no"
         android:inputType="textPersonName"
+       
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Exclusions" />

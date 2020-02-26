@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 
 import com.recipe.recipesearch.R;
 
+import com.recipe.recipesearch.R;
 
 public class Recipe_Ingredient_Tab_Fragment extends Fragment
 {

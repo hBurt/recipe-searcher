@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.material.tabs.TabLayout;
 import com.recipe.recipesearch.MainActivity;
 import com.recipe.recipesearch.R;
 import com.recipe.recipesearch.database.User;
@@ -19,7 +20,6 @@ import com.recipe.recipesearch.helpers.DatabaseHelper;
 import com.recipe.recipesearch.ui.CustomRecipes.CustomStorage;
 import com.recipe.recipesearch.ui.search_result.SearchActivity;
 import com.recipe.recipesearch.ui.search_result.SearchingActivity;
-import com.google.android.material.tabs.TabLayout;
 import com.squareup.picasso.Picasso;
 
 public class RecipeActivity extends AppCompatActivity

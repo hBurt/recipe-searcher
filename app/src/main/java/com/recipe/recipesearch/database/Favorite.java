@@ -4,9 +4,14 @@ import java.io.Serializable;
 
 public class Favorite implements Serializable {
 
-    private int rating;
+    private int rating = 0;
 
     private Recipe recipe;
+
+    public Favorite(){
+        setRating(0);
+        setRecipe(new Recipe());
+    }
 
     public Favorite(Recipe recipe) {
         setRating(0);

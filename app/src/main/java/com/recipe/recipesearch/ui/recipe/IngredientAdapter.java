@@ -125,7 +125,7 @@ public class IngredientAdapter extends BaseAdapter implements ListAdapter {
 
     private void loadImageIntoView(View view, Ingredient ingredient){
         ImageView profileImageView = view.findViewById(R.id.profile_image_ingredient);
-        String img = ingredient.getImage();
+        String img = ingredient.getFullImageURL();
         Picasso.get().load(img).placeholder(R.drawable.image_placeholder_blue).into(profileImageView);
     }
 

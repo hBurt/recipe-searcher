@@ -12,7 +12,10 @@ public class User implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "ID")
-    private int id;
+    private long id;
+
+    @ColumnInfo(name = "UID")
+    private String uid;
 
     @ColumnInfo(name = "Email")
     private String email;
@@ -23,11 +26,11 @@ public class User implements Serializable {
     @ColumnInfo(name = "Favorites")
     private ArrayList<Favorite> favorites = new ArrayList<>();
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -53,6 +56,28 @@ public class User implements Serializable {
 
     public void setFavorites(ArrayList<Favorite> favorites) {
         this.favorites = favorites;
+    }
+
+    public void setUser(User user) {
+        setId(user.getId());
+        setUid(user.getUid());
+        setEmail(user.getEmail());
+        setPassword(user.getPassword());
+        setFavorites(user.getFavorites());
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
+    public String display(){
+        return " EMAIL: " + getEmail()
+                + " ID: " + getId()
+                + " UID: " + getUid();
     }
 }
 

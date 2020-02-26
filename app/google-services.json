@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "446809966423",
+    "firebase_url": "https://recipesearcher-28dba.firebaseio.com",
+    "project_id": "recipesearcher-28dba",
+    "storage_bucket": "recipesearcher-28dba.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:446809966423:android:10de0d6fda21e6ecd2e012",
+        "android_client_info": {
+          "package_name": "com.recipe.recipesearch"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "446809966423-81dvsrt0j41gcolg36294e1mb0m1dq65.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAyZ2r-jQnAPfNzZx4RD8roxKWZ7-IpbEg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "446809966423-81dvsrt0j41gcolg36294e1mb0m1dq65.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

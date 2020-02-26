@@ -46,10 +46,7 @@ public class settings_activity extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                if (SwitchState_Dish == true)
-                    SwitchState_Dish = false;
-                else
-                    SwitchState_Dish = true;
+                SwitchState_Dish = SwitchState_Dish != true;
 
             }
         });
@@ -58,10 +55,7 @@ public class settings_activity extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                if (SwitchState_Ingredient == false)
-                    SwitchState_Ingredient = true;
-                else
-                    SwitchState_Ingredient = false;
+                SwitchState_Ingredient = SwitchState_Ingredient == false;
             }
         });
     }

@@ -4,8 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
-    tools:context=".ui.MealPlanMaker.GeneratedMealPlan">
+  
+   
+    tools:context="com.recipe.recipesearch.ui.MealPlanMaker.GeneratedMealPlan">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -31,6 +32,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:clickable="true"
+               
                 android:focusable="true"
                 android:textSize="24sp" />
 
@@ -46,6 +48,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:clickable="true"
+                
                 android:focusable="true"
                 android:textSize="24sp" />
 
@@ -61,6 +64,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:clickable="true"
+                
                 android:focusable="true"
                 android:textSize="24sp" />
 

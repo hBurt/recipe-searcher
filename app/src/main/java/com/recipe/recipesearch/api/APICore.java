@@ -10,6 +10,11 @@ import com.recipe.recipesearch.database.contents.Equipment;
 import com.recipe.recipesearch.database.contents.Ingredient;
 import com.recipe.recipesearch.database.contents.Step;
 import com.recipe.recipesearch.ui.search_result.SearchActivity;
+import com.recipe.recipesearch.database.Recipe;
+import com.recipe.recipesearch.database.contents.Amount;
+import com.recipe.recipesearch.database.contents.Equipment;
+import com.recipe.recipesearch.database.contents.Ingredient;
+import com.recipe.recipesearch.database.contents.Step;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -52,7 +57,6 @@ public class APICore implements AsyncResponse {
     @Override
     public void processFinish(String output) {
         try {
-            //Log.v(TAG, "processFinish : " + output);
             switch (requestType){
                 case REQUEST_BASE_RECIPE:
                     Log.v(TAG, "[processFinish][base_recipe] : ");
@@ -137,6 +141,7 @@ public class APICore implements AsyncResponse {
         else if(searchType == BackgroundRequest.SearchType.INGREDIENT){
 
             System.out.println(apiResponse);
+            //TODO
 
         }
     }
@@ -265,6 +270,7 @@ public class APICore implements AsyncResponse {
 
     private void collapseHandler(){
         handler.sendEmptyMessageDelayed(0, 0);
+        Log.v(TAG, "Collapse");
     }
 
     public Recipe getRecipe(){

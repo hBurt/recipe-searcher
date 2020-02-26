@@ -64,13 +64,13 @@ public class Recipe_Similar_Recipes_Tab_Fragment extends Fragment
         Button Clear = view.findViewById(R.id.ClearBTN);
         Button cRecipe = view.findViewById(R.id.CRecipes);
         h = new  Handler()
-    {
-        @Override
-        public void handleMessage(Message msg)
         {
-            ((RecipeActivity)getActivity()).refresh();
-        }
-    };
+            @Override
+            public void handleMessage(Message msg)
+            {
+                ((RecipeActivity)getActivity()).refresh();
+            }
+        };
         R2 = new  Handler()
         {
             @Override
@@ -134,15 +134,15 @@ public class Recipe_Similar_Recipes_Tab_Fragment extends Fragment
                 CustomStorage Cs = new CustomStorage(getActivity().getApplicationContext());
                 if (Cs.getCount() > 0)
                 {
-                if (RecipeActivity.getIsOpen() == false)
-                {
-                    Intent in = new Intent(getActivity().getApplicationContext(), RecipeActivity.class);
-                    startActivity(in);
-                }
-                if (Cs.getNum() == Cs.getCount())
-                {
-                    Cs.resetNUM();
-                }
+                    if (RecipeActivity.getIsOpen() == false)
+                    {
+                        Intent in = new Intent(getActivity().getApplicationContext(), RecipeActivity.class);
+                        startActivity(in);
+                    }
+                    if (Cs.getNum() == Cs.getCount())
+                    {
+                        Cs.resetNUM();
+                    }
                     if (Cs.getCName() != null)
                     {
                         RecipeActivity.setRecipeName(Cs.getCName());
@@ -171,9 +171,9 @@ public class Recipe_Similar_Recipes_Tab_Fragment extends Fragment
                     }
                 }
                 else
-                    {
-                        Toast.makeText(getActivity().getApplicationContext(),"No Custom Recipes stored on this device, Go make Some.",Toast.LENGTH_SHORT).show();
-                    }
+                {
+                    Toast.makeText(getActivity().getApplicationContext(),"No Custom Recipes stored on this device, Go make Some.",Toast.LENGTH_SHORT).show();
+                }
 
             }
         });
@@ -219,7 +219,7 @@ public class Recipe_Similar_Recipes_Tab_Fragment extends Fragment
         super.onDestroy();
         clicks = false;
         if (SearchingActivity.getIsOpen())
-        SearchingActivity.SA.finish();
+            SearchingActivity.SA.finish();
     }
     public static String getBaseID(){return baseID;}
     public static void setBaseID(String id){ baseID = id;}

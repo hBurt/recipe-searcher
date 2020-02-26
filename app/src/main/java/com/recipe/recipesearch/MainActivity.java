@@ -1,6 +1,7 @@
 package com.recipe.recipesearch;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -13,16 +14,17 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
-import com.recipe.recipesearch.helpers.DatabaseHelper;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.recipe.recipesearch.helpers.DatabaseHelper;
 
 public class MainActivity extends AppCompatActivity {
 
-    private CharSequence message;
     private DatabaseHelper databaseHelper;
     private BottomNavigationView navView;
     private ConstraintLayout constraintLayout;
     ConstraintLayout.LayoutParams newLayoutParams;
+
+    //private boolean loginMessage = false;
 
     @Override
     protected void onResume() {
@@ -47,20 +49,16 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupWithNavController(navView, navController);
 
-        //autoLogin("test3@test.com", "1234");
-
-
         // keep layout when keyboard is shown
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
 
-    }
+        Intent intent = getIntent();
+        // Get the extras (if there are any)
+        Bundle extras = intent.getExtras();
 
-    public void setMessage(CharSequence s){
-        message = s;
-    }
-
-    public CharSequence getMessage(){
-        return message;
+        /*if(extras != null) {
+            setLoginMessage((boolean) getIntent().getSerializableExtra("loginMessage"));
+        }*/
     }
 
     public DatabaseHelper getDatabaseHelper() {
@@ -71,15 +69,15 @@ public class MainActivity extends AppCompatActivity {
         navView.setVisibility(viewID);
     }
 
-    private void autoLogin(String email, String pass){
-
-        //if(databaseHelper.isLoginStateSaved()){
-        //    System.out.println("Saved state login");
-        //    databaseHelper.login(databaseHelper.getSharedPrefEmail(), databaseHelper.getSharedPrefPass());
-        //} else {
-        //    System.out.println("input login");
-            databaseHelper.login(email, pass);
-        //}
+    public BottomNavigationView getNavView(){
+        return navView;
     }
 
+    /*public boolean isLoginMessage() {
+        return loginMessage;
+    }
+
+    public void setLoginMessage(boolean loginMessage) {
+        this.loginMessage = loginMessage;
+    }*/
 }
