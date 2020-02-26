@@ -8,7 +8,7 @@ import android.widget.ListView;
 
 import androidx.fragment.app.Fragment;
 
-import com.example.recipesearch.R;
+import com.recipe.recipesearch.R;
 import com.recipe.recipesearch.database.Recipe;
 
 public class RecipeInstruction extends Fragment {

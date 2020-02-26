@@ -9,7 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
-import com.example.recipesearch.R;
+import com.recipe.recipesearch.R;
 import com.recipe.recipesearch.database.contents.Step;
 
 import java.util.ArrayList;

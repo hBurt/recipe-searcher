@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
-import com.example.recipesearch.R;
+import com.recipe.recipesearch.R;
 import com.recipe.recipesearch.database.Recipe;
 import com.recipe.recipesearch.database.contents.Amount;
 import com.recipe.recipesearch.database.contents.Ingredient;

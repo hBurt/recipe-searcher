@@ -16,7 +16,7 @@ import android.widget.SearchView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.example.recipesearch.R;
+import com.recipe.recipesearch.R;
 import com.recipe.recipesearch.api.APICore;
 import com.recipe.recipesearch.api.BackgroundRequest;
 import com.recipe.recipesearch.database.Recipe;

@@ -16,9 +16,8 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.recipe.recipesearch.MainActivity;
-import com.example.recipesearch.R;
+import com.recipe.recipesearch.R;
 import com.recipe.recipesearch.database.Favorite;
 import com.recipe.recipesearch.database.Recipe;
 import com.recipe.recipesearch.database.User;

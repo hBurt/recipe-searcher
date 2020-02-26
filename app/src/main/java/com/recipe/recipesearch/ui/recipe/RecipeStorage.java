@@ -126,12 +126,7 @@ public class RecipeStorage
     }
     public  boolean isThisInTheBook()
     {
-        if(mPrefs.contains(SearchActivity.getSearchedFood()+"id"))
-        {
-            return true;
-        }
-        else
-            return false;
+        return mPrefs.contains(SearchActivity.getSearchedFood() + "id");
     }
     public void removePref()
     {

@@ -208,10 +208,7 @@ public class CustomStorage
 
     public boolean atCap()
     {
-        if (num < getCount())
-            return true;
-        else
-            return false;
+        return num < getCount();
     }
     public void Clear(){ Custom.edit().clear().apply();}
 }

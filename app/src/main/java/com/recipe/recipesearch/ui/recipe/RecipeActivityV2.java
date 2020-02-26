@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.recipe.recipesearch.MainActivity;
-import com.example.recipesearch.R;
+import com.recipe.recipesearch.R;
 import com.recipe.recipesearch.database.Favorite;
 import com.recipe.recipesearch.database.Recipe;
 import com.recipe.recipesearch.database.User;

@@ -12,7 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.example.recipesearch.R;
+import com.recipe.recipesearch.R;
 import com.recipe.recipesearch.ui.APIComunication.MealPlanGeneration;
 
 public class MealPlanActivity extends AppCompatActivity

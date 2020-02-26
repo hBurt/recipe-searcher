@@ -8,7 +8,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.room.Room;
 
-import com.example.recipesearch.R;
+import com.recipe.recipesearch.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -78,7 +78,7 @@ public class DatabaseHelper {
     }
 
     public void setCurrentUser(User currentUser) {
-        this.currentUser = currentUser;
+        DatabaseHelper.currentUser = currentUser;
     }
 
     public boolean isUserLoggedOn(){

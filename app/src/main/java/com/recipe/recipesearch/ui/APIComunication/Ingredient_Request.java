@@ -33,7 +33,7 @@ public class Ingredient_Request extends AsyncTask<Void, Void, String>
     {
         String RetreivedFood = SearchActivity.getSearchedFood();
         IDList = SearchActivity.getIDList();
-        String Food = new String(RetreivedFood.trim().replace(" ", "%20").replace("&", "%26")
+        String Food = RetreivedFood.trim().replace(" ", "%20").replace("&", "%26")
                 .replace(",", "%2c").replace("(", "%28").replace(")", "%29")
                 .replace("!", "%21").replace("=", "%3D").replace("<", "%3C")
                 .replace(">", "%3E").replace("#", "%23").replace("$", "%24")
@@ -42,7 +42,7 @@ public class Ingredient_Request extends AsyncTask<Void, Void, String>
                 .replace(";", "%3B").replace("?", "%3F").replace("@", "%40")
                 .replace("[", "%5B").replace("\\", "%5C").replace("]", "%5D")
                 .replace("_", "%5F").replace("`", "%60").replace("{", "%7B")
-                .replace("|", "%7C").replace("}", "%7D"));
+                .replace("|", "%7C").replace("}", "%7D");
         // Do some validation here
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
@@ -84,10 +84,10 @@ public class Ingredient_Request extends AsyncTask<Void, Void, String>
         String needsCleaning2  = resulta[2];
         String needsCleaning3  = resulta[3];
         String needsCleaning4  = resulta[4];
-        oneObjectsItem = new String(needsCleaning1.trim().replace(",", "").replace("\"", "").replace("title", ""));
-        oneObjectsItem2 = new String(needsCleaning2.trim().replace(",", "").replace("\"", "").replace("image", ""));
+        oneObjectsItem = needsCleaning1.trim().replace(",", "").replace("\"", "").replace("title", "");
+        oneObjectsItem2 = needsCleaning2.trim().replace(",", "").replace("\"", "").replace("image", "");
         oneObjectsItem3 = needsCleaning3+ " "+ needsCleaning4;
-        oneObjectsItem4 = new String(oneObjectsItem3.trim().replace("imageType", "").replace(",", "").replace(" ", ":").replace("\"", ""));
+        oneObjectsItem4 = oneObjectsItem3.trim().replace("imageType", "").replace(",", "").replace(" ", ":").replace("\"", "");
         // will create a second api call
         // after received must get the item id from what was received
         if (oneObjectsItem != null) {
@@ -136,7 +136,7 @@ public class Ingredient_Request extends AsyncTask<Void, Void, String>
         // after the second one is done i will work on how to use the data where it is needed
         String secondReturn = " ";
         // this should remove unwanted characters
-        secondReturn = new String(newReturn.trim().replace("&", "")
+        secondReturn = newReturn.trim().replace("&", "")
                 .replace(",", " ")
                 .replace("!", "").replace("=", "").replace("<", "")
                 .replace(">", "").replace("#", "").replace("$", "")
@@ -147,7 +147,7 @@ public class Ingredient_Request extends AsyncTask<Void, Void, String>
                 .replace("_", "").replace("`", "").replace("{", "")
                 .replace("|", "").replace("}", "").replace("name", "")
                 .replace("image", "").replace(".jpg", "").replace("  ", "")
-                .replace("\"", " ").replace(".png", ""));
+                .replace("\"", " ").replace(".png", "");
         StringTokenizer tokens = new StringTokenizer(secondReturn, ":");
         String[] result = new String[tokens.countTokens()];
         int i = 0;
@@ -177,8 +177,8 @@ public class Ingredient_Request extends AsyncTask<Void, Void, String>
         firstIngred.clear();
         firstIngred.addAll(hashSet);
         String secondIngred = firstIngred.toString();
-        Directions = new String(firstDirect.trim().replace("ingredients", ""));
-        String thirdIngred = new String(secondIngred.trim().replace("null", "").replace("id ", "").replace("steps", "").replace("length", "")
+        Directions = firstDirect.trim().replace("ingredients", "");
+        String thirdIngred = secondIngred.trim().replace("null", "").replace("id ", "").replace("steps", "").replace("length", "")
                 .replace("0", "").replace("1", "").replace("2", "").replace("3", "").replace("4", "")
                 .replace("5", "").replace("6", "").replace("7", "").replace("8", "").replace("9", "")
                 .replace("step", "").replace("minutes", "").replace("equipment", "").replace(",", "").replace("[", "")
@@ -186,7 +186,7 @@ public class Ingredient_Request extends AsyncTask<Void, Void, String>
                 .replace("Celsius", "").replace("  ", " ").replace(" and ", " ").replace("instant", "").replace(" pot ", "")
                 .replace(" kitchen", "").replace(" timer ", "").replace(" Form ", "").replace(" Cook ", "").replace(" Grill ", "")
                 .replace(" or ", "").replace(" frying ", "").replace(" pan ", "").replace(" grill ", "").replace(" fry ", "")
-                .replace(" fresh ", "").replace(" brown ", "").replace(" the ", ""));
+                .replace(" fresh ", "").replace(" brown ", "").replace(" the ", "");
         StringTokenizer tokensb = new StringTokenizer(thirdIngred, " ");
         String[] resultb = new String[tokensb.countTokens()];
         List<String> fourthIngred = new ArrayList<String>();
@@ -204,8 +204,8 @@ public class Ingredient_Request extends AsyncTask<Void, Void, String>
         fourthIngred.clear();
         fourthIngred.addAll(hashSetb);
         String fifthIngred = fourthIngred.toString();
-        String sixthIngred = new String(fifthIngred.trim().replace("[", "").replace("]", "").replace(",", " ").replace(".", " ")
-                .replace(" in ", "") .replace(" dutch ", ""));
+        String sixthIngred = fifthIngred.trim().replace("[", "").replace("]", "").replace(",", " ").replace(".", " ")
+                .replace(" in ", "").replace(" dutch ", "");
         Ingredients = sixthIngred;
         //RecipeActivity.setID(oneObjectsItem);
         RecipeActivity.setPic(oneObjectsItem4);

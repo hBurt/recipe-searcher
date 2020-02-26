@@ -11,7 +11,7 @@ import android.widget.ImageView;
 
 import androidx.core.content.ContextCompat;
 
-import com.example.recipesearch.R;
+import com.recipe.recipesearch.R;
 import com.recipe.recipesearch.database.Favorite;
 import com.recipe.recipesearch.database.User;
 import com.recipe.recipesearch.helpers.DatabaseHelper;

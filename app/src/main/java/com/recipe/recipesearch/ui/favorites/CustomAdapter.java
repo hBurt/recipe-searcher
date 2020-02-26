@@ -15,7 +15,7 @@ import android.widget.TextView;
 import androidx.core.content.ContextCompat;
 
 import com.recipe.recipesearch.FavoriteRecipeView;
-import com.example.recipesearch.R;
+import com.recipe.recipesearch.R;
 import com.recipe.recipesearch.database.Favorite;
 import com.recipe.recipesearch.database.User;
 import com.recipe.recipesearch.helpers.UiHelper;
@@ -142,11 +142,11 @@ class CustomAdapter extends BaseAdapter implements ListAdapter {
     private void colorizeRatings(View view, Favorite favorite){
         ArrayList<ImageView> ratings = new ArrayList<>();
 
-        ratings.add((ImageView) view.findViewById(R.id.rating_1));
-        ratings.add((ImageView) view.findViewById(R.id.rating_2));
-        ratings.add((ImageView) view.findViewById(R.id.rating_3));
-        ratings.add((ImageView) view.findViewById(R.id.rating_4));
-        ratings.add((ImageView) view.findViewById(R.id.rating_5));
+        ratings.add(view.findViewById(R.id.rating_1));
+        ratings.add(view.findViewById(R.id.rating_2));
+        ratings.add(view.findViewById(R.id.rating_3));
+        ratings.add(view.findViewById(R.id.rating_4));
+        ratings.add(view.findViewById(R.id.rating_5));
 
         for (int i = 0; i < 5; ++i) {
             if(i < favorite.getRating()){

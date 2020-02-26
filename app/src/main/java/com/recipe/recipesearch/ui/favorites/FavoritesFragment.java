@@ -3,7 +3,6 @@ package com.recipe.recipesearch.ui.favorites;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,9 +19,8 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.recipe.recipesearch.MainActivity;
-import com.example.recipesearch.R;
+import com.recipe.recipesearch.R;
 import com.recipe.recipesearch.database.Favorite;
 import com.recipe.recipesearch.helpers.DatabaseHelper;
 import com.recipe.recipesearch.helpers.UiHelper;

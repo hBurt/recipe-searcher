@@ -138,7 +138,7 @@ public class Random_Recipe extends AsyncTask<Void, Void, String>
         // after the second one is done i will work on how to use the data where it is needed
         String secondReturn = " ";
         // this should remove unwanted characters
-        secondReturn = new String(newReturn.trim().replace("&", "")
+        secondReturn = newReturn.trim().replace("&", "")
                 .replace(",", " ")
                 .replace("!", "").replace("=", "").replace("<", "")
                 .replace(">", "").replace("#", "").replace("$", "")
@@ -149,7 +149,7 @@ public class Random_Recipe extends AsyncTask<Void, Void, String>
                 .replace("_", "").replace("`", "").replace("{", "")
                 .replace("|", "").replace("}", "").replace("name", "")
                 .replace("image", "").replace(".jpg", "")
-                .replace("\"", " ").replace(".png", ""));
+                .replace("\"", " ").replace(".png", "");
         StringTokenizer tokens = new StringTokenizer(secondReturn, ":");
         String[] result = new String[tokens.countTokens()];
         int i = 0;
@@ -179,14 +179,14 @@ public class Random_Recipe extends AsyncTask<Void, Void, String>
         firstIngred.clear();
         firstIngred.addAll(hashSet);
         String secondIngred = firstIngred.toString();
-        Directions = new String(firstDirect.trim().replace("ingredients", ""));
-        String thirdIngred = new String(secondIngred.trim().replace("null", "").replace("id ", "").replace("steps", "").replace("length", "")
+        Directions = firstDirect.trim().replace("ingredients", "");
+        String thirdIngred = secondIngred.trim().replace("null", "").replace("id ", "").replace("steps", "").replace("length", "")
                 .replace("0", "").replace("1", "").replace("2", "").replace("3", "").replace("4", "")
                 .replace("5", "").replace("6", "").replace("7", "").replace("8", "").replace("9", "")
                 .replace("step", "").replace("minutes", "").replace("equipment", "").replace(",", "").replace("[", "")
                 .replace("]", "").replace("temperature", "").replace("Fahrenheit", "").replace("stove", "").replace("oven", "")
                 .replace("Celsius", "").replace("  ", " ").replace(" and ", " ").replace("instant", "").replace(" pot ", "")
-                .replace(" kitchen", "").replace(" timer ", ""));
+                .replace(" kitchen", "").replace(" timer ", "");
         StringTokenizer tokensb = new StringTokenizer(thirdIngred, " ");
         String[] resultb = new String[tokensb.countTokens()];
         List<String> fourthIngred = new ArrayList<String>();
@@ -204,8 +204,8 @@ public class Random_Recipe extends AsyncTask<Void, Void, String>
         fourthIngred.clear();
         fourthIngred.addAll(hashSetb);
         String fifthIngred = fourthIngred.toString();
-        String sixthIngred = new String(fifthIngred.trim().replace("[", "").replace("]", "").replace(",", " ").replace(".", " ")
-                .replace(" in ", "") .replace(" dutch ", ""));
+        String sixthIngred = fifthIngred.trim().replace("[", "").replace("]", "").replace(",", " ").replace(".", " ")
+                .replace(" in ", "").replace(" dutch ", "");
         Ingredients = sixthIngred;
         RecipeActivity.setPic(oneObjectsItem4);
         RecipeActivity.setTime(oneObjectsItem3);

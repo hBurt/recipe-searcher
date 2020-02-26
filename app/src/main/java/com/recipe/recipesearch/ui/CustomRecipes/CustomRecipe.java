@@ -27,7 +27,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.recipesearch.R;
+import com.recipe.recipesearch.R;
 
 import java.io.File;
 import java.io.IOException;
@@ -172,7 +172,7 @@ public class CustomRecipe extends AppCompatActivity
             }
             if (imgFile != null)
             {
-                Uri imgUri = FileProvider.getUriForFile(this , "com.example.android.fileprovider",imgFile);
+                Uri imgUri = FileProvider.getUriForFile(this , "com.recipe.android.fileprovider",imgFile);
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imgUri);
                 startActivityForResult(takePictureIntent, 1);
                 CBool = true;

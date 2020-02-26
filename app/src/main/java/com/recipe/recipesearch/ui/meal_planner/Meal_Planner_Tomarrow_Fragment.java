@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.recipesearch.R;
+import com.recipe.recipesearch.R;
 
 
 public class Meal_Planner_Tomarrow_Fragment extends Fragment

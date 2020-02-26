@@ -1,7 +1,5 @@
 package com.recipe.recipesearch.ui.recipe;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.recipesearch.R;
+import com.recipe.recipesearch.R;
 
 
 public class Recipe_Ingredient_Tab_Fragment extends Fragment

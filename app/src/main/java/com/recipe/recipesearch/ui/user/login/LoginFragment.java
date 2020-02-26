@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.recipe.recipesearch.MainActivity;
-import com.example.recipesearch.R;
+import com.recipe.recipesearch.R;
 import com.recipe.recipesearch.helpers.DatabaseHelper;
 import com.recipe.recipesearch.helpers.UiHelper;
 import com.recipe.recipesearch.ui.home_search.HomeSearchFragment;

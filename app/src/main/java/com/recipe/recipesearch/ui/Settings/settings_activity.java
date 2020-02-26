@@ -2,18 +2,13 @@ package com.recipe.recipesearch.ui.Settings;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.TextureView;
 import android.view.View;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import com.example.recipesearch.R;
+import com.recipe.recipesearch.R;
 
-import androidx.annotation.StringDef;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SwitchCompat;
-
-import org.w3c.dom.Text;
 
 public class settings_activity extends AppCompatActivity
 {
@@ -51,10 +46,7 @@ public class settings_activity extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                if (SwitchState_Dish == true)
-                    SwitchState_Dish = false;
-                else
-                    SwitchState_Dish = true;
+                SwitchState_Dish = SwitchState_Dish != true;
 
             }
         });
@@ -63,10 +55,7 @@ public class settings_activity extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                if (SwitchState_Ingredient == false)
-                    SwitchState_Ingredient = true;
-                else
-                    SwitchState_Ingredient = false;
+                SwitchState_Ingredient = SwitchState_Ingredient == false;
             }
         });
     }

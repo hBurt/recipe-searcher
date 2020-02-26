@@ -13,7 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.example.recipesearch.R;
+import com.recipe.recipesearch.R;
 import com.recipe.recipesearch.ui.APIComunication.Next_recipe;
 import com.recipe.recipesearch.ui.APIComunication.Random_Recipe;
 import com.recipe.recipesearch.ui.CustomRecipes.CustomStorage;

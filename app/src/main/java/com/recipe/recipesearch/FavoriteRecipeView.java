@@ -12,10 +12,9 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
-import com.example.recipesearch.R;
+import com.recipe.recipesearch.R;
 import com.recipe.recipesearch.database.Favorite;
 import com.recipe.recipesearch.database.User;
-import com.recipe.recipesearch.helpers.DatabaseHelper;
 import com.recipe.recipesearch.ui.CustomDialog;
 import com.google.android.material.tabs.TabLayout;
 import com.squareup.picasso.Picasso;

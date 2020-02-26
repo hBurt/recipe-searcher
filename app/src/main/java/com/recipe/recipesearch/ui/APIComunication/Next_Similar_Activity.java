@@ -44,7 +44,7 @@ public class Next_Similar_Activity extends AsyncTask<Void, Void, String>
         {
             e.printStackTrace();
         }
-        editedReturn = new String(originalReturn.trim().replace("&", "")
+        editedReturn = originalReturn.trim().replace("&", "")
                 .replace("(", "").replace(")", "").replace(",", " ")
                 .replace("!", "").replace("=", "").replace("<", "")
                 .replace(">", "").replace("#", "").replace("$", "")
@@ -55,7 +55,7 @@ public class Next_Similar_Activity extends AsyncTask<Void, Void, String>
                 .replace("_", "").replace("`", "").replace("{", "")
                 .replace("|", "").replace("}", "").replace("name", "")
                 .replace("image", "").replace(".jpg", "").replace("minutes", "")
-                .replace("\"", " ").replace(".png", "").replace("id", ""));
+                .replace("\"", " ").replace(".png", "").replace("id", "");
         StringTokenizer tokens = new StringTokenizer(editedReturn, ":");
         String[] result = new String[tokens.countTokens()];
         int i = 0;

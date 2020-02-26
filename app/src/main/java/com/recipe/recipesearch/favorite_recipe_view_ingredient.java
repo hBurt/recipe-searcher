@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
-import com.example.recipesearch.R;
+import com.recipe.recipesearch.R;
 
 public class favorite_recipe_view_ingredient extends Fragment {
 

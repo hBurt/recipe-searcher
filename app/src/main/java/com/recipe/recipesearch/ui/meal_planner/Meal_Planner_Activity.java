@@ -7,7 +7,7 @@ import android.widget.CalendarView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
-import com.example.recipesearch.R;
+import com.recipe.recipesearch.R;
 import com.recipe.recipesearch.ui.recipe.RecipeStorage;
 import com.google.android.material.tabs.TabLayout;
 
