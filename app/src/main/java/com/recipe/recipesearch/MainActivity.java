@@ -14,9 +14,8 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
-import com.recipe.recipesearch.R;
-import com.recipe.recipesearch.helpers.DatabaseHelper;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.recipe.recipesearch.helpers.DatabaseHelper;
 
 public class MainActivity extends AppCompatActivity {
 
