@@ -211,7 +211,7 @@ public class CustomRecipe extends AppCompatActivity
             }
             if (imgFile != null)
             {
-                Uri imgUri = FileProvider.getUriForFile(this , "com.example.android.fileprovider",imgFile);
+                Uri imgUri = FileProvider.getUriForFile(this , "com.recipe.android.fileprovider",imgFile);
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imgUri);
                 startActivityForResult(takePictureIntent, 1);
                 CBool = true;
