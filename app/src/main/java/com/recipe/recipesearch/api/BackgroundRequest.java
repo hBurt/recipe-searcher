@@ -122,7 +122,7 @@ public class BackgroundRequest extends AsyncTask<Void, Void, String> {
     public enum SearchType {
         RECIPE,
         RANDOM,
-        NEXT, SelMeal, INGREDIENT
+        NEXT, INGREDIENT
     }
 
     public enum RequestType {
