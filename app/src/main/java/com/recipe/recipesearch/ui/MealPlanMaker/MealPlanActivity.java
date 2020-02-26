@@ -1,7 +1,5 @@
 package com.recipe.recipesearch.ui.MealPlanMaker;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -12,8 +10,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.recipe.recipesearch.R;
-import com.recipe.recipesearch.ui.APIComunication.MealPlanGeneration;
+import com.recipe.recipesearch.ui.APIComunication.MealPlanGenV2;
 
 public class MealPlanActivity extends AppCompatActivity
 {
@@ -97,7 +97,7 @@ public class MealPlanActivity extends AppCompatActivity
                 GeneratedMealPlan.doReset();
                 Intent loading = new Intent(MealPlanActivity.this, LoadingScreenMP.class);
                 startActivity(loading);
-                MealPlanGeneration gen = new MealPlanGeneration();
+                MealPlanGenV2 gen = new MealPlanGenV2();
                 gen.execute(); // will generate the meal plan
                 h.sendEmptyMessageDelayed(0, 3000);
             }
@@ -105,7 +105,7 @@ public class MealPlanActivity extends AppCompatActivity
     }
     public static String getTimePeriod()
     {
-        if (timePeriod.length() > 2)
+        if (timePeriod.length() > 1)
         return timePeriod;
         else
             return null;
@@ -119,7 +119,7 @@ public class MealPlanActivity extends AppCompatActivity
     }
     public static String getCaloricNum()
     {
-        if(caloricNum.length() > 2)
+        if(caloricNum.length() > 1)
         return caloricNum;
         else
             return null;

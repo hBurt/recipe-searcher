@@ -1,7 +1,5 @@
 package com.recipe.recipesearch.ui.MealPlanMaker;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -10,11 +8,15 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.recipe.recipesearch.R;
+import com.recipe.recipesearch.api.APICore;
+import com.recipe.recipesearch.api.BackgroundRequest;
+import com.recipe.recipesearch.database.Recipe;
 import com.recipe.recipesearch.database.User;
 import com.recipe.recipesearch.helpers.DatabaseHelper;
-import com.recipe.recipesearch.ui.APIComunication.SelectedMealData;
-import com.recipe.recipesearch.ui.recipe.RecipeActivity;
+import com.recipe.recipesearch.ui.recipe.RecipeActivityV2;
 import com.recipe.recipesearch.ui.recipe.RecipeStorage;
 import com.recipe.recipesearch.ui.search_result.SearchingActivity;
 import com.squareup.picasso.Picasso;
@@ -105,7 +107,7 @@ public class GeneratedMealPlan extends AppCompatActivity
             @Override
             public void handleMessage(Message msg)
             {
-                Intent in = new Intent(GeneratedMealPlan.this, RecipeActivity.class);
+                Intent in = new Intent(GeneratedMealPlan.this, RecipeActivityV2.class);
                 in.putExtra("databaseUserr", user);
                 startActivity(in);
             }
@@ -115,15 +117,16 @@ public class GeneratedMealPlan extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
+                APICore api = new APICore();
+                Recipe recipe = api.getRecipe();
                 Intent in = new Intent(GeneratedMealPlan.this, SearchingActivity.class);
                 startActivity(in);
-                //RecipeActivity.setID(id1);
-                RecipeActivity.setTime(readyInMin1);
-                RecipeActivity.setRecipeName(Meal1Name);
-                RecipeActivity.setPic(mealImg1);
-                SelectedMealData data = new SelectedMealData();
-                data.setId(id1);
-                data.execute();
+                recipe.setId(Integer.parseInt(id1));
+                recipe.setBaseImageURI("https://spoonacular.com/recipeImages/");
+                recipe.setReadyInMiniutes(Integer.parseInt(readyInMin1));
+                recipe.setImageURL(mealImg1);
+                recipe.setTitle(Meal1Name);
+                api.startRequest(Integer.parseInt(id1), BackgroundRequest.RequestType.REQUEST_INGREDIENTS);
                 h.sendEmptyMessageDelayed(0, 3000);// a delay to allow the search to finish before the recipe page pops up
             }
         });
@@ -132,15 +135,18 @@ public class GeneratedMealPlan extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
+                APICore api = new APICore();
+                Recipe recipe = api.getRecipe();
                 Intent in = new Intent(GeneratedMealPlan.this, SearchingActivity.class);
                 startActivity(in);
-                //RecipeActivity.setID(id2);
-                RecipeActivity.setTime(readyInMin2);
-                RecipeActivity.setRecipeName(Meal2Name);
-                RecipeActivity.setPic(mealImg2);
-                SelectedMealData data = new SelectedMealData();
-                data.setId(id2);
-                data.execute();
+                int test = Integer.parseInt(id2);
+                recipe.setId(Integer.parseInt(id2));
+                int ntest = recipe.getId();
+                recipe.setBaseImageURI("https://spoonacular.com/recipeImages/");
+                recipe.setReadyInMiniutes(Integer.parseInt(readyInMin2));
+                recipe.setImageURL(mealImg2);
+                recipe.setTitle(Meal2Name);
+                api.startRequest(Integer.parseInt(id2), BackgroundRequest.RequestType.REQUEST_INGREDIENTS);
                 h.sendEmptyMessageDelayed(0, 3000);// a delay to allow the search to finish before the recipe page pops up
             }
         });
@@ -149,15 +155,16 @@ public class GeneratedMealPlan extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
+                APICore api = new APICore();
+                Recipe recipe = api.getRecipe();
                 Intent in = new Intent(GeneratedMealPlan.this, SearchingActivity.class);
                 startActivity(in);
-                //RecipeActivity.setID(id3);
-                RecipeActivity.setTime(readyInMin3);
-                RecipeActivity.setRecipeName(Meal3Name);
-                RecipeActivity.setPic(mealImg3);
-                SelectedMealData data = new SelectedMealData();
-                data.setId(id3);
-                data.execute();
+                recipe.setId(Integer.parseInt(id3));
+                recipe.setBaseImageURI("https://spoonacular.com/recipeImages/");
+                recipe.setReadyInMiniutes(Integer.parseInt(readyInMin3));
+                recipe.setImageURL(mealImg3);
+                recipe.setTitle(Meal3Name);
+                api.startRequest(Integer.parseInt(id3), BackgroundRequest.RequestType.REQUEST_INGREDIENTS);
                 h.sendEmptyMessageDelayed(0, 3000);// a delay to allow the search to finish before the recipe page pops up
             }
         });
