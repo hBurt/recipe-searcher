@@ -14,7 +14,9 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@color/secondary_whiteDark"
+            >
 
 
             <LinearLayout
@@ -26,8 +28,8 @@
                     android:id="@+id/favorites_search_text"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:drawableStart="@drawable/ic_search_black_24dp"
-                    android:drawableLeft="@drawable/ic_search_black_24dp"
+                    android:drawableStart="@drawable/ic_searchdraw"
+                    android:drawableLeft="@drawable/ic_searchdraw"
                     android:drawablePadding="10dp"
                     android:hint="@string/recipe"
                     android:importantForAutofill="no"
@@ -62,15 +64,23 @@
                 app:srcCompat="@drawable/ic_favoriteup_24dp" />
         </LinearLayout>
 
-        <ListView
-            android:id="@+id/list"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:divider="#000"
-            android:dividerHeight="1dp"
-            android:footerDividersEnabled="false"
-            android:headerDividersEnabled="false"
-            android:clickable="true"
-            android:focusable="false" />
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/pullToRefresh"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ListView
+                android:id="@+id/list"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:divider="#000"
+                android:dividerHeight="1dp"
+                android:footerDividersEnabled="false"
+                android:headerDividersEnabled="false"
+                android:clickable="true"
+                android:focusable="false"
+                android:background="@color/paletteDarkGreen"
+                />
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

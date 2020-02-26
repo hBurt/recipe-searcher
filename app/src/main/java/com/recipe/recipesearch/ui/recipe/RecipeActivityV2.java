@@ -8,6 +8,12 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.recipe.recipesearch.MainActivity;
+import com.recipe.recipesearch.R;
+import com.recipe.recipesearch.database.Favorite;
+import com.recipe.recipesearch.database.Recipe;
+import com.recipe.recipesearch.database.User;
+import com.recipe.recipesearch.helpers.DatabaseHelper;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
@@ -109,9 +115,9 @@ public class RecipeActivityV2 extends AppCompatActivity implements TabLayout.OnT
         btnHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                isOpen = false;
+                //isOpen = false;
                 Intent in = new Intent(RecipeActivityV2.this, MainActivity.class);
-                finish();
+                //finish();
                 startActivity(in);
             }
         });
@@ -151,8 +157,10 @@ public class RecipeActivityV2 extends AppCompatActivity implements TabLayout.OnT
 
         Favorite favoite = new Favorite(0, recipe);
 
-        user.getFavorites().add(favoite);
-        databaseHelper.getDatabase().getUserDao().updateDetails(user);
+        Log.d("RecipeActivityV2", "TO save: " + favoite.getRecipe().display());
+
+        databaseHelper.addRecipeToFavoriteAndUpdateUser(favoite);
+        //databaseHelper.updateCurrentUser(false, false,  favoite);
     }
     public static boolean getIsOpen(){return isOpen;}
 

@@ -12,11 +12,19 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.recipe.recipesearch.MainActivity;
+import com.recipe.recipesearch.R;
+import com.recipe.recipesearch.database.Favorite;
+import com.recipe.recipesearch.helpers.DatabaseHelper;
+import com.recipe.recipesearch.helpers.UiHelper;
+import com.recipe.recipesearch.ui.home_search.HomeSearchFragment;
 import com.recipe.recipesearch.MainActivity;
 import com.recipe.recipesearch.R;
 import com.recipe.recipesearch.database.Favorite;
@@ -29,6 +37,8 @@ import java.util.Collections;
 public class FavoritesFragment extends Fragment {
 
     private FavoritesViewModel favoritesViewModel;
+
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     private ArrayList<Favorite> favoritesList;
     private ArrayList<Favorite> favoritesListSecondary;
@@ -51,6 +61,7 @@ public class FavoritesFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        initFavoritesList(super.getView());
 
     }
 
@@ -69,6 +80,8 @@ public class FavoritesFragment extends Fragment {
         buttonFilterRating = root.findViewById(R.id.favorites_filter_rating);
 
         favoriteButtonDelete = root.findViewById(R.id.favorite_button_delete);
+
+        swipeRefreshLayout = root.findViewById(R.id.pullToRefresh);
 
         initFavoritesList(root);
 
@@ -166,33 +179,33 @@ public class FavoritesFragment extends Fragment {
             }
         });
 
+        swipeRefreshLayout.setOnRefreshListener(() -> {
+            initFavoritesList(root);
+            swipeRefreshLayout.setRefreshing(false);
+        });
 
-       /* list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        // This callback will only be called when MyFragment is at least Started.
+        OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Favorite currentfavorite = ((CustomAdapter) getAdapterView().getAdapter()).getFavoriteAtIndex(i);
-
-                System.out.println("clicked index: " + i);
-                System.out.println("fav title: " + currentfavorite.getRecipe().getTitle() + " fav img: " + currentfavorite.getRecipe().getImageURL());
-                /ui.switchScreen(new FavoriteRecipeView(currentfavorite));
-
+            public void handleOnBackPressed() {
+                uiHelper.switchScreen(new HomeSearchFragment());
+                ((MainActivity) getActivity()).getNavView().getMenu().getItem(0).setChecked(true);
             }
-        });*/
-
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(callback);
 
         return root;
-
-
     }
 
     private void initFavoritesList(View root){
         list = root.findViewById(R.id.list);
 
-        favoritesList = databaseHelper.getCurrentUser().getFavorites();
+        //favoritesList = databaseHelper.getCurrentUser().getFavorites();
+        favoritesList = databaseHelper.updateUserFromFirestore().getFavorites();
         favoritesListSecondary = new ArrayList<>(favoritesList);
 
         if(favoritesList.size() > 0){
-            customAdapter = new CustomAdapter(getContext(), favoritesList, list, uiHelper);
+            customAdapter = new CustomAdapter(getActivity(), favoritesList, list, uiHelper, databaseHelper.getCurrentUser());
             list.setAdapter(customAdapter);
         }
     }
@@ -224,7 +237,7 @@ public class FavoritesFragment extends Fragment {
 
     private void setAdapter(ArrayList<Favorite> newList){
         if(newList.size() > 0) {
-            CustomAdapter customAdapter = new CustomAdapter(getContext(), newList, list, uiHelper);
+            CustomAdapter customAdapter = new CustomAdapter(getContext(), newList, list, uiHelper, databaseHelper.getCurrentUser());
             list.setAdapter(customAdapter);
         }
     }
@@ -236,4 +249,6 @@ public class FavoritesFragment extends Fragment {
     public void setAdapterView(AdapterView<?> adapterView) {
         this.adapterView = adapterView;
     }
+
+
 }

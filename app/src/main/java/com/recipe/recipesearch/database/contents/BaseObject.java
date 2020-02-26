@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class BaseObject implements Serializable {
 
     private int id;
-    private String image, name;
+    private String image, baseimage, name;
 
     public BaseObject(){
         setId(-1);
@@ -41,5 +41,13 @@ public class BaseObject implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getBaseimage() {
+        return baseimage;
+    }
+
+    public void setBaseimage(String baseimage) {
+        this.baseimage = baseimage;
     }
 }

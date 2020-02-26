@@ -5,6 +5,8 @@ import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +15,11 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
@@ -33,24 +38,32 @@ public class HomeSearchFragment extends Fragment {
     private HomeSearchViewModel homeSearchViewModel;
     private EditText et;
     private ImageView iv;
-    private Button login, signup, planer, MPGen;
-    private TextView textView_or;
+    private Button login, logout, signup, planer, MPGen;
+    private TextView textView_or, textViewUserEmail;
+    private Toolbar toolbarUser;
     private boolean canSwitch = true;
-
+    private boolean canWatch = false;
+    private boolean performedOnce = false;
     private DatabaseHelper databaseHelper;
     private ConstraintLayout constraintLayout;
 
+    private String userEmail = null;
+
+    private boolean showLoginMessage, loginSucess;
+
+    public HomeSearchFragment(){
+    }
     @Override
     public void onResume() {
         super.onResume();
 
         setButtonVisibilty();
 
-        // This stops auto switching back to search result fragment
+        canWatch = false;
         et.getText().clear();
-        canSwitch = true;
-
+        canWatch = true;
         setBottomVisibilityAndMargin();
+        textViewUserEmail.setText(databaseHelper.getSharedPrefEmail());
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -64,34 +77,44 @@ public class HomeSearchFragment extends Fragment {
         iv = root.findViewById(R.id.imageView);
         et = root.findViewById(R.id.search_bar_edit_text);
         login = root.findViewById(R.id.home_button_login);
+        logout = root.findViewById(R.id.button_logout);
         signup = root.findViewById(R.id.home_button_signup);
         planer = root.findViewById(R.id.Planer);
         textView_or = root.findViewById(R.id.textView_or2);
         MPGen = root.findViewById(R.id.MPGenerator);
 
-        constraintLayout = root.findViewById(R.id.serch_frag);
+        textViewUserEmail = root.findViewById(R.id.textView_user_email);
+        toolbarUser = root.findViewById(R.id.toolbar_user);
 
+        constraintLayout = root.findViewById(R.id.serch_frag);
 
         databaseHelper = ((MainActivity) getActivity()).getDatabaseHelper();
 
-
-        /*if(databaseHelper.isLoginStateSaved()){
-            System.out.println("Login state is saved");
-
+        if(!performedOnce) {
+            performedOnce = true;
             String email = databaseHelper.getSharedPrefEmail();
             String pass = databaseHelper.getSharedPrefPass();
-
-            //System.out.println("Email: " + email + "\n" + "Password: " + pass);
-
-            databaseHelper.login(email, pass);
-
-        } else {
-            System.out.println("Login state is NOT saved");
-        }*/
+            databaseHelper.loginUserInFirestore(email, pass, ui, true);
+        }
 
         //Do img color overlay
         imgColorOverlay();
         setButtonVisibilty();
+
+        if(databaseHelper.getCurrentUser() == null){
+            toolbarUser.setVisibility(View.INVISIBLE);
+            textViewUserEmail.setVisibility(View.INVISIBLE);
+            logout.setVisibility(View.INVISIBLE);
+        } else{
+            toolbarUser.setVisibility(View.VISIBLE);
+            textViewUserEmail.setVisibility(View.VISIBLE);
+            logout.setVisibility(View.VISIBLE);
+            textViewUserEmail.setText(userEmail);
+        }
+
+        logout.setOnClickListener(view -> {
+            databaseHelper.logout(ui);
+        });
 
         et.setOnClickListener(new View.OnClickListener()
         {
@@ -106,27 +129,28 @@ public class HomeSearchFragment extends Fragment {
         et.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
+                if(canWatch) {
+                    canSwitch = true;
+                }
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+                if(canSwitch && canWatch) {
+                    canSwitch = false;
+                    String temp = s.toString();
+                    Log.v("HomeSearchFrag", "Temp string(on change): " + temp);
+                    Intent in = new Intent(getActivity(), SearchActivity.class);
+                    in.putExtra("databaseUser", databaseHelper.getCurrentUser());
+                    in.putExtra("stringTransfer", temp);
+                    canWatch = false;
+                    startActivity(in);
+                }
             }
 
             @Override
             public void afterTextChanged(Editable s) {
                 //Switch to the search result activity
-                if(canSwitch) {
-                    MainActivity m = (MainActivity) getActivity();
-                    if (m != null) {
-                        m.setMessage(s);
-                    }
-                    canSwitch = false;
-                    Intent in = new Intent(getActivity(), SearchActivity.class);
-                    in.putExtra("databaseUser", databaseHelper.getCurrentUser());
-                    startActivity(in);
-                }
             }
         });
 
@@ -161,11 +185,26 @@ public class HomeSearchFragment extends Fragment {
         });
 
         setBottomVisibilityAndMargin();
+
+
+        if(showLoginMessage){
+
+            showLoginMessage();
+        }
+
+        // This callback will only be called when MyFragment is at least Started.
+        OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
+            @Override
+            public void handleOnBackPressed() {
+                //Do nothing
+            }
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(callback);
         return root;
     }
 
     private void imgColorOverlay(){
-        iv.setColorFilter(getResources().getColor(R.color.paletteLightGreenAplha), PorterDuff.Mode.SRC_ATOP);
+        iv.setColorFilter(getResources().getColor(R.color.secondary_whiteLightAlpha), PorterDuff.Mode.SRC_ATOP);
     }
 
     private boolean loginCheck(){
@@ -192,5 +231,19 @@ public class HomeSearchFragment extends Fragment {
         FrameLayout.LayoutParams newLayoutParams = (FrameLayout.LayoutParams) constraintLayout.getLayoutParams();
         newLayoutParams.bottomMargin = bottomMargin;
         constraintLayout.setLayoutParams(newLayoutParams);
+    }
+
+    public void setShowLoginMessage(boolean showLoginMessage) {
+        this.showLoginMessage = showLoginMessage;
+    }
+
+    public void showLoginMessage(){
+        Toast toast = Toast.makeText(getContext(), "Login success: " + databaseHelper.getCurrentUser().getEmail(), Toast.LENGTH_LONG);
+        toast.setGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 50);
+        toast.show();
+    }
+
+    public void setTextViewUserEmail(String textViewUserEmail){
+        userEmail = textViewUserEmail;
     }
 }

@@ -17,6 +17,11 @@ import androidx.core.content.ContextCompat;
 import com.recipe.recipesearch.FavoriteRecipeView;
 import com.recipe.recipesearch.R;
 import com.recipe.recipesearch.database.Favorite;
+import com.recipe.recipesearch.database.User;
+import com.recipe.recipesearch.helpers.UiHelper;
+import com.recipe.recipesearch.FavoriteRecipeView;
+import com.recipe.recipesearch.R;
+import com.recipe.recipesearch.database.Favorite;
 import com.recipe.recipesearch.helpers.UiHelper;
 import com.squareup.picasso.Picasso;
 
@@ -27,12 +32,14 @@ class CustomAdapter extends BaseAdapter implements ListAdapter {
     Context context;
     ListView listView;
     UiHelper uiHelper;
+    User user;
 
-    public CustomAdapter(Context context, ArrayList<Favorite> arrayList, ListView listView, UiHelper uiHelper) {
+    public CustomAdapter(Context context, ArrayList<Favorite> arrayList, ListView listView, UiHelper uiHelper, User user) {
         this.arrayList = arrayList;
         this.context = context;
         this.listView = listView;
         this.uiHelper = uiHelper;
+        this.user = user;
     }
 
     @Override
@@ -93,7 +100,7 @@ class CustomAdapter extends BaseAdapter implements ListAdapter {
                 public void onClick(View v) {
                     System.out.println("clicked index: " + position);
                     System.out.println("fav title: " + favorite.getRecipe().getTitle() + " fav img: " + favorite.getRecipe().getImageURL() + " direct: " + favorite.getRecipe().getDirections() + " ingred: " + favorite.getRecipe().getIngredients());
-                    uiHelper.switchScreen(new FavoriteRecipeView(favorite));
+                    uiHelper.switchScreen(new FavoriteRecipeView(favorite, user));
                 }
             });
 
@@ -122,7 +129,7 @@ class CustomAdapter extends BaseAdapter implements ListAdapter {
     }
 
     private void setRatingStarColor(ImageView imageView){
-        imageView.setColorFilter(ContextCompat.getColor(context, R.color.yellow), android.graphics.PorterDuff.Mode.SRC_IN);
+        imageView.setColorFilter(ContextCompat.getColor(context, R.color.secondary_yellow), android.graphics.PorterDuff.Mode.SRC_IN);
     }
 
     private void concatTitle(View view, String itemTitle){
@@ -139,11 +146,11 @@ class CustomAdapter extends BaseAdapter implements ListAdapter {
     private void colorizeRatings(View view, Favorite favorite){
         ArrayList<ImageView> ratings = new ArrayList<>();
 
-        ratings.add((ImageView) view.findViewById(R.id.rating_1));
-        ratings.add((ImageView) view.findViewById(R.id.rating_2));
-        ratings.add((ImageView) view.findViewById(R.id.rating_3));
-        ratings.add((ImageView) view.findViewById(R.id.rating_4));
-        ratings.add((ImageView) view.findViewById(R.id.rating_5));
+        ratings.add(view.findViewById(R.id.rating_1));
+        ratings.add(view.findViewById(R.id.rating_2));
+        ratings.add(view.findViewById(R.id.rating_3));
+        ratings.add(view.findViewById(R.id.rating_4));
+        ratings.add(view.findViewById(R.id.rating_5));
 
         for (int i = 0; i < 5; ++i) {
             if(i < favorite.getRating()){

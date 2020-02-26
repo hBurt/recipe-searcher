@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.meal_planner.Meal_Planner_Misc_Fragment">
+    tools:context="com.recipe.recipesearch.ui.meal_planner.Meal_Planner_Misc_Fragment">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/MealPlan"

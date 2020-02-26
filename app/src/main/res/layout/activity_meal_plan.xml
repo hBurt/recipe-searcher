@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
-    tools:context=".ui.MealPlanMaker.MealPlanActivity">
+    tools:context="com.recipe.recipesearch.ui.MealPlanMaker.MealPlanActivity">
 
     <TextView
         android:id="@+id/textView2"

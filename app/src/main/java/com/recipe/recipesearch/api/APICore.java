@@ -52,7 +52,6 @@ public class APICore implements AsyncResponse {
     @Override
     public void processFinish(String output) {
         try {
-            //Log.v(TAG, "processFinish : " + output);
             switch (requestType){
                 case REQUEST_BASE_RECIPE:
                     Log.v(TAG, "[processFinish][base_recipe] : ");
@@ -137,6 +136,7 @@ public class APICore implements AsyncResponse {
         else if(searchType == BackgroundRequest.SearchType.INGREDIENT){
 
             System.out.println(apiResponse);
+            //TODO
 
         }
     }
@@ -265,6 +265,7 @@ public class APICore implements AsyncResponse {
 
     private void collapseHandler(){
         handler.sendEmptyMessageDelayed(0, 0);
+        Log.v(TAG, "Collapse");
     }
 
     public Recipe getRecipe(){

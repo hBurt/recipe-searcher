@@ -20,10 +20,12 @@
     <string name="directions">Directions</string>
     <string name="place_holder">Place_Holder</string>
     <string name="save_recipe">Save Recipe</string>
+    <string name="cancel">Cancel</string>
 
     <!-- ******** Favorites fragment ******** -->
 
     <string name="recipe">Recipe</string>
+    <string name="set_rating">Set Rating</string>
 
     <!-- *************** End **************** -->
 
@@ -45,6 +47,9 @@
 
     <string name="saved_user">savedUser</string>
     <string name="saved_pass">savedPass</string>
+
+    <string name="connection_error_logged_into_local">Connection error: logged into local</string>
+    <string name="login_sucess">Login success: </string>
 
     <!-- *************** End **************** -->
     <string-array name="food_stuff">

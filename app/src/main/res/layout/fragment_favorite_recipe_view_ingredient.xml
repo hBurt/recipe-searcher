@@ -5,7 +5,7 @@
     android:id="@+id/linearLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".favorite_recipe_view_ingredient">
+    tools:context="com.recipe.recipesearch.favorite_recipe_view_ingredient">
 
     <TextView
         android:id="@+id/favorite_recipe_view_ingredients"

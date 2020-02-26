@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.recipe.recipesearch.R;
+import com.recipe.recipesearch.ui.APIComunication.MealPlanGeneration;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.recipe.recipesearch.R;

@@ -7,132 +7,171 @@
     android:layout_height="match_parent"
     android:layout_marginBottom="60dp">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar4"
-        android:layout_width="0dp"
-        android:layout_height="58dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.365" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:contentDescription="TODO"
-        android:scaleType="centerCrop"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/bg_1" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout3"
-        android:layout_width="0dp"
-        android:layout_height="57dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbar4"
-        app:layout_constraintEnd_toEndOf="@+id/toolbar4"
-        app:layout_constraintStart_toStartOf="@+id/toolbar4"
-        app:layout_constraintTop_toTopOf="@+id/toolbar4"
-        app:layout_constraintVertical_bias="0.39">
-
-        <EditText
-            android:id="@+id/search_bar_edit_text"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar4"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:autofillHints=""
-            android:background="@color/navLight"
-            android:hint="@string/search_default_text"
-            android:textColorHint="@color/black"
-            android:inputType="textCapWords"
+            android:layout_height="58dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginRight="32dp"
+            android:background="?attr/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.365" />
 
-            android:paddingLeft="10dp"
-            android:drawablePadding="10dp"
-            android:drawableLeft="@drawable/ic_search_black_24dp"
-            android:drawableStart="@drawable/ic_search_black_24dp"/>
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="TODO"
+            android:scaleType="centerCrop"
+            android:background="@color/secondary_whiteLight"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/bg_1"/>
 
-    </LinearLayout>
+        <LinearLayout
+            android:id="@+id/linearLayout3"
+            android:layout_width="0dp"
+            android:layout_height="57dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="@+id/toolbar4"
+            app:layout_constraintEnd_toEndOf="@+id/toolbar4"
+            app:layout_constraintStart_toStartOf="@+id/toolbar4"
+            app:layout_constraintTop_toTopOf="@+id/toolbar4"
+            app:layout_constraintVertical_bias="0.39">
 
-    <Button
-        android:id="@+id/home_button_signup"
-        android:layout_width="0dp"
-        android:layout_height="67dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
-        android:text="@string/sign_up"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/home_button_login"
-        app:layout_constraintVertical_bias="0.231" />
+            <EditText
+                android:id="@+id/search_bar_edit_text"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:autofillHints=""
+                android:background="@color/secondary_whiteDark"
+                android:hint="@string/search_default_text"
+                android:textColorHint="@color/black"
+                android:inputType="textCapWords"
 
-    <TextView
-        android:id="@+id/textView_or2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/or"
-        app:layout_constraintBottom_toTopOf="@+id/home_button_signup"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/home_button_login"
-        app:layout_constraintVertical_bias="0.5" />
+                android:paddingLeft="10dp"
+                android:drawablePadding="10dp"
+                android:drawableLeft="@drawable/ic_searchdraw"
+                android:drawableStart="@drawable/ic_searchdraw"/>
 
-    <Button
-        android:id="@+id/home_button_login"
-        android:layout_width="0dp"
-        android:layout_height="67dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
-        android:text="@string/login"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar4"
-        app:layout_constraintVertical_bias="0.141" />
+        </LinearLayout>
 
-    <Button
-        android:id="@+id/Planer"
-        android:layout_width="84dp"
-        android:layout_height="84dp"
-        android:layout_marginTop="85dp"
-        android:layout_marginEnd="80dp"
-        android:layout_marginRight="80dp"
-        android:layout_marginBottom="77dp"
-        android:background="@android:drawable/ic_menu_my_calendar"
-        app:layout_constraintBottom_toTopOf="@+id/toolbar4"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.336" />
+        <Button
+            android:id="@+id/home_button_signup"
+            android:layout_width="0dp"
+            android:layout_height="67dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginRight="32dp"
+            android:text="@string/sign_up"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/home_button_login"
+            app:layout_constraintVertical_bias="0.231" />
 
-    <Button
-        android:id="@+id/MPGenerator"
-        android:layout_width="87dp"
-        android:layout_height="85dp"
-        android:layout_marginTop="13dp"
-        android:layout_marginEnd="35dp"
-        android:layout_marginRight="35dp"
-        android:background="@android:drawable/ic_menu_day"
-        app:layout_constraintEnd_toStartOf="@+id/Planer"
-        app:layout_constraintTop_toBottomOf="@+id/home_button_signup" />
+        <TextView
+            android:id="@+id/textView_or2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/or"
+            app:layout_constraintBottom_toTopOf="@+id/home_button_signup"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/home_button_login"
+            app:layout_constraintVertical_bias="0.5" />
+
+        <Button
+            android:id="@+id/home_button_login"
+            android:layout_width="0dp"
+            android:layout_height="67dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginRight="32dp"
+            android:text="@string/login"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar4"
+            app:layout_constraintVertical_bias="0.141" />
+
+        <Button
+            android:id="@+id/Planer"
+            android:layout_width="84dp"
+            android:layout_height="84dp"
+            android:layout_marginTop="85dp"
+            android:layout_marginEnd="80dp"
+            android:layout_marginRight="80dp"
+            android:layout_marginBottom="77dp"
+            android:background="@android:drawable/ic_menu_my_calendar"
+            app:layout_constraintBottom_toTopOf="@+id/toolbar4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView"
+            app:layout_constraintVertical_bias="0.336" />
+
+        <Button
+            android:id="@+id/MPGenerator"
+            android:layout_width="87dp"
+            android:layout_height="85dp"
+            android:layout_marginTop="13dp"
+            android:layout_marginEnd="35dp"
+            android:layout_marginRight="35dp"
+            android:background="@android:drawable/ic_menu_day"
+            app:layout_constraintEnd_toStartOf="@+id/Planer"
+            app:layout_constraintTop_toBottomOf="@+id/home_button_signup" />
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_user"
+            android:layout_width="409dp"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <Button
+            android:id="@+id/button_logout"
+            android:layout_width="114dp"
+            android:layout_height="56dp"
+            android:text="logout"
+            app:layout_constraintBottom_toTopOf="@+id/toolbar4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.993"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/textView_user_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/toolbar_user"
+            app:layout_constraintEnd_toStartOf="@+id/button_logout"
+            app:layout_constraintHorizontal_bias="0.1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

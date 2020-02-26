@@ -11,10 +11,11 @@
 
     <color name="errorRed">#FF0000</color>
 
+    <color name="white">#FFFFFF</color>
     <!-- ****** Main color palette ****** -->
 
     <color name="paletteLightGreen">#5EA259</color>
-    <color name="paletteLightGreenAplha">#855EA259</color>
+    <color name="paletteLightGreenAplha">#595EA259</color>
     <color name="paletteDarkGreen">#498D50</color>
     <color name="paletteLightCreme">#FFF0D9</color>
     <color name="paletteDarkCreme">#FBDAB9</color>
@@ -22,5 +23,19 @@
     <color name="paletteDarkGray">#373737</color>
 
     <!-- ************** End ************* -->
-    
+
+    <!-- **** Secondary color palette *** -->
+
+    <color name="secondary_blueDarkest">#2C3E50</color>
+    <color name="secondary_red">#E74C3C</color>
+    <color name="secondary_whiteLight">#ECF0F1</color>
+    <color name="secondary_whiteLightAlpha">#4DECF0F1</color>
+    <color name="secondary_whiteDark">#D4D8D9</color>
+    <color name="secondary_blueLight">#3498DB</color>
+    <color name="secondary_blueDark">#2980B9</color>
+    <color name="secondary_yellow">#EDC351</color>
+
+    <!-- ************** End ************* -->
+
+
 </resources>

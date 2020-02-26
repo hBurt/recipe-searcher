@@ -3,7 +3,7 @@
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/paletteLightGreen"
+        android:background="@color/secondary_whiteLight"
         android:paddingTop="0dp">
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -12,7 +12,7 @@
             android:layout_height="60dp"
             android:layout_marginStart="0dp"
             android:layout_marginEnd="0dp"
-            android:background="@color/paletteDarkGreen"
+            android:background="@color/secondary_whiteDark"
             android:visibility="visible"
             app:itemIconTint="@color/drawer_item"
             app:itemTextColor="@color/black"

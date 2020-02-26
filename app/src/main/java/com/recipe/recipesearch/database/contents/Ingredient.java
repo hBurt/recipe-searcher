@@ -7,25 +7,35 @@ public class Ingredient extends BaseObject implements Serializable {
 
     private ArrayList<Amount> amounts;
 
+    private String fullImageURL;
+
     public Ingredient(){
         super();
-        setAmount(new ArrayList<Amount>());
+        setAmount(new ArrayList<>());
+        setBaseimage("https://spoonacular.com/cdn/ingredients_100x100/");
     }
 
     public Ingredient(String name, String image){
         setName(name);
         setImage(image);
+        setBaseimage("https://spoonacular.com/cdn/ingredients_100x100/");
     }
 
     public Ingredient(String name, String image, ArrayList<Amount> amounts) {
         setName(name);
         setImage(image);
         setAmount(amounts);
+        setBaseimage("https://spoonacular.com/cdn/ingredients_100x100/");
     }
 
     @Override
     public void setImage(String image) {
-        super.setImage("https://spoonacular.com/cdn/ingredients_100x100/" + image);
+            super.setImage(image);
+            setFullImageURL(getBaseimage() + getImage());
+    }
+
+    public String getFullImageURL(){
+        return fullImageURL;
     }
 
     public ArrayList<Amount> getAmount() {
@@ -54,5 +64,9 @@ public class Ingredient extends BaseObject implements Serializable {
             }
         }
         return builder.toString();
+    }
+
+    public void setFullImageURL(String fullImageURL) {
+        this.fullImageURL = fullImageURL;
     }
 }
