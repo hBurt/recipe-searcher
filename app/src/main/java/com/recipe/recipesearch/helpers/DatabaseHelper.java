@@ -255,6 +255,8 @@ public class DatabaseHelper {
                         for (QueryDocumentSnapshot document : task.getResult()) {
                             String passwordFromDB = (String) document.get("password");
 
+                            HomeSearchFragment home = new HomeSearchFragment();
+
                             if(!fromSharedPref) {
                                 try {
                                     if (encrypt.DoDecryption(password, passwordFromDB)) {
@@ -264,8 +266,8 @@ public class DatabaseHelper {
 
                                         Log.d(TAG, "ID: " + user.getId() + " EMAIL: " + user.getEmail());
 
-                                        HomeSearchFragment home = new HomeSearchFragment();
-                                        home.setShowLoginMessage(true);
+                                        home.setTextViewUserEmail(user.getEmail());
+                                        //home.setShowLoginMessage(true);
                                         ui.switchScreen(home);
 
                                     }
@@ -284,12 +286,13 @@ public class DatabaseHelper {
 
                                     Log.d(TAG, "ID: " + user2.getId() + " EMAIL: " + user2.getEmail());
 
-                                    HomeSearchFragment home = new HomeSearchFragment();
-                                    home.setShowLoginMessage(true);
+                                    home.setTextViewUserEmail(user.getEmail());
+                                    //home.setShowLoginMessage(true);
                                     ui.switchScreen(home);
                                     performedOnce = true;
                                 }
                             }
+
 
                             saveLoginState();
                         }

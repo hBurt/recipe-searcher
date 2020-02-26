@@ -1,6 +1,7 @@
 package com.recipe.recipesearch;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -24,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
     private BottomNavigationView navView;
     private ConstraintLayout constraintLayout;
     ConstraintLayout.LayoutParams newLayoutParams;
+
+    //private boolean loginMessage = false;
 
     @Override
     protected void onResume() {
@@ -51,6 +54,13 @@ public class MainActivity extends AppCompatActivity {
         // keep layout when keyboard is shown
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
 
+        Intent intent = getIntent();
+        // Get the extras (if there are any)
+        Bundle extras = intent.getExtras();
+
+        /*if(extras != null) {
+            setLoginMessage((boolean) getIntent().getSerializableExtra("loginMessage"));
+        }*/
     }
 
     public DatabaseHelper getDatabaseHelper() {
@@ -61,20 +71,15 @@ public class MainActivity extends AppCompatActivity {
         navView.setVisibility(viewID);
     }
 
-    private void autoLogin(String email, String pass){
-
-        //if(databaseHelper.isLoginStateSaved()){
-        //    System.out.println("Saved state login");
-        //    databaseHelper.login(databaseHelper.getSharedPrefEmail(), databaseHelper.getSharedPrefPass());
-        //} else {
-        //    System.out.println("input login");
-            //databaseHelper.loginUserInFirestore(email, pass);
-
-        //}
-    }
-
     public BottomNavigationView getNavView(){
         return navView;
     }
 
+    /*public boolean isLoginMessage() {
+        return loginMessage;
+    }
+
+    public void setLoginMessage(boolean loginMessage) {
+        this.loginMessage = loginMessage;
+    }*/
 }

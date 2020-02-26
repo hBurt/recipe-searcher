@@ -101,7 +101,9 @@ public class RecipeActivityV2 extends AppCompatActivity implements TabLayout.OnT
         btnHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.v("RecipeActivityV2", "Navigating home");
                 Intent in = new Intent(RecipeActivityV2.this, MainActivity.class);
+                //in.putExtra("loginMessage", false);
                 startActivity(in);
             }
         });

@@ -36,7 +36,7 @@ public class URLHandler {
                     byRecipe +
                     getQuery() +
                     amount +
-                    apiKeyBase + apiKey2;
+                    apiKeyBase + apiKey;
 
 
         } else if (getSearchType() == BackgroundRequest.SearchType.INGREDIENT) {
@@ -57,7 +57,7 @@ public class URLHandler {
                     byIngredients +
                     recreated +
                     amount +
-                    apiKeyBase + apiKey2;
+                    apiKeyBase + apiKey;
         }
 
         Log.v(TAG, returned);
@@ -72,7 +72,7 @@ public class URLHandler {
         String out = baseSearch +
                 id + "/" +
                 ingredientWidget +
-                "apiKey=" + apiKey2;
+                "apiKey=" + apiKey;
 
         Log.v(TAG, "[buildUrlForIngredients]" + out);
         return out;
@@ -86,7 +86,7 @@ public class URLHandler {
         String out = baseSearch +
                 id + "/" +
                 analyze +
-                apiKeyBase + apiKey2;
+                apiKeyBase + apiKey;
 
         Log.v(TAG, "[buildUrlForInstructions]" + out);
         return out;
@@ -97,7 +97,7 @@ public class URLHandler {
         return baseSearch +
                 id + "/" +
                 "similar" +
-                apiKeyBase + apiKey2;
+                apiKeyBase + apiKey;
     }
 
     private String[] splitStringByComma() {
