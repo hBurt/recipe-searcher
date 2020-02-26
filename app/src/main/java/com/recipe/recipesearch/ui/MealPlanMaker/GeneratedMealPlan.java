@@ -11,14 +11,10 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.recipe.recipesearch.R;
-import com.recipe.recipesearch.api.APICore;
-import com.recipe.recipesearch.api.BackgroundRequest;
-import com.recipe.recipesearch.database.Recipe;
 import com.recipe.recipesearch.database.User;
 import com.recipe.recipesearch.helpers.DatabaseHelper;
 import com.recipe.recipesearch.ui.recipe.RecipeActivityV2;
 import com.recipe.recipesearch.ui.recipe.RecipeStorage;
-import com.recipe.recipesearch.ui.search_result.SearchingActivity;
 import com.squareup.picasso.Picasso;
 
 public class GeneratedMealPlan extends AppCompatActivity
@@ -117,7 +113,7 @@ public class GeneratedMealPlan extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                APICore api = new APICore();
+                /*APICore api = new APICore();
                 Recipe recipe = api.getRecipe();
                 Intent in = new Intent(GeneratedMealPlan.this, SearchingActivity.class);
                 startActivity(in);
@@ -127,7 +123,7 @@ public class GeneratedMealPlan extends AppCompatActivity
                 recipe.setImageURL(mealImg1);
                 recipe.setTitle(Meal1Name);
                 api.startRequest(Integer.parseInt(id1), BackgroundRequest.RequestType.REQUEST_INGREDIENTS);
-                h.sendEmptyMessageDelayed(0, 3000);// a delay to allow the search to finish before the recipe page pops up
+                h.sendEmptyMessageDelayed(0, 3000);// a delay to allow the search to finish before the recipe page pops up*/
             }
         });
         meal2.setOnClickListener(new View.OnClickListener()
@@ -135,7 +131,7 @@ public class GeneratedMealPlan extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                APICore api = new APICore();
+               /* APICore api = new APICore();
                 Recipe recipe = api.getRecipe();
                 Intent in = new Intent(GeneratedMealPlan.this, SearchingActivity.class);
                 startActivity(in);
@@ -147,7 +143,7 @@ public class GeneratedMealPlan extends AppCompatActivity
                 recipe.setImageURL(mealImg2);
                 recipe.setTitle(Meal2Name);
                 api.startRequest(Integer.parseInt(id2), BackgroundRequest.RequestType.REQUEST_INGREDIENTS);
-                h.sendEmptyMessageDelayed(0, 3000);// a delay to allow the search to finish before the recipe page pops up
+                h.sendEmptyMessageDelayed(0, 3000);// a delay to allow the search to finish before the recipe page pops up*/
             }
         });
         meal3.setOnClickListener(new View.OnClickListener()
@@ -155,7 +151,7 @@ public class GeneratedMealPlan extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                APICore api = new APICore();
+                /*APICore api = new APICore();
                 Recipe recipe = api.getRecipe();
                 Intent in = new Intent(GeneratedMealPlan.this, SearchingActivity.class);
                 startActivity(in);
@@ -165,7 +161,7 @@ public class GeneratedMealPlan extends AppCompatActivity
                 recipe.setImageURL(mealImg3);
                 recipe.setTitle(Meal3Name);
                 api.startRequest(Integer.parseInt(id3), BackgroundRequest.RequestType.REQUEST_INGREDIENTS);
-                h.sendEmptyMessageDelayed(0, 3000);// a delay to allow the search to finish before the recipe page pops up
+                h.sendEmptyMessageDelayed(0, 3000);// a delay to allow the search to finish before the recipe page pops up*/
             }
         });
         RecipeStorage storage = new RecipeStorage(getApplicationContext());
