@@ -14,7 +14,6 @@ public class Recipe implements Serializable {
     private int readyInMinutes;
     private ArrayList<Ingredient> ingredients;
     private ArrayList<Step> steps;
-
     private boolean loaded = false;
 
     public Recipe() {
@@ -156,5 +155,10 @@ public class Recipe implements Serializable {
 
     public void setLoaded(boolean loaded) {
         this.loaded = loaded;
+    }
+
+    public int getID()
+    {
+        return id;
     }
 }

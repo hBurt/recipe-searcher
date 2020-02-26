@@ -33,7 +33,6 @@ public class URLHandler {
         setQuery(query);
         setSearchType(searchType);
     }
-
     public String buildUrl() {
 
         if (getSearchType() == BackgroundRequest.SearchType.RECIPE) {
@@ -53,7 +52,8 @@ public class URLHandler {
         }
         else if(getSearchType() == BackgroundRequest.SearchType.NEXT)
         {
-            //returned = buildUrlForSimilar(Recipe.getID());
+            Recipe recipe = SearchActivity.getSimRecipe();
+            returned = buildUrlForSimilar(recipe.getID());
         }
         else if (getSearchType() == BackgroundRequest.SearchType.INGREDIENT) {
 

@@ -150,8 +150,8 @@ public class SearchActivity extends AppCompatActivity
                         ||query.contains("similar to previous Search") || query.contains("similar to previous search")
                         || query.contains("Similar")|| query.contains("similar"))
                 {
-                    //TODO
-                    //api.startRequest(String.valueOf(Recipe.getID()), BackgroundRequest.SearchType.NEXT, getApplicationContext(), h);
+                    Recipe recipe = api.getRecipe();
+                    api.startRequest(String.valueOf(recipe.getID()), BackgroundRequest.SearchType.NEXT, getApplicationContext(), h);
                     Intent se = new Intent(SearchActivity.this, SearchingActivity.class);
                     startActivity(se);
                 }

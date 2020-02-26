@@ -32,7 +32,7 @@ class MyTabAdapter extends FragmentPagerAdapter
                 Recipe_Directions_Tab_Fragment Directions = new Recipe_Directions_Tab_Fragment();
                 return Directions;
             case 2:
-                Recipe_Similar_Recipes_Tab_Fragment Similar_Recipes = new Recipe_Similar_Recipes_Tab_Fragment();
+                Recipe_Similar_Recipes_Tab_Fragment Similar_Recipes = new Recipe_Similar_Recipes_Tab_Fragment(recipe);
                 return Similar_Recipes;
             default:
                 return null;

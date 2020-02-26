@@ -118,17 +118,17 @@ public class APICore implements AsyncResponse {
             getRecipe().setBaseImageURI("https://spoonacular.com/recipeImages/");
             Log.v(TAG, "End base build; ID search recipe ingredients: " + getRecipe().getId());
             startRequest(getRecipe().getId(), BackgroundRequest.RequestType.REQUEST_INGREDIENTS);
-        } else if(searchType == BackgroundRequest.SearchType.NEXT) {
+        }else if(searchType == BackgroundRequest.SearchType.NEXT) {
 
             Log.v(TAG, "Start base recipe build");
             String that = apiResponse.trim().replace("[{","{").replace("}]","}");
             JSONObject jsonObjectBase = null;
             jsonObjectBase = new JSONObject(that);
-                getRecipe().setId(jsonObjectBase.optInt("id"));
-           SearchActivity.setPreviousID(String.valueOf(jsonObjectBase.optInt("id")));
-                getRecipe().setTitle(jsonObjectBase.optString("title"));
-                getRecipe().setReadyInMiniutes(jsonObjectBase.optInt("readyInMinutes"));
-                getRecipe().setImageURL(jsonObjectBase.optString("image"));
+            getRecipe().setId(jsonObjectBase.optInt("id"));
+            SearchActivity.setPreviousID(String.valueOf(jsonObjectBase.optInt("id")));
+            getRecipe().setTitle(jsonObjectBase.optString("title"));
+            getRecipe().setReadyInMiniutes(jsonObjectBase.optInt("readyInMinutes"));
+            getRecipe().setImageURL(jsonObjectBase.optString("image"));
             getRecipe().setBaseImageURI("https://spoonacular.com/recipeImages/");
             Log.v(TAG, "End base build; ID search recipe ingredients: " + getRecipe().getId());
             startRequest(getRecipe().getId(), BackgroundRequest.RequestType.REQUEST_INGREDIENTS);
