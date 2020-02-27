@@ -325,6 +325,11 @@ public class DatabaseHelper {
         baseUserUpdate();
     }
 
+    public void updateUserInDatabse(){
+        Log.d(TAG,  "Updating user in database");
+        baseUserUpdate();
+    }
+
 
     private void baseUserUpdate(){
         firestoreDB.collection("users").document(getCurrentUser().getUid()).set(getCurrentUser())

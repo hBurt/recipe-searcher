@@ -211,6 +211,8 @@ public class FavoritesFragment extends Fragment {
                 reDelDoubleDelete = false;
                 doReDel(index, favoritesListSecondary);
             }
+            databaseHelper.getCurrentUser().setFavorites(favoritesListSecondary);
+            databaseHelper.updateUserInDatabse();
         }
     }
 
