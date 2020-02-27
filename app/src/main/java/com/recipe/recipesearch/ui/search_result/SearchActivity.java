@@ -1,5 +1,6 @@
 package com.recipe.recipesearch.ui.search_result;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -31,6 +32,8 @@ import com.recipe.recipesearch.ui.recipe.RecipeStorage;
 import com.recipe.recipesearch.ui.recipe.Recipe_Directions_Tab_Fragment;
 import com.recipe.recipesearch.ui.recipe.Recipe_Ingredient_Tab_Fragment;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -53,10 +56,12 @@ public class SearchActivity extends AppCompatActivity
     private static Recipe simRecipe;
     User user;
     private Recipe recipe;
+    @SuppressLint("StaticFieldLeak")
     public static SearchActivity SE;
     //This latch will be used to wait on
     private static CountDownLatch _latch;
 
+    @SuppressLint("HandlerLeak")
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -114,9 +119,9 @@ public class SearchActivity extends AppCompatActivity
         FsearchView.setQueryHint("Search Food");
         h = new  Handler(){
             @Override
-            public void handleMessage(Message msg)
+            public void handleMessage(@NotNull Message msg)
             {
-                if(RecipeActivityV2.getIsOpen() != true && !searchFailed)
+                if(!RecipeActivityV2.getIsOpen() && !searchFailed)
                 {
                     Intent in = new Intent(SearchActivity.this, RecipeActivityV2.class);
                     in.putExtra("databaseUserr", user);
@@ -226,7 +231,7 @@ public class SearchActivity extends AppCompatActivity
         CustomStorage Cs = new CustomStorage(getApplicationContext());
         if (Cs.getCount() > 0)
         {
-            if (RecipeActivity.getIsOpen() == false)
+            if (!RecipeActivity.getIsOpen())
             {
                 Intent in = new Intent(getApplicationContext(), RecipeActivity.class);
                 startActivity(in);
@@ -238,7 +243,7 @@ public class SearchActivity extends AppCompatActivity
             {
                 RecipeActivity.setRecipeName(Cs.getCName());
                 RecipeActivity.setTime(Cs.getCTime());
-                if (Cs.getBool() == true)
+                if (Cs.getBool())
                     RecipeActivity.setTakenPio(Cs.getCImgURL());
                 else
                     RecipeActivity.setPicUri(Cs.getCImgURL());
@@ -246,7 +251,7 @@ public class SearchActivity extends AppCompatActivity
                 String ingred = Cs.getCIngred().trim() .replace(",", " \n ");
                 Recipe_Ingredient_Tab_Fragment.setIngredients(ingred);
                 Cs.setNum();
-                if (RecipeActivity.getIsOpen() == true)
+                if (RecipeActivity.getIsOpen())
                 {
                     h.sendEmptyMessageDelayed(0, 300);
                 }
