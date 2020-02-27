@@ -59,7 +59,6 @@
         <item>Lamb Burger</item>
         <item>Cheese Pizza</item>
         <item>Fried Shrimp</item>
-        <item>Pasta</item>
         <item>fettuccine alfredo</item>
         <item>calamari</item>
         <item>chocolate chunk brownies</item>
@@ -69,6 +68,14 @@
         <item>lettuce</item>
         <item>Milk Shakes</item>
         <item>Steak</item>
+        <item>Japanese Souffle Pancakes</item>
+        <item>Taco egg muffin cups</item>
+        <item>Greek Lentil Salad</item>
+        <item>Lemon-Coconut Sour Cream Cake</item>
+        <item>Chicken and potato Bake</item>
+        <item>Broccoli Pie</item>
+        <item>Buttermilk Chocolate Chip Muffins</item>
+        <item>Just here so the one above is seen</item>
     </string-array>
 
     <!-- TODO: Remove or change this placeholder text -->

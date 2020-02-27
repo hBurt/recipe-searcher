@@ -20,6 +20,7 @@
                 android:layout_width="408dp"
                 android:layout_height="36dp"
                 android:text="@string/create_custom_recipe"
+                android:textColor="#000000"
                 android:textSize="24sp" />
 
             <EditText
@@ -30,7 +31,8 @@
                 android:autofillHints=""
                 android:ems="10"
                 android:hint="@string/name_of_recipe"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:textColor="#000000" />
 
             <EditText
                 android:id="@+id/Time"
@@ -40,7 +42,8 @@
                 android:autofillHints=""
                 android:ems="10"
                 android:hint="@string/time"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:textColor="#000000" />
 
             <EditText
                 android:id="@+id/IngredientInput"
@@ -50,7 +53,8 @@
                 android:autofillHints=""
                 android:ems="10"
                 android:hint="@string/enter_ingredients_for_recipe"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:textColor="#000000" />
 
             <EditText
                 android:id="@+id/Directions"
@@ -61,6 +65,7 @@
                 android:ems="10"
                 android:hint="@string/enter_directions_for_recipe"
                 android:inputType="textPersonName"
+                android:textColor="#000000"
                 android:textSize="18sp" />
 
             <Button
