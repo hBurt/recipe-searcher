@@ -103,7 +103,7 @@ public class Recipe_Similar_Recipes_Tab_Fragment extends Fragment
                 {
                     getRand = false;
                     APICore api = new APICore();
-                    api.startRequest(String.valueOf(recipe.getID()), BackgroundRequest.SearchType.NEXT, getActivity(), R2);
+                    api.startRequest(String.valueOf(recipe.getId()), BackgroundRequest.SearchType.NEXT, getActivity(), R2);
                 }
                 if (RecipeActivity.getIsOpen())
                 {

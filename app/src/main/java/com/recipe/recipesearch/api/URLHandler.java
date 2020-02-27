@@ -53,7 +53,7 @@ public class URLHandler {
         else if(getSearchType() == BackgroundRequest.SearchType.NEXT)
         {
             Recipe recipe = SearchActivity.getSimRecipe();
-            returned = buildUrlForSimilar(recipe.getID());
+            returned = buildUrlForSimilar(recipe.getId());
         }
         else if (getSearchType() == BackgroundRequest.SearchType.INGREDIENT) {
 

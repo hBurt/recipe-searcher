@@ -151,7 +151,7 @@ public class SearchActivity extends AppCompatActivity
                         || query.contains("Similar")|| query.contains("similar"))
                 {
                     Recipe recipe = api.getRecipe();
-                    api.startRequest(String.valueOf(recipe.getID()), BackgroundRequest.SearchType.NEXT, getApplicationContext(), h);
+                    api.startRequest(String.valueOf(recipe.getId()), BackgroundRequest.SearchType.NEXT, getApplicationContext(), h);
                     Intent se = new Intent(SearchActivity.this, SearchingActivity.class);
                     startActivity(se);
                 }
