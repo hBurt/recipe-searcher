@@ -48,11 +48,12 @@ public class SearchActivity extends AppCompatActivity
     public static String SearchedFood = null; // static to share the query
     static SharedPreferences mPrefs;
     SharedPreferences.Editor edit;
+    private static boolean searchFailed = false;
     static List<String> IDList;
     private static Recipe simRecipe;
     User user;
     private Recipe recipe;
-
+    public static SearchActivity SE;
     //This latch will be used to wait on
     private static CountDownLatch _latch;
 
@@ -64,6 +65,7 @@ public class SearchActivity extends AppCompatActivity
         mPrefs = getSharedPreferences("LastSearch", MODE_PRIVATE);
         user = (User) getIntent().getSerializableExtra("databaseUser");
         simRecipe = null;
+        SE = this;
         if (mPrefs.contains("LastSearch"))
         {
             previousID = mPrefs.getString("LastSearch", " ");
@@ -114,7 +116,7 @@ public class SearchActivity extends AppCompatActivity
             @Override
             public void handleMessage(Message msg)
             {
-                if(RecipeActivityV2.getIsOpen() != true)
+                if(RecipeActivityV2.getIsOpen() != true && !searchFailed)
                 {
                     Intent in = new Intent(SearchActivity.this, RecipeActivityV2.class);
                     in.putExtra("databaseUserr", user);
@@ -139,18 +141,21 @@ public class SearchActivity extends AppCompatActivity
                 RecipeStorage storage = new RecipeStorage(getApplicationContext());
                 if (query.contains("random") || query.contains("Random"))
                 {
+                    searchFailed = false;
                     api.startRequest(query, BackgroundRequest.SearchType.RANDOM, getBaseContext(), h);
                     Intent se = new Intent(SearchActivity.this, SearchingActivity.class);
                     startActivity(se);
                 }
                 else if (query.contains("Custom") || query.contains("custom"))
                 {
+                    searchFailed = false;
                     startCustom();
                 }
                 else if (query.contains("Similar to Previous Search") ||query.contains("similar to Previous Search")
                         ||query.contains("similar to previous Search") || query.contains("similar to previous search")
                         || query.contains("Similar")|| query.contains("similar"))
                 {
+                    searchFailed = false;
                     Recipe recipe = api.getRecipe();
                     api.startRequest(String.valueOf(recipe.getId()), BackgroundRequest.SearchType.NEXT, getApplicationContext(), h);
                     Intent se = new Intent(SearchActivity.this, SearchingActivity.class);
@@ -158,6 +163,7 @@ public class SearchActivity extends AppCompatActivity
                 }
                 else if (storage.isThisInTheBook())
                 {
+                    searchFailed = false;
                     api.startRequest(query, BackgroundRequest.SearchType.RECIPE, getBaseContext(), h);
                     h.sendEmptyMessageDelayed(0, 10000);
                     Intent se = new Intent(SearchActivity.this, SearchingActivity.class);
@@ -179,7 +185,7 @@ public class SearchActivity extends AppCompatActivity
                     startActivity(se);
                 }*/
                 else {
-
+                    searchFailed = false;
                     api.startRequest(query, BackgroundRequest.SearchType.RECIPE, getBaseContext(), h);
                     h.sendEmptyMessageDelayed(0, 10000);
                     Intent se = new Intent(SearchActivity.this, SearchingActivity.class);
@@ -273,4 +279,10 @@ public class SearchActivity extends AppCompatActivity
     }
     public static void setSimRecipe(Recipe recipe){simRecipe = recipe;}
     public static Recipe getSimRecipe(){return simRecipe;}
+    public  void Error()
+    {
+        searchFailed = true;
+        SearchingActivity.SA.finish();
+        Toast.makeText(getApplicationContext(),"Error; Bad Input",Toast.LENGTH_SHORT).show();
+    }
 }

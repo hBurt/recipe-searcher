@@ -79,10 +79,10 @@ public class APICore implements AsyncResponse {
         if(searchType == BackgroundRequest.SearchType.RECIPE) {
 
             Log.v(TAG, "Start base recipe build");
-
-            JSONObject jsonObjectBase = new JSONObject(apiResponse);
-            JSONArray jsonArray = jsonObjectBase.getJSONArray("results");
-            JSONObject jsonObject;
+            if (apiResponse.contains("id")) {
+                JSONObject jsonObjectBase = new JSONObject(apiResponse);
+                JSONArray jsonArray = jsonObjectBase.getJSONArray("results");
+                JSONObject jsonObject;
                 for (int i = 0; i < jsonArray.length(); i++) {
                     jsonObject = jsonArray.getJSONObject(i);
                     getRecipe().setId(jsonObject.optInt("id"));
@@ -91,11 +91,17 @@ public class APICore implements AsyncResponse {
                     getRecipe().setReadyInMiniutes(jsonObject.optInt("readyInMinutes"));
                     getRecipe().setImageURL(jsonObject.optString("image"));
                 }
-
                 getRecipe().setBaseImageURI(jsonObjectBase.getString("baseUri"));
 
                 Log.v(TAG, "End base build; ID search recipe ingredients: " + getRecipe().getId());
                 startRequest(getRecipe().getId(), BackgroundRequest.RequestType.REQUEST_INGREDIENTS);
+            }
+            else
+                {
+                    // in case there was a search that gets no return
+                    SearchActivity.SE.Error();
+                    Log.v(TAG, "Build Failed, Bad input");
+                }
         }
         else if(searchType == BackgroundRequest.SearchType.RANDOM)
         {
