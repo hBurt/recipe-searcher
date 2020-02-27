@@ -123,6 +123,7 @@ public class SearchActivity extends AppCompatActivity
                 }
             }
         };
+        FsearchView.onActionViewExpanded();
         FsearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener()
         {
             @Override
