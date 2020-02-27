@@ -3,6 +3,7 @@ package com.recipe.recipesearch.ui.favorites;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,6 +56,9 @@ public class FavoritesFragment extends Fragment {
 
     private boolean isAlphabetical = false;
     private boolean isRating = false;
+
+    private boolean reDel = false;
+    private boolean reDelDoubleDelete = true;
 
     UiHelper uiHelper;
 
@@ -155,26 +159,26 @@ public class FavoritesFragment extends Fragment {
 
                 ((CustomAdapter) getAdapterView().getAdapter()).refreshItems();
 
+
+                setReDel(false);
+
                 favoriteButtonDelete.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
 
+                        setReDel(true);
 
                         int index = getAdapterView().getFirstVisiblePosition();
                         View v = getAdapterView().getChildAt(0);
                         int top = (v == null) ? 0 : (v.getTop() - getAdapterView().getPaddingTop());
 
-                        ((CustomAdapter) getAdapterView().getAdapter()).removeItemAtIndex(i);
-                        ((CustomAdapter) getAdapterView().getAdapter()).refreshItems();
-                        ((CustomAdapter) getAdapterView().getAdapter()).refreshItems();
-                        //((CustomAdapter) getAdapterView().getAdapter()).notifyDataSetChanged();
-
-                        setAdapter(favoritesListSecondary);
+                        doReDel(i, favoritesListSecondary);
 
                         // restore index and position
                         ((ListView) getAdapterView()).setSelectionFromTop(index, top);
                     }
                 });
+
                 return false;
             }
         });
@@ -195,6 +199,19 @@ public class FavoritesFragment extends Fragment {
         requireActivity().getOnBackPressedDispatcher().addCallback(callback);
 
         return root;
+    }
+
+    private void doReDel(int index, ArrayList<Favorite> favoritesListSecondary){
+
+        if(isReDel()){
+            ((CustomAdapter) getAdapterView().getAdapter()).removeItemAtIndex(index);
+            ((CustomAdapter) getAdapterView().getAdapter()).refreshItems();
+            setAdapter(favoritesListSecondary);
+            if(reDelDoubleDelete){
+                reDelDoubleDelete = false;
+                doReDel(index, favoritesListSecondary);
+            }
+        }
     }
 
     private void initFavoritesList(View root){
@@ -251,4 +268,11 @@ public class FavoritesFragment extends Fragment {
     }
 
 
+    public boolean isReDel() {
+        return reDel;
+    }
+
+    public void setReDel(boolean reDel) {
+        this.reDel = reDel;
+    }
 }
