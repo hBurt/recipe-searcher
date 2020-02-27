@@ -157,8 +157,8 @@ public class Recipe implements Serializable {
         this.loaded = loaded;
     }
 
-    public int getID()
+    /*public int getID()
     {
         return id;
-    }
+    }*/
 }
