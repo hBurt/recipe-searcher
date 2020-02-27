@@ -41,7 +41,7 @@ public class URLHandler {
                     byRecipe +
                     getQuery() +
                     amount +
-                    apiKeyBase + apiKey2;
+                    apiKeyBase + apiKey3;
 
         }
         else if(getSearchType() == BackgroundRequest.SearchType.RANDOM)
@@ -55,7 +55,7 @@ public class URLHandler {
             Recipe recipe = SearchActivity.getSimRecipe();
             returned = buildUrlForSimilar(recipe.getId());
         }
-        else if (getSearchType() == BackgroundRequest.SearchType.INGREDIENT) {
+       /* else if (getSearchType() == BackgroundRequest.SearchType.INGREDIENT) {
 
             StringBuilder recreated = new StringBuilder();
 
@@ -73,7 +73,7 @@ public class URLHandler {
                     byIngredients +
                     recreated +
                     amount +
-                    apiKeyBase + apiKey2;        }
+                    apiKeyBase + apiKey3;        }*/
         Log.v(TAG, returned);
 
         return returned;
@@ -86,7 +86,7 @@ public class URLHandler {
         String out = baseSearch +
                 id + "/" +
                 ingredientWidget +
-                "apiKey=" + apiKey2;
+                "apiKey=" + apiKey3;
         Log.v(TAG, "[buildUrlForIngredients]" + out);
         return out;
     }
@@ -99,7 +99,7 @@ public class URLHandler {
         String out = baseSearch +
                 id + "/" +
                 analyze +
-                apiKeyBase + apiKey2;
+                apiKeyBase + apiKey3;
         Log.v(TAG, "[buildUrlForInstructions]" + out);
         return out;
     }
@@ -110,7 +110,7 @@ public class URLHandler {
         return baseSearch +
                 prevID + "/" +
                 "similar" + "?number=1"+
-                apiKeyBase + apiKey2;
+                apiKeyBase + apiKey3;
     }
 
     private String[] splitStringByComma() {

@@ -93,10 +93,10 @@ public class SearchActivity extends AppCompatActivity
             {
                 switch (item.getItemId())
                 {
-                    case R.id.Settings_BTN:
+                    /*case R.id.Settings_BTN:
                         Intent in = new Intent(SearchActivity.this, settings_activity.class);
                         startActivity(in);
-                        break;
+                        break;*/
                     case R.id.CustomBTN:
                         Intent CU = new Intent(SearchActivity.this, CustomRecipe.class);
                         startActivity(CU);
@@ -163,7 +163,7 @@ public class SearchActivity extends AppCompatActivity
                     Intent se = new Intent(SearchActivity.this, SearchingActivity.class);
                     startActivity(se);
                 }
-                else if (settings_activity.GetSwitchA() == true)
+               /* else if (settings_activity.GetSwitchA() == true)
                 {
                     api.startRequest(query, BackgroundRequest.SearchType.RECIPE, getBaseContext(), h);
                     h.sendEmptyMessageDelayed(0, 10000);
@@ -177,7 +177,7 @@ public class SearchActivity extends AppCompatActivity
                     h.sendEmptyMessageDelayed(0, 10000);
                     Intent se = new Intent(SearchActivity.this, SearchingActivity.class);
                     startActivity(se);
-                }
+                }*/
                 else {
 
                     api.startRequest(query, BackgroundRequest.SearchType.RECIPE, getBaseContext(), h);

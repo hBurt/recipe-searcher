@@ -3,12 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/Settings_BTN"
-        android:icon="@android:drawable/ic_menu_preferences"
-        android:title="@string/settings"
-        app:showAsAction="ifRoom"
-        />
-    <item
         android:id="@+id/CustomBTN"
         android:icon="@android:drawable/sym_contact_card"
         android:title="@string/settings"
