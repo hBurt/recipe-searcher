@@ -40,6 +40,7 @@ public class Recipe_Similar_Recipes_Tab_Fragment extends Fragment
     private static Handler h, check, R2;
     private static int offSet = 1;
     private boolean clicks = false;
+    private boolean getRand = false;
     private Recipe recipe;
     User user;
     public Recipe_Similar_Recipes_Tab_Fragment( Recipe r)
@@ -63,6 +64,7 @@ public class Recipe_Similar_Recipes_Tab_Fragment extends Fragment
         Button next = view.findViewById(R.id.Sim_btn);
         Button Clear = view.findViewById(R.id.ClearBTN);
         Button cRecipe = view.findViewById(R.id.CRecipes);
+        Button rand = view.findViewById(R.id.Rand);
         h = new  Handler()
         {
             @Override
@@ -78,7 +80,10 @@ public class Recipe_Similar_Recipes_Tab_Fragment extends Fragment
             {
                 RecipeActivityV2.setUseSimilar();
                 ((RecipeActivityV2) Objects.requireNonNull(getActivity())).refresh();
+                if (!getRand)
                 Toast.makeText(getActivity().getApplicationContext(), "Next Similar Recipe has been loaded",Toast.LENGTH_SHORT).show();
+                else if (getRand)
+                    Toast.makeText(getActivity().getApplicationContext(), "Random Recipe has been loaded",Toast.LENGTH_SHORT).show();
             }
         };
         check = new  Handler()
@@ -96,8 +101,25 @@ public class Recipe_Similar_Recipes_Tab_Fragment extends Fragment
             {
                 if (!RecipeActivity.getIsOpen())
                 {
+                    getRand = false;
                     APICore api = new APICore();
                     api.startRequest(String.valueOf(recipe.getID()), BackgroundRequest.SearchType.NEXT, getActivity(), R2);
+                }
+                if (RecipeActivity.getIsOpen())
+                {
+                    Toast.makeText(getActivity().getApplicationContext(), "This function is not available while viewing Custom Recipes",Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+        rand.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                if (!RecipeActivity.getIsOpen())
+                {
+                    getRand = true;
+                    APICore api = new APICore();
+                    api.startRequest("", BackgroundRequest.SearchType.RANDOM, getActivity(), R2);
                 }
                 if (RecipeActivity.getIsOpen())
                 {
