@@ -35,7 +35,9 @@
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        android:layout_marginLeft="63dp"
+        android:layout_marginRight="64dp" />
 
     <EditText
         android:id="@+id/TimeOfDay"
@@ -65,7 +67,9 @@
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TimeOfDay" />
+        app:layout_constraintTop_toBottomOf="@+id/TimeOfDay"
+        android:layout_marginLeft="69dp"
+        android:layout_marginRight="62dp" />
 
     <EditText
         android:id="@+id/CalTarget"
@@ -82,7 +86,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cal"
-        tools:targetApi="o" />
+        tools:targetApi="o"
+        android:layout_marginLeft="81dp"
+        android:layout_marginRight="86dp" />
 
     <TextView
         android:id="@+id/Diet"
@@ -97,7 +103,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/CalTarget" />
+        app:layout_constraintTop_toBottomOf="@+id/CalTarget"
+        android:layout_marginRight="102dp"
+        android:layout_marginLeft="101dp" />
 
     <EditText
         android:id="@+id/DietPrefrence"
@@ -126,7 +134,9 @@
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/DietPrefrence" />
+        app:layout_constraintTop_toBottomOf="@+id/DietPrefrence"
+        android:layout_marginLeft="112dp"
+        android:layout_marginRight="121dp" />
 
     <EditText
         android:id="@+id/foodExceptions"

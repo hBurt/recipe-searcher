@@ -153,7 +153,7 @@ public class CustomStorage
     public void removeFirstCRecipe()
     {
         String toBeRemoved = Custom.getString(0+"CName", "");
-        String Names[] = new String[25];
+        String[] Names = new String[25];
 
 
             if (Custom.contains(toBeRemoved+"CName" ))

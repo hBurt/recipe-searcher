@@ -32,7 +32,8 @@
                 android:ems="10"
                 android:hint="@string/name_of_recipe"
                 android:inputType="textPersonName"
-                android:textColor="#000000" />
+                android:textColor="#000000"
+                tools:targetApi="o" />
 
             <EditText
                 android:id="@+id/Time"
@@ -43,7 +44,8 @@
                 android:ems="10"
                 android:hint="@string/time"
                 android:inputType="textPersonName"
-                android:textColor="#000000" />
+                android:textColor="#000000"
+                tools:targetApi="o" />
 
             <EditText
                 android:id="@+id/IngredientInput"
@@ -54,7 +56,8 @@
                 android:ems="10"
                 android:hint="@string/enter_ingredients_for_recipe"
                 android:inputType="textPersonName"
-                android:textColor="#000000" />
+                android:textColor="#000000"
+                tools:targetApi="o" />
 
             <EditText
                 android:id="@+id/Directions"
@@ -66,7 +69,8 @@
                 android:hint="@string/enter_directions_for_recipe"
                 android:inputType="textPersonName"
                 android:textColor="#000000"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                tools:targetApi="o" />
 
             <Button
                 android:id="@+id/ImgselectBTN"
@@ -82,7 +86,8 @@
                 android:layout_marginTop="30dp"
                 android:scaleType="centerCrop"
                 app:srcCompat="@drawable/ic_favorite_black_24dp"
-                tools:srcCompat="@tools:sample/avatars" />
+                tools:srcCompat="@tools:sample/avatars"
+                android:contentDescription="TODO" />
 
             <Button
                 android:id="@+id/CSubmit"

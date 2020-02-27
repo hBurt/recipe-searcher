@@ -12,9 +12,9 @@
         android:id="@+id/thumbnail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
         android:layout_marginRight="5dip"
-        android:padding="3dip">
+        android:padding="3dip"
+        tools:ignore="RtlHardcoded">
 
 
         <androidx.cardview.widget.CardView
@@ -27,7 +27,8 @@
                 android:id="@+id/profile_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scaleType="fitXY" />
+                android:scaleType="fitXY"
+                android:contentDescription="TODO" />
 
         </androidx.cardview.widget.CardView>
 
@@ -51,7 +52,7 @@
                 android:layout_height="31dp"
                 android:gravity="start"
                 android:textColor="#040404"
-                android:textSize="15dip"
+                android:textSize="15sp"
                 android:textStyle="bold"
                 android:typeface="sans" />
 
@@ -67,7 +68,8 @@
                     android:paddingLeft="0dp"
                     android:paddingEnd="2dp"
                     android:paddingRight="2dp"
-                    app:srcCompat="@drawable/ic_favorite_black_24dp" />
+                    app:srcCompat="@drawable/ic_favorite_black_24dp"
+                    android:contentDescription="TODO" />
 
                 <ImageView
                     android:id="@+id/rating_2"
@@ -77,7 +79,8 @@
                     android:paddingLeft="0dp"
                     android:paddingEnd="2dp"
                     android:paddingRight="2dp"
-                    app:srcCompat="@drawable/ic_favorite_black_24dp" />
+                    app:srcCompat="@drawable/ic_favorite_black_24dp"
+                    android:contentDescription="TODO" />
 
                 <ImageView
                     android:id="@+id/rating_3"
@@ -87,7 +90,8 @@
                     android:paddingLeft="0dp"
                     android:paddingEnd="2dp"
                     android:paddingRight="2dp"
-                    app:srcCompat="@drawable/ic_favorite_black_24dp" />
+                    app:srcCompat="@drawable/ic_favorite_black_24dp"
+                    android:contentDescription="TODO" />
 
                 <ImageView
                     android:id="@+id/rating_4"
@@ -97,7 +101,8 @@
                     android:paddingLeft="0dp"
                     android:paddingEnd="2dp"
                     android:paddingRight="2dp"
-                    app:srcCompat="@drawable/ic_favorite_black_24dp" />
+                    app:srcCompat="@drawable/ic_favorite_black_24dp"
+                    android:contentDescription="TODO" />
 
                 <ImageView
                     android:id="@+id/rating_5"
@@ -107,7 +112,8 @@
                     android:paddingLeft="0dp"
                     android:paddingEnd="2dp"
                     android:paddingRight="2dp"
-                    app:srcCompat="@drawable/ic_favorite_black_24dp" />
+                    app:srcCompat="@drawable/ic_favorite_black_24dp"
+                    android:contentDescription="TODO" />
 
             </LinearLayout>
         </LinearLayout>

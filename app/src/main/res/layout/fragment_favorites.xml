@@ -78,7 +78,7 @@
                 android:footerDividersEnabled="false"
                 android:headerDividersEnabled="false"
                 android:clickable="true"
-                android:focusable="false"
+                android:focusable="true"
                 android:background="@color/paletteDarkGreen"
                 />
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

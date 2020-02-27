@@ -1,5 +1,6 @@
 package com.recipe.recipesearch.ui.Settings;
 
+import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -18,6 +19,7 @@ public class settings_activity extends AppCompatActivity
     SharedPreferences Prefs;
     SharedPreferences.Editor edit;
     TextView hint1, hint2, discription;
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

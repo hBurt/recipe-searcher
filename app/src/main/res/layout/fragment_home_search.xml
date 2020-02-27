@@ -37,7 +37,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0"
-            app:srcCompat="@drawable/bg_1"/>
+            app:srcCompat="@drawable/bg_1"
+            tools:ignore="ContentDescription,HardcodedText" />
 
         <LinearLayout
             android:id="@+id/linearLayout3"
@@ -64,7 +65,10 @@
                 android:paddingLeft="10dp"
                 android:drawablePadding="10dp"
                 android:drawableLeft="@drawable/ic_searchdraw"
-                android:drawableStart="@drawable/ic_searchdraw"/>
+                android:drawableStart="@drawable/ic_searchdraw"
+                tools:targetApi="o"
+                tools:ignore="RtlSymmetry"
+                android:paddingStart="10dp" />
 
         </LinearLayout>
 

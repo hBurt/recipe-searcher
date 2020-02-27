@@ -24,7 +24,8 @@
                 android:layout_marginStart="130dp"
                 android:layout_marginTop="10dp"
                 android:background="#1DDF16"
-                android:text="@string/next_similar_recipe" />
+                android:text="@string/next_similar_recipe"
+                android:layout_marginLeft="130dp" />
 
             <Button
                 android:id="@+id/Rand"
@@ -33,7 +34,8 @@
                 android:layout_marginStart="130dp"
                 android:layout_marginTop="5dp"
                 android:background="#1DDF16"
-                android:text="@string/random_recipe" />
+                android:text="@string/random_recipe"
+                android:layout_marginLeft="130dp" />
 
             <Button
                 android:id="@+id/CRecipes"
@@ -42,7 +44,8 @@
                 android:layout_marginStart="130dp"
                 android:layout_marginTop="5dp"
                 android:background="#1DDF16"
-                android:text="@string/load_custom_recipes" />
+                android:text="@string/load_custom_recipes"
+                android:layout_marginLeft="130dp" />
 
             <Button
                 android:id="@+id/ClearBTN"
@@ -51,7 +54,8 @@
                 android:layout_marginStart="130dp"
                 android:layout_marginTop="5dp"
                 android:background="#1DDF16"
-                android:text="@string/clear_custom_recipes" />
+                android:text="@string/clear_custom_recipes"
+                android:layout_marginLeft="130dp" />
 
         </LinearLayout>
     </ScrollView>

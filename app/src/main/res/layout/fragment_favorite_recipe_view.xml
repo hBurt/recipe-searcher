@@ -41,7 +41,8 @@
         android:id="@+id/favorite_recipe_image"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:scaleType="centerCrop" />
+        android:scaleType="centerCrop"
+        android:contentDescription="TODO" />
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/favorite_recipe_tablayout"

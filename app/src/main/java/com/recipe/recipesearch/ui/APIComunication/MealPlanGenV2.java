@@ -55,7 +55,7 @@ public class MealPlanGenV2 extends AsyncTask<Void, Void, String>
         String responseData = "";
         Response response = null;
         if (MealPlanActivity.getTimePeriod() != null)
-            UserTOD = new String(MealPlanActivity.getTimePeriod().trim().replace(" ", "%20").replace("&", "%26")
+            UserTOD = MealPlanActivity.getTimePeriod().trim().replace(" ", "%20").replace("&", "%26")
                     .replace(",", "%2c").replace("(", "%28").replace(")", "%29")
                     .replace("!", "%21").replace("=", "%3D").replace("<", "%3C")
                     .replace(">", "%3E").replace("#", "%23").replace("$", "%24")
@@ -64,9 +64,9 @@ public class MealPlanGenV2 extends AsyncTask<Void, Void, String>
                     .replace(";", "%3B").replace("?", "%3F").replace("@", "%40")
                     .replace("[", "%5B").replace("\\", "%5C").replace("]", "%5D")
                     .replace("_", "%5F").replace("`", "%60").replace("{", "%7B")
-                    .replace("|", "%7C").replace("}", "%7D"));
+                    .replace("|", "%7C").replace("}", "%7D");
         if (MealPlanActivity.getCaloricNum() != null)
-            UserTargetCal = new String(MealPlanActivity.getCaloricNum().trim().replace(" ", "%20").replace("&", "%26")
+            UserTargetCal = MealPlanActivity.getCaloricNum().trim().replace(" ", "%20").replace("&", "%26")
                     .replace(",", "%2c").replace("(", "%28").replace(")", "%29")
                     .replace("!", "%21").replace("=", "%3D").replace("<", "%3C")
                     .replace(">", "%3E").replace("#", "%23").replace("$", "%24")
@@ -75,9 +75,9 @@ public class MealPlanGenV2 extends AsyncTask<Void, Void, String>
                     .replace(";", "%3B").replace("?", "%3F").replace("@", "%40")
                     .replace("[", "%5B").replace("\\", "%5C").replace("]", "%5D")
                     .replace("_", "%5F").replace("`", "%60").replace("{", "%7B")
-                    .replace("|", "%7C").replace("}", "%7D"));
+                    .replace("|", "%7C").replace("}", "%7D");
         if (MealPlanActivity.getDietaryPrefrence() != null)
-            UserDiet = new String(MealPlanActivity.getDietaryPrefrence().trim().replace(" ", "%20").replace("&", "%26")
+            UserDiet = MealPlanActivity.getDietaryPrefrence().trim().replace(" ", "%20").replace("&", "%26")
                     .replace(",", "%2c").replace("(", "%28").replace(")", "%29")
                     .replace("!", "%21").replace("=", "%3D").replace("<", "%3C")
                     .replace(">", "%3E").replace("#", "%23").replace("$", "%24")
@@ -86,9 +86,9 @@ public class MealPlanGenV2 extends AsyncTask<Void, Void, String>
                     .replace(";", "%3B").replace("?", "%3F").replace("@", "%40")
                     .replace("[", "%5B").replace("\\", "%5C").replace("]", "%5D")
                     .replace("_", "%5F").replace("`", "%60").replace("{", "%7B")
-                    .replace("|", "%7C").replace("}", "%7D"));
+                    .replace("|", "%7C").replace("}", "%7D");
         if (MealPlanActivity.getExclusions() != null)
-            UserExclusions = new String(MealPlanActivity.getExclusions().trim().replace(" ", "%20").replace("&", "%26")
+            UserExclusions = MealPlanActivity.getExclusions().trim().replace(" ", "%20").replace("&", "%26")
                     .replace(",", "%2c").replace("(", "%28").replace(")", "%29")
                     .replace("!", "%21").replace("=", "%3D").replace("<", "%3C")
                     .replace(">", "%3E").replace("#", "%23").replace("$", "%24")
@@ -97,7 +97,7 @@ public class MealPlanGenV2 extends AsyncTask<Void, Void, String>
                     .replace(";", "%3B").replace("?", "%3F").replace("@", "%40")
                     .replace("[", "%5B").replace("\\", "%5C").replace("]", "%5D")
                     .replace("_", "%5F").replace("`", "%60").replace("{", "%7B")
-                    .replace("|", "%7C").replace("}", "%7D"));
+                    .replace("|", "%7C").replace("}", "%7D");
         if (UserTOD == null)
             UserTOD = "Day";
         if (UserExclusions == null && UserDiet == null && UserTargetCal == null)
@@ -141,7 +141,7 @@ public class MealPlanGenV2 extends AsyncTask<Void, Void, String>
         try
         {
             //this response data is for testing only
-            jObject = new JSONObject(String.valueOf(responseData));
+            jObject = new JSONObject(responseData);
         }
         catch (JSONException e)
         {

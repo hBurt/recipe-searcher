@@ -30,7 +30,8 @@
             android:layout_weight="1"
             android:background="@color/navLight"
             android:scaleType="center"
-            app:srcCompat="@drawable/ic_user_black_24dp" />
+            app:srcCompat="@drawable/ic_user_black_24dp"
+            android:contentDescription="TODO" />
         <!--            android:backgroundTint="@color/navigationGreen"-->
 
         <EditText
@@ -42,7 +43,8 @@
             android:background="@color/navLight"
             android:hint="@string/email"
             android:inputType="textCapWords"
-            android:textColorHint="@color/black" />
+            android:textColorHint="@color/black"
+            tools:targetApi="o" />
 
     </LinearLayout>
 
@@ -69,7 +71,8 @@
             android:layout_weight="1"
             android:background="@color/navLight"
             android:scaleType="center"
-            app:srcCompat="@drawable/ic_key_black_24dp" />
+            app:srcCompat="@drawable/ic_key_black_24dp"
+            android:contentDescription="TODO" />
         <!--            android:backgroundTint="@color/navigationGreen"-->
 
         <EditText
@@ -83,7 +86,8 @@
             android:inputType="textPassword"
             android:textColorHint="@color/black"
             tools:layout_editor_absoluteX="158dp"
-            tools:layout_editor_absoluteY="159dp" />
+            tools:layout_editor_absoluteY="159dp"
+            tools:targetApi="o" />
 
     </LinearLayout>
 
