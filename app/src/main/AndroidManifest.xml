@@ -21,14 +21,17 @@
         <activity android:name="com.recipe.recipesearch.ui.recipe.RecipeActivityV2" />
         <activity android:name="com.recipe.recipesearch.ui.CustomRecipes.CustomRecipe"
             android:screenOrientation="portrait"/>
-        <activity android:name="com.recipe.recipesearch.ui.CustomRecipes.CustomRecipe"
-            android:screenOrientation="portrait"/>
+
         <activity android:name="com.recipe.recipesearch.ui.MealPlanMaker.LoadingScreenMP"
             android:screenOrientation="portrait"/>
+
         <activity android:name="com.recipe.recipesearch.ui.MealPlanMaker.GeneratedMealPlan"
             android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"/>
+
         <activity android:name="com.recipe.recipesearch.ui.MealPlanMaker.MealPlanActivity"
             android:screenOrientation="portrait"/>
+
         <activity android:name="com.recipe.recipesearch.ui.search_result.SearchingActivity"
             android:screenOrientation="portrait"/>
 
